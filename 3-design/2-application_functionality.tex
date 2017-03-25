@@ -1,0 +1,34 @@
+\section{Application requirements}
+This section gives an overview of the desired use cases for the finished application. When the user
+wishes to initiate or join a session with a particular 3D model to be inspected, he/she should be able to:
+\begin{itemize}
+	\item Choose between hosting or joining a session.
+	\item If the user wishes to host a session, he/she should be able to specify a 3D model from a standard file format (such as FBX files).
+	\item If the user wishes to join a session, he/she should be able to choose an open session from a list of available sessions.
+\end{itemize}
+Once a user has either created or joined a session and is loaded into the model, he/she should be able to:
+\begin{itemize}
+	\item Look around, e.g.~by using mouse movements or head motions (picked up from sensors in the VR head device).
+	\item Move around on the horizontal plane by using the arrow keys, the WASD keys or by specific gestures (e.g.~a "dragging motion").
+	\item Move in the vertical plane increasing or decreasing altitude (i.e "flying").
+	\item Zoom in and out by virtually changing the avatar's own size.
+	\item Annotate the surface he/she is looking at. This should furthermore enable:
+	\begin{itemize}
+		\item Choosing between a placeholder-, predefined- or custom defined text and/or an icon.
+		\item Choosing between several annotation states,  e.g.~"unresolved", "work in progress", "Ready for approval" and "approved".
+		\item Automatic saving of the annotation and its coordinates to a log used for easy retrieval of the annotation entries. 
+		\item A threaded follow up discussion of the annotation (i.e adding comments).
+	\end{itemize}
+	\item Annotate regions or areas of the 3D model (e.g.~annotate an entire room). These "area annotations" should subsequently be modifiable to change the size. 
+	\item Link annotations to the DNV GL rules and requirements.
+	\item Draw on the desired surface to make suggestions or highlight, e.g.~drawing arrows.
+	\item Choose between enabling or disabling collision and gravity. By default the user should be able to traverse freely without collision, but to enable it can be practical in certain circumstances.
+	%\item Make the target surface transparent and without collision, thereby enabling the user to %move through it.
+	\item Obtain the real-world distance between two specified points.
+	\item Bookmark the avatar's current location and orientation to easily be able to go back to bookmarked locations. 
+\end{itemize}
+
+Actions done during the 3D model session (such as annotating an object) should continuously be stored in a database. If a user wants to re-enter the session at a later time, this database is read, and the actions done in previous sessions are loaded into the model. By utilizing a database 
+in this way the model files themselves can also remain unedited throughout a session, as opposed to saving annotations into the model files itself, which could be more inefficient and create model versioning issues. Another upside with utilizing a database is that it enables exposure of the actions done in the sessions to other platforms, such as web applications. This can enable annotation and comments done on the 3D model to become "issues" or "remarks" in more traditional collaboration tools such as Atlassian's Jira or Confluence, although this will not be a focus point for the thesis.  
+
+To ensure that the desired application is as intuitive and functional as possible the upcoming master's thesis will also look into several ways of interacting with the 3D model while using virtual reality lenses. Special emphasis will be put on using gestures for certain tasks (such as marking and annotating objects) and evaluating the performance through user testing. Using gestures in combination with mouse and keyboard, game controller and joysticks will also be evaluated to ensure a satisfactory user experience.     

@@ -1,0 +1,56 @@
+\documentclass[UKenglish]{ifimaster}  
+\usepackage[utf8]{inputenc}           
+\usepackage[T1]{fontenc,url}
+\urlstyle{sf}
+\usepackage{babel,textcomp,csquotes,duomasterforside,varioref,graphicx}
+\usepackage[round]{natbib}
+\usepackage{import}
+
+\title{Using Virtual Reality- and Gesture Recognition Technology in Design Reviews}
+\subtitle{A Master's Thesis}        
+\author{Andreas Oven Aalsaunet}                  
+
+\begin{document}
+\duoforside[dept={Department of Informatics}, program={Programming and Networks}, long]                                        
+
+\frontmatter{}                 
+\tableofcontents{}
+\listoffigures{}
+\listoftables{}
+
+\import{../0-preface/}{preface.tex}
+
+\mainmatter{}
+\part{The state of the field}  
+\import{../1-introduction/}{introduction.tex}
+
+% About the field of gesture recognition, its challenges and its devices
+\import{../2-gesture_recognition_technology/}{1-gesture_recognition.tex}
+\import{../2-gesture_recognition_technology/}{2-challenges_and_problems.tex}
+\import{../2-gesture_recognition_technology/}{3-devices.tex}
+\import{../2-gesture_recognition_technology/}{4-leap_motion.tex}
+
+% About Virtual reality, with Oculus Rift and HTC Vive
+
+% About commercial game engines such as Unity
+
+\part{The project} 
+
+% About the design decitions and the use cases
+\import{../3-design/}{1-background.tex}
+\import{../3-design/}{2-application_functionality.tex}
+\import{../3-design/}{3-gesture-scheme.tex}
+
+% About how this was implemented
+\import{../4-implementation/}{1-technology_choices.tex}
+
+% Evaluation of the final product, user feedback etc
+\import{../5-evaluation/}{1-instructions.tex}
+
+% Summary, future work and conclusion
+\import{../6-conclusion/}{3-conclusion.tex}
+
+\backmatter{}
+\bibliography{../references}
+\bibliographystyle{apalike}
+\end{document}

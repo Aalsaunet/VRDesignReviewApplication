@@ -1,0 +1,22 @@
+Master thesis outline:
+
+Introduction
+- Motivation
+- Scope
+- Overview of the thesis
+- Begrensninger
+
+State of the art / Related work
+
+Design
+
+Implementation
+
+Evalutation
+- Performance
+- Functionality
+- Use case test
+
+Future work
+
+Conclusion
