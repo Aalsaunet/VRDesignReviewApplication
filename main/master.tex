@@ -13,18 +13,20 @@
 \begin{document}
 \duoforside[dept={Department of Informatics}, program={Programming and Networks}, long]                                        
 
+\import{../0-preface/}{preface.tex}
+
 \frontmatter{}                 
 \tableofcontents{}
 \listoffigures{}
 \listoftables{}
 
-\import{../0-preface/}{preface.tex}
-
 \mainmatter{}
-\part{The state of the field}  
+% \part{The state of the field}  
+\chapter{Introduction}  
 \import{../1-introduction/}{introduction.tex}
 
 % About the field of gesture recognition, its challenges and its devices
+\chapter{Considerations with Gesture Recognition- and Virtual Reality Technology}
 \import{../2-gesture_recognition_technology/}{1-gesture_recognition.tex}
 \import{../2-gesture_recognition_technology/}{2-challenges_and_problems.tex}
 \import{../2-gesture_recognition_technology/}{3-devices.tex}
@@ -34,20 +36,24 @@
 
 % About commercial game engines such as Unity
 
-\part{The project} 
+% \part{The project} 
 
 % About the design decitions and the use cases
+\chapter{Designing the virtual design review application}
 \import{../3-design/}{1-background.tex}
 \import{../3-design/}{2-application_functionality.tex}
 \import{../3-design/}{3-gesture-scheme.tex}
 
 % About how this was implemented
+\chapter{The Unity Implementation}
 \import{../4-implementation/}{1-technology_choices.tex}
 
 % Evaluation of the final product, user feedback etc
+\chapter{Evaluation of the implementation}
 \import{../5-evaluation/}{1-instructions.tex}
 
 % Summary, future work and conclusion
+\chapter{Conclusion}
 \import{../6-conclusion/}{3-conclusion.tex}
 
 \backmatter{}
