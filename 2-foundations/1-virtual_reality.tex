@@ -36,7 +36,15 @@ that the displays don't "redraws" and identical frame on a buffer update the fra
 rate (e.g 90 frames per second for the Oculus Rift CV1 or HTC Vive). Refresh rate and frame rate are thus highly codependent, where performance is only as good as the weaker
 of the two, and the target computer should thus have a GPU strong enough to meet a frame rate equal or above to the HMD's refresh rate. 
 
+\subsubsection{Asynchronous reprojection}
+To reduce the perceived latency, or to compensate for a frame rate that is too low, several virtual reality HMDs makes use of \textbf{\textit{asynchronous reprojection}} 
+(equivalent to what Oculus VR refer to as "asynchronous time warp")~\citep{GD2016}. This is a technique in which the virtual reality system generates intermediate frames 
+in situations where the software (e.g a game) can't maintained the required frame rate (which is typically 90 fps with 90 Hz). In simple terms asynchronous reprojection 
+produces "in-between frames", which is a manipulated version of an older rendered frame. This is done my morphing the frame according to the most recent head tracking data just 
+before the frame is presented on the displays~\citep{GD2016}. By doing this, software that runs at e.g 45 FPS (frames per seconds) natively can be transformed into 90 FPS by 
+applying asynchronous reprojection to each rendered frame. Every other frame is thus actually a manipulated version of the former frame. 
 
+\subsection{}
 
 \section{A review of two HMD's hardware}
 
