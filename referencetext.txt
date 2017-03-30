@@ -1,0 +1,549 @@
+There’s been a lot of question marks raised about the PlayStation VR, not least how it manages to provide a supposed high quality experience on a cut price console. Priced at $399 and significantly undercutting the $600 Oculus Rift and $800 HTC Vive, Sony’s been working its own brand of black magic once again.
+
+The reaction to PlayStation VR’s price point has been swift yet unsurprising - Amazon has been reporting almost instant sellouts worldwide, and from the sound of things other stores aren’t faring too badly either. But just what is PSVR and how can the humble PS4 power a 120Hz 1080p display. We spoke to VR expert and VR World Congress organiser Dan Page for the full tech breakdown….
+
+First things first, what sets the PlayStation VR headset apart in technical terms. “There's a lot to talk about here - as it's powered by the PS4 you'd expect a huge compromise in terms of performance compared to the Rift and Vive, but some very clever thinking from Sony has meant this isn't necessarily the case, or at least the consumer won't feel like it is anyway,” explains Page.
+
+PlayStation VR
+
+“Framerate has always been an important topic in the games industry but the rise of VR has practically, and sometimes quite literally quadrupled our demands of it. While the HTC Vive and Oculus Rift run at 90hz, and the Gear VR at 60hz, the PSVR comes out on top by being capable of displaying at 120hz in three different modes. Why is this important? To put it simply: a higher framerate, when combined with the necessary low latency, is less nausea-inducing than a lower framerate. High-end device manufacturers have effectively set an industry standard at 90hz as an absolute minimum, while the mid-range Gear VR sits at 60hz.”
+
+The modes in which the PSVR displays its frames are as follows:
+
+60hz rendering (by the game/experience) with 120hz display via "asynchronous reprojection."
+90hz rendering resulting in a 90hz display
+120hz rendering to a 120hz display.
+“This means some developers will chase a native 120hz with clever optimisation and/or low-poly graphics, while others will shoot for the are more achievable 60hz by relying on Sony's "asynchronous reprojection", says Page. "Others, however, will go for a native 90hz, the same they'd be aiming for when producing content for the HTC Vive or Oculus Rift, albeit on much more powerful hardware."
+
+PS VR Complete
+
+As for what asynchronous reprojection even is, Page clarifies “It's what Oculus chooses to refer to as "asynchronous timewarp", and to quote Oculus's Michael Antonov "Asynchronous timewarp (ATW) is a technique that generates intermediate frames in situations when the game can't maintain frame rate, helping to reduce judder. However, ATW is not a silver bullet and has limitations that developers should be aware of.”’
+
+“The PSVR also differs to the Vive and Rift in that its display uses a single horizontal screen which splits the image into two, as opposed to the aforementioned headset manufacturers' choice to go with two vertical screens. This means IPD (Interpupillary distance, the distance between each eye) will be dealt with using a slightly different mechanic to the other headsets - i.e. not by moving the distances of each eye's screen.
+
+In comparison to the other major headsets, Sony opted to go with a significantly lower resolution screen than the HTC Vive and Oculus Rift. You would expect this would mean a bigger issue with screen door effect seen in some headsets (especially older prototypes). Not necessarily. According to Sony’s Dr. Richard Marks: "Not every 1080P is the same. Ours has three subpixels per pixel, so there's a true R, G and B for every pixel; some of the other displays actually don't have the full RGB for every pixel, so they have less subpixels per pixel. The frame rate of PSVR is also very high, but probably the biggest effect is the optics. The designers have done a really good job at matching the optics to the field of view to the screen".
+
+Then there's the external processing unit, which, ever since it first spotted, has been a bit of a mystery. Various sites have rumoured it to be doing all sorts of different things, including serve as an extra GPU, but in fact it does three things to aid PlayStation VR:
+
+It takes the dual stereo image from the PS4 that's going to the headset and converts it to a ratio suitable for the TV meaning those not wearing the PSVR can see what's going on in 2D.
+It processes the game or experience's "3D audio".
+It takes the sensor data from the headset and sends it back to the PS4 via USB.
+PS VR External Processor
+
+So to clarify then, the external PS VR processor does not provide any additional GPU or CPU horsepower directly to the PS4 whatsoever. It is merely there as a means to convert the image. The PS4 is perfectly capable of outputting at 120 frames per second on its own, but it's up to the developers to scale the visuals down to hit this target.
+
+In terms of whether this technology can be taken and applied to PC, it’s a difficult task. The vast number of different configurations makes optimising for any one a tricky task. The very reason such tricks are employed for PS VR is because the PlayStation 4 lacks the necessary computing power. Compare this to PC where performance can be brute-forced and you begin to see how PS VR and the likes of the Oculus Rift and HTC Vive differ.
+
+IF THE controls and movement in a traditional video game aren’t natural, it’s merely annoying to players. For designers of virtual reality experiences, the same mistake could make users sick.
+With the release of a trio of high-definition headsets on the horizon, many VR aficionados in attendance at this week’s Game Developers Conference in San Francisco are confronting that issue head on.
+The low-latency headsets from Oculus, HTC and Sony are intended to right the nausea-inducing wrongs of their VR predecessors from 20 years ago, but many users still report feeling woozy after using souped-up systems, such as the Oculus Rift.
+“The challenge is that people’s sensitivity to motion and simulator sickness varies wildly,” said Evan Suma, an assistant professor who studies VR at the University of Southern California, during a talk at the 30th annual gathering of game creators.
+It’s a unique design challenge for game makers accustom to crafting interactive entertainment appearing on flat screens in front of gamers, not completely encasing them.
+Despite the advancements made in VR over the past four years, there’s still concern the immersive technology may force players to lose more than a battle with an alien. They could also lose their lunch.
+“It’s been a huge focus of development,” said Hilmar Petursson, chief executive of CCP Games, which is developing several VR games, including the sci-fi dogfighting simulator EVE: Valkyrie.
+“We want super comfort all the way.”
+Mr Petursson said the developers of Valkyrie opted to surround seated players with a virtual cockpit to ground and shelter them from the effects of appearing to whiz through space past asteroids, missiles and ships.
+A VR gamer tracks down zombies in virtual reality at Melbourne’s Zero Latency.
+A VR gamer tracks down zombies in virtual reality at Melbourne’s Zero Latency.Source:Supplied
+Other designers are attempting to tackle the problem by limiting movement in virtual worlds and not inundating players with head-spinning stimuli.
+“If you have something for your brain to fixate on as the thing that matches similar inputs you’re given when sitting in the real world, you’re going to be feeling a lot better,” said Palmer Luckey, co-founder of Oculus, which ignited the latest VR revolution in 2012.
+Oculus and Sony both posted health and safety warnings outside their booths on the GDC show floor, cautioning attendees trying the Rift and PlayStation VR that they may feel motion sickness, nausea, disorientation and blurred vision. Those effects were felt by many attendees.
+“After a morning’s worth of different Rift games, I felt disorientated, a touch nauseous and distinctly headachy,” wrote Keza MacDonald on the gaming site Kotaku. “After five hours, I felt like I needed a lie-down in a dark room.”
+Kimberly Voll, senior technical designer at Radial Games, noted during her GDC speech about the effects of VR on the brain that more academic research about VR should be conducted.
+“We really need to look hard at the effects of long-term exposure to VR, the psychological effects and what we can say about the power of our VR experiences,” said Ms Voll, who has studied computer and cognitive science.
+With hype for VR at an all-time high and pre-orders for the Rift and HTC Vive sold out, it’s no longer a question of if consumers will want to experience VR. They do. It’s now becoming a matter of how long it’s safe to keep it on their noggins.
+Would two hours in VR be too much?
+“With the current technology, it’s iffy,” said Mr Luckey. “It’s all technologically solvable. It’s not like we’re saying, ‘Oh no. We can’t get any better. This is a dead end’. We have tons of ways to make this higher resolution, lighter weight and more comfortable. Eventually, the goal is to make something that’s not much heavier than a pair of sunglasses.”
+For many who’ve tried VR, it’s not an issue at all. Hidden Path Entertainment founder Jeff Pobst said he recently spent 15 hours wearing the Rift headset while playing the VR version of his strategy game, Defense Grid 2.
+“I was happy,” said Mr Pobst. “I even did it with glasses on and didn’t take the headset off to put in my contacts. It all depends on the person and the experience. When there’s not a lot of movement and the controls aren’t tiring, I think you can be in VR indefinitely.”
+
+How fast does “virtual reality” have to be to look like “actual reality”?
+Low latency is important to an effective VR display but might not be everything.
+
+KYLE ORLAND - 1/3/2013, 11:55 PM
+
+Thinkstock
+For decades now, virtual reality has been a pipe dream concept, well ahead of the technology needed to realize it. Generating a convincing 3D world that precisely and instantly matches the head-tracked position of a player's gaze was well beyond the headsets that proliferated in research centers and on the market up through the '90s. It has only been recently that products like Sony's prototype gaming headset and the upcoming Oculus Rift have seriously attempted to create believable virtual reality headsets using modern head-tracking and display technology.
+
+But there are some who think the technology in these systems still hasn't been developed far enough to create a truly believable, head-tracked virtual reality. Valve's Michael Abrash laid out this case in a detailed blog post last weekend, suggesting that VR headsets need a "Kobayashi Maru moment" to solve the inherent problem of display latency that plagues current and upcoming headsets.
+
+Current non-VR games usually bottom out at about 50 milliseconds (ms) of latency between a controller input and the time the pixels actually update. That's more than fine when viewing an image on a stationary screen, Abrash says, but VR systems need much better latency in order to trick the brain into thinking it's looking at a virtual world that completely surrounds the player wherever he or she looks. "The key to this is that virtual objects have to stay in very nearly the same perceived real-world locations as you move; that is, they have to register as being in almost exactly the right position all the time," Abrash writes. "Being right 99 percent of the time is no good, because the occasional mis-registration is precisely the sort of thing your visual system is designed to detect, and will stick out like a sore thumb."
+
+To be nearly indistinguishable from reality, Abrash says a VR system should ideally have a delay of 15ms or even 7ms between the time a player moves their head and the time the player sees a new, corrected view of the scene. The Oculus Rift can achieve latency of about 30 or 40 milliseconds under perfectly optimized conditions, according to creator Palmer Luckey (this doesn't take into account the added delay inherent in the physical display itself; more on that later). While Luckey acknowledges that this is slower than the "real world" modeling ideal, he says he thinks the Rift is more than capable of creating a convincing virtual world.
+
+"The Rift developer kit has received a lot of positive feedback from those who’ve tried it, but there’s no denying we’re still a ways away from perfect VR," Luckey told Ars. "It's a difficult question, because 'convincing virtual reality' is very subjective... You can be very convincing without necessarily being indistinguishable from reality."
+
+That certainly describes my experience with a prototype of the Oculus Rift at the Penny Arcade Expo in September. To me, the delay between my head movements was practically unnoticeable and much smoother than any other VR headset I had tried before. I could tell I was looking at a screen, obviously, but it wasn't the kind of jarring, "which way am I facing" experience of some other VR systems. I did get a little nauseous during the experience, but that was more from using the controller to turn my view without moving my head, rather than any delay in the virtual world I was tilting my head in.
+
+Physical limits
+
+Luckey says he and his team have been doing everything they can to get that latency number down, including creating their own head tracker that works more quickly than prepackaged solutions. But even if the Rift software could generate and transmit a perfectly aligned 3D perspective instantaneously, there's a significant bit of "motion-to-photons" latency introduced by the refresh rate of the display.
+
+The standard 60Hz displays used in most phone-sized LCD displays (like the ones used on the Rift) are perfectly fine for your iPhone, but they introduce about 15ms of extra delay as the image is drawn pixel by pixel in front of your eye. "It’s actually more complicated though, because the image is drawn line by line, meaning pixels on the bottom of the display begin switching before the entire image is draw on to the screen," Luckey says. "On top of that, a pixel does not have to completely switch for motion to be perceived; you can see motion even if the pixels are in the process of switching."
+
+Abrash suggests that using 120Hz or even 240Hz displays would help a VR system get down to that holy grail of a 7ms delay, and increased scan-out speeds could help even further. Luckey agrees that a better refresh rate on standard, low-cost displays would help matters, but he says that features like higher resolution and better positional tracking would help even more. "Luckily for the VR community, the massive mobile phone market continues to help us solve many of these challenges," he said.
+
+One way to short-circuit that kind of inherent hardware delay is predictive head tracking. By guessing which way a player is going to move and pre-rendering the correct display for that view, the apparent latency could be cut down drastically.
+
+Luckey says the Rift team has looked into this potential solution, but he says it's "no silver bullet." While it's often relatively easy to guess which way a goal-oriented gamer will want to look next, things "[become] especially tricky when trying to predict when the player will stop moving." In some cases, using predictive tracking can "actually be worse than no prediction at all," he added.
+
+Valve has been long-rumored to be working on its own virtual or augmented reality headset, and Abrash didn't respond to a request for comment on the development of that potential project. But his blog post suggests that he sees the journey to the perfect VR headset as just beginning.
+
+"It's my hope that if the VR market takes off in the wake of the Rift's launch, the day when display latency comes down will be near at hand," Abrash wrote.
+
+
+John Carmack Talks Virtual Reality Latency Mitigation Strategies
+By Ben Lang -  Feb 24, 2013 0
+FacebookTwitterRedditLinkedinSubscribe
+OLYMPUS DIGITAL CAMERAJohn Carmack, the famed developer who helped put the Oculus Rift on the map, has been doing plenty of virtual reality research as of late. Carmack is particularly interested in latency. Specifically, he’s interested in reducing latency to a point that looking around inside of a virtual reality world with a VR headset feels genuinely real. Recently he’s published a paper discussing “latency mitigation strategies.”
+
+Low latency is vital in order to feel like you’re really inside of a virtual reality game. It isn’t as simple as slapping a fast head tracker into a head mounted display and calling it a day. There’s a pipeline of hardware that needs to work in symphony to correctly render the game world according to your head movements, and the round trip through that pipeline can take a significant amount of time.
+
+If the end-to-end latency isn’t low enough, it will mean that your view into the virtual reality world feels sluggish. Carmack writes:
+
+A total system latency of 50 milliseconds will feel responsive, but still subtly lagging.  One of the easiest ways to see the effects of latency in a head mounted display is to roll your head side to side along the view vector while looking at a clear vertical edge.  Latency will show up as an apparent tilting of the vertical line with the head motion; the view feels “dragged along” with the head motion.  When the latency is low enough, the virtual world convincingly feels like you are simply rotating your view of a stable world.
+
+Too much latency not only breaks the illusion of virtual reality, but can also contribute to motion sickness and even make games difficult to play. Minimal latency is essential for a virtual reality experience and it’s a problem that’s not yet solved.
+
+SEE ALSO
+$4 Billion ZeniMax v. Oculus Verdict Could Come as Early as Today, Here's What You Need to Know
+Oculus Inc. said at CES 2013 that they have their end-to-end Oculus Rift latency down to 80ms — though it’s likely that they’re continuing to work that figure down.
+
+In the paper, published at #AltDevBlogADay, Carmack proposes several measures that could be taken to reduce end-to-end latency to acceptable levels. According to him, anything under 20 ms is largely imperceptible. And while it is possible to reach that level with current hardware, it will take some careful work to make it happen.
+
+According to Carmack, in an ideal world sensor data is sent to the computer from the head mounted display and then…
+
+The operating system immediately processes the update, and immediately performs GPU accelerated rendering directly to the framebuffer without any page flipping or buffering.  The display accepts the video signal with no buffering or processing, and the screen phosphors begin emitting new photons within microseconds.
+
+“In a typical VR system,” he continues, “many things go far less optimally, sometimes resulting in end to end latencies of over 100 milliseconds.”
+
+It isn’t the hardware itself that’s the issue, it’s simply that modern games don’t require such levels of latency optimization, so the industry has largely avoided techniques that could be used to reduce it.
+
+The paper goes on to describe, at a rather technical level, what steps can be taken to reduce end-to-end latency. If you are a developer looking to make virtual reality games for the Oculus Rift, you’d do well to read this as a primer on some of the latency challenges that you’ll face.
+
+
+
+THE COMPLETE GUIDE TO VIRTUAL REALITY IN 2016 (SO FAR) (UPDATE: FEBRUARY 2016)
+
+By Ben Kuchera on Jan 15, 2016 at 2:15pm
+SHARE  TWEET
+Want to get into virtual reality? This is your first step.
+Virtual reality in 2016 is a complicated place, and it can be hard to know where to begin. Let us help.
+
+2016 is widely expected to be the year of VR by people who believe that virtual reality has a pretty decent chance of becoming a thing. Or it's possible the retail hardware is released, no one buys it and we're about to see one of the worst bubbles in technology since puppets tried to sell us pet supplies during the Super Bowl.
+
+But for now, let's be a bit more optimistic!
+
+There are plenty of people who would love to get going in virtual reality, or would at least love to understand a bit more about the products coming this year. This guide will get you started, and if you'd like to take your first tiny looks into this brave new world, we'll present some low-cost options. This is, on the whole, rather expensive technology, however.
+
+
+Less than two years ago, Oculus raised 2.5 million dollars on Kickstarter.
+
+Yesterday, they were acquired by Facebook for $2 billion.
+
+To write the words “A Brief History Of Oculus” is a bit funny — because really, the company’s very existence has been brief. From the launch of their Kickstarter campaign to their massive acquisition, just 601 days had passed.
+
+The company has definitely generated its fair share of buzz in its short lifespan — and yet, many, many people are hearing about the team for the very first time this week.
+
+For those people, and for everyone who might’ve missed some details along the way, here’s their story so far.
+
+Early Days:
+
+palmer
+
+Around the age of 15, Palmer Luckey started to fall in love with the concept of virtual reality.
+
+By day, he attended classes at the local community college. By night, he was the founder and admin of ModRetro, a community dedicated to modifying vintage gaming consoles. Taking a N64 and making it portable; contorting an Xbox into a package half its original size — that sort of thing.
+
+If there’s anything that videogames have taught gamers to love, it’s collecting things — the rarer, the better. Palmer’s favorite thing to pick up? Early attempts at virtual reality headsets.
+
+Throughout the late 80s and 90s, dozens of companies tried to turn VR headsets into commercial success. All of them failed — hard. Some were too expensive; most just didn’t work worth a damn. All of them were far too ahead of their time (with components being far too expensive to source, and most home computers being far too weak to power anything worth playing.)
+
+Sourcing his collection everywhere from industry liquidation sales to government auctions and carting himself out to the seller to avoid paying for shipping, he’d get his hands on headsets that once cost nearly $100,000 for less than $100. By his own estimates, Palmer has the largest private collection of virtual reality headsets in the world.
+
+palmer proto
+
+Around the age of 16, Palmer took on a new hobby: building headsets of his own. Unhappy with the performance of everything he’d obtained, he set out to build something better. Some of the prototypes were pieced together from his collection; others were modified versions of displays other enthusiasts had put together; others were built entirely from off-the-shelf pieces.
+
+Even then, though, it wasn’t entirely clear that there was a company in the making. He was attending classes at Cal State Long Beach, pursuing a journalism degree. Meanwhile, he worked as an engineer at USC’s Mixed Reality lab, experimenting with VR and head-mounted displays.
+
+Becoming A Company:
+
+Carmack
+You never know who you’re going to meet wandering around the Internet.
+
+In Palmer’s case, a random crossing of digital paths made a connection that would very quickly define the company, raising it from “some crazy smart dudes building VR goggles in a garage” to something that just about everyone in the industry was keeping an eye on.
+
+Lurking around yet another forum, Palmer found himself chatting with John Carmack — the John Carmack. As in, co-founder of id Software; the lead programmer of Doom, Wolfenstein 3D, and Quake. When it comes to gaming giants, most of’em sit comfortably within Carmack’s shadow.
+
+As luck had it, Carmack had been playing with the idea of whipping up some VR goggles of his own, modifying a headset he had on hand. Palmer mentioned the prototypes he’d built.
+
+As he told Eurogamer last year:
+
+“… He ended up seeing my head-mounted display work and asked me, ‘Hey, what you have looks interesting – is there any chance I could buy one?’ He’s John Carmack,” Luckey snorts, “I just gave him one instead – you can’t turn him down.”
+
+That was, perhaps, the best decision Luckey could have made. A few months later, Carmack was at E3 demonstrating one of Luckey’s prototypes — a hulk of duct tape and whatever components were convenient — to anybody who would watch.
+
+Suddenly, this thing wasn’t just a passion project anymore. The Internet was suddenly on fire with talk of “Carmack’s new virtual reality project” — though Carmack wouldn’t officially join the company for over a year.
+
+Something was happening. Almost overnight, it had become shockingly clear: if there was a time for Palmer to do this, to really do this, it was now.
+
+Within weeks, just past halfway to his journalism degree, Palmer dropped out of college to start a company. In June of 2012, Palmer formed OculusVR.
+
+Kickstarter
+
+oculus
+
+When Palmer first started thinking about Kickstarting a virtual reality headset — long before he met Carmack, long before he ever formed a company — he hoped he’d get 100 or so enthusiasts to back his project.
+
+“I won’t make a penny of profit off this project, the goal is to pay for the costs of parts, manufacturing, shipping, and credit card/Kickstarter fees with about $10 left over for a celebratory pizza and beer.” wrote Palmer in early 2012.
+
+Then came the endorsements from Carmack. Other industry titans, like Gabe Newell of Valve, threw their support behind the project. Thoughts of selling just 100 headsets went out the window.
+
+On August 1st of 2012, Oculus launched their Kickstarter campaign. For a company with such ambitious (if newfound) plans — to revive an entire genre, to succeed where so many had failed only a decade ago — they had a rather modest campaign goal: $250,000. That’s less than some of those 90’s VR headsets from Palmer’s collection cost when they flopped onto the market.
+
+Within 24 hours, they’d raised $670,000 from 2,750 people.
+
+Within three days, they’d broken a million dollars.
+
+(For reference: Around the time the Kickstarter ended, Oculus had 10 employees. By the time they sold to Facebook, they were at 100.)
+
+Dev Kit 1:
+
+DK1
+
+Now, they weren’t using Kickstarter to pitch some incredibly polished, perfectly refined virtual reality headset that they’d somehow conjured out of thin air.
+
+This was something… else. Something rougher. It was much, much prettier than that old duct-tape-tastic E3 prototype, mind you — but, with relatively weak specs and a chunky design, it wasn’t something they meant to sit on store shelves.
+
+Instead, this first release was meant for developers and early adopters to get their feet wet with VR. To cleanse the palate of any bad taste left by the headsets of yesteryear. To get people building things in VR.
+
+This dev kit (or Oculus Rift DK1, as it came to be known) gave most people their first glimpse at Oculus’ potential, and it made one thing clear: this little $350 dollar headset was already better than everything that came before it. But it wasn’t perfect.
+
+Its low resolution screen (combined with magnification lenses that helped wrap the image around your view) made even the most beautifully rendered 3D environment look dated. It was like you were sitting too close to an old TV, or staring at the display through a screen door (aptly, this shortcoming quickly came to be known as “the screen door effect”)
+
+This initial headset also lacked a feature that only really seems important once you notice it’s not there: positional tracking. While the headset’s sensors could keep tabs of how your head was angled (are you looking up? Down? Turned to the left?), it had absolutely no idea where your head was from moment to moment. You could look down at an object — but if you tried to lean in for a closer view, your in-game character did nothing. Bam! Immersion shattered.
+
+Meanwhile, complaints of the headset causing motion sickness weren’t rare. That low-res screen, the early software, the lack of positional tracking — it all swirled together into something that managed to make some people’s inner-ears flip out and their stomaches turn.
+
+Despite the flaws, Oculus managed to sell every last one of these headsets that they could make. They’d sourced enough components to make around 65,000 units of this first iteration — on February 21st of 2014, they officially sold out.
+
+Could they have made more? Yes. But that would mean taking the time to source components for a now out-of-date product, as they were just weeks away from the debut of…
+
+Dev Kit 2:
+
+dk2
+
+On the morning of March 19th (just one week before the Facebook acquisition) Oculus began accepting pre-orders for their second hardware release.
+
+It still isn’t the exact product that Oculus intends to ship to consumers, but it’s close.
+
+Based on a prototype that Oculus had started showing a few months prior, Developer Kit 2 (or DK2) fixed or improved upon many of the original headset’s flaws.
+
+That old low-res display? They bumped it up considerably, from 640×800 in each eye to 960×1080 — increasing the overall pixel count by over 100%. That “screen door” effect isn’t completely gone, but it’s much, much less noticeable.
+
+As for the motion sickness? Oculus figured out that much of it was triggered by the display’s tendency to blur motion. They countered this in three ways:
+
+They switched the technology powering their display from LCD to OLED, which offers brighter screens with less motion blur
+They decreased the latency of the headset (the delay between you moving your head and the content on screen reacting accordingly) from 60 milliseconds to 30 milliseconds
+They began inserting entirely black frames (shown so quickly that they’re essentially invisible to the human eye) in between other frames to fool your brain into seeing a smoothly moving image.
+Most significantly, they introduced an entirely new piece of hardware to the mix: an external camera. By using this camera to track an array of cleverly hidden infrared LEDs built into the DK2 headset, they were now able to detect not just how your head was angled, but where it was. Things like leaning in and out to read text, or to peek around a corner, or over a ledge, were suddenly possible for developers to support.
+
+Everything In Between:
+
+Barely one year passed between Oculus shipping their first developer kits (March 29th, 2013) and the start of pre-orders for version 2 (March 19th, 2014), but a ton happened in that time.
+
+At the end of March 2013, Oculus found support from two big video game development engines: Unity gave all Oculus developers free access to their pro-level engine for 4 months, and Epic Games began giving away a new, Oculus-enabled version of their Unreal engine to anyone with a dev kit.
+On June 1st, tragedy struck. One of their founding employees and lead engineer, Andrew Reisse, was killed in a hit-and-run.
+On June 17th, Oculus raised their first, big, traditional VC (as opposed to Kickstarter) round of funding. They’d raised $16M from Spark Capital and Matrix Partners.
+On November 22nd, John Carmack officially left his position at id (the company he co-founded) to join Oculus as their Chief Technology Officer.
+Just six months after their first round, Oculus raised again in December of 2013 — this time, it was $75M from Andreessen Horowitz, Spark Capital, Matrix Partners, and Formation 8.
+Valve, one of the most gaming world’s most lauded companies, pledged to share their virtual reality R&D with Oculus. Weeks later, one of Valve’s lead VR researchers joined Oculus
+What Now?
+
+fb rift
+
+Before the acquisition, Oculus had two big checkboxes left on their to-do list: to ship all of those pre-orders they got for the second development kit, and, eventually, to finalize and ship the consumer product.
+
+With yesterday’s news that Facebook has bought them, however, they’ve given themselves a huge new challenge: to keep people on their side.
+
+One of Oculus’ biggest strengths has always been in the way that people perceived it. You just wanted to root for them — and how could you not? It’s the tech world’s favorite tale: a brilliant whiz-kid turns his garage project into a company, makes millions.
+
+Add in the fact that the company launched on Kickstarter, and Oculus had seemingly locked in its cred as something “homegrown”. Something “indie” — even when they went on to raise nearly $100M from traditional venture capitalists.
+
+So of course, them being acquired by Facebook was met with backlash from some of their biggest fans. To them, Oculus was like their favorite band — and this was them “selling out”.
+
+Within hours of the announcement, the top post on reddit was a drawing of reddit’s mascot laying flowers on Oculus’ grave. Many pledged to cancel their DK2 orders, and instructed others on how to do the same. Notch, the creator of Minecraft, immediately (and quite publicly) killed the company’s plans to build an Oculus version.
+
+Oculus insists that they’ll remain absolutely independent at Facebook, publishing not one, not two, but three posts saying as much. When I sent the company an email with a few questions for this article, I (in haste) used the word “exit” to describe the acquisition, and they immediately took issue with the term. “This is not an exit,” they wrote back. “Oculus stays independent.”
+
+Their challenge now is to somehow convince the world of this.
+
+The best thing Facebook could do here? Keep their hands off of it for a (long) while. Throw money at it, but keep their branding and influence at bay (No one, and I mean no one, wants a Facebook-branded VR headset.) Let them ship the hardware they’ve promised, and to make what they ship better than anything they’ve promised so far. If this is a long term play, Facebook’s short term strategy should be to stay the hell away.
+
+Let's go!
+
+Update (February 2016): Our section on the HTC Vive has been updated to include the final retail price, links to our coverage of games coming this year and a few more details about the retail version of the hardware. The Gear VR section has been updated to include compatibility information for Samsung's upcoming phones.
+
+TABLE OF CONTENTS
+
+Google Cardboard
+Samsung Gear VR
+Oculus Rift
+HTC Vive
+PlayStation VR
+So what is virtual reality? In simple terms, it's the act of using a combination of computing power and optics to simulate a visual and auditory experience that seeks to fool the user into believing they're someplace else. It seeks to replace reality with something else, rather than enhance it. This is usually accomplished by some combination of optics, headphones and head tracking, so you can look around the virtual environment and, in some cases, move within it in some way.
+
+The act of laying information or virtual aspects over actual reality is usually referred to as "augmented" reality, or AR. For the purposed of this guide, the terms "virtual reality" and "VR" will be used interchangeably, and AR devices like Microsoft's HoloLens will be left for another day.
+
+It's also worth pointing out that nearly all virtual reality devices require external hardware. So when you buy the Gear VR headset, you still need a phone for the screen and computing power. The Oculus Rift requires a powerful PC. Even Googe Cardboard, our first entry and the least expensive way to experience VR, requires an iOS or Android phone of some kind. It's important to understand exactly what you're getting when you buy a VR device, and what else you need to own or purchase separately to get the best experience.
+
+ Cardboard viewer
+GOOGLE CARDBOARD
+
+Google has a list of viewers that are officially supported, and they start at around $20
+Amazon has a list of Cardboard viewers as well
+The Cardboard app is available on both iOS and Android devices
+Google Cardboard is the least expensive way to dip your toe into virtual reality, as Cardboard viewers, which are designed to work with nearly any phone, can be purchased for around $20. Google has made it clear that it's serious about virtual reality, and you'll find a wide variety of programs and demos available to try with this platform, although you'll quickly find the offerings are of wildly varying quality.
+
+You can also check out a variety of YouTube videos designed for virtual reality, and Google recently announced that every YouTube video can now be watched in virtual reality. You're not going to run out of content anytime soon, and there are many things to do and see in Cardboard that are very enjoyable, especially if this is your first experience with virtual reality.
+
+The low cost of the Cardboard viewers, which are literally made of cardboard and often shipped flat until you bend them together, is a huge selling point. The New York Times recently gave subscribers a free one with its Sunday edition, allowing many people to try virtual reality for the first time. The possibilities for education are also massive, since low-cost Android devices are already common and the viewers are so inexpensive and welcoming. Getting a viewer, which Google often gives away for free at tech shows, and putting it together is part of the fun.
+
+So you have one of the most respected and largest tech companies in the world backing the standard; hardware is cheap; the ecosystem is strong; there's plenty of content. What's not to love?
+
+For starters, the experience isn't great. The low-cost viewers mean that Cardboard is 100 percent reliant on the connected smartphone for head tracking and motion sensing. The requisite sensors are great for most uses on a phone, but not nearly precise enough to give you a sense of presence in VR.
+
+People love to compare Cardboard to Samsung's Gear VR, another VR standard we'll get to next, but they're not in the same class of product.
+
+"Samsung and Oculus did a lot of work to improve movement tracking and reduce latency for the user," Fireproof Games' Barry Meade told Polygon. "They took the Android rendering loop and pared it right back for speed, as well as adding accurate sensors to the headset. Compared to Gear VR, Google [Cardboard] is more a like a VR viewer — it allows you to peer into VR but not really take part in it."
+
+Meade isn't the only VR developer a bit worried about the weaknesses of Cardboard.
+
+"Maybe you don't care about technical terms like 'low persistence' or 'asynchronous timewarp,'" VR developer E McNeill told Polygon. "Maybe you don't think that a few milliseconds of latency sounds like a big deal. But I'm willing to bet that you don't like getting sick, and these features can determine whether you feel nauseous or not. Personally, I've never found a Cardboard app that felt comfortable for more than a few minutes at a time, so it's hard for me to take it seriously as a platform."
+
+Cardboard is interesting in many ways — the ability to take your own VR pictures and show them off in a free app is particularly neat — and it's never smart to count Google out. But there is a real danger of people using Cardboard, assuming all VR suffers from the same high latency problems, and losing interest in the technology altogether.
+
+If good virtual reality is a roller coaster, Cardboard, in its present state, is a rocking chair. It's not bad, but it's only a hint of what VR is capable of.
+
+On the other hand, if you've tried Cardboard and found it fun, you're in luck: VR only gets better.
+
+ Gear VR 9
+GEAR VR
+
+
+
+HOW DO I GET IN?
+
+Buy or own a Galaxy Note 5, Galaxy S6, Galaxy S6 Edge, Galaxy S6 Edge+, or the upcoming S7 and S7 Edge and then purchase the $100 Gear VR
+If you have a Gear VR, here is my list of some of the best ways to start your VR journey, enjoy!
+One note to be aware of is that the enthusiast-focused "Innovator Edition" of the hardware is still floating around for sale, often at a reduced price. It's worth it to pay the full $100 for the improved fit and finish of the retail model
+Samsung's Gear VR is one of the most impressive and easy-to-use headsets available right now, and you can go ahead and read our review for all the details.
+
+The hardware itself only costs $100 and is available now, but it's only compatible with four of Samsung's current smartphones. If you don't have a Galaxy Note 5, Galaxy S6 edge+, Galaxy S6 or Galaxy S6 Edge, or you're not willing to buy one, you're out of luck. There is no similar product available for iOS devices, either. Gear VR is a product made by Samsung and Oculus to sell Samsung phones.
+
+That being said, it's an amazing virtual reality experience. You can stream Netflix films in a private villa that seems to be in the mountains; you can watch Twitch streams or your own imported videos in a private movie theater. The games range from the forgettable to the wonderful, but there's plenty there already to keep players interested for a very long time, with new releases most weeks.
+
+The Gear VR headset handles the head tracking, which creates a much more comfortable experience compared to Cardboard. The compatible Samsung phones all feature high-quality screens, so it's next to impossible to have a bad experience while playing the Gear VR. The lack of wires and ability to throw the whole setup into a small bag to travel with you is also a huge selling point; this is a fully contained virtual reality solution that is easy to set up and a joy to use.
+
+Outside of the limitation of only being compatible with a few Samsung phones, Gear VR is one of the best ways to get into virtual reality right now. There is only so much developers can do with the graphical limitations of current-generation smartphones, however, and you'll only get a few hours of battery life out of each charge. Overheating can also be a problem.
+
+Despite these few shortcomings, the Gear VR is currently the least expensive but highest-quality way to experience virtual reality. It's also a huge jump up in quality and comfort from Google Cardboard, due to the more precise, external sensors that improve on the smartphone hardware, even though the two technologies look superficially similar. Samsung is currently offering the Gear VR hardware free if you pre-order an S7 or S7 Edge.
+
+ VR porn
+OCULUS RIFT
+
+HOW DO I GET IN?
+
+Make sure your PC can run it
+Pre-order the $599 Oculus Rift
+You're good to go!
+The Oculus Rift is where we begin to move into "real" virtual reality on a larger scale. The addition of a high-end gaming PC means that you'll see fuller, more realized experiences here than on the Gear VR, and the hardware will begin shipping in March for the first round of pre-orders. The cost is $599 for the Oculus Rift itself, although the total cost can be $1,500 or above if you need to buy a gaming PC to run everything.
+
+Right now, if you haven't ordered a unit yet, you're going to be waiting until June for pre-orders to be filled. If you're curious, it may be a good idea to get your pre-order in and then wait for reviews; Oculus won't be charging you until the hardware ships. Getting your place in line has no risk, unless you change your mind and then forget to cancel your order.
+
+The Oculus Rift comes with the headset, the depth-tracking device that rests on your desk, a wireless Xbox One controller and the Oculus Remote. The Remote is purely a swiping device like a standard remote, so don't expect any motion tracking to be included in the initial product. The Touch controllers, which are true virtual reality controllers, will be shipping in the second half of the year, with no price set for the upgrade yet.
+
+The Oculus Rift also comes with Eve: Valkyrie and Lucky's Tale, which are two of the most impressive VR games we've played, full stop. Oculus is giving you the good stuff right off the bat, and it's a wise move; the company is ensuring everyone who buys the hardware plays the really good games first. Both games are also made significantly better by virtual reality — they're experiences that couldn't easily be replicated on a standard screen.
+
+The Oculus Rift is also arguably the best-supported virtual reality headset, with over 100 titles, including Minecraft, planned for release in 2016. The $599 is only part of the cost, however, you'll need the following hardware, or better, to run the device:
+
+Nvidia GTX 970 / AMD 290 equivalent or greater
+Intel Core i5-4590 equivalent or greater
+8 GB+ RAM
+HDMI 1.3 video output
+three USB 3.0 ports and one USB 2.0 port
+Windows 7 Service Pack 1 (64-bit) or newer
+If your PC is underpowered, you can still run some games, but you may find yourself dealing with frame rates that are low enough to make you ill.
+
+You can also try to track down a Development Kit 2, the last version of the hardware that was widely released for developers and enthusiasts before the retail edition, but Oculus is now longer selling them directly and the price of the hardware on the gray market can be hundreds of dollars over the $350 retail price. Many are selling for higher prices than the retail Oculus Rift itself. It's best just to wait for the real thing.
+
+The Oculus Rift, if you'll forgive the pun, is the hardware that kickstarted the current generation of virtual reality hardware, and Oculus' brain trust of engineers and developers, including the legendary John Carmack and Michael Abrash, can't really be beat. Combine that with the clout and bank account of parent company Facebook, and you have a product that stands at least a fighting chance of breaking through to a mainstream audience.
+
+ Vive Pre
+HTC VIVE
+
+HOW DO I GET IN?
+
+Pre-orders will open up on Feb. 29, and the hardware will cost $799
+There isn't much information on the kind of system you need to run the HTC Vive, but expect something close to the Rift's recommended specs
+Pre-orders for the Vive go live Feb. 29, and the hardware with the two motion controllers, two Lighthouse stations and "free" copies of Fantastic Contraption and Job Simulator will cost $799. It's a complete platform, one that offers a much better control selection than the Rift out of the box, but it's also $200 more expensive.
+
+We were recently able to use an updated version of the development kit, and the addition of a camera that allows you to see the world around you in seeming 3D while still wearing the headset is impressive. We also spent a significant amount of time with some of the Vive's upcoming games and were very happy with what we saw. Developers are creating games specifically for movement and motion controls, and it's a huge competitive advantage over the Rift.
+
+Also impressive is the Lighthouse technology, the two sensors that you have to install in the corners of your room to enable the room-scale tracking that helps to make the Vive so magical. Once they're in place, you can walk around an entire room in virtual reality, interacting with the environment using the two wireless motion-tracking controllers that come with the base unit.
+
+The tracking on the headset and the controllers feels close to flawless, which goes a long way to locking you into the virtual world. As a complete solution, the Vive has the Oculus Rift beat; it's a headset, set of controllers and room-scale tracking technology all in one. Tilt Brush, a virtual reality program that allows you to use the controllers to paint and sculpt in 3D space, is perhaps the closest thing VR has to a killer app right now.
+
+
+Of course, this assumes that you have an entire room to give over to a virtual reality rig, and that you can afford all that hardware to begin with. HTC hasn't revealed the sort of specs that will be required to run the Vive, but expect them to be similar to, if not more demanding than, the Oculus Rift. That is to say, you'll likely need to upgrade your existing PC.
+
+Valve and HTC have also often stressed that the Vive is a "premium" virtual reality experience, and it comes packed with much more hardware than the $599 Rift for $200 more. But Vive is also the VR platform that is coming from a collaboration between HTC and a little PC gaming company called Valve, which happens to own the most popular PC gaming storefront in the world. There is already a SteamVR listing in Steam, and Valve's near-ubiquity in the PC gaming space is a huge advantage.
+
+The Vive will also integrate your existing smartphone to keep your connected to the outside world. "The consumer edition of Vive also integrates phone functionality," the official page states. "Enabling you to stay connected to the real world, without exiting the virtual world, Vive Phone Services demonstrates the ability to combine both realities without losing touch of either. By allowing you to receive and respond to both incoming and missed calls, get text messages and send quick replies and check upcoming calendar invites directly through the headset, it opens up a whole new world of possibilities for both consumers and businesses."
+
+That's a lot of marketing speak, but locking yourself away in VR can be challenging if you have family or kids in the house. These services will allow people to reach you in virtual reality without pulling you out of the experience, and the possibilities for productivity software using your phone are also interesting. Valve and HTC are spending a good amount of time and effort on making sure you can move between the real and virtual worlds with minimal friction, and in many cases without removing the headset.
+
+The hardware is scheduled to begin shipping in early April. 
+
+ PlayStation vr ces
+PLAYSTATION VR
+
+HOW DO I GET IN?
+
+For now? You wait
+And now we come to the last of the big-name VR headsets coming in 2016. PlayStation VR has many advantages over its competition: The PlayStation 4 is much less expensive than a high-end PC, and the Move and even DualShock 4 controllers offer inexpensive motion-sensing controls along with the PlayStation Camera. PlayStation VR developers, much like Gear VR developers, also have the luxury of aiming at a single hardware platform so they can spend more time optimizing each experience.
+
+PlayStation VR is also one of the most comfortable virtual reality headsets we've tried, and is a bit easier to use with glasses than the Vive or the Rift. Plus, Sony is getting aggressive with software support, including an updated version of Rez coming to the platform.
+
+Like all high-quality virtual reality headsets, though, the PlayStation VR is going to be expensive, and it could likely eclipse the PlayStation 4 itself, which costs $349.99. The ability to lock onto the PlayStation 4 as the single hardware spec is very helpful for developers, but it could lead to games and demos that are a bit smaller or lower-fidelity than what we'll see on the Rift and the Vive. Then again, that shouldn't be surprising when you're comparing a years-old console to a gaming PC that costs significantly more.
+
+PlayStation VR is a smart play by Sony for the mainstream, but until we have a set release date or price it's hard to know how it will stack up to the Vive and Rift.
+
+We'll know more about many of these platforms and products in the coming weeks and months, but this should go a long way to making sure you understand the options available to you at the moment. The number of competing platforms can be overwhelming, and VR is just getting started. Good luck!
+
+HTC reveals virtual reality headset with Valve at MWC
+By Leo Kelion
+Technology desk editor
+1 March 2015
+ From the section Technology	These are external links and will open in a new window Share this with Facebook  Share this with Twitter  Share this with Messenger  Share this with Email  Share
+HTC ViveImage copyrightHTC
+Image caption
+HTC said that Google and HBO were among those working on content for the helmet
+HTC is to release a virtual reality headset as part of a tie-up with Valve, a leading PC video games publisher.
+The HTC Vive will be paired with wireless controllers and tracking technology to let wearers explore computer-generated environments by walking round their rooms.
+A test version of the kit will go on sale to developers shortly, followed by a public edition later this year.
+It will compete with Facebook's Oculus Rift and Sony's Morpheus VR headsets.
+The machines let wearers view computer-generated 3D environments to give them a sense of being there.
+
+Media captionWATCH: Dave Lee gets an early reaction to HTC's VR kit
+The announcement marks a change of strategy for HTC, which has focused on smartphones.
+At a press conference in Barcelona on the eve of the Mobile World Congress trade show, the Taiwanese firm also unveiled a new flagship handset - the HTC One M9 - and a GPS-enabled fitness tracker
+Virtual gaming
+Only limited details of the Vive have been released ahead of a planned presentation by Valve at the Game Developers Conference in San Francisco on Wednesday.
+However, HTC has said that the headset features can display video at 90 frames per second (fps) - an important consideration as many developers believe a rate lower than 60fps can cause nausea.
+It includes two 1,200 by 1,080 pixel screens to provide high definition - but not 4K - quality graphics, and allows existing sets of headphones to be plugged into its side.
+HTC said that more than 70 sensors were built in to the machine, including a gyroscope, an accelerometer and a laser position sensor.
+HTC ViveImage copyrightHTC
+Image caption
+HTC's virtual reality headset uses dozens of sensors to track the wearer's position
+It added that the machine also supported a facility developed by Valve that allows users to explore a virtual space and the objects within it from different angles - by moving about in real life within a 15ft by 15ft (4.6m squared) space. To do this, owners will also need to buy a Steam VR base station.
+"It is rare that a company has an opportunity to forever transform the ways in which people interact with the world and communicate with each other," said Peter Chou, HTC's chief executive.
+Although gamers are set to be the most likely early adopters, HTC added that the device could also be used for shopping, visiting other parts of the world and meeting friends in virtual reality.
+HTC virtual reality helmetImage copyrightHTC
+Image caption
+HTC said that its kit would be available to buy before the end of the year
+It added that Google, the US TV network HBO and movie studio Lionsgate were already working on content for the machine.
+Half Life VR?
+While HTC's handsets have been well reviewed in the past, its relatively small marketing budget has played to rival Samsung's favour.
+
+Media captionWATCH: Samsung put its own VR headset on sale at the end of last year
+Samsung already sells virtual reality kit of its own, thanks to an alliance with US firm Oculus VR. However, the Gear VR relies on the user also owning either a Samsung Galaxy Note or a Galaxy S6 handset, and as yet has little content available.
+US-based Valve runs Steam - the hugely popular online marketplace for PC videogames - as well as developing renowned games of its own, including Half Life, Portal and Dota 2.
+Half LifeImage copyrightVALVE
+Image caption
+News of the device is likely to fuel speculation about a VR-based sequel to Half Life
+A link-up with Valve therefore offers HTC a way to promote its machine without having to fund all the associated costs.
+But one expert suggested the relationship could be a double-edged sword.
+"Valve has a huge amount to offer a consumer electronics company through its giant user-base and the content distribution platform it runs," said Piers Harding-Rolls from the IHS Technology consultancy.
+"But on the flipside it must make sense commercially, and it is an issue if the hardware company doesn't have a share of the content revenues."
+Phone and fitness
+One company watcher was less positive about the firm's new Android-powered handset.
+HTC One M9Image copyrightHTC
+Image caption
+The One M9's home screen makes restaurant recommendations based on its location
+The look of the all-metal unibody One M9 has hardly changed from that of its predecessor. However, its main camera has been upgraded to a 20 megapixel component that can shoot video in 4K ultra high definition (UHD) quality.
+HTC's Sense user interface has also been updated to provide location-specific news and suggestions on the phone's home screen. And the handset can now simulate a surround sound experience from its front-facing speakers.
+"These are just small incremental changes," commented Francisco Jeronimo, from the research firm IDC.
+"HTC needs to do a lot more to retain market share."
+The company shipped 21.3 million smartphones in 2014, giving it a 1.6% share of the market, according to IDC.
+HTC One M9Image copyrightHTC
+Image caption
+The phone uses surround sound processing technology licensed from Dolby
+That was down from a 4.4% share and 31.6 million shipments two years earlier.
+It did, however, manage to return to profit last year after cutting costs.
+The firm also unveiled a wristband, which is compatible with both Android and iOS handsets.
+HTC GripImage copyrightHTC
+Image caption
+The HTC Grip is designed to share its data with the Under Armour Connected Fitness Platform
+The HTC Grip fitness tracker contains a built-in GPS chip to track the user's location, helping it measure their pace and calorie burn during exercise.
+It is waterproof and features a 1.8in (4.6cm) OLED display that can show incoming calls and notifications to a linked phone, but lacks a heart rate monitor.
+"The problem is that there are lots of other wristbands out there at a cheaper price," said Mr Jeronimo.
+"So, unless HTC bundles it for free when someone buys the M9 I don't see how it will succeed."
+
+This Is How Valve’s Amazing Lighthouse Tracking Technology Works
+
+Sean Buckley
+5/19/15 12:00pmFiled to: LIGHTHOUSE
+138.0K
+282
+19
+
+Valve’s virtual reality demo at GDC was nothing short of magical—it used fancy emitter technology to let us actually walk around a demo room. It felt so real. Valve calls the tech Lighthouse, and it’s kind of genius.
+
+Article preview thumbnail
+HTC Vive: Virtual Reality That's So Damn Real I Can't Even Handle It
+I saw the future today. I mean that. I got the chance here at MWC to try the new VR headset that…
+Read more
+The main idea behind the tracking tech is pretty simple—by flooding a room with non-visible light, Lighthouse functions as a reference point for any positional tracking device (like a VR headset or a game controller) to figure out where it is in real 3D space. Sure, you could do that with cameras and QR codes, Christmas lights, almost anything—but Valve’s tech allows it to pull of the trick with just two relatively inexpensive Lighthouse boxes. And how it does this is pretty damn neat.
+
+
+See, Valve’s Lighthouse boxes don’t have any cameras. They don’t need to “see” anything at all. Like their namesake, they just fire light out into the world to help ships (or VR headsets) navigate on their own.
+
+In this case, that light comes from a whole bunch of stationary LEDs, plus a pair of active laser emitters that spin like crazy. Sixty times every second, the LEDs flash, then one of the two spinning lasers sweep a beam of light across the room:
+
+
+Meanwhile, the receiver (read: VR headset or controller) is covered with little photosensors that detect the flashes and the laser beams. Ready for the genius part? When a flash occurs, the headset simply starts counting (like a stopwatch) until it “sees” which one of its photosensors gets hit by a laser beam—and uses the relationship between where that photosensor exists on the headset, and when the beam hit the photosensor, to mathematically calculate its exact position relative to the base stations in the room.
+
+Hit enough of those photosensors with a laser at the same time, and they form a “pose” — a 3D shape that not only lets you know where the headset is, but the direction it’s facing, too!
+
+Again, no optical tracking required. It’s all about timing. 
+
+
+
+The Evolution of Valve’s Lighthouse Tracking Sensors
+
+The result is cheap, accurate positional tracking. A bit high-level and wordy, I know, but it’s pretty awesome—Lighthouse is so accurate that jugglers can virtually toss and catch multiple objects under their legs and behind their back. Trick juggling. No joke. Check it out: 
+
+
+
+An anonymous, former Valve employee told me that Lighthouse is pretty cheap to build, too. We couldn’t get an official number, but it sounds like it’ll be almost negligible to add this kind of tracking tech to VR headgear and peripherals in the future.
+
+Which is exactly what Valve wants. The company says it will make the tech freely available to any hardware manufacturer interested in building it out, as a public service of sorts. “It’s a really hard problem to track things as well as they need to be tracked in VR,” Valve’s Joe Ludwig tells us. “They think that tracking is something you throw a smart guy at for six months, and it’s way harder than that.”
+
+Now that Valve believes it’s solved the problem, it’s willing to save other companies the trouble as well. They’re particularly interested in companies using Lighthouse for uses other than games—which Ludwig says Valve will never get around to pursuing.
+
+Palmer Luckey Explains Oculus Rift’s Constellation Tracking And Fabric
+
+Jamie FelthamBy Jamie Feltham  On Jun 16, 2015
+Oculus RiftPalmer LuckeyVirtual RealityVRFocus
+Plenty of new details about the consumer Oculus Rift virtual reality (VR) head-mounted display (HMD) were revealed last week at the company’s pre-E3 show in San Francisco, California. In particular, creator Oculus VR talked about a brand new constellation tracking system to deliver positional tracking for users, along with the ergonomics of the device, which is wrapped in fabric. As it turns out, the material used to cover the kit also plays a key role making that new tracking system possible.
+
+OculusRift_7
+
+Oculus VR founder and Oculus Rift creator Palmer Luckey explained as much during an interview on Youtube today. “So we call it a constellation tracking system,” Luckey noted. “We actually have an external sensor that mounts and it can detect the infrared light that is in the headset. We’ve actually got a constellation of infrared, LED light emitters underneath the fabric, and this fabric is actually infrared transparent so it looks black to us but the infrared light, it passes right through.”
+
+When asked house this differed to the last prototype for the Oculus Rift, dubbed Crescent Bay, Luckey replied: “Crescent Bay has holes drilled in plastic to let the light out, we’ve actually made this using a combination of textiles and plastic to make it really lightweight and durable and also it allows it hide all of the LED features rather than them being really visible.”
+
+The Oculus Rift is due to launch in the first quarter of 2016, though pricing and a more specific release date for the device are yet to be announced. VRFocus will continue to follow the device closely, reporting back with the latest updates on them.
+
