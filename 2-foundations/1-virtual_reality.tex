@@ -19,7 +19,7 @@ thesis will investigate gesture recognition systems as the primary interaction m
 	\label{fig:vive_and_rift_marked}
 \end{figure} 
 
-\section{Virtual Reality demands}
+\section{Virtual reality technical demands}
 Virtual reality places some strict demands on performance and software design to avoid discomfort for the user. This is in many ways connected to how virtual reality "tricks" 
 the user's brain into thinking the virtual experiences are actually real, thus giving it its "reality feel". Failing to meet these demands can quickly result in significant 
 discomfort for the user, often called \textbf{\textit{virtual reality sickness}}, a kind of motion sickness~\citep{ARSTECHNICA2013}. Some of this demands are described below:
@@ -52,8 +52,8 @@ One such example is \textbf{\textit{the screen-door effect (SDE)}},
 which is when the lines separating the display pixel or subpixels is visible in the displayed image~\citep{TC2016}. 
 To illustrate this issue \citet{TC2016} had the following remark about the Oculus Rift DK1 (released in 2013 with a resolution of 640×800 per eye):
 
-\textit{"Its low resolution screen (combined with magnification lenses that helped wrap the image around your view) made even the most beautifully rendered 3D environment look dated. 
-It was like you were sitting too close to an old TV, or staring at the display through a screen door (aptly, this shortcoming quickly came to be known as “the screen door effect”)"}
+"Its low resolution screen (combined with magnification lenses that helped wrap the image around your view) made even the most beautifully rendered 3D environment look dated. 
+It was like you were sitting too close to an old TV, or staring at the display through a screen door (aptly, this shortcoming quickly came to be known as “the screen door effect”)"
 
 \begin{figure}%[h!] %[H]
 	\includegraphics[width=\linewidth]{pictures/the_screen_door_effect.jpg}
@@ -61,14 +61,71 @@ It was like you were sitting too close to an old TV, or staring at the display t
 	\label{fig:the_screen_door_effect}
 \end{figure} 
 
-\subsection{Sensory conflict}
-As mention earlier in this sections, virtual reality sickness can be a consequence of the usage of virtual reality headsets, and can include symptoms like 
-headache, stomach awareness, nausea, vomiting, pallor, sweating, fatigue, drowsiness and disorientation~\citep{Kolasinski1995}. 
-% \citep{Brooks2010}
-
 \section{A review of two HMD's hardware}
-
+This section will briefly review what hardware is used in two virtual reality HMD and how this related to the demands outlined in the previous section. 
 \subsection{The Oculus Rift CV1}
 
 \subsection{The HTC Vive}
 The HTC Vive uses more than 70 sensors \citep{BBC2015}.
+
+
+\section{Virtual reality sickness}
+As mentioned in the previous sections, virtual reality sickness, a condition similar to \textbf{\textit{simulator sickness}}, 
+can be a consequence of the usage of virtual reality headsets, and is considered a major barrier to 
+using virtual reality. Virtual reality sickness causes symptoms that are similar to those of motion sickness, and can include symptoms like 
+headache, stomach awareness, nausea, vomiting, pallor, sweating, fatigue, drowsiness and disorientation~\citep{Kolasinski1995}. 
+
+Contrary to "regular" motion sickness, where the user visually perceived to be still while in actual motion, 
+virtual reality sickness turns this around: The user visually perceive to be in motion which he or she is still. 
+Virtual reality sickness can thus in many ways be considered as "a reverse motion sickness". Both these condition can thus be caused by
+\textbf{\textit{sensory conflict}}, i.e that there exist a discrepancy between the information given by the senses ("the human sensors").
+The susceptibility for this condition vary widely among users. Some user might experience it shortly after putting on the headset, 
+while others may never experience it~\cite{Stanney2003}.
+The causes for virtual reality sickness can vary and while some are less under the VR application designer's control than others, 
+they should still be understood by the VR designer~\cite{Stanney2003}. 
+The following two subsections will review factors that contribute to virtual reality sickness, and make a distinction by
+what are mostly determined by individual differences and whats mostly determined by the application design. 
+
+\subsection{Individual differences in susceptibility}
+Research has identified some individual differences that correlate with susceptibility for virtual reality sickness. 
+One observation is that the susceptibility of virtual reality sickness correlates heavily motion sickness susceptibility, and 
+factors that influence motion sickness susceptibility also usually influence virtual reality sickness susceptibility~\citep{Stanney2003}.
+Below are some of the major contributing factors that are based on individual differences, and are difficult to account for during the design of a virtual reality application.
+
+
+\subsubsection{Age}
+Research suggest that users between the ages of 2 and 12 are the most susceptible to virtual reality sickness~\citep{Kolasinski1995}. The susceptibility then decreases
+rapidly until an age of about 21, before it start decreasing more slowly until and age of 50, where the susceptibility increases again~\citep{Brooks2010}.
+
+\subsubsection{Gender}
+Women have proven more susceptible to virtual reality sickness than men~\citep{Kennedy1985}. The most common theories to explain this difference point out the genders' differences
+in hormonal composition, field of view (women has a wider field of view than men) and differences in depth cue recognition~\citep{Kennedy1985}. 
+Women are most susceptible to virtual reality sickness during ovulation~\citep{Clemes2005}.
+
+\subsubsection{Ethnicity}
+Some ethnicities seem to be more susceptible to virtual reality sickness than others, suggesting a genetic component. 
+Several studies prove asians people to be more susceptible to visually-induced motion sickness,
+with the Chinese being more susceptible that European-Americans and African-Americans on measures to motion sickness induced by a circular vection drum, and with
+Tibetans and Northeast Indians having greater susceptibility than Caucasian races~\citet{Barrett2004}.
+
+\subsubsection{Health}
+Symptoms of virtual reality sickness are more prevalent in people who are fatigued, sleep deprived, are nauseated or have an upper respiratory illness, ear trouble or influenza~\cite{Kolasinski1995}.
+
+\subsubsection{Postural stability}
+Users with a postural instability has been found to be more susceptible to visually-induced motion sickness, such as virtual reality sickness, and to experience
+stronger symptoms of nausea and disorientation~\cite{Kolasinski1995}. 
+
+\subsubsection{Experience with the application}
+More exposure to virtual environments can train the brain to be less sensitive to their effects~\citep{Stanney2003}. Users tend to become less likely to experience
+virtual reality sickness as they become more familiar with the virtual reality application. This adaption may occur with only a few seconds of exposure to the application~\cite{Kennedy1985}.\\
+
+
+In addition to this, people with a low threshold for detecting flicker and low mental rotation ability are more susceptible to virtual reality sickness~\cite{Kolasinski1995}.
+
+\subsection{Contributing factors to virtual reality sickness}
+
+
+
+
+
+
