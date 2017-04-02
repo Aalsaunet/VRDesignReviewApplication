@@ -1,6 +1,6 @@
-This chapter will review some important considerations when designing and implementing a virtual reality application using gesture recognition as input method.
+%This chapter will review some important considerations when designing and implementing a virtual reality application using gesture recognition as input method.
 
-\section{Virtual Reality hardware}
+\section{The virtual reality ecosystem}
 As described in the previous chapter, a virtual reality head-mounted device (HMD) is in simple terms and device that is fastened to the user's head and, when fastened, covers the
 user's entire field of vision. Each eye has its own display, and both of these are positioned about 2-3 centimeters from the eyes. In addition to this several head motion
 tracking sensors are built into the headset to detect any movement~\citep{POLYGON2016}. This usually includes a gyroscope, which is responsible for measuring the orientation of the
@@ -19,7 +19,7 @@ thesis will investigate gesture recognition systems as the primary interaction m
 	\label{fig:vive_and_rift_marked}
 \end{figure} 
 
-\section{Virtual reality technical demands}
+\section{Virtual reality performance demands}
 Virtual reality places some strict demands on performance and software design to avoid discomfort for the user. This is in many ways connected to how virtual reality "tricks" 
 the user's brain into thinking the virtual experiences are actually real, thus giving it its "reality feel". Failing to meet these demands can quickly result in significant 
 discomfort for the user, often called \textbf{\textit{virtual reality sickness}}, a kind of motion sickness~\citep{ARSTECHNICA2013}. Some of this demands are described below:
@@ -122,9 +122,53 @@ virtual reality sickness as they become more familiar with the virtual reality a
 
 In addition to this, people with a low threshold for detecting flicker and low mental rotation ability are more susceptible to virtual reality sickness~\cite{Kolasinski1995}.
 
-\subsection{Contributing factors to virtual reality sickness}
+\subsection{Virtual reality design factors}
+This section identifies some of the most common contributers to virtual reality sickness that can be lessened or mitigated completely by the VR application design.
 
+\subsubsection{Acceleration}
+As mentioned earlier sensory conflict during a virtual reality session might occur. This is especially noticeable during acceleration that is conveyed visually, but 
+not to the vestibular organs (inner ear organs that responds to acceleration). The speed of movement does not seem to contribute to virtual reality sickness in the same scale
+as the vestibular organs do not respond to constant velocity. % Needs some references
 
+\subsubsection{Camera control}
+Some theories indicates that the ability to anticipate and control the motion the user experiences plays a significant role in staving off motion- 
+and virtual reality sickness~\citep{Rolnick1991}. Unexpected movement of the camera should thus be avoided in the virtual reality application. 
+If the camera control is taken away from the user it is considered good practice to cue the impending camera movement to help the user to anticipate and prepare for 
+the visual motion~\citep{Lin2004}.
+
+\subsubsection{Focus distance}
+To avoid discomfort and fatigue it is important to place content the user will be focusing on for extended amounts of time in an optimal range.
+As an example Oculus VR recommends such content to be placed a distance in the range of 0.75 to 3.5 Unity units/meters away from the camera \citep{OCULUS2016}. 
+
+\subsubsection{Field of view}
+The term "field of view" (FOV) can refer both to "display FOV" and "camera FOV", which are similar, 
+but still distinct concepts that can both have an effect on the user's proneness to virtual reality sickness. 
+
+\textbf{\textit{Display FOV}} refers to the area of the visual field subtended by the display. As motion perception is more sensitive in the periphery view 
+a wide display FOV can contribute to VR sickness by providing the visual system with more visual input, i.e more "area" in the periphery, than a smaller display FOV. 
+This can lead to more sensory conflict as more of the visual view suggest that the user is moving, which he or she might be standing or sitting still.
+Reducing display FOV can reduce the changes of VR sickness \citep{Draper2001}, but can also reduce the level of immersion and awareness, and require the user to turn his or her head more
+than with a higher display FOV.
+
+\textbf{\textit{Camera FOV}} refers the area of the virtual environment that the graphics engine draws to the display.
+If the camera FOV is setup wrong, movement of the user head can lead to unnatural movement in the virtual environment (e.g a 15° rotation of the head can lead to a 
+25° rotation of the camera in the virtual environment). In addition to begin highly discomforting, this can lead to a temporary impairment in the vestibulo-ocular reflex, 
+which is a reflex to stabilize images on the retinas during head movement~\citep{Stanney2002}.
+
+\subsubsection{Latency and Lag}
+As mentioned earlier in this chapter, latency and lag can have a major impact VR sickness and the usability of the virtual reality application as a whole.
+Although designers and developers have no control over many aspects of a system's performance, it's important to make sure the target virtual reality application
+doesn't drop frames or lag on a minimum technical specifications system~\citep{OCULUS2016}. While some dropped frames or occasional jitter can be a minor annoyance
+in conventional applications or video games, it can have a much more discomforting effect on the user of a virtual reality application. 
+
+Some research indicates that a fixed, and thus predictable, latency creates about the same degree of VR sickness whether it's as short as 48 milliseconds or as long 
+as 300 milliseconds, and that big and predictable latency or lag are more comfortable for VR users than smaller, but more unpredictable, latency or lag~\citep{Draper2001}. 
+
+%\subsubsection{Distortion Correction}
+
+%\subsubsection{Flicker}
+
+%\subsubsection{Independent Visual Backgrounds}
 
 
 
