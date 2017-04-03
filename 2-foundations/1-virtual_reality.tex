@@ -1,7 +1,7 @@
 %This chapter will review some important considerations when designing and implementing a virtual reality application using gesture recognition as input method.
 
 \section{The virtual reality ecosystem}
-As described in the previous chapter, a virtual reality head-mounted device (HMD) is in simple terms and device that is fastened to the user's head and, when fastened, covers the
+As described in the previous chapter, a virtual reality head-mounted device (HMD) is in simple terms a device that is fastened to the user's head and, when fastened, covers the
 user's entire field of vision. Each eye has its own display, and both of these are positioned about 2-3 centimeters from the eyes. In addition to this several head motion
 tracking sensors are built into the headset to detect any movement~\citep{POLYGON2016}. This usually includes a gyroscope, which is responsible for measuring the orientation of the
 HMD, and some times an accelerometer to measure the proper acceleration of the HMD \citep{THEVERGE2016}. In addition, or instead of this, the first consumer versions of 
@@ -61,12 +61,12 @@ It was like you were sitting too close to an old TV, or staring at the display t
 	\label{fig:the_screen_door_effect}
 \end{figure} 
 
-\section{A review of two HMD's hardware}
-This section will briefly review what hardware is used in two virtual reality HMD and how this related to the demands outlined in the previous section. 
-\subsection{The Oculus Rift CV1}
+% \section{A review of two HMD's hardware}
+% This section will briefly review what hardware is used in two virtual reality HMD and how this related to the demands outlined in the previous section. 
+% \subsection{The Oculus Rift CV1}
 
-\subsection{The HTC Vive}
-The HTC Vive uses more than 70 sensors \citep{BBC2015}.
+% \subsection{The HTC Vive}
+% The HTC Vive uses more than 70 sensors \citep{BBC2015}.
 
 
 \section{Virtual reality sickness}
@@ -136,10 +136,6 @@ and virtual reality sickness~\citep{Rolnick1991}. Unexpected movement of the cam
 If the camera control is taken away from the user it is considered good practice to cue the impending camera movement to help the user to anticipate and prepare for 
 the visual motion~\citep{Lin2004}.
 
-\subsubsection{Focus distance}
-To avoid discomfort and fatigue it is important to place content the user will be focusing on for extended amounts of time in an optimal range.
-As an example Oculus VR recommends such content to be placed a distance in the range of 0.75 to 3.5 Unity units/meters away from the camera \citep{OCULUS2016}. 
-
 \subsubsection{Field of view}
 The term "field of view" (FOV) can refer both to "display FOV" and "camera FOV", which are similar, 
 but still distinct concepts that can both have an effect on the user's proneness to virtual reality sickness. 
@@ -155,7 +151,11 @@ If the camera FOV is setup wrong, movement of the user head can lead to unnatura
 25° rotation of the camera in the virtual environment). In addition to begin highly discomforting, this can lead to a temporary impairment in the vestibulo-ocular reflex, 
 which is a reflex to stabilize images on the retinas during head movement~\citep{Stanney2002}.
 
-\subsubsection{Latency and Lag}
+\subsubsection{Focus distance}
+To avoid discomfort and fatigue it is important to place content the user will be focusing on for extended amounts of time in an optimal range.
+As an example Oculus VR recommends such content to be placed a distance in the range of 0.75 to 3.5 Unity units/meters away from the camera \citep{OCULUS2016}. 
+
+\subsubsection{Latency and lag}
 As mentioned earlier in this chapter, latency and lag can have a major impact VR sickness and the usability of the virtual reality application as a whole.
 Although designers and developers have no control over many aspects of a system's performance, it's important to make sure the target virtual reality application
 doesn't drop frames or lag on a minimum technical specifications system~\citep{OCULUS2016}. While some dropped frames or occasional jitter can be a minor annoyance
@@ -163,6 +163,11 @@ in conventional applications or video games, it can have a much more discomforti
 
 Some research indicates that a fixed, and thus predictable, latency creates about the same degree of VR sickness whether it's as short as 48 milliseconds or as long 
 as 300 milliseconds, and that big and predictable latency or lag are more comfortable for VR users than smaller, but more unpredictable, latency or lag~\citep{Draper2001}. 
+
+\subsubsection{Mouse and keyboard usage}
+While a user is wearing a virtual reality headset, interaction with external input devices such as a keyboard, might be inconvenient or difficult. 
+Put simply, this is because the user can't see his or her hands and thus can't get the visual hand positional feedback they could get without the virtual reality HMD. 
+Because of this, many virtual reality applications makes use of a gamepad controller instead. %reference needed
 
 %\subsubsection{Distortion Correction}
 
