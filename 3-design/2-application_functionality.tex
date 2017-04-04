@@ -4,30 +4,55 @@ The Launcher should show up when the application is launched and in many ways fu
 Here the user can decide between hosting a session on a 3D model he or she has access to, or join an existing session from a list/browser.
 When the user wishes to initiate or join a session with a particular 3D model to be inspected, he/she should be able to:
 
+\paragraph{When hosting}a session, the user should be able to:
 \begin{itemize}
-	\item Choose between hosting or joining a session.
-	\item If the user wishes to \textbf{host} a session, he or she should be able to: 
-	\begin{itemize}
-		\item Specify a 3D model from a standard file format to host the session on.
-		\item Give the session a name
-		\item Define a password, which will be required to enter the session. 
-		\item Choose between different visibility settings for the session (e.g~whether it should show up in the session list)
-	\end{itemize}
-		
-	\item If the user wishes to \textbf{join} a session, he or she should be able to:
-	\begin{itemize}
-		\item Choose a session from the session list and click the join-button to enter.
-		\item Enter the name of a session in the search text field to search for a session by name.
-			  This should also enable to find sessions that are otherwise "hidden".
-	\end{itemize}	 
+	\item Specify a 3D model from a standard file format to host the session on.
+	\item Give the session a name
+	\item Define a password, which will be required to enter the session. 
+	\item Choose between different visibility settings for the session (e.g~whether it should show up in the session list)
 \end{itemize}
+
+\paragraph{When joining}a session, the user  should be able to:
+\begin{itemize}
+	\item Choose a session from the session list and click the join-button to enter.
+	\item Enter the name of a session in the search text field to search for a session by name.
+			This should also enable to find sessions that are otherwise "hidden".
+\end{itemize}	
 
 % Mockup for the launcher?
 
 \subsubsection{The Inspector}
-Once a user has either created or joined a session and is loaded into the model, he or she should be able to:
+Once a user has either created or joined a session and is loaded into the model, he or she should be able to do the following:
+
+\paragraph{Choose between Virtual Reality Mode and Desktop Mode.} Virtual reality mode is meant to be used with a virtual reality headset
+and sets up the correct settings (e.g the field of view). Desktop mode is meant to be used without a virtual reality headset and instead used
+a regular display. This modes sets up the best setting for regular display usage, and if a virtual reality headset is attached the input from it will be ignored 
+(e.g.~To avoid its orientation affecting the camera in the application).
+
+\paragraph{Look around.} By looking around the camera should rotate to the desired direction, but the player model should keep its orientation 
+(e.g.~"forward" is the same directing independent of where the user is looking). Looking around can only be achieved by the user turning his or her 
+head while wearing a virtual reality HMD and having the application run in VR mode.
+
+\paragraph{Rotate (i.e change orientation).} When rotating the camera and the player model should rotate in the desired direction (e.g.~"forward" is where the player model is
+facing after the rotation).
+Rotation should allow pitching and yawing (rotation along the Y and Z axis), but not rolling (rotation along the X axis) as this might cause the user discomfort, especially when
+using a virtual reality headset, and has little to no practical implication. See \ref{the_six_degrees_of_freedom} for an illustration of this. 
+Rotation should be possible either by using a gesture or by moving the mouse.
+
+\paragraph{Move (i.e change position).} 
+
+
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/the_six_degrees_of_freedom.jpg}
+	\caption[The six degrees of freedom]{The six degrees of movement in a three-dimensional space. A rigid body in this space can change \textbf{position} along the X axis (left/right), 
+	Y axis (up/down)and Z axis (forward/backward), or change \textbf{rotation/orientation} along the X axis (rolling), Y axis (pitching) and Z axis (yawing).
+	Picture from \citet{6DOF}}
+	\label{fig:the_six_degrees_of_freedom}
+\end{figure} 
+
+
+
 \begin{itemize}
-	\item Look around, e.g.~by using mouse movements or head motions (picked up from sensors in the VR head device).
 	\item Move around on the horizontal plane by using the arrow keys, the WASD keys or by specific gestures (e.g.~a "dragging motion").
 	\item Move in the vertical plane increasing or decreasing altitude (i.e "flying").
 	\item Zoom in and out by virtually changing the avatar's own size.
