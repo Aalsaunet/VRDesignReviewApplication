@@ -21,10 +21,12 @@ can have some limitation when working in a 3D environment~\citep{Rautaray2015}. 
 the Leap Motion Controller, a vision-based device using stereoscopic cameras, as a primary input device to the application. 
 
 \section{Initial design ideas} 
-The core functionality in the application should be to navigate the 3D model and annotate it, primarily by using the advantages of virtual reality and 
-gesture recognition. The users should be able to create "sessions" that enable several users to be virtually present 
-in the same instance of the 3D model, and to interact with it using gestures. During a session the 3D model may thus contain one or several annotations,
-which can be interacted with (e.g.~edited or deleted). Beyond this there is a lot of functionality which should be in place for a complete product, but which will not be a priority 
+The core functionality in the application should be to navigate the 3D model and "annotate" it (i.e creating and placing remarks tied to a the model), 
+primarily by using the advantages of virtual reality and gesture recognition. 
+The users should in later iteration also be able to create "sessions" that enable several users to be virtually present 
+in the same instance of the 3D model, and to interact with it using gestures. During a session a user should then be able to create annotations, 
+which can be interacted with (e.g.~edited or deleted) and is tied to the 3D model and the session. 
+Beyond this there is a lot of other functionality which should be in place for a complete product, but which will not be a priority 
 for this thesis as the virtual reality and gesture recognition aspects are the focus. 
 
 In the final product the application should support a lot more functionality, some of which is described in the next section.
@@ -33,7 +35,9 @@ In the final product the application should support a lot more functionality, so
 
 \subsection{Application use cases}
 This section gives an overview of the use cases which is intended for the finished application, some of which will be implemented in this thesis. 
-The user stories that have not been implemented as part of this thesis will be explicitly mentioned or marked italics, while the rest will be in plain text.
+This section separates the user stores into two subsection "The Launcher" and "The Inspector", where "The Inspector stories" was all implemented, while
+"The Launcher stories" where skipped because they aren't relevant for the thesis, and to give more time to prioritize "The Inspector stories".
+
 
 \import{}{2-application_functionality.tex}
 
