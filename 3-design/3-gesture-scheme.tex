@@ -1,11 +1,15 @@
 \section{The gestures}
 As mention in the user stories for the application, all of the application's functionality should be accessible by using gestures. The user should thus
 be able to do every task only by using gestures (except the "look around story", which only be done by rotating the HMD). To support this a gesture scheme of seven (or eight depending
-on perspective) individual gestures were created. 
-These are individually described below on a functional level and will be covered in more technical detail during the next chapter. 
+on perspective) individual gestures were created. The gestures can all be considered static gesture, meaning that they don't require movement for the gesture to be detected, 
+except for the movement required to form the gesture. 
+Even though the gestures can be considered static in this aspect, the user is still often required to move his or her hand while holding the gesture to get the desired effect. 
+
+The gestures are individually described below on a functional level and will be covered in more technical detail during the next chapter. 
 Both the left- and right hand should be able to execute all these gestures independently, so scenarios where both hands do the same gestures, or different gestures, should
 work. The only exception from this is the menu gesture, where one hand is assigned to be "the menu hand" (the left hand by default) and one is assigned to be "the selector hand"
-(right by default).
+(right by default). The gestures are design to be as distinguishable from each other as possible (i.e so the gesture recognition system doesn't mistake one gesture for
+another), and to work with the cameras (assuming a vision-based system) positioned in several different positions (i.e also distinguishable from different angles).
 
  
 \subsection{The pinch gesture}

@@ -20,16 +20,16 @@ and a depth, which is hard to match by regular "2D screens". DNV GL is also inte
 can have some limitation when working in a 3D environment~\citep{Rautaray2015}. As mentioned in the previous chapters this thesis will use 
 the Leap Motion Controller, a vision-based device using stereoscopic cameras, as a primary input device to the application. 
 
-\section{Initial design ideas} 
+\section{The core design} 
 The core functionality in the application should be to navigate the 3D model and "annotate" it (i.e creating and placing remarks tied to a the model), 
 primarily by using the advantages of virtual reality and gesture recognition. 
 The users should in later iteration also be able to create "sessions" that enable several users to be virtually present 
-in the same instance of the 3D model, and to interact with it using gestures. During a session a user should then be able to create annotations, 
-which can be interacted with (e.g.~edited or deleted) and is tied to the 3D model and the session. 
+in the same instance of the 3D model, and to interact with it using gestures. During these sessions a user should then be able to create annotations, 
+which can be interacted with (e.g.~edited or deleted) and are tied to the 3D model and the session. 
 Beyond this there is a lot of other functionality which should be in place for a complete product, but which will not be a priority 
 for this thesis as the virtual reality and gesture recognition aspects are the focus. 
 
-In the final product the application should support a lot more functionality, some of which is described in the next section.
+In the final product the application should support a lot more functionality, some of which is described in the next sections.
 
 %To enable the application to a be a VR collaboration tool
 
@@ -42,6 +42,33 @@ This section separates the user stories into two subsection "The Launcher" and "
 
 \import{}{2-application_functionality.tex}
 
-% link the problems to predefined rules or requirements 
+\section{Functionality limitations}
 
-% see representations of each other (i.e through a character model/avatar).
+\subsection{Handling textual input with gestures}
+
+\subsection{User gesture calibration}
+
+\subsection{Saving annotation to a database}
+
+\subsection{Exposing annotation to web servers}
+
+\subsection{Annotation time-lines}
+
+% \section{Challenges with VR and GRT} 
+% Problems with using VR + e.g Leap over mouse + keyboard + display. E.g:
+
+% \subsection{The "writing issue"}
+% Virtual keyboards are bad. 
+% Regular keyboards are impractical. 
+% See "ideer til masteroppgaven.txt"
+% 
+% \subsection{Challenges in "designing" gesture schemes}
+% People have different preferences. Have intuitive gestures. Have gestures that is not too
+% fatiguing. Have gesture with high precision and recall (F-score) (high TP and TN. Low FP, FN).
+% Have a system that doesnt mistake one gesture for another.
+% 
+% \subsubsection{Fixes?}
+% User-gesture calibration. 
+% 
+% \section{Related work}
+
