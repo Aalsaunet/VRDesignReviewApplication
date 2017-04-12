@@ -6,8 +6,8 @@ When the application is started user is positioned into a oiltank model, which w
 This model is of high fidelity and was originally developed for the DNV GL Survey Simulator, an application to train surveyors.
 
 \begin{figure}%[h!] %[H]
-	\frame{\includegraphics[width=0.5\linewidth]{pictures/tank/back.png}}
-	\frame{\includegraphics[width=0.5\linewidth]{pictures/tank/half_profile.png}}
+	\frame{\includegraphics[width=0.5\linewidth]{pictures/screenshots/tank_back.png}}
+	\frame{\includegraphics[width=0.5\linewidth]{pictures/screenshots/tank_half_profile.png}}
 	\caption[The Oil tank model]{The Oil tank model from the outside}
 	\label{fig:tank_outside}
 \end{figure} 
@@ -27,7 +27,7 @@ From SteamVR the \texttt{[CameraRig]} prefab is used, which essentially does the
 The Design review application also makes use of Hover UI Kit, an open source project for creating VR/AR-enabled, customizable and dynamic user interfaces. 
 This kit was vital in rapidly prototyping a gesture-enabled menu and a virtual keyboard to the annotation forms.
 
-\section{The architecture}
+% \section{The architecture}
 \begin{figure}%[h!] %[H]
 	\includegraphics{pictures/unity_hierarchy.png}
 	\caption[The Unity project hierarchy of the Design Review Application]{The Unity project hierarchy of the Design Review Application}
@@ -47,7 +47,7 @@ The \texttt{MasterController} game object represents the player model and contai
 holding many key scripts. The \texttt{MasterController}'s transform, with its position, rotation and scale, represents the user's position and orientation, 
 and every child object of \texttt{MasterController} will have a position, rotation and scale that is relative to its own. This ensures
 that e.g.~the camera will always "follow" the user. Because this game object is so essential, we will cover several important components and
-child objects in the following section.
+child objects in the following sections.
 
 \begin{figure}%[h!] %[H]
 	\includegraphics{pictures/unity_inspector.png}
@@ -55,7 +55,7 @@ child objects in the following section.
 	\label{fig:unity_inspector}
 \end{figure} 
 
-\subsection{The camera rigs}
+\section{The camera rigs}
 The \texttt{CameraRigs} game objects holds three different game object, which each represents its own camera-setup: \texttt{DesktopCameraRig}, which is meant to be used
 without virtual reality, \texttt{OculusCameraRig}, meant to be used with Oculus Rift HMDs, and \texttt{ViveCameraRigs}, meant to be used with the HTC Vive.
 For the application to run successfully one of these rigs should be enabled, while the other two should be disabled.
@@ -66,7 +66,7 @@ is selected, as this can wrongfully be set to a HMD's value if a HMD is connecte
 set automatically by the HMD software. Another thing done by the script is to decide wheter a two dimensional crosshair/cursor should be drawn on the screen space
 (in case of the desktop rig), or if a three dimensional crosshair/cursor (i.e the \texttt{GazePointerRing}) should be drawn in the world space. 
 
-\subsection{The world space canvas}
+\section{The world space canvas}
 The \texttt{WorldSpaceCanvas} is a canvas object, which in Unity serves as a container for other user interface elements, such as buttons and input fields, 
 and is rendered in world space. It is thus diegetic and exists there like other 3D objects.
 
@@ -96,13 +96,13 @@ and a script called \texttt{CanvasCollider}, which keeps track of objects that's
 obstruct the whole, or parts of, the canvas. The objects are enabled again once the users is done editing the annotation (i.e when the user clicks "submit", "cancel" or "delete").
 
 \begin{figure}%[h!] %[H]
-	\includegraphics[width=\linewidth]{pictures/tank/worldspacecanvas_scene.png}
+	\includegraphics[width=\linewidth]{pictures/screenshots/canvas/worldspacecanvas_scene.png}
 	\caption[The \texttt{WorldSpaceCanvas} as seen in the Unity Scene View]{The \texttt{WorldSpaceCanvas} as seen in the Unity Scene View.}
 	\label{fig:worldspacecanvas_scene}
 \end{figure} 
 
 \begin{figure}%[h!] %[H]
-	\includegraphics[width=\linewidth]{pictures/tank/worldspacecanvas_ingame.png}
+	\includegraphics[width=\linewidth]{pictures/screenshots/canvas/worldspacecanvas_ingame.png}
 	\caption[The \texttt{WorldSpaceCanvas} as seen in the Unity Game View]{The \texttt{WorldSpaceCanvas} as seen in the Unity Game View.}
 	\label{fig:worldspacecanvas_ingame}
 \end{figure} 
@@ -112,7 +112,7 @@ The \texttt{WorldSpaceCanvas} has two child game objects: \texttt{AnnotationForm
 contain other user interaction elements. The \texttt{Hoverkey} game object represents the touch keyboard and is part of the HoverUI-kit.
 In addition to the keyboard six other similar buttons are also present: Submit, Cancel, Delete, Error, Warning and Information (see \ref{fig:worldspacecanvas_ingame}).
 
-\subsection{The Leap Motion Controller}
+\section{The Leap Motion Controller}
 The \texttt{LeapMotionController} game object contains objects related to the Leap Motion device and gesture recognition and consist primarily of the hand models, necessary 
 scrips and detectors. In the game object \texttt{HandModels} there is one object-representation of the left hand, called \texttt{Pepper\_LeftHand}, and one for the 
 right hand, called \texttt{Pepper\_RightHand}. These objects have their own hand models (as there needs to be different models for the left and right hand) and their 
@@ -121,7 +121,7 @@ These are the definition and implementation of the gesture scheme that were disc
 hand also have its own instance of the \texttt{GestureHand} class, which is an important component to keep track of hand states and resources, and
 it exposes utility function to other classes. 
 
-\subsection{The GestureHand class}
+\section{The GestureHand class}
 The \texttt{GestureHand} class is assigned as a component to each hand object, and contain several important variables.
 \begin{itemize}
 	\item \texttt{bool isLeftHand} - Keeps track of whether this instance belong to the left or the right hand.
@@ -191,7 +191,7 @@ When the user switches between having gestures enabled and disable by using the 
 is edited. When an annotation is edited, and the annotation form is open, gestures that one can use otherwise (e.g~the movement and rotation gestures) are disabled.
 
  
-\subsection{The detectors}
+\section{The detectors}
 The detectors are represented as game objects and children of the \texttt{Detectors} game object under each hand game object. 
 Each of these detector objects have the naming convention <gesture name> + "Detector" + <optional specifier> + "\_" + <handedness: Left or Right>, 
 e.g.~\texttt{PinchDetectorStrict\_Left} and \texttt{FistDetector\_Right}. A certain detector of one hand is usual identical to the equivalent detector for the 
@@ -211,7 +211,7 @@ During the implementation phase these values were adjusted several times in purs
 has their own "gesture sensitivity preferences" (this will be review in the next chapter). First the gesture implementations will be reviewed. 
 
 
-\subsubsection{The PinchDetectorStrict and PinchDetectorSlack}
+\subsection{The PinchDetectorStrict and PinchDetectorSlack}
 The \texttt{PinchDetectorStrict} and \texttt{PinchDetectorSlack} were originally one detector called \texttt{PinchDetector}, but was split up to represent two 
 different options for the user. Both detectors utilize the base \textit{PinchDetector} script provided by the Leap Motion detection utilities, while the strict version
 also uses the \textit{ExtendedFingerDetector}. The \texttt{PinchDetector} measures the distance between the tip of the thumb and index finger, and if these are below
@@ -227,7 +227,7 @@ The finger states of the \textit{ExtendedFingerDetector} for all individual fing
 be either extended or not extended, but on the "minimum extended" parameter 2 is set, while "maximum extended" is set to 5, 
 meaning that anything between two and five fingers can be extended. 
 
-\subsubsection{The PalmDownDetector}
+\subsection{The PalmDownDetector}
 The \texttt{PalmDownDetector} uses a PalmDirection detector and an ExtendedFinger detector, which is AND'ed by a DetectorLogicGate. 
 The PalmDirectionDetector is configured to become active when the palm is pointing within 30 degrees of {0, -1, 0} (x = 0, y = -1, z = 0) direction, relative to the camera.
 The coordinate system used functions just as if the three-dimensional axis had been drawn on the screen, so e.g.~ the coordinates {0, 0, 1} would be directly forward, while
@@ -241,7 +241,7 @@ The PalmDirectionDetector is also configured with an "On Angel" of 30 degrees an
 The \texttt{PalmDownDetector} also used an ExtendedFingerdetector, as was covered in the previous section. This one is configured to require that 
 the index-, middle, ring and pinky finger have to be extended, which the thumb can be either. 
 
-\subsubsection{The PalmSideDetector}
+\subsection{The PalmSideDetector}
 The \texttt{PalmSideDetector} is quite similar to the \texttt{PalmDownDetector} and uses the same detectors, but with a different configuration. 
 Although the settings used for the DetectorLogicGate and the ExtendedFingerDetector are very similar, the settings for the PalmDirectionDetector differs.
 Unlike the \texttt{PalmDownDetector}, where both hands are required to point in the direction {0, -1, 0} to perform the gesture, the \texttt{PalmSideDetector} makes 
@@ -249,12 +249,12 @@ a distinction here. This is because requiring the palm direction {1, 0, 0} (righ
 for the right hand this requires the whole arm to twist. The required palm direction for the left hand is thus {1, 0, 0} (right), and {-1, 0, 0} (left) for the right hand, both
 with an "On Angel" of 30 degrees and an "Off Angle" of 50.
 
-\subsubsection{The FistDetector}
+\subsection{The FistDetector}
 The \texttt{FistDetector} is prehaps the simplest of the detectors and only uses the ExtendedFingerDetector.
 The ExtendedFingerDetector is simply configured to require that no finger is extended. 
 As such the minimum- and maximum amount of fingers extended are both set to 0, and all finger have their required state set to "Not Extended"
 
-\subsubsection{The SinglePointDetector}
+\subsection{The SinglePointDetector}
 The \texttt{SinglePointDetector} uses two detectors, ExtendedFingerDetector and FingerDirectionDetector, bound together with an AND-DetectorLogicGate.
 The ExtendedFingerDetector here requires that the index finger is extended and that the middle-, ring- and pinky fingers are not extended (both thumb states are accepted).
 The FingerDirectionDetector is set to be active when the index finger points within 15 degrees of the direction {0, 0, 1}, relative to the camera.
@@ -262,15 +262,19 @@ Both the "On Angle" and "Off Angle" settings are set to 15 in this detector, as,
 Simply put, the previous gestures can last as long as the gesture is held, and while this is the case the application continously watches the active hands and responds to
 hand movements. The single- and double point detectors are techniqually also continous and can last as long as the user desires, 
 but as soon as these gestures are activated their discrete action is performed. After this action has been performed no other action will be performed by the same
-and while the same gesture is kept. In the case of both the single- and double point detectors,an annotation is either placed or edited upon activation. 
+and while the same gesture is kept. In the case of both the single- and double point detectors, an annotation is either placed or edited upon activation. 
 If a user thus with to place an annotation and immediatly edit it, he or she has to use the approprate gesture, release the gesture and do the same gesture again.
 
-\subsubsection{The DoublePointDetector}
+\subsection{The DoublePointDetector}
 The \texttt{DoublePointDetector} is similar to the \texttt{SinglePointDetector} and uses the same base detectors. 
 The only implementational difference between this two is that the ExtendedFingerDetector is configured to require that both the index- and middle finger are extended, while
 the ring- and pinky finger are contracted (both thumb states are accepted).
 
 
+% Write about the menu?
+
+\section{The Movement- and Rotation Controller}
+\texttt{MovementController} and \texttt{RotationController} are script components of the MasterController, and relates to the movement and rotation of the user.
 
 
 
