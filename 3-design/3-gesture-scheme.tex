@@ -5,6 +5,9 @@ be able to do every task only by using gestures (except the "look around story",
 on perspective) individual gestures were created. The gestures can all be considered static gesture, meaning that they don't require movement for the gesture to be detected, 
 except for the movement required to form the gesture. 
 Even though the gestures can be considered static in this aspect, the user is still often required to move his or her hand while holding the gesture to get the desired effect. 
+The application should also give visual feedback when a gesture is recognized. This could be by altering the hand model in some way (e.g~color it differently by
+switching materials) or by having some user interface showing it. 
+
 
 The gestures are individually described below on a functional level and will be covered in more technical detail during the next chapter. 
 Both the left- and right hand should be able to execute all these gestures independently, so scenarios where both hands do the same gestures, or different gestures, should
@@ -62,6 +65,7 @@ and is used by extending and retracting the fist.
 \end{figure} 
 
 \subsection{The combined-movement gesture}
+\label{sec:combined-movement}
 The combined-movement gesture, alternatively called the XYZ-gesture, is a special gesture that's only enabled if the "use combined gesture" option is selected in the menu.
 When this gesture is enable the other movement gestures, i.e the palm-down-, the palm-side- and the fist gesture, are disabled. If the "use combined gesture" is disabled, 
 by clicking "distinguish movement gestures" in the menu, the other movement gestures are once again enabled. This gesture is done in the same manner as the palm-down gesture, 
