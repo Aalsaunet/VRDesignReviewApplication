@@ -1,6 +1,6 @@
 % About Unity
 
-\section{External resources}
+\section{External Resources}
 The Design Review application was implemented by using several pre-made assets.
 When the application is started user is positioned into a oiltank model, which was provided by DNV GL. 
 This model is of high fidelity and was originally developed for the DNV GL Survey Simulator, an application to train surveyors.
@@ -42,7 +42,7 @@ These will be covered by their own sections, with subsections detailing their im
 % GestureMenu contains the menu, all its interactable buttons and several scripts.
 % The MasterController . 
 
-\section{The master controller}
+\section{The Master Controller}
 The \texttt{MasterController} game object represents the player model and contains many of the most important game objects, in addition to
 holding many key scripts. The \texttt{MasterController}'s transform, with its position, rotation and scale, represents the user's position and orientation, 
 and every child object of \texttt{MasterController} will have a position, rotation and scale that is relative to its own. This ensures
@@ -55,7 +55,7 @@ child objects in the following sections.
 	\label{fig:unity_inspector}
 \end{figure} 
 
-\section{The camera rigs}
+\section{The Camera Rigs}
 The \texttt{CameraRigs} game objects holds three different game object, which each represents its own camera-setup: \texttt{DesktopCameraRig}, which is meant to be used
 without virtual reality, \texttt{OculusCameraRig}, meant to be used with Oculus Rift HMDs, and \texttt{ViveCameraRigs}, meant to be used with the HTC Vive.
 For the application to run successfully one of these rigs should be enabled, while the other two should be disabled.
@@ -66,7 +66,7 @@ is selected, as this can wrongfully be set to a HMD's value if a HMD is connecte
 set automatically by the HMD software. Another thing done by the script is to decide wheter a two dimensional crosshair/cursor should be drawn on the screen space
 (in case of the desktop rig), or if a three dimensional crosshair/cursor (i.e the \texttt{GazePointerRing}) should be drawn in the world space. 
 
-\section{The world space canvas}
+\section{The World Space Canvas}
 The \texttt{WorldSpaceCanvas} is a canvas object, which in Unity serves as a container for other user interface elements, such as buttons and input fields, 
 and is rendered in world space. It is thus diegetic and exists there like other 3D objects.
 
@@ -121,7 +121,7 @@ These are the definition and implementation of the gesture scheme that were disc
 hand also have its own instance of the \texttt{GestureHand} class, which is an important component to keep track of hand states and resources, and
 it exposes utility function to other classes. 
 
-\section{The GestureHand class}
+\section{The GestureHand Class}
 The \texttt{GestureHand} class is assigned as a component to each hand object, and contain several important variables.
 \begin{itemize}
 	\item \texttt{bool isLeftHand} - Keeps track of whether this instance belong to the left or the right hand.
@@ -135,24 +135,6 @@ The \texttt{GestureHand} class is assigned as a component to each hand object, a
 	\item \texttt{HandState handState} - Holds one of several HandState enum values that represent the hand state. This variable has one of the following enum values:
 			NONE = 0, PINCH = 1, PALM\_DOWN = 2, PALM\_SIDE = 3, FIST = 4, SINGLE\_POINT = 5, DOUBLE\_POINT = 6 or DISABLED = 7 (see \ref{tab:handstates}).  
 \end{itemize}
-
-% \begin{table}[]
-% \centering
-% \caption{The instance variables of the \texttt{GestureHand} class}
-% \label{my-label}
-% \begin{tabular}{p{2cm}| p{2cm} | p{4cm}}
-% 	\textbf{Data type} &  \textbf{Variable name} &   \textbf{Description} \\
-% 	bool & isLeftHand &   Keeps track of whether this instance belong to the left or the right hand. \\
-% 	GameObject & handModel & A reference to the unity game-object that contains the handModel this gesturehand instance is relevant for.  \\
-% 	Material[] & handMaterials & An array of different material for the hand model. These are swapped between when e.g.~a certain gesture is brecognized and tracked.  \\
-% 	GestureHand & otherHand & A reference to the other GestureHand-instance. For the lefthand GestureHand-instance this variable thus point to the right hand GestureHand hand-instance.  \\
-% 	GameObject & detectors & A reference to the gameobject that hold/is parent of this hands detectors.  \\
-% 	bool &  combineGestures & Keeps track of whether the user is using a combined XYZ axis gesture scheme or if these movement gesture are kept separate (see \ref{sec:combined-movement}).  \\
-% 	Vector & gestureOriginPosition & Holds the x-, y- and z- coordinates of the palm when the current gesture was recognized.  \\
-% 	HandState & handState & Holds one of several HandState enum values that represent the hand state. This variable has one of the following enum values:
-% 			NONE = 0, PINCH = 1, PALM\_DOWN = 2, PALM\_SIDE = 3, FIST = 4, SINGLE\_POINT = 5, DOUBLE\_POINT = 6 or DISABLED = 7.  
-% \end{tabular}
-% \end{table}
 
 \begin{table}[]
 \centering
@@ -190,8 +172,14 @@ enables or disables all the detectors that belongs to the same hand as the curre
 When the user switches between having gestures enabled and disable by using the menu options "Enable Gestures" and "Disable Gestures" and when an annotation 
 is edited. When an annotation is edited, and the annotation form is open, gestures that one can use otherwise (e.g~the movement and rotation gestures) are disabled.
 
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/gestures/disabled_detector.png}
+	\caption[Disabled gestures]{When gestures are disabled, i.e all the detectors are disabled, the hand models are transparent}
+	\label{fig:disabled_detector}
+\end{figure} 
+
  
-\section{The detectors}
+\section{The Detectors}
 The detectors are represented as game objects and children of the \texttt{Detectors} game object under each hand game object. 
 Each of these detector objects have the naming convention <gesture name> + "Detector" + <optional specifier> + "\_" + <handedness: Left or Right>, 
 e.g.~\texttt{PinchDetectorStrict\_Left} and \texttt{FistDetector\_Right}. A certain detector of one hand is usual identical to the equivalent detector for the 
@@ -208,10 +196,32 @@ values (e.g~extended or not extended). Finding the optimal values for a certain 
 technology often or always will be someone unprecice compared to e.g.~mouse and keyboard. The challenge is thus to find values that give a high amout of true positives (e.g.~the user attemps a gesture
 and the gesture was recognized) and a low amount of false positives (e.g.~the user did not attempt a gesture and a gesture was recognized). 
 During the implementation phase these values were adjusted several times in pursuit of the optimal values, and during the evaluation phase this was a much discussed topic were users often 
-has their own "gesture sensitivity preferences" (this will be review in the next chapter). First the gesture implementations will be reviewed. 
+has their own "gesture sensitivity preferences" (this will be review in the next chapter). 
+
+As was mentioned in the design, giving the user visual feedback when a gesture is recognized (i.e a detector is active) is probably a good idea.
+In this implementation this is performed by changing the material of the hand models. The materials for each hand is listed in the handMaterials variable in the
+\texttt{GestureHand} class, and follows the same order (or indecies) as the HandState enums specify (see \ref{tab:handstates}). 
+Changing these materials is thus easy to do in Unity, but as default the following color-categories are used:
+\begin{itemize}
+\item Plain gold   - Used for gestures that perform rotations (only the pinch gesture).
+\item Black 	   - Used for gestures that perform movement. This includes the Palm-down gesture (either y-axis movement or xyz-axes movement), 
+			  		 Palm-side gesutre (x-axis movement) and the fist gesture (z-axis movement).
+\item Glowing teal - Used for gestures that perform annotation interaction, i.e either places or edits annotations.
+					 This includes the single point-gesture and the double point-gesture.
+\item White 	   - Used when no gesture is performed (but gestures are still enabled).
+\item Transparent  - Used when gestures are disabled.					
+\end{itemize}
+
+First the gesture implementations will be reviewed. 
 
 
 \subsection{The PinchDetectorStrict and PinchDetectorSlack}
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/gestures/pinch_detector2.png}
+	\caption[The pinch gesture]{When the PinchDetector is active, i.e a pinch gesture is recognized, the hand is colored in a pale gold color.}
+	\label{fig:pinch_detector2}
+\end{figure} 
+
 The \texttt{PinchDetectorStrict} and \texttt{PinchDetectorSlack} were originally one detector called \texttt{PinchDetector}, but was split up to represent two 
 different options for the user. Both detectors utilize the base \textit{PinchDetector} script provided by the Leap Motion detection utilities, while the strict version
 also uses the \textit{ExtendedFingerDetector}. The \texttt{PinchDetector} measures the distance between the tip of the thumb and index finger, and if these are below
@@ -228,6 +238,11 @@ be either extended or not extended, but on the "minimum extended" parameter 2 is
 meaning that anything between two and five fingers can be extended. 
 
 \subsection{The PalmDownDetector}
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/gestures/palmdown_detector.png}
+	\caption[The palmdown gesture]{When the PalmDownDetector is active, i.e a palm-down gesture is recognized, the hand is colored in a black.}
+	\label{fig:palmdown_detector}
+\end{figure}
 The \texttt{PalmDownDetector} uses a PalmDirection detector and an ExtendedFinger detector, which is AND'ed by a DetectorLogicGate. 
 The PalmDirectionDetector is configured to become active when the palm is pointing within 30 degrees of {0, -1, 0} (x = 0, y = -1, z = 0) direction, relative to the camera.
 The coordinate system used functions just as if the three-dimensional axis had been drawn on the screen, so e.g.~ the coordinates {0, 0, 1} would be directly forward, while
@@ -242,6 +257,12 @@ The \texttt{PalmDownDetector} also used an ExtendedFingerdetector, as was covere
 the index-, middle, ring and pinky finger have to be extended, which the thumb can be either. 
 
 \subsection{The PalmSideDetector}
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/gestures/palmside_detector.png}
+	\caption[The palmside gesture]{When the PalmSideDetector is active, i.e a palm-side gesture is recognized, the hand is colored in a black.}
+	\label{fig:palmside_detector}
+\end{figure} 
+
 The \texttt{PalmSideDetector} is quite similar to the \texttt{PalmDownDetector} and uses the same detectors, but with a different configuration. 
 Although the settings used for the DetectorLogicGate and the ExtendedFingerDetector are very similar, the settings for the PalmDirectionDetector differs.
 Unlike the \texttt{PalmDownDetector}, where both hands are required to point in the direction {0, -1, 0} to perform the gesture, the \texttt{PalmSideDetector} makes 
@@ -250,11 +271,21 @@ for the right hand this requires the whole arm to twist. The required palm direc
 with an "On Angel" of 30 degrees and an "Off Angle" of 50.
 
 \subsection{The FistDetector}
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/gestures/fist_detector.png}
+	\caption[The fist gesture]{When the FistDetector is active, i.e a fist gesture is recognized, the hand is colored in a black.}
+	\label{fig:fist_detector}
+\end{figure} 
 The \texttt{FistDetector} is prehaps the simplest of the detectors and only uses the ExtendedFingerDetector.
 The ExtendedFingerDetector is simply configured to require that no finger is extended. 
 As such the minimum- and maximum amount of fingers extended are both set to 0, and all finger have their required state set to "Not Extended"
 
 \subsection{The SinglePointDetector}
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/gestures/singlepoint_detector.png}
+	\caption[The single-point gesture]{When the SinglePointDetector is active, i.e a single-point gesture is recognized, the hand is colored in a glowing teal color.}
+	\label{fig:singlepoint_detector}
+\end{figure} 
 The \texttt{SinglePointDetector} uses two detectors, ExtendedFingerDetector and FingerDirectionDetector, bound together with an AND-DetectorLogicGate.
 The ExtendedFingerDetector here requires that the index finger is extended and that the middle-, ring- and pinky fingers are not extended (both thumb states are accepted).
 The FingerDirectionDetector is set to be active when the index finger points within 15 degrees of the direction {0, 0, 1}, relative to the camera.
@@ -266,12 +297,93 @@ and while the same gesture is kept. In the case of both the single- and double p
 If a user thus with to place an annotation and immediatly edit it, he or she has to use the approprate gesture, release the gesture and do the same gesture again.
 
 \subsection{The DoublePointDetector}
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/gestures/doublepoint_detector.png}
+	\caption[The double-point gesture]{When the DoublePointDetector is active, i.e a double-point gesture is recognized, the hand is colored in a glowing teal color.}
+	\label{fig:doublepoint_detector}
+\end{figure} 
 The \texttt{DoublePointDetector} is similar to the \texttt{SinglePointDetector} and uses the same base detectors. 
 The only implementational difference between this two is that the ExtendedFingerDetector is configured to require that both the index- and middle finger are extended, while
 the ring- and pinky finger are contracted (both thumb states are accepted).
 
 
 % Write about the menu?
+\section{The Menu}
+The menu is opened when the palm of the left hand is facing towards the camera, and can be interacted with using the index finger of the right hand.
+Unlike the other gestures-enabled commands the menu is implemented through the use of the open source project Hover UI Kit, created by Aesthetic Interactive~\citep{Hoverkit}.
+The Hover UI Kit project offer three different interface modules: Hovercast, Hoverkey and Hoverpanel, where Hovercast is the one the menu is based on.
+This means that several of the menu's interaction components, such as registering button clicks are handled by the Hover UI kit package.
+
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/gestures/menu_detector.png}
+	\caption[The Menu]{The menu is opened when the palm of the left hand is facing towards the camera, and can be interacted with using the index finger of the right hand.}
+	\label{fig:menu_detector}
+\end{figure} 
+
+The Hover UI kit main game object is present in the \texttt{GestureMenu} game object, which is a top-level game object in the project hierarchy.
+\texttt{GestureMenu} has four child game object: \texttt{Hovercast}, \texttt{CursorRenderer} (which is disabled by default), \texttt{MenuHandler} and \texttt{Hoverkit}.
+\texttt{Hovercast} represent the menu itself and contains the hierarchy of game objects that represents the menu buttons. 
+\texttt{CursorRenderer} can optionally render a ring/cursor around the fingers that can be used as cursors.
+By default only the index finger of the right hand can be used to select elements in the menu.
+\texttt{MenuHandler} contains the scripts \texttt{ToggleOptions}, \texttt{Bookmarks} and \texttt{AnnotationVisibility}, which are all responsible for handling
+the different actions accessable from the menu.
+Lastly, the \texttt{Hoverkit} game objects contains some important "management scripts" (e.g.~\texttt{HoverItemsManager} and \texttt{HoverInteractionSettings}) related to the 
+different functionality of the Hovercast menu and hoverkey keyboard in the annotation form (more on that later). The \texttt{Hoverkit} game object also
+contains a Cursor game object, which contains a hierarchy with representations of the left- and right hand, and then each hand's respective finger objects. 
+In this object hierarchy we can select which fingers that are cursors, which hand that can "host" or "spawn" the menu etc. As mentioned earlier
+the default setting is that the menu only can be created by the left hand palm and only interacted with using the right hand index finger. 
+ 
+\subsection{Organizing the Menu}
+The \texttt{Hovercast} game object has four game objects as direct children, which all represent a visible part of the hovercast menu:
+\texttt{OpenItem}, \texttt{TitleItem}, \texttt{BackItem} and \texttt{Rows}. 
+
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/menu/menu_components.png}
+	\caption[The Menu components]{The main menu object is represented with four sub-objects: \texttt{OpenItem} (a), \texttt{TitleItem} (b), \texttt{BackItem} (c) 
+			 and \texttt{Rows} (d).}
+	\label{fig:menu_components}
+\end{figure}
+
+While the \texttt{OpenItem}, \texttt{TitleItem} and \texttt{BackItem} uses functionality that is the default in Hover UI Kit, and is readily available in presets
+\texttt{Rows} contains quite a bit of implementation specific objects. 
+%Picture of the menu and submenues?
+
+\section{The Annotations}
+%About how annotations are implemented
+
+\subsection{Annotation Visibility Levels}
+Annotation visibiliy levels can be access through the menu and decides how annotations appear the the virtual world. 
+
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/annotation_visibility/annotation_visibility_options.png}
+	\caption[The Annotation Visibility Submenu]{The user can decide three different annotation visibility settings in the Annotation Visibility Submenu.}
+	\label{fig:annotation_visibility_options}
+\end{figure} 
+
+
+\paragraph{Visible with Line Of Sight}
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/annotation_visibility/LOS_visible.png}
+	\caption[Annotations only visible with LOS]{When selecting the "Visible with LOS" option in the Annotation Visibility Submenu annotations are only visible with 
+				line of sight.}
+	\label{fig:LOS_visible}
+\end{figure} 
+
+
+\paragraph{Always Visible}
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/annotation_visibility/always_visible.png}
+	\caption[Annotation always visible]{When selecting the "Always visible" option in the Annotation Visibility Submenu annotations are not occluded and thus always visible, 
+	even through other objects.}
+	\label{fig:always_visible}
+\end{figure} 
+
+\paragraph{Invisible}
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/annotation_visibility/invisible.png}
+	\caption[Annotation invisible]{When selecting the "Invisible" option in the Annotation Visibility Submenu annotations are not visible and can not be interacted with.}
+	\label{fig:invisible}
+\end{figure} 
 
 \section{The Movement- and Rotation Controller}
 \texttt{MovementController} and \texttt{RotationController} are script components of the MasterController, and relates to the movement and rotation of the user.
