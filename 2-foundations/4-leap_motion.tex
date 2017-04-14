@@ -61,9 +61,11 @@ Some examples (from~\citet{LeapMotion2016}) of what variables the hand objects c
 
 Below is an example derived from the MovementController.cs class in the Design Review implementation (in C\#). 
 This examples highlights how hand-object can be acquired from the frame-object, how we can e.g.~make sure its a left-hand
-before proceeeding, and how we can calculate a new player model position based on the hand position offset from the gesture origin.
+before proceeding, and how we can calculate a new player model position based on the hand position offset from the gesture origin.
 Note that this code is incomplete and only meant as a somewhat compact example:
 
+\begin{table}
+\label{table:annotation_visibility_code}
 \lstset{style=csharp}
 \begin{lstlisting}
 
@@ -100,6 +102,8 @@ void Update()
     }
 }
 \end{lstlisting}
+\caption[Accessing the Leap Motion Frame objects]{Accessing the Leap Motion Frame objects}
+\end{table}
 
 \subsection{The coordinate system}
 The Leap Motion API enables acquisition of the recognized object's position through Cartesian and spherical coordinate systems, 

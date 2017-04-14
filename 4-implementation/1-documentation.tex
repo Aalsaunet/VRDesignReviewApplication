@@ -57,7 +57,22 @@ child objects in the following sections.
 
 \section{The Camera Rigs}
 The \texttt{CameraRigs} game objects holds three different game object, which each represents its own camera-setup: \texttt{DesktopCameraRig}, which is meant to be used
-without virtual reality, \texttt{OculusCameraRig}, meant to be used with Oculus Rift HMDs, and \texttt{ViveCameraRigs}, meant to be used with the HTC Vive.
+without virtual reality, \texttt{OculusCameraRig}, meant to be used with Oculus Rift HMDs, and \texttt{ViveCameraRigs}, meant to be used with the HTC Vive. 
+While the desktop rig uses one main camera, the virtual reality rigs (i.e the Oculus and Vive rigs) utilizes two main cameras (one per eye).
+These are slightly offset, by about the same length as the real-world distance between two eyes, and rendered separately.
+The camera rigs all utilize a separate camera for rendering annotation objects in the scene, while the main camera(s) (one for desktop, two for VR), 
+renders the rest. This is done by:
+
+\begin{enumerate}
+	\item Placing the annotation objects in the scene on a different rendering layer than the rest of the objects (called the annotation-layer).
+	\item Have the annotation-camera only render objects on this layer.
+	\item Have the main camera(s) render the other layers.
+	\item "Combining" the results into the resulting frames the user will see.
+\end{enumerate}
+
+By rendering these two categories of layers independently we get some flexibility and options with regards to how to present the annotations.
+This will be discuss more in depth in the \ref{sec:annotations} section.
+
 For the application to run successfully one of these rigs should be enabled, while the other two should be disabled.
 This can be done by switching between the three rigs in the dropdown-menu named Rig, which is present on the \texttt{CameraRigs} game object itself and
 implemented in the \texttt{CameraRigSetup} script. In addition to ensuring that only the correct rig is enabled, 
@@ -65,6 +80,7 @@ the \texttt{CameraRigSetup} script also does several other operations. One of th
 is selected, as this can wrongfully be set to a HMD's value if a HMD is connected to the computer. When a virtual reality rig is used the field of view is 
 set automatically by the HMD software. Another thing done by the script is to decide wheter a two dimensional crosshair/cursor should be drawn on the screen space
 (in case of the desktop rig), or if a three dimensional crosshair/cursor (i.e the \texttt{GazePointerRing}) should be drawn in the world space. 
+
 
 \section{The World Space Canvas}
 The \texttt{WorldSpaceCanvas} is a canvas object, which in Unity serves as a container for other user interface elements, such as buttons and input fields, 
@@ -150,7 +166,7 @@ The \texttt{GestureHand} class is assigned as a component to each hand object, a
 	6 & DOUBLE\_POINT & User is placing/has placed object-annotation.  \\
 	7 & DISABLED & The detectors are disabled and no gesture and hand state can be achieved before enabling them.  
 \end{tabular}
-\caption{The\texttt{GestureHand} class' hand states}
+\caption{The \texttt{GestureHand} class' hand states}
 \end{table}
 
 The \texttt{GestureHand} class also contains several important functions that are called when a certain gesture is activated or deactivated.
@@ -333,7 +349,7 @@ contains a Cursor game object, which contains a hierarchy with representations o
 In this object hierarchy we can select which fingers that are cursors, which hand that can "host" or "spawn" the menu etc. As mentioned earlier
 the default setting is that the menu only can be created by the left hand palm and only interacted with using the right hand index finger. 
  
-\subsection{Organizing the Menu}
+\subsection{The Menu Objects}
 The \texttt{Hovercast} game object has four game objects as direct children, which all represent a visible part of the hovercast menu:
 \texttt{OpenItem}, \texttt{TitleItem}, \texttt{BackItem} and \texttt{Rows}. 
 
@@ -344,14 +360,92 @@ The \texttt{Hovercast} game object has four game objects as direct children, whi
 	\label{fig:menu_components}
 \end{figure}
 
-While the \texttt{OpenItem}, \texttt{TitleItem} and \texttt{BackItem} uses functionality that is the default in Hover UI Kit, and is readily available in presets
-\texttt{Rows} contains quite a bit of implementation specific objects. 
-%Picture of the menu and submenues?
+While the \texttt{OpenItem}, \texttt{TitleItem} and \texttt{BackItem} uses functionality that is the default in Hover UI Kit, and is readily available in presets,
+\texttt{Rows} contains quite a bit of implementation specific objects. The term "row" will her refer to a set of one or more buttons, which are clickable and visible at together,
+in the "row section" of the menu (see \ref{fig:menu_components} (d)). The \texttt{Rows} game object has four direct children: \texttt{Root}, \texttt{RowA}, \texttt{RowB} 
+and \texttt{RowC}. \texttt{Root} is the root menu row, i.e the row that is visible when the menu is opened, and contains three buttons, each represented as 
+child game objects of \texttt{Root}: \texttt{ItemA}, \texttt{ItemB} and \texttt{ItemC}. Each of these buttons leads to their own submenu, i.e their own row. 
+\texttt{ItemA} represent the "Annotation Visibility" submenu, and brings up \texttt{RowA} as the "current row" instead of root when clicked. \texttt{ItemB} ("Position Bookmarks") 
+and \texttt{ItemC} ("Toggle Options") follows the same logic and lead to \texttt{RowB} and \texttt{RowC} respectively (see \ref{table:menu_hierarchy} for the hierarchical overview. 
+This transition is handled by the \texttt{HovercastRowSwitchingInfo} component that is attached to each button game object.  
+
+\renewcommand{\DTstyle}{\textrm\expandafter\raisebox{-0.7ex}}
+\DTsetlength{1em}{1em}{0.2em}{0.4pt}{0.4pt}
+\setlength{\DTbaselineskip}{2\baselineskip}
+
+\begin{table}[]
+\label{table:menu_hierarchy}
+	\dirtree{%
+	.1 Root menu.
+	.2 Annotation Visibility (submenu/row).
+	.3 Always visible (radio button).
+	.3 Visible with LOS (radio button).
+	.3 Invisible (radio button).
+	.3 Use Glow (checkbox).
+	.3 Back (button).
+	.2 Position Bookmarks (submenu/row).
+	.3 Origin (button).
+	.3 Back (button).
+	.2 Toggle Options (submenu/row).
+	.3 Toggle crosshair (button).
+	.3 Enable gestures/Disable gestures (button).
+	.3 Combined XYZ gestures/Distinguish XYZ gestures (button).
+	.3 Back (button).
+	}
+\caption[The Menu Hierarchy]{The Menu Hierarchy}
+\end{table}
+
+\texttt{RowA}, \texttt{RowB} and \texttt{RowC} each contains game objects that represents buttons in that submenu. 
+In these button game objects \texttt{HoverItemDataSelector}, \texttt{HoverItemDataRadio} or \texttt{HoverItemDataCheckbox}, for "regular buttons", radio buttons and 
+checkboxes respectively, are attached as components. These components are all either directly or indirectly subclasses of \texttt{HoverItemDataSelectable}, which 
+contains important properties like "Label" (i.e the button text value) and a list of eventhandler. An example of this is \texttt{ItemCB} in \texttt{RowC}, which has 
+the label "Disable Gestures" and has an entry in the "OnSelectedEvent" list. This entry is a reference to the \texttt{ToggleOption} class' function \texttt{toggleGestures}. 
+
+\subsection{The MenuHandler Scripts}
+The menu makes use of three scripts to handle all actions: \texttt{AnnotationVisibility}, \texttt{Bookmarks} and \texttt{ToggleOptions}.
+These are all components of the \texttt{MenuHandler} game object and serve their seperate submenus (i.e Row A, B and C) and buttons. 
+
+The \texttt{AnnotationVisibility} script's main purpose is to interact with the active camera rig's annotation camera, and manipulate the way
+the annotations are presented to the user. This include choosing between three annotation presentation modes: "Always visible", "Visible with LOS" and 
+"Invisible", and choosing whether to use a glow effect on annotation or not. This is done by manipulating the active annotation camera's culling mask 
+and clear flags using bit shift:
+
+\begin{table}
+\label{table:annotation_visibility_code}
+\lstset{style=csharp}
+\begin{lstlisting}
+public void alwaysShow()
+{
+	//to toggle a bit on and off, use XOR
+	annotationCamera.cullingMask |= 1 << LayerMask.NameToLayer("SphereAnnotation");
+	annotationCamera.clearFlags = CameraClearFlags.Depth;
+}
+
+public void showWithLOS()
+{
+	annotationCamera.cullingMask |= 1 << LayerMask.NameToLayer("SphereAnnotation");
+	annotationCamera.clearFlags = CameraClearFlags.Nothing;
+}
+
+public void hide()
+{
+	// Only render objects in the first layer (Default layer)
+	annotationCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("SphereAnnotation"));
+}
+\end{lstlisting}
+\caption[Annotation visibility manipulation]{Annotation visibility manipulation using bit shifts on the annotation camera's culling mask and clear-flags}
+\end{table}
+
+
+The functional differences between the annotation presentation mode with or without glow are covered in \ref{sec:annotations}. 
+
 
 \section{The Annotations}
+
 %About how annotations are implemented
 
 \subsection{Annotation Visibility Levels}
+\label{sec:annotations}
 Annotation visibiliy levels can be access through the menu and decides how annotations appear the the virtual world. 
 
 \begin{figure}%[h!] %[H]
