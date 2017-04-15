@@ -399,10 +399,10 @@ This transition is handled by the \texttt{HovercastRowSwitchingInfo} component t
 In these button game objects \texttt{HoverItemDataSelector}, \texttt{HoverItemDataRadio} or \texttt{HoverItemDataCheckbox}, for "regular buttons", radio buttons and 
 checkboxes respectively, are attached as components. These components are all either directly or indirectly subclasses of \texttt{HoverItemDataSelectable}, which 
 contains important properties like "Label" (i.e the button text value) and a list of eventhandler. An example of this is \texttt{ItemCB} in \texttt{RowC}, which has 
-the label "Disable Gestures" and has an entry in the "OnSelectedEvent" list. This entry is a reference to the \texttt{ToggleOption} class' function \texttt{toggleGestures}. 
+the label "Disable Gestures" and has an entry in the "OnSelectedEvent" list. This entry is a reference to the \texttt{GestureOptions} class' function \texttt{toggleGestures}. 
 
 \subsection{The MenuHandler Scripts}
-The menu makes use of three scripts to handle all actions: \texttt{AnnotationVisibility}, \texttt{Bookmarks} and \texttt{ToggleOptions}.
+The menu makes use of three scripts to handle all actions: \texttt{AnnotationVisibility}, \texttt{Bookmarks} and \texttt{GestureOptions}.
 These are all components of the \texttt{MenuHandler} game object and serve their seperate submenus (i.e Row A, B and C) and buttons. 
 
 The \texttt{AnnotationVisibility} script's main purpose is to interact with the active camera rig's annotation camera, and manipulate the way
@@ -433,14 +433,76 @@ public void hide()
 	annotationCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("SphereAnnotation"));
 }
 \end{lstlisting}
-\caption[Annotation visibility manipulation]{Annotation visibility manipulation using bit shifts on the annotation camera's culling mask and clear-flags}
+\caption[Annotation visibility manipulation]{Annotation visibility manipulation example in C\# code. This code snippets makes use of 
+		bit shifts on the annotation camera's culling mask and clear-flags properties.} 
 \end{table}
-
 
 The functional differences between the annotation presentation mode with or without glow are covered in \ref{sec:annotations}. 
 
+The \texttt{Bookmarks} script's main purpose is to handle what in the menu is refered to as "Positional bookmarks". The primary idea behind positional bookmarks 
+is to allow the user to save specific points of interest in the model to be able to quickly return there, just like one could bookmark a web page in a web browser. 
+In the current iteration of the application it isn't possible to create new bookmarks, so the only available one is the "Origin" bookmark, which is the position and orientation
+the user has when first entering the application (useful to reset the position e.g.~ if the user should get lost in some way). In the script this functionality is accomplished
+by having a linked list of transforms (a unity game object component storing relevant information) and a referance to the \texttt{MasterController} game object. 
+The \texttt{MasterController}'s position and rotation in the applications first rendered frame is stored as the first entry in this list and, should the user click the 
+appropriate menu button "Origin", in the "Positional bookmarks" submenu, the function \texttt{GoToBookmark(int index)} should be called with index = 0 as index argument. 
+The \texttt{GoToBookmark} function then looks up the transform stored at index \textit{i}, and if successful sets the position and orientation coordinates of the 
+\texttt{MasterController}'s transform. The user will experience this as the camera "teleporting" to the same spot as the player started on when entering the 3D model.
+
+The \texttt{GestureOptions} script's main purpose is to handle options related to gestures, and handles two menu elements from the Toggle Options submenu:
+"Enable gestures" / "Disable gestures" (one button with a context dependent label) and "Combine XYZ gestures" / "Distingush XYZ gestures" (also context dependent label). This is 
+primarily done by two of its functions \texttt{toggleGesturesActive} and \texttt{toggleGestureMode}, which both use the context dependent toggle principle 
+and functions in the \texttt{GestureHand} class. In the implementation a toggle is simply to swap to the opposite value of the current, with two possible values available (i.e 
+toggle + true = false and toggle + false = true).
+
+
+\texttt{toggleGesturesActive} checks the value of the instance variable \texttt{GesturesEnabled} 
+and either disables or enables gestures based on what is variable holds. If \texttt{GesturesEnabled = true}, i.e that gestures are enabled, the function 
+disables gestures by calling each \texttt{GestureHand}'s \texttt{disableDetectors} function, swaps hand materials to the "disabled-material" and swaps the 
+\texttt{GesturesEnabled} variable to its opposite value (i.e now \texttt{GesturesEnabled = false}). In the opposite case, i.e when the function is called and 
+the \texttt{GesturesEnabled} variable has the value false, gestures are enabled by calling each \texttt{GestureHand}'s \texttt{enableDetectors} function, swapping
+hand materials to the "none-material" and swapping the \texttt{GesturesEnabled} variable to its opposite value (i.e now \texttt{GesturesEnabled = true}). 
+
+\begin{table}
+\label{table:gesture_options_code}
+\lstset{style=csharp}
+\begin{lstlisting}
+public GestureHand[] hands;
+private static bool gesturesEnabled;
+
+public void toggleGesturesActive(HoverItemDataSelector selector)
+{
+	if (gesturesEnabled)
+	{
+		selector.Label = "Enable Gestures";
+		foreach (GestureHand hand in hands)
+		{
+			hand.disableDetectors();
+			hand.ToggleHandMaterial(hand.handMaterials[7]);
+		}
+
+	}
+	else
+	{
+		selector.Label = "Disable Gestures";
+		foreach (GestureHand hand in hands)
+		{
+			hand.enableDetectors();
+			hand.ToggleHandMaterial(hand.handMaterials[0]);
+		}
+	}
+
+	gesturesEnabled = !gesturesEnabled;
+}
+\end{lstlisting}
+\caption[The GestureOptions class]{The GestureOptions class can be called to enable or disable all detectors based on its current state.} 
+\end{table}
+
+The \texttt{toggleGestureMode} functions in a very similar manner as \texttt{toggleGesturesActive} and uses a boolean value present in the \texttt{GestureHand} instances
+to toggle between a combined or separate state for movement gesture (i.e whether to have movement gestures in the x, y and z plans combined or separate.   
 
 \section{The Annotations}
+
 
 %About how annotations are implemented
 
@@ -454,14 +516,26 @@ Annotation visibiliy levels can be access through the menu and decides how annot
 	\label{fig:annotation_visibility_options}
 \end{figure} 
 
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=0.32\linewidth]{pictures/screenshots/annotation_visibility/side_by_side/always_visible_small.png}
+	\includegraphics[width=0.32\linewidth]{pictures/screenshots/annotation_visibility/side_by_side/LOS_visible_small.png}
+	\includegraphics[width=0.32\linewidth]{pictures/screenshots/annotation_visibility/side_by_side/invisible_small.png}
+	\caption[Annotation visibility levels comparison]{A side-by-side comparison of the annotation visibility levels. These three pictures are taken with the same camera position
+	and orientation using different visibility settings. When selecting the "Always visible" option (left picture) annotations are not occluded and thus always visible, even through other objects like
+	the pipes present in this picture. When selecting the "Visible with LOS" option (middle picture) annotations are only visible with line of sight. 
+	If the user selects the "Invisible" option (right picture) are not visible and can not be interacted with.}
+	\label{fig:visibility_comparison}
+\end{figure} 
+
+
 
 \paragraph{Visible with Line Of Sight}
-\begin{figure}%[h!] %[H]
-	\includegraphics[width=\linewidth]{pictures/screenshots/annotation_visibility/LOS_visible.png}
-	\caption[Annotations only visible with LOS]{When selecting the "Visible with LOS" option in the Annotation Visibility Submenu annotations are only visible with 
-				line of sight.}
-	\label{fig:LOS_visible}
-\end{figure} 
+% \begin{figure}%[h!] %[H]
+% 	\includegraphics[width=\linewidth]{pictures/screenshots/annotation_visibility/LOS_visible.png}
+% 	\caption[Annotations only visible with LOS]{When selecting the "Visible with LOS" option in the Annotation Visibility Submenu annotations are only visible with 
+% 				line of sight.}
+% 	\label{fig:LOS_visible}
+% \end{figure} 
 
 
 \paragraph{Always Visible}
@@ -473,11 +547,11 @@ Annotation visibiliy levels can be access through the menu and decides how annot
 \end{figure} 
 
 \paragraph{Invisible}
-\begin{figure}%[h!] %[H]
-	\includegraphics[width=\linewidth]{pictures/screenshots/annotation_visibility/invisible.png}
-	\caption[Annotation invisible]{When selecting the "Invisible" option in the Annotation Visibility Submenu annotations are not visible and can not be interacted with.}
-	\label{fig:invisible}
-\end{figure} 
+% \begin{figure}%[h!] %[H]
+% 	\includegraphics[width=\linewidth]{pictures/screenshots/annotation_visibility/invisible.png}
+% 	\caption[Annotation invisible]{When selecting the "Invisible" option in the Annotation Visibility Submenu annotations are not visible and can not be interacted with.}
+% 	\label{fig:invisible}
+% \end{figure} 
 
 \section{The Movement- and Rotation Controller}
 \texttt{MovementController} and \texttt{RotationController} are script components of the MasterController, and relates to the movement and rotation of the user.
