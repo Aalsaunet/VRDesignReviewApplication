@@ -46,8 +46,8 @@ These will be covered by their own sections, with subsections detailing their im
 The \texttt{MasterController} game object represents the player model and contains many of the most important game objects, in addition to
 holding many key scripts. The \texttt{MasterController}'s transform, with its position, rotation and scale, represents the user's position and orientation, 
 and every child object of \texttt{MasterController} will have a position, rotation and scale that is relative to its own. This ensures
-that e.g.~the camera will always "follow" the user. Because this game object is so essential, we will cover several important components and
-child objects in the following sections.
+that e.g.~the camera will always "follow" the user. Several of the important game objects that are covered in later sections are children of 
+the master controller. First, however, we will cover the important components of \texttt{MasterController}.
 
 \begin{figure}%[h!] %[H]
 	\includegraphics{pictures/unity_inspector.png}
@@ -55,8 +55,18 @@ child objects in the following sections.
 	\label{fig:unity_inspector}
 \end{figure} 
 
+\subsection{The Movement- and Rotation Controller}
+\texttt{MovementController} and \texttt{RotationController} are script components of the MasterController, and relates to the movement and rotation of the user.
+
+\subsection{The Raycast Handler}
+
+\subsection{The Annotation Form Orchestrator}
+
+
+
 \section{The Camera Rigs}
-The \texttt{CameraRigs} game objects holds three different game object, which each represents its own camera-setup: \texttt{DesktopCameraRig}, which is meant to be used
+The \texttt{CameraRigs} game object is a direct child of the \texttt{MasterController} and holds three different game object, 
+which each represents its own camera-setup: \texttt{DesktopCameraRig}, which is meant to be used
 without virtual reality, \texttt{OculusCameraRig}, meant to be used with Oculus Rift HMDs, and \texttt{ViveCameraRigs}, meant to be used with the HTC Vive. 
 While the desktop rig uses one main camera, the virtual reality rigs (i.e the Oculus and Vive rigs) utilizes two main cameras (one per eye).
 These are slightly offset, by about the same length as the real-world distance between two eyes, and rendered separately.
@@ -502,13 +512,31 @@ The \texttt{toggleGestureMode} functions in a very similar manner as \texttt{tog
 to toggle between a combined or separate state for movement gesture (i.e whether to have movement gestures in the x, y and z plans combined or separate.   
 
 \section{The Annotations}
+As mentioned in earlier sections, an annotation can either be a point annotation or an object annotation. A point annotation is an instance of a prefab 
+called \texttt{SphereAnnotation} and is instantiated and added to the scene at the point where the raycast hits a collider (assuming the range threshold isn't surpassed).  
+The \texttt{SphereAnnotation} prefab includes a sphere mesh, sphere collider, mesh renderer and shader, and effectively looks like a small shining orb.
+An object annotation functions a little differently as no new object is added to the scene to represent the annotation. Instead, the annotation is attached to the 
+object itself and the object's material ("color") is changed to show that the object has an annotation attached. Although these two annotation types differs in this respect 
+they both are based on the \texttt{AnnotationInformation} class, which is a component in both the \texttt{AnnotationSphere} prefab and the annotated objects. 
 
+In the current implementation \texttt{AnnotationInformation} is a pretty simplistic and limited class, but can easily be extended to include a lot of other functionality. 
+Prehaps the most essential class member is the string variable \texttt{text}, which is simply the string value of the annotation.
+This value is read when the annotation form opens (i.e the user starts editting an annotation) and displayed in the annotation form text box. 
+If the user exits the annotation form by clicking the submit button the text value is replaced/updated with what's currently in the text box. 
+In addition to this, the \texttt{AnnotationInformation} class also contain a material-list called \texttt{annotationMaterials} and a material reference called
+\texttt{previousMaterial}. \texttt{annotationMaterials} is a list of the available materials to the annotation and is utilzed to look up which material to use for the annotation, 
+e.g.~when the user changes the annotation's priority (different priorities have different colors). 
+\texttt{previousMaterial} holds a reference to the previous material the annotation had, and is most commonly used in object annotations to "remember" the original material 
+(since annotating an object overrides its materials), in cases where the object annotation is deleted.  
+
+\texttt{AnnotationInformation} also contains a destroy function, called \texttt{Destroy}, which is used to delete annotations (i.e removing them from the scene).
 
 %About how annotations are implemented
 
 \subsection{Annotation Visibility Levels}
 \label{sec:annotations}
-Annotation visibiliy levels can be access through the menu and decides how annotations appear the the virtual world. 
+Annotation visibiliy levels can be accessed through the menu and decides how annotations appear the the virtual world. 
+
 
 \begin{figure}%[h!] %[H]
 	\includegraphics[width=\linewidth]{pictures/screenshots/annotation_visibility/annotation_visibility_options.png}
@@ -553,8 +581,7 @@ Annotation visibiliy levels can be access through the menu and decides how annot
 % 	\label{fig:invisible}
 % \end{figure} 
 
-\section{The Movement- and Rotation Controller}
-\texttt{MovementController} and \texttt{RotationController} are script components of the MasterController, and relates to the movement and rotation of the user.
+
 
 
 
