@@ -19,7 +19,7 @@ another), and to work with the cameras (assuming a vision-based system) position
 \subsection{The pinch gesture}
 The pinch gesture will cover the "rotate user story", specified in the previous section, and thus enable the user to rotate the camera by the Y and Z axis. 
 The pinch gesture is accomplished by squeezing the tip of the thumb and index fingers together while, preferably, keeping the rest of the fingers erect and the palm facing 
-somewhere between the table top and the displays (see \ref{fig:gestures1} for an illustration). Once this gesture is done by the user, 
+somewhere between the table top and the displays (see~\vref{fig:gestures1} for an illustration). Once this gesture is done by the user, 
 the system should indicate that the gesture was recognized as a pinch gesture.
 Once the system has recognized the pinch gesture it sets the x, y and z coordinates where the gesture was detected as an origin point and starts rotating the 
 camera with the offset value of this origin point. This means that when the user does a pinch gesture without moving the hand, the pinch gesture should be detected and be
@@ -40,7 +40,7 @@ In addition this scheme also prevents the user from having to move his or her ha
 \subsection{The palm-down gesture}
 The palm-down gesture, alternatively called the Y-gesture, fulfills the up-and-down functionality specified in the "move-user story", and enables the user to 
 move the player model along the y-axis, relative to its orientation. The palm-down gesture is accomplished simply by having all fingers extended, with all of them pointing in
-the direction of the display with the palm facing downwards towards the table top (see \ref{fig:gestures1} for an illustration). This gesture, along with the rest of the 
+the direction of the display with the palm facing downwards towards the table top (see~\vref{fig:gestures1} for an illustration). This gesture, along with the rest of the 
 "movement gestures", uses the same origin-offset scheme as the pinch gesture, but the offset is in this gesture only measured on the y-axis, so moving the hand to the 
 right, as mention in the pinch gesture section, will cause no movement when the palm-down gesture is the active gesture. 
 Instead the user can move his or her hands up and down on the y-axis, so the distance to the table top varies.  
@@ -48,7 +48,7 @@ Instead the user can move his or her hands up and down on the y-axis, so the dis
 \subsection{The palm-side gesture}
 The palm-side gesture, alternatively called the X-gesture, fulfills the left-and-right functionality specified in the "move-user story", and enables the user to 
 move the player model along the x-axis, relative to its orientation. The palm-side gesture is accomplished simply by having all fingers extended, with all of them pointing in
-the direction of the display with the palm perpendicular (i.e~at a 90° or 270° angle) to the table top (see \ref{fig:gestures2} for an illustration). 
+the direction of the display with the palm perpendicular (i.e~at a 90° or 270° angle) to the table top (see~\vref{fig:gestures2} for an illustration). 
 As one of the movement gesture, this gesture also uses the origin-offset scheme, but only with the x-axis monitored.
 
 \subsection{The fist gesture}

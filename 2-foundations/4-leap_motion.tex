@@ -6,7 +6,7 @@ sub-millimeter accuracy~\citep{Guna2014}. This chapter is based on the Leap Moti
 and aims to highlight the important conceptual foundation for using the Leap Motion Controller in this thesis' design review application.
 
 \section{Physical properties}
-The Leap Motion Controller (see fig. \ref{fig:leapmotion} and \ref{fig:leapmotion2}) contains two stereoscopic cameras, with a field of view of about 150 degrees, 
+The Leap Motion Controller (see fig.~\vref{fig:leapmotion} and~\vref{fig:leapmotion2}) contains two stereoscopic cameras, with a field of view of about 150 degrees, 
 in addition to three infrared LEDs. These infrared lights periodically emit light pulses with a wavelength of 850 nanometer, and thus outside the visible light spectrum. 
 During the light pulses, 
 which light up about eight cubic feet in front of the controller, grayscale stereo images are captured by the cameras and sent to the 
@@ -108,12 +108,12 @@ void Update()
 \subsection{The coordinate system}
 The Leap Motion API enables acquisition of the recognized object's position through Cartesian and spherical coordinate systems, 
 which are used to describe positions in the controller's sensory space~\citep{Guna2014}. The hand positions above the Leap Motion device are given as three dimensional
-vectors on the form \{x, y, z\}, with origin being in the center of the Leap Motion surface (see \ref{fig:leapmotion3})~\citep{LeapMotion2016}.  
+vectors on the form \{x, y, z\}, with origin being in the center of the Leap Motion surface (see~\vref{fig:leapmotion3})~\citep{LeapMotion2016}.  
 Positional information, like the position of a hand, or the position of the tip of a finger, can be access in various ways. One way is to access the hands through the
 Frame-object, and then find the relevant hand, palm, finger or finger-joint.
 
 The Leap Motion API uses a right-handed coordinate convention, meaning that when the user is positioned in front of the Leap Motion Controller the x-axis grows more positive 
-towards the right, the y-axis grows more positive upwards and the z-axis grows more positive towards the user (see \ref{fig:leapmotion3}). 
+towards the right, the y-axis grows more positive upwards and the z-axis grows more positive towards the user (see~\vref{fig:leapmotion3}). 
 As frameworks like that of Unity uses a left-handed convention for its coordinate system, i.e that the z-axis grows more positive away from the 
 user instead of towards, the Leap Motion API also does an appropriate convention to adhere to its software environment. 
 The Leap Motion API also adhere to differences in units, as e.g Unity uses a default unit of meters, while the Leap Motion uses millimeters~\citep{LeapMotion2016}.
