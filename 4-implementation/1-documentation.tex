@@ -34,7 +34,7 @@ This kit was vital in rapidly prototyping a gesture-enabled menu and a virtual k
 	\label{fig:unity_hierarchy}
 \end{figure} 
 
-The Unity project has four top-level game objects, as visible in \ref{fig:unity_hierarchy}. 
+The Unity project has four top-level game objects, as visible in~\vref{fig:unity_hierarchy}. 
 These will be covered by their own sections, with subsections detailing their important child game objects where appropriate.
 
 % In short terms EventSystem is responsible for processing and handling events and input actions in the scene.
@@ -65,30 +65,34 @@ the master controller. First, however, we will cover the important components of
 
 
 \section{The Camera Rigs}
+\label{sec:camera_rigs}
 The \texttt{CameraRigs} game object is a direct child of the \texttt{MasterController} and holds three different game object, 
 which each represents its own camera-setup: \texttt{DesktopCameraRig}, which is meant to be used
 without virtual reality, \texttt{OculusCameraRig}, meant to be used with Oculus Rift HMDs, and \texttt{ViveCameraRigs}, meant to be used with the HTC Vive. 
 While the desktop rig uses one main camera, the virtual reality rigs (i.e the Oculus and Vive rigs) utilizes two main cameras (one per eye).
 These are slightly offset, by about the same length as the real-world distance between two eyes, and rendered separately.
-The camera rigs all utilize a separate camera for rendering annotation objects in the scene, while the main camera(s) (one for desktop, two for VR), 
-renders the rest. This is done by:
+The camera rigs all utilize a separate camera for rendering only annotation objects in the scene, while the main camera(s) (one for desktop, two for VR), 
+renders the rest. %This is done by having the annotation on a separate layer (the "AnnotationSphere" level) from the rest of the objects in the scene. 
+This is done by:
 
 \begin{enumerate}
 	\item Placing the annotation objects in the scene on a different rendering layer than the rest of the objects (called the annotation-layer).
-	\item Have the annotation-camera only render objects on this layer.
-	\item Have the main camera(s) render the other layers.
-	\item "Combining" the results into the resulting frames the user will see.
+	\item Have the main camera(s) render all layers, except the annotation-layer.
+	\item Have the annotation-camera only render objects on the annotation-layer.
+	\item "Combine" the output of the two cameras by drawing the output from the annotation camera on top of the output from the main camera. 
+		  The main camera thus renders first and the annotation camera second. This is accomplished by giving the main camera \texttt{depth = 0} and the
+		  annotation camera \texttt{depth = 1}. 
 \end{enumerate}
 
 By rendering these two categories of layers independently we get some flexibility and options with regards to how to present the annotations.
-This will be discuss more in depth in the \ref{sec:annotations} section.
+This will be discuss more in depth in the~\vref{sec:annotations} section.
 
 For the application to run successfully one of these rigs should be enabled, while the other two should be disabled.
 This can be done by switching between the three rigs in the dropdown-menu named Rig, which is present on the \texttt{CameraRigs} game object itself and
 implemented in the \texttt{CameraRigSetup} script. In addition to ensuring that only the correct rig is enabled, 
 the \texttt{CameraRigSetup} script also does several other operations. One of these is ensuring that the field of view is set to 60 degrees if the desktop rig 
 is selected, as this can wrongfully be set to a HMD's value if a HMD is connected to the computer. When a virtual reality rig is used the field of view is 
-set automatically by the HMD software. Another thing done by the script is to decide wheter a two dimensional crosshair/cursor should be drawn on the screen space
+set automatically by the HMD software. Another thing done by the script is to decide whether a two dimensional crosshair/cursor should be drawn on the screen space
 (in case of the desktop rig), or if a three dimensional crosshair/cursor (i.e the \texttt{GazePointerRing}) should be drawn in the world space. 
 
 
@@ -136,14 +140,14 @@ obstruct the whole, or parts of, the canvas. The objects are enabled again once 
 The \texttt{WorldSpaceCanvas} has two child game objects: \texttt{AnnotationForm} and \texttt{Hoverkey}. 
 \texttt{AnnotationForm} currently only contains a inputfield-object and a background rectangle, but can in future iteration grow to 
 contain other user interaction elements. The \texttt{Hoverkey} game object represents the touch keyboard and is part of the HoverUI-kit.
-In addition to the keyboard six other similar buttons are also present: Submit, Cancel, Delete, Error, Warning and Information (see \ref{fig:worldspacecanvas_ingame}).
+In addition to the keyboard six other similar buttons are also present: Submit, Cancel, Delete, Error, Warning and Information (see~\vref{fig:worldspacecanvas_ingame}).
 
 \section{The Leap Motion Controller}
 The \texttt{LeapMotionController} game object contains objects related to the Leap Motion device and gesture recognition and consist primarily of the hand models, necessary 
 scrips and detectors. In the game object \texttt{HandModels} there is one object-representation of the left hand, called \texttt{Pepper\_LeftHand}, and one for the 
 right hand, called \texttt{Pepper\_RightHand}. These objects have their own hand models (as there needs to be different models for the left and right hand) and their 
 own detector objects (as a detector can/should only observe one hand). Each "hand" thus have its own list of detectors called \texttt{Detectors}. 
-These are the definition and implementation of the gesture scheme that were discussed in \ref{sec:gesture_design}. In addition to detectors, each
+These are the definition and implementation of the gesture scheme that were discussed in~\vref{sec:gesture_design}. In addition to detectors, each
 hand also have its own instance of the \texttt{GestureHand} class, which is an important component to keep track of hand states and resources, and
 it exposes utility function to other classes. 
 
@@ -156,10 +160,10 @@ The \texttt{GestureHand} class is assigned as a component to each hand object, a
 	\item \texttt{GestureHand otherHand} - A reference to the other GestureHand-instance. For the lefthand GestureHand-instance this variable thus point to the right hand GestureHand
 			hand-instance.
 	\item \texttt{GameObject detectors} - A reference to the gameobject that hold/is parent of this hands detectors.
-	\item \texttt{bool combineGestures} - Keeps track of whether the user is using a combined XYZ axis gesture scheme or if these movement gesture are kept separate (see \ref{sec:combined-movement}).
+	\item \texttt{bool combineGestures} - Keeps track of whether the user is using a combined XYZ axis gesture scheme or if these movement gesture are kept separate (see~\vref{sec:combined-movement}).
 	\item \texttt{Vector gestureOriginPosition} - Holds the x-, y- and z- coordinates of the palm when the current gesture was recognized.
 	\item \texttt{HandState handState} - Holds one of several HandState enum values that represent the hand state. This variable has one of the following enum values:
-			NONE = 0, PINCH = 1, PALM\_DOWN = 2, PALM\_SIDE = 3, FIST = 4, SINGLE\_POINT = 5, DOUBLE\_POINT = 6 or DISABLED = 7 (see \ref{tab:handstates}).  
+			NONE = 0, PINCH = 1, PALM\_DOWN = 2, PALM\_SIDE = 3, FIST = 4, SINGLE\_POINT = 5, DOUBLE\_POINT = 6 or DISABLED = 7 (see~\vref{tab:handstates}).  
 \end{itemize}
 
 \begin{table}[]
@@ -226,7 +230,7 @@ has their own "gesture sensitivity preferences" (this will be review in the next
 
 As was mentioned in the design, giving the user visual feedback when a gesture is recognized (i.e a detector is active) is probably a good idea.
 In this implementation this is performed by changing the material of the hand models. The materials for each hand is listed in the handMaterials variable in the
-\texttt{GestureHand} class, and follows the same order (or indecies) as the HandState enums specify (see \ref{tab:handstates}). 
+\texttt{GestureHand} class, and follows the same order (or indecies) as the HandState enums specify (see~\vref{tab:handstates}). 
 Changing these materials is thus easy to do in Unity, but as default the following color-categories are used:
 \begin{itemize}
 \item Plain gold   - Used for gestures that perform rotations (only the pinch gesture).
@@ -372,11 +376,11 @@ The \texttt{Hovercast} game object has four game objects as direct children, whi
 
 While the \texttt{OpenItem}, \texttt{TitleItem} and \texttt{BackItem} uses functionality that is the default in Hover UI Kit, and is readily available in presets,
 \texttt{Rows} contains quite a bit of implementation specific objects. The term "row" will her refer to a set of one or more buttons, which are clickable and visible at together,
-in the "row section" of the menu (see \ref{fig:menu_components} (d)). The \texttt{Rows} game object has four direct children: \texttt{Root}, \texttt{RowA}, \texttt{RowB} 
+in the "row section" of the menu (see~\vref{fig:menu_components} (d)). The \texttt{Rows} game object has four direct children: \texttt{Root}, \texttt{RowA}, \texttt{RowB} 
 and \texttt{RowC}. \texttt{Root} is the root menu row, i.e the row that is visible when the menu is opened, and contains three buttons, each represented as 
 child game objects of \texttt{Root}: \texttt{ItemA}, \texttt{ItemB} and \texttt{ItemC}. Each of these buttons leads to their own submenu, i.e their own row. 
 \texttt{ItemA} represent the "Annotation Visibility" submenu, and brings up \texttt{RowA} as the "current row" instead of root when clicked. \texttt{ItemB} ("Position Bookmarks") 
-and \texttt{ItemC} ("Toggle Options") follows the same logic and lead to \texttt{RowB} and \texttt{RowC} respectively (see \ref{table:menu_hierarchy} for the hierarchical overview. 
+and \texttt{ItemC} ("Toggle Options") follows the same logic and lead to \texttt{RowB} and \texttt{RowC} respectively (see~\vref{table:menu_hierarchy} for the hierarchical overview. 
 This transition is handled by the \texttt{HovercastRowSwitchingInfo} component that is attached to each button game object.  
 
 \renewcommand{\DTstyle}{\textrm\expandafter\raisebox{-0.7ex}}
@@ -426,20 +430,21 @@ and clear flags using bit shift:
 \begin{lstlisting}
 public void alwaysShow()
 {
-	//to toggle a bit on and off, use XOR
+	//Include the SphereAnnotation layer to the culling mask and use "Depth only" as clear flag.
 	annotationCamera.cullingMask |= 1 << LayerMask.NameToLayer("SphereAnnotation");
 	annotationCamera.clearFlags = CameraClearFlags.Depth;
 }
 
 public void showWithLOS()
 {
+	//Include the SphereAnnotation layer to the culling mask and dont clear anything.
 	annotationCamera.cullingMask |= 1 << LayerMask.NameToLayer("SphereAnnotation");
 	annotationCamera.clearFlags = CameraClearFlags.Nothing;
 }
 
 public void hide()
 {
-	// Only render objects in the first layer (Default layer)
+	//Only render objects in the first layer (Default layer)
 	annotationCamera.cullingMask &= ~(1 << LayerMask.NameToLayer("SphereAnnotation"));
 }
 \end{lstlisting}
@@ -447,7 +452,7 @@ public void hide()
 		bit shifts on the annotation camera's culling mask and clear-flags properties.} 
 \end{table}
 
-The functional differences between the annotation presentation mode with or without glow are covered in \ref{sec:annotations}. 
+The functional differences between the annotation presentation mode with or without glow are covered in~\vref{sec:annotations}. 
 
 The \texttt{Bookmarks} script's main purpose is to handle what in the menu is refered to as "Positional bookmarks". The primary idea behind positional bookmarks 
 is to allow the user to save specific points of interest in the model to be able to quickly return there, just like one could bookmark a web page in a web browser. 
@@ -533,10 +538,31 @@ e.g.~when the user changes the annotation's priority (different priorities have 
 
 %About how annotations are implemented
 
+\subsection{Annotation Categories}
+As mentioned earlier an annotation can have one of the following labels or categories: "Information", "Warning" or "Error", selectable in the annotation form.
+These categories or labels were created to reflect the nature of an annotation in a design review settings. 
+The information-category is meant for general remarks, the warning-category for potential issues and things that should be improved, and the
+error-category for design aspects that needs to be changed for the design to be approved. To make this annotation distinction clear to the user
+the annotation's material ("color") is changed depending on the category it belongs to. In the implementation the information-category is
+the default category, i.e the category an annotation belongs to upon creation, and has the color teal. The warning-category has the color yellow and
+the error-category has the color red (see~\vref{annotation_colors}).
+
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/screenshots/annotations/point_annotation_colors.png}
+	\caption[The Annotation Category Colors]{The Annotation Category Colors. a) Is an information-annotation and is colored in teal. 
+			b) Is a warning-annotation and is colored in yellow. c) Is an error-annotation and is colored in red.}
+	\label{fig:annotation_colors}
+\end{figure} 
+
 \subsection{Annotation Visibility Levels}
 \label{sec:annotations}
-Annotation visibiliy levels can be accessed through the menu and decides how annotations appear the the virtual world. 
-
+Annotation visibiliy levels can be accessed through the menu, by clicking the "Annotation Visibility" button in the root menu, 
+and decides how annotations appear in the virtual world. This includes choosing between three annotation presentation modes: "Always visible", "Visible with LOS" and 
+"Invisible", with the "Always visible" setting being used by default. 
+The user can from this menu also choose whether to use a glow effect on the annotation or not. 
+As was mentioned in the camera rigs sections (\ref{sec:camera_rigs}), this is 
+accomplished by manipulating the annotation camera in the active rig, and more specifically its culling mask and clear flags. 
+This is done in the \texttt{AnnotationVisibility} script, which is partly shown in table~\vref{table:annotation_visibility_code}.
 
 \begin{figure}%[h!] %[H]
 	\includegraphics[width=\linewidth]{pictures/screenshots/annotation_visibility/annotation_visibility_options.png}
@@ -544,29 +570,24 @@ Annotation visibiliy levels can be accessed through the menu and decides how ann
 	\label{fig:annotation_visibility_options}
 \end{figure} 
 
-\begin{figure}%[h!] %[H]
-	\includegraphics[width=0.32\linewidth]{pictures/screenshots/annotation_visibility/side_by_side/always_visible_small.png}
-	\includegraphics[width=0.32\linewidth]{pictures/screenshots/annotation_visibility/side_by_side/LOS_visible_small.png}
-	\includegraphics[width=0.32\linewidth]{pictures/screenshots/annotation_visibility/side_by_side/invisible_small.png}
-	\caption[Annotation visibility levels comparison]{A side-by-side comparison of the annotation visibility levels. These three pictures are taken with the same camera position
-	and orientation using different visibility settings. When selecting the "Always visible" option (left picture) annotations are not occluded and thus always visible, even through other objects like
-	the pipes present in this picture. When selecting the "Visible with LOS" option (middle picture) annotations are only visible with line of sight. 
-	If the user selects the "Invisible" option (right picture) are not visible and can not be interacted with.}
-	\label{fig:visibility_comparison}
-\end{figure} 
+\subsubsection{Always Visible}
+As mentioned in~\vref{sec:camera_rigs} the main camera's culling mask includes (and thus renders) every layer except the 
+annotation layer (actually called "AnnotationSphere" in implementation), while the annotation camera, only renders
+the annotation layer (\texttt{CullingMask = {SphereAnnotation}}). The output of these two cameras is combined by rendering the main camera first, and
+then render the annotation camera and put its results "on top of" the main camera's output.
+To ensure that the annotation camera's output doesn't overwrite the entire output of the main camera,
+so only the annotation-cameras output would be shown, we have to use a different clear flag for the annotation camera than we would in a single-camera setup. 
 
+The main camera uses a clear flag called "Solid Color", which
+effectivly clears any empty portions of the screen by displaying a certain background color. 
+If there is nothing for the camera to render (i.e no object in front of the camera on a layer which is included in the camera's culling mask) only this background color 
+will be shown. If this clear flag were used on the annotation camera everything on the frame, except annotation models, would be this background color. 
+Because of this another clear flag, called "Depth only", is used on the annotation camera. This clear flag only clears the depth buffer and not the color buffer as is done 
+in with the "Solid Color"-flag. It also doesn't overwrite anything from the frames produced by other cameras 
+unless it captures an object that is on a layer thats in the cameras culling mask. This effectivly means that annotations, picked up by the annotation camera, is effectly drawn
+over the pixels that were produced by the main camera, effectivly removing or obstructing the parts of the model that would otherwise obstruct the annotation from the user.
+This makes it so annotation are visible from all angles and distances with the "Always visible" setting active. 
 
-
-\paragraph{Visible with Line Of Sight}
-% \begin{figure}%[h!] %[H]
-% 	\includegraphics[width=\linewidth]{pictures/screenshots/annotation_visibility/LOS_visible.png}
-% 	\caption[Annotations only visible with LOS]{When selecting the "Visible with LOS" option in the Annotation Visibility Submenu annotations are only visible with 
-% 				line of sight.}
-% 	\label{fig:LOS_visible}
-% \end{figure} 
-
-
-\paragraph{Always Visible}
 \begin{figure}%[h!] %[H]
 	\includegraphics[width=\linewidth]{pictures/screenshots/annotation_visibility/always_visible.png}
 	\caption[Annotation always visible]{When selecting the "Always visible" option in the Annotation Visibility Submenu annotations are not occluded and thus always visible, 
@@ -574,26 +595,34 @@ Annotation visibiliy levels can be accessed through the menu and decides how ann
 	\label{fig:always_visible}
 \end{figure} 
 
-\paragraph{Invisible}
-% \begin{figure}%[h!] %[H]
-% 	\includegraphics[width=\linewidth]{pictures/screenshots/annotation_visibility/invisible.png}
-% 	\caption[Annotation invisible]{When selecting the "Invisible" option in the Annotation Visibility Submenu annotations are not visible and can not be interacted with.}
-% 	\label{fig:invisible}
-% \end{figure} 
+\subsubsection{Visible with Line Of Sight}
+As mentioned earlier the "Always visible" option is the default in the application. This is meant to make it more easy to keep track of the different annotations 
+present in the model. This seems like a good option with relatively few annotation, but can probably be distracting if the number or concentration of annotations 
+grow beyond a certain size. Because of this the "Visible with LOS" (Visible with Line of Sight) option was developed to give the user the option to 
+disable the "annotation are always visible"-functionality and instead only see annotation if they are directly in the line of sight.
 
+The "Visible with LOS" option in the menu changes the behavior outlined in the previous section by some degree.
+It keeps the same culling mask configurations as in the "Always visible" setting, but changes the annotation camera's clear flag to the "Nothing flag".
+This flag will leave colors and depth buffer from the previous frame, which is produced by the main camera, and thus not clear anything. 
+Because the depth buffer isn't cleared, as is the case with the "Solid Color" and "Depth Only" flags, objects rendered by the main camera can now
+obstruct objects rendered by the annotation camera, thus giving the "normal" line of sight requirement for seeing objects. 
 
+\subsubsection{Invisible}
+To enable the user to hide annotation all together the "Annotation Visibility" submenu also offers an invisible-option. 
+This option simply removed the annotion layer from the annotation camera's culling mask, thus leaving the annotation camera to render nothing.
+The clear flag is kept in its current state as neither the "Depth only" or "Nothing" flag interferes with the frames produced from the main camera
+when nothing is produced by the annotation camera.
 
-
-
-
-
-
-
-
-
-
-% Important child objects of MasterController include CameraRigs, which holds seperate camera rigs for either destop, oculus rift or htc vive usage, 
-% WorldSpaceCanvas for drawing user interfaces in the game world, LeapMotionController for aspects related to the Leap Motion and
-% GazePointerRing to enable the gazepointer ring when a virtual reality headset is used. These are all documented below.
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=0.32\linewidth]{pictures/screenshots/annotation_visibility/side_by_side/always_visible_small.png}
+	\includegraphics[width=0.32\linewidth]{pictures/screenshots/annotation_visibility/side_by_side/LOS_visible_small.png}
+	\includegraphics[width=0.32\linewidth]{pictures/screenshots/annotation_visibility/side_by_side/invisible_small.png}
+	\caption[Annotation visibility levels comparison]{A side-by-side comparison of the annotation visibility levels. These three pictures are taken with the same camera position
+	and orientation using different visibility settings. 	
+	"Always visible" option (left): Annotations are not occluded and thus always visible, even through other objects. % like the pipes present in this picture. 	
+	"Visible with LOS" option (middle): Annotations are only visible with line of sight. 	
+	"Invisible" option (right): Annotations are not visible.}
+	\label{fig:visibility_comparison}
+\end{figure} 
 
 
