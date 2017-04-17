@@ -24,8 +24,8 @@ Originally the design included the functionality to load different models into t
 this was fell out of scope to both prioritize the gesture recognition and virtual reality aspect, and because of a low availability of similar models.
 The tank model has not received any changes during implementation and has been used as it was supplied. 
 
-The \texttt{GestureMenu} and \texttt{MasterController} together contain most of the key components of the application and they and their child objects will
-be the focus for the rest of this chapter. \texttt{GestureMenu} represents the gesture menu, which by default is available by directing the left hand palm in the 
+The \texttt{GestureMenu} and \texttt{MasterController} together contain most of the key components of the application and will, with their relevant child objects,
+be the main focus for the rest of this chapter. \texttt{GestureMenu} represents the gesture menu, which by default is available by directing the left hand palm in the 
 direction of the camera. The \texttt{MasterController} game object represents the player model and contains many of the most important game objects, in addition to
 holding many key scripts. The \texttt{MasterController}'s transform, with its position, rotation and scale, represents the user's position and orientation, 
 and every child object of \texttt{MasterController} will have a position, rotation and scale that is relative to its own. This ensures

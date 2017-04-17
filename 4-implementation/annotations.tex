@@ -26,7 +26,7 @@ The information-category is meant for general remarks, the warning-category for 
 error-category for design aspects that needs to be changed for the design to be approved. To make this annotation distinction clear to the user
 the annotation's material ("color") is changed depending on the category it belongs to. In the implementation the information-category is
 the default category, i.e the category an annotation belongs to upon creation, and has the color teal. The warning-category has the color yellow and
-the error-category has the color red (see~\vref{annotation_colors}).
+the error-category has the color red (see figure~\vref{fig:annotation_colors}).
 
 \begin{figure}%[h!] %[H]
 	\includegraphics[width=\linewidth]{pictures/screenshots/annotations/point_annotation_colors.png}
@@ -54,7 +54,7 @@ This is done in the \texttt{AnnotationVisibility} script, which is partly shown 
 \subsubsection{Always Visible}
 As mentioned in~\vref{sec:camera_rigs} the main camera's culling mask includes (and thus renders) every layer except the 
 annotation layer (actually called "AnnotationSphere" in implementation), while the annotation camera, only renders
-the annotation layer (\texttt{CullingMask = {SphereAnnotation}}). The output of these two cameras is combined by rendering the main camera first, and
+the annotation layer (\texttt{CullingMask = \{SphereAnnotation\}}). The output of these two cameras is combined by rendering the main camera first, and
 then render the annotation camera and put its results "on top of" the main camera's output.
 To ensure that the annotation camera's output doesn't overwrite the entire output of the main camera,
 so only the annotation-cameras output would be shown, we have to use a different clear flag for the annotation camera than we would in a single-camera setup. 

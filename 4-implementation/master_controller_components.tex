@@ -3,7 +3,10 @@ the correct action. These controllers typically interact with the \texttt{Gestur
 is met, utilize its utility functions and check for changes every frame. The \texttt{GestureHand} will be covered more in depth in section~\vref{sec:gesturehand_class}, 
 but can in short be described as a class which is instantiated once per hand and keeps track of what potential gesture the hands are performing, the origin coordinates
 for the potential gestures and other useful hand-specific information. 
-The following four sections will cover the controllers that the master controller contains.
+
+Another important component in the controllers, with the \texttt{AnnotationFormController} as an exception, is how they all relies on the Update-function, 
+which is called in a set order by the Unity runtime environment on every frame. During the update call these controllers checks for input relevant for its 
+purposes. The following four sections will cover the controllers that the master controller contains.
 
 \subsection{The Rotation Controller}
 The \texttt{RotationController} is a script component of the \texttt{MasterController} and its primary function to handle user input related to rotation.
@@ -31,9 +34,119 @@ have this requirement, and is which should not be accessed from other parts of t
                                                 retrieving it from the Leap Motion \texttt{Frame} object (see table~\vref{table:annotation_visibility_code} for an example).  
 \end{itemize}
 
+During its update function \texttt{RotationController} both checks for mouse movements and whether the pinch gesture is performed by either hand.
+
+Mouse movements are retrieved by calling the unity-function \texttt{Input.GetAxis(string axisName)} once per axis (i.e twice to get the x- and y axis). 
+The return value of this function is in the range -1 and 1 for each axis, which signifies in what direction the mouse is moving and at what speed. 
+If \texttt{Input.GetAxis("Mouse X")} e.g.~returns "-0.01" the mouse is moving very slowly to the left, while "1.0" would mean that is moves as fast as possible to the right. 
+If calling GetAxis with the x-axis and the y-axis both yield 0, then the mouse is not moving and no rotation is performed.
+
+\begin{table}
+\label{table:rotation_mouse_code}
+\lstset{style=csharp}
+\begin{lstlisting}
+public float sensitivity = 100.0f;
+private float rotX, rotY = 0.0f;
+
+void Update() { // Update is called every frame
+    trackMouse();
+    [...]
+    
+    // Create new rotation quaternion and replace the rotation of the 
+    // MasterController's transform. 
+    Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
+    transform.rotation = localRotation;         
+}
+
+private void trackMouse() {
+    float mouseX = Input.GetAxis("Mouse X");  // Get x-axis mouse movement
+    float mouseY = -Input.GetAxis("Mouse Y");// Get y-axis mouse movement
+
+    rotY += mouseX * sensitivity * Time.deltaTime; // Transform mouse movements
+    rotX += mouseY * sensitivity * Time.deltaTime; // to rotations  
+}                                                                                
+\end{lstlisting}
+\caption[How mouse movement is captured and transformed to rotations]{How mouse movement is captured and transformed to rotations.} 
+\end{table}
+
+% // Create new position quaternion and update the MasterController's position
+%     Quaternion newRot = Quaternion.Euler(rotX, rotY, 0.0f);                          
+%     transform.rotation = newRot;  
+
+Before applying the captured mouse movements to the rotation it is multiplied by the sensitivity variable outlined above, and by \texttt{Time.deltaTime}.
+\texttt{Time.deltaTime} is another function in the Unity framework and returns the time in seconds it took to complete the last frame.
+By applying this to the equation we make the calculation frame rate independent and essentially expresses that we want to rotate X amount per second, instead of
+X amount per frame.
+
+The pinch gesture, which is used for rotation, is captured in a similar fashion. The update function checks for the pinch state, and if its detected
+it tracks the hand position within the interaction box (i.e the area above/in front of the Leap Motion device). 
+Just as the variables \texttt{mouseX} and \texttt{mouseY} is captured in table~\vref{table:rotation_mouse_code} the variables 
+\texttt{handX} and \texttt{handY} are captured, but somewhat differently. These two variables are calculated by obtaining the hand's palm position within the interaction box
+and subtracting the origin point, i.e the point were the current pinch gesture started (see table~\vref{table:rotation_gesture_code}). 
+After this is done they are, like with the mouse movement, multiplied by the \texttt{sensitivity} variable and \texttt{Time.deltaTime}. 
+
+
+\begin{table}
+\label{table:rotation_gesture_code}
+\lstset{style=csharp}
+\begin{lstlisting}
+public GestureHand leftHand, righthand; 
+public float sensitivity = 100.0f;
+private float rotX, rotY = 0.0f;
+
+void Update() {
+    trackMouse();
+
+    bool leftPinch = false, rightPinch = false;
+    
+    if (leftHand.getGestureType() == GestureHand.HandState.PINCH)
+        leftPinch = true;
+    if (rightHand.getGestureType() == GestureHand.HandState.PINCH)
+        rightPinch = true;
+
+    if (leftPinch || rightPinch) {
+        Frame frame = LeapBehavior.getLastFrame();
+        iBox = frame.InteractionBox;
+        for (int i = 0; i < frame.Hands.Count; i++) {
+            Hand hand = frame.Hands[i];
+
+            if (hand.IsLeft && leftPinch)
+                TrackPinch(hand, leftHand.GetGestureOriginPosition());
+
+            if (!hand.IsLeft && rightPinch)
+                TrackPinch(hand, rightHand.GetGestureOriginPosition());
+        }
+    }
+    
+    // Create new rotation quaternion and replace the rotation of the 
+    // MasterController's transform. 
+    Quaternion localRotation = Quaternion.Euler(rotX, rotY, 0.0f);
+    transform.rotation = localRotation;         
+}
+
+private void TrackPinch(Hand hand, Leap.Vector originCoordinates)
+{       
+    // Get position, convert from right to left hand coordinates, normalize
+    Leap.Vector leapPoint = hand.StabilizedPalmPosition * -1.0f;
+    Leap.Vector normalizedPoint = iBox.NormalizePoint(leapPoint, false);
+
+    float handX = normalizedPoint.x - originCoordinates.x; // Find x-offset
+    float handY = normalizedPoint.y - originCoordinates.y; // Find y-offset
+
+    // Transform hand movement to rotation
+    rotX += -handY * sensitivity * Time.deltaTime;
+    rotY +=  handX * sensitivity * Time.deltaTime;
+}                                                                                  
+\end{lstlisting}
+\caption[How the pinch gesture is captured and transformed to rotations]{How the pinch gesture is captured and transformed to rotations. 
+            Note that the implementation code looks somewhat different (e.g.~Some shorter variable names in this table.)} 
+\end{table}
+
+% Illustration idea: Detector -> *detects gesture* -> GestureHand's activate <- Controllers check hand state. 
 
 \subsection{The Movement Controller}
 The \texttt{MovementController} is a script component of the MasterController, and relates to the movement of the user.
+
 
 \subsection{The Raycast Controller}
 
