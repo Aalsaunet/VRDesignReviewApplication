@@ -145,7 +145,71 @@ private void TrackPinch(Hand hand, Leap.Vector originCoordinates)
 % Illustration idea: Detector -> *detects gesture* -> GestureHand's activate <- Controllers check hand state. 
 
 \subsection{The Movement Controller}
-The \texttt{MovementController} is a script component of the MasterController, and relates to the movement of the user.
+The \texttt{MovementController} is another script component of the \texttt{MasterController}, and relates to the movement of the user. 
+This controller has many similarities with the \texttt{RotationController}, covered in the previous section, as it has very similar
+code for hand detection in the update method. If one of the hands have a different state than NONE, the \texttt{TrackHandMovement} 
+(see table~\vref{table:movement_gesture_code}) is called. In this function the hand position is obtained and a number of conditions are checked for:
+
+\begin{enumerate}
+    \item Is the combined gesture scheme used AND is the palm-down gesture active?
+    \item Is the combined gesture scheme NOT used AND is the palm-down gesture active?
+    \item Is the combined gesture scheme NOT used AND is the palm-side gesture active?
+    \item Is the combined gesture scheme NOT used AND is the fist gesture active?
+\end{enumerate}
+
+If any of these criteria are met the appropriate action is taken. 
+For the last criterion this would mean going forward by X, where X is positive or negative float point number, 
+and is the result of (current coordinates - origin coordinates). Also not that although only one of these cases can trigger for one hand, the user can 
+perform different (or the same) gesture with each hand, and thus perform more of these cases at the same time.
+
+\begin{table}
+\label{table:movement_gesture_code}
+\lstset{style=csharp}
+\begin{lstlisting}
+private void TrackHandMovement(Hand hand, GestureHand gestureHand)
+{
+    // Get position, convert from right to left hand coordinates, normalize
+    Leap.Vector leapPoint = hand.StabilizedPalmPosition * -1.0f;
+    Leap.Vector normalizedPoint = iBox.NormalizePoint(leapPoint, false);
+
+    // True if movement along the x-, y- and z-axis are handle by one gesture instead of three, false otherwise.
+    if (gestureHand.getCombineGestures()) 
+    {
+        if (gestureHand.getGestureType() == HandState.PALM_DOWN)
+        {
+            transform.position += transform.up * speed * (normalizedPoint.y - gestureHand.GetGestureOriginPosition().y) * Time.deltaTime;
+            transform.position += transform.right * speed * (normalizedPoint.x - gestureHand.GetGestureOriginPosition().x) * Time.deltaTime;
+            transform.position += transform.forward * speed * (normalizedPoint.z - gestureHand.GetGestureOriginPosition().z) * Time.deltaTime;
+        }      
+    }
+
+    else if (gestureHand.getGestureType() == HandState.PALM_DOWN)
+        transform.position += transform.up * speed * (normalizedPoint.y - gestureHand.GetGestureOriginPosition().y) * Time.deltaTime;
+
+    else if (gestureHand.getGestureType() == HandState.PALM_SIDE)
+        transform.position += transform.right * speed * (normalizedPoint.x - gestureHand.GetGestureOriginPosition().x) * Time.deltaTime;
+
+    else if (gestureHand.getGestureType() == HandState.FIST)
+        transform.position += transform.forward * speed * (normalizedPoint.z - gestureHand.GetGestureOriginPosition().z) * Time.deltaTime;
+}                                                                              
+\end{lstlisting}
+\caption[How movement gestures are detected and handling in \texttt{MovementController}]{How movement gestures are detected and handling in \texttt{MovementController}} 
+\end{table}
+
+As \texttt{MovementController} also support keyboard usage some keys are also tracked, primarily by using the two different unity built-in functions \texttt{Input.GetAxis} 
+and \texttt{Input.GetKey}. The former of these is used for movement along the x- and z-axis (left/right and forward/backward), in a similar fashion as 
+mouse movement was captured, but instead using the arguments "Vertical" for the x-axis and "Horizontal" for the z-axis. 
+
+What keys this corresponds to is configured in the Unity Input Manager, which is a project specific configuration to make it easier to allow the users to customize the 
+controls. In this implementation the default keys "left" or "A" for left (-horizontal), "right" or "D" for right (+horizontal), 
+"up" or "W" for going forward (+vertical) and "down" or "S" for going backward (-vertical).  
+
+\begin{figure}
+\label{fig:unity_build_startup}
+\includegraphics[width=\linewidth]{pictures/unity_build_startup.png}
+\caption[The Unity Input Manager enable startup configuration]{The Unity Input Manager enables the user to specify which input keys to use for certain actions
+when starting up the application}
+\end{figure}
 
 
 \subsection{The Raycast Controller}
