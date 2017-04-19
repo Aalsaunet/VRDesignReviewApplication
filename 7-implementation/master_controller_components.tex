@@ -147,7 +147,7 @@ private void TrackPinch(Hand hand, Leap.Vector originCoordinates)
 \subsection{The Movement Controller}
 The \texttt{MovementController} is another script component of the \texttt{MasterController}, and relates to the movement of the user. 
 This controller has many similarities with the \texttt{RotationController}, covered in the previous section, as it has very similar
-code for hand detection in the update method. If one of the hands have a different state than NONE, the \texttt{TrackHandMovement} 
+code for hand detection in the update method. If one of the hands have a different state than NONE, the \texttt{TrackHandMovement} function
 (see table~\vref{table:movement_gesture_code}) is called. In this function the hand position is obtained and a number of conditions are checked for:
 
 \begin{enumerate}
@@ -159,8 +159,8 @@ code for hand detection in the update method. If one of the hands have a differe
 
 If any of these criteria are met the appropriate action is taken. 
 For the last criterion this would mean going forward by X, where X is positive or negative float point number, 
-and is the result of (current coordinates - origin coordinates). Also not that although only one of these cases can trigger for one hand, the user can 
-perform different (or the same) gesture with each hand, and thus perform more of these cases at the same time.
+and is the result of (current coordinates - origin coordinates). Also note that although only one of these cases can trigger for each hand, the user can 
+perform different gestures simultaneously using both hands, and thus potentially meet more of these criteria at the same time.
 
 \begin{table}
 \label{table:movement_gesture_code}
@@ -197,12 +197,22 @@ private void TrackHandMovement(Hand hand, GestureHand gestureHand)
 \end{table}
 
 As \texttt{MovementController} also support keyboard usage some keys are also tracked, primarily by using the two different unity built-in functions \texttt{Input.GetAxis} 
-and \texttt{Input.GetKey}. The former of these is used for movement along the x- and z-axis (left/right and forward/backward), in a similar fashion as 
-mouse movement was captured, but instead using the arguments "Vertical" for the x-axis and "Horizontal" for the z-axis. 
+and \texttt{Input.GetButton}. The former of these is used for movement along the x- and z-axis (left/right and forward/backward) and returns a continuous number in the 
+range <-1, 1>, while the latter is used for the rest of the actions and returns a discrete number. 
+\texttt{Input.GetAxis} is used in a similar fashion as mouse movement was captured, but instead using the arguments "Vertical" for the x-axis and "Horizontal" for the z-axis. 
 
-What keys this corresponds to is configured in the Unity Input Manager, which is a project specific configuration to make it easier to allow the users to customize the 
-controls. In this implementation the default keys "left" or "A" for left (-horizontal), "right" or "D" for right (+horizontal), 
-"up" or "W" for going forward (+vertical) and "down" or "S" for going backward (-vertical).  
+What keys this correspond to is configured in the Unity Input Manager, which is a build specific configuration that allows the user to customize the 
+controls at runtime. This also gives an abstraction layer for the developer, where a virtual "input name", e.g.~"down", is specified instead of which physical key that needs to be 
+used (e.g.~\texttt{KeyCode.DownArrow}). If the latter approach is preferred, Unity also offers the function \texttt{Input.GetKey(Keycode)}. 
+With this function the developer must specify a "physical" and "actual" key instead of a virtual one. 
+This means that the code \texttt{Input.GetKey(Keycode.Q)} always listen for the Q-button on the keyboard and never any other. 
+Because of the flexibility of using the Input Manager this implementation uses \texttt{Input.GetAxis} and \texttt{Input.GetButton} for all keyboard input.
+
+In this implementation the default keys for actions handled by the \texttt{MovementController} class are as follows:
+"Left" or "A" for left (-horizontal), "right" or "D" for right (+horizontal), "up" or "W" for going forward (+vertical), 
+"down" or "S" for going backward (-vertical), "Q" for going up (+altitude), "E" for going down (-altitude), "Left Shift" for increasing movement speed and
+"Left Ctrl" for decreasing movement speed. The movement speed is a multiplier that is applied to every movement (i.e the ones mention in this section),
+and it is increased or decreased in increments of 0.5.  
 
 \begin{figure}
 \label{fig:unity_build_startup}
@@ -210,6 +220,9 @@ controls. In this implementation the default keys "left" or "A" for left (-horiz
 \caption[The Unity Input Manager enable startup configuration]{The Unity Input Manager enables the user to specify which input keys to use for certain actions
 when starting up the application}
 \end{figure}
+
+For input keys not covered by \texttt{Input.GetAxis}, \texttt{Input.GetButton} is used. This function also uses the Unity Input Manager configuration, so the 
+end user easily can configure the key layout. 
 
 
 \subsection{The Raycast Controller}

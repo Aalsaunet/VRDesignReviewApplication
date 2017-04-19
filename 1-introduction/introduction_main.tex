@@ -1,0 +1,87 @@
+\section{Background}            
+The field of virtual reality technology has seen an exciting development in recent years, 
+with the release of the first commercially successful virtual reality headsets, such as the Oculus Rift CV1 and HTC Vive, taking place in 2016.
+The application area for these virtual reality headset have exceeded the expectations of many, with virtual reality 
+technology already being present in several different domains, ranging from engineering to entertainment~\citep{VRS2016}. 
+\citet{VRS2016} reports numerous domains where virtual reality is successful being used, including 
+healthcare (e.g surgery), military, architecture/construction, art, fashion, entertainment (games, films etc), education, business, telecommunications, sports and rehabilitation.
+
+With the success of virtual reality technology, and increased attention towards technologies that complement it, several businesses and institutions 
+are interested in making use of the new possibilities virtual reality offer~\citep{TW22016}. One major business area for virtual reality, besides entertainment, 
+has been in the architecture, engineering and construction fields. Iris VR, a New York-based technology company building virtual reality applications, has reported that
+among their 15 000 customers, 75\% are from these industry segments. One possible reason for the impact virtual reality has had on these fields is their dependence 
+on big and complex 3D models. As virtual reality head mounted devices (HMD) are stereoscopic, i.e provide separate images for each eye, they are able to deliver a feeling of 
+depth and scale that is unrivaled by regular two dimensional displays~\citep{POLYGON2016}. This point was highlighted in an interview of a senior designer at an architect 
+firm, conducted by~\citet{TW22016}. He stated that "Practically nobody can understand architectural drawings, and even 3D visualizations are a stretch for most. 
+But everybody gets VR instinctively. You can get to the point very quickly. It either sells or kills the project right away." 
+
+Virtual reality applications that allow its users to inspect models in 3D also has many additional possibilities. 
+One example is to be able to work (e.g.~to edit, annotate or comment) on the model while being "inside" it (e.g.~when wearing a virtual reality HMD) and 
+to use the virtual reality application as a collaboration tool to exchange ideas about the model.
+DNV GL, a big international classification society, is looking into exactly this, and sees this vision as a potential big improvement over their standard 
+"paper-based" work flow. More specifically, DNV GL is interested in a virtual reality application for design reviews, a process where DNV GL employees review the 
+design of a client's design model and comments or annotates on various aspects of the model (e.g.~improvements that have to be made).
+
+This thesis will address this vision and utilize several state-of-the-art frameworks and technologies to design and implement such 
+an application. This presents several challenges, some of which will be mentioned in the next section and reviewed more throughout the thesis, while 
+DNV GL, their work flow, visions and motivations will be discussed further in chapter~\ref{chapter:dnvgl}. 
+
+
+\section{The Challenges of Virtual Reality} 
+Despite the early success the field of virtual reality technology has seen, there are still a lot challenges associated with it. 
+These challenges include prevention of virtual reality sickness (a kind of induced motion sickness), 
+stricter performance demands on target hardware and having more suitable input methods when using virtual reality HMDs. % (human-computer interactions).
+Addressing these challenges, in both design and implementation, is an important step when building virtual reality software~\citep{OCULUS2016}, 
+and each of these challenges, among others, will be discussed more in the following chapters.
+
+As virtual reality technology enables users to experience virtual worlds in a new way, 
+human-computer interaction (HCI) is also a highly relevant topic. 
+This field has in many ways seen a resurgence as virtual technology gives new possibilities, but also set new constrains. 
+One of these constraints is limiting the user's field of vision exclusively to that projected by the lenses, 
+which may make interaction with traditional input devices, such as mouse and keyboard, more challenging. 
+Because of this, alternate methods of interacting with the computer is a relevant topic. 
+One of these methods is the use of gestures, 
+which have long been considered an interaction technique that can potentially deliver more natural, 
+creative and intuitive methods for interacting with computers~\citep{Rautaray2015}. 
+To enable the use of gestures as a viable input method to a computer, responsive and reliable gesture recognition techniques are needed.  
+
+\section{Problem definition}
+This thesis will evaluate the consequences of utilizing virtual reality technology in combination with vision based gesture recognition technology, and discuss the benefits it 
+might bring, as well and the challenges it presents. 
+The thesis will also review the design and implementation of a design review application, which is developed as part of this thesis with the aforementioned goal in mind. 
+The design review application is also a prototype developed for the major international classification company DNV GL to evaluate how the use of virtual reality and gesture
+recognition technology might benefit their design review process. As such, the application requirements has been created in cooperation with DNV GL and represents
+common 3D object manipulating and navigation tasks. After discussing the design and implementation choices of this application, the user evaluation session will be discussed. 
+The user evaluation sessions were performed in cooperation with DNV GL employees, the potential end users, and contained invaluable feedback relevant to the use of virtual reality and gesture
+recognition technology in a professional setting. 
+
+% Write more about the concrete thesis ideas and why all the chapters are relevant. 
+
+\section{Limitations}
+The initial list of application features had to be shortened significantly to focus more on the most relevant parts for this thesis. As such the design review application
+is more a prototype or proof-of-concept than a finished product. Section 5.2.1 outlines the application features and will explain more of whats include in the application and what isn't. 
+
+\section{Outline}
+This thesis is organized as follows: In chapter~\ref{chapter:dnvgl} DNV GL and their business domains and processes will be introduced, together with common use cases
+and visions for what virtual reality can achieve. In this chapter we also define some of the scope for the application, a topic which will be revisited in 
+chapter~\ref{chapter:design}. In chapter~\ref{chapter:vr} we will review the history, concepts and demands of virtual reality, as well as discuss the issue of virtual reality
+sickness and other challenges. The implication these challenges have for the design and implementation stages, which are covered in chapter~\ref{chapter:design} and
+chapter~\ref{chapter:implementation}, are also discussed. Chapter~\ref{chapter:grt} reviews gesture recognition technology and its exciting possibilities for virtual reality.
+This chapter also discusses the different technologies that makes up the field of gesture recognition technology, and how it functions. 
+In chapter~\ref{chapter:design} we will review the design of the design review application, its user stories (i.e function requirements), how gesture recognition technologies
+can be used, and what frameworks and technologies are utilized. Chapter~\ref{chapter:technical} will review the software development libraries, APIs and frameworks
+which were outlined in ~\ref{chapter:design} and is utilized in the implementation. Special emphasis will be put important concepts of the Unity Engine, its programming model
+and on the Leap Motion library.  
+In chapter~\ref{chapter:implementation} we will document how the application is implemented and expand upon some of the Unity and Leap Motion concepts that were used.
+In chapter~\ref{chapter:evaluation} the user evaluation sessions will be covered, and the responses discussed and analyzed.
+Chapter~\ref{chapter:conclusion} will conclude this thesis with a summary of the findings and some thoughts about future work.
+
+
+% This thesis is organized as follows: In chapter 2 we will review the history and theoretical foundations for virtual reality, as well as discuss its performance demands
+% and the various challenges it presents. In chapter 3 we will discuss gesture recognition technology, its concepts and the different technology enabling this technology.
+% Chapter 4 will review the Leap Motion Controller, a vision-based gesture recognition device, both in terms of its hardware and software properties. Especial
+% emphasis will be put on its API (application program interface), which significantly simplifies the creation of programs utilizing gesture recognition.
+% Chapter 5 we will review the design of the design review application, its user stories (i.e function requirements) and what gestures it makes use of.
+% Chapter 6 will go more into the technical details of how the application is implemented in the Unity game engine and review its architecture along with some central Unity concepts.
+% In chapter 7 the user evaluation sessions will be covered, and the responses discussed and analyzed.
+% Chapter 8 will conclude this thesis with a summary of the findings and some thoughts about future work.
