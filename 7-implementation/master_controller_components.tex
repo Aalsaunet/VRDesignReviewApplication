@@ -200,8 +200,10 @@ As \texttt{MovementController} also support keyboard usage some keys are also tr
 and \texttt{Input.GetButton}. The former of these is used for movement along the x- and z-axis (left/right and forward/backward) and returns a continuous number in the 
 range <-1, 1>, while the latter is used for the rest of the actions and returns a discrete number. 
 \texttt{Input.GetAxis} is used in a similar fashion as mouse movement was captured, but instead using the arguments "Vertical" for the x-axis and "Horizontal" for the z-axis. 
+The movement calculations are similar to those found in \texttt{TrackHandMovement} (see table~\vref{table:movement_gesture_code}), only substituting or removing the
+hand position calculations (e.g.~\texttt{normalizedPoint.x - gestureHand.GetGestureOriginPosition().x}). 
 
-What keys this correspond to is configured in the Unity Input Manager, which is a build specific configuration that allows the user to customize the 
+What key each movement corresponds to is configured in the Unity Input Manager, which is a build specific configuration that allows the user to customize the 
 controls at runtime. This also gives an abstraction layer for the developer, where a virtual "input name", e.g.~"down", is specified instead of which physical key that needs to be 
 used (e.g.~\texttt{KeyCode.DownArrow}). If the latter approach is preferred, Unity also offers the function \texttt{Input.GetKey(Keycode)}. 
 With this function the developer must specify a "physical" and "actual" key instead of a virtual one. 
@@ -221,10 +223,74 @@ and it is increased or decreased in increments of 0.5.
 when starting up the application}
 \end{figure}
 
-For input keys not covered by \texttt{Input.GetAxis}, \texttt{Input.GetButton} is used. This function also uses the Unity Input Manager configuration, so the 
-end user easily can configure the key layout. 
-
 
 \subsection{The Raycast Controller}
+The \texttt{RaycastController} is another script component of the \texttt{MasterController}, and is responsible for detecting certain input from the user, create raycast-beams 
+and handle when a raycast hits an object. When activated a raycast beam should be fired from the position of the \texttt{MasterController} and towards where the 
+\texttt{MasterController} is oriented ("toward were the camera is located"). To enable the user to aim the raycast properly a crosshair or cursor (depending on the 
+active camera rig) is present in the middle of the users field of view, just like in a first-person shooter game. 
+If a raycast is created and collides with a part of the model (i.e an object with a collider that is within range), one of the following cases occur:
+
+\begin{enumerate}
+    \item A point annotation is created at the collision point (where the raycast hit the object).
+    \item The object the raycast hit gets an annotation attached to it and have its material changed to indicate that it is annotated.
+    \item The annotation form because active and edits the target point annotation.
+    \item The annotation form because active and edits the target object annotation.
+\end{enumerate}
+ 
+These scenarios and which one of them is triggered can be summarized with the following pseudo code:
+
+\begin{table}
+\label{table:raycast_scenarios}
+\begin{lstlisting}
+if single-point gesture is active OR left-click-mouse is active)
+    objectWhichWasHit = createRayCastBeam();
+    if (objectWhichWasHit is a point annotation)
+        editTheHitPointAnnotation();
+
+    else 
+        // Place a point annotation on the object, 
+        // even if its on top of an object annotation
+        CreatePointAnnotation();  
+
+else if double-point gesture is active OR right-click-mouse is active
+    
+    objectWhichWasHit = createRayCastBeam();
+    if (objectWhichWasHit is an object annotation)
+        editTheHitObjectAnnotation();
+
+    else if (objectWhichWasHit is NOT a point annotation)
+        // Object annotation of a point annotation is not allowed.
+        CreateObjectAnnotation(); 
+
+else 
+    Go check for other stuff!                                                                 
+\end{lstlisting}
+\caption[Pseudo code for the raycast scenarios]{Pseudo code for the raycast scenarios} 
+\end{table}
+
+Note that a raycast beam can be created by a single-point gesture or "Fire1" (a input name in the Input Manager that defaults to the left mouse button), or 
+by a double-point gesture or "Fire2" (right mouse button by default). The logic for these to scenarios are handled independently as seen in the pseudo code in 
+table~\vref{table:raycast_scenarios}. % tags
+
+The \texttt{RayCastController} contains the following instance variables:
+\begin{itemize}
+\item \texttt{public float raycastRange} - The raycasts maximum range, meaning the user has to be within N distance from an object for the raycast to hit it. Default is 50.0f.                             
+\item \texttt{public Camera mainCamera} - A reference to the main camera of the active camera rig.                                       
+\item \texttt{public GameObject annotationPrefab} - A reference to the point annotation prefab. This serves as a blue print for new point annotations.
+\item \texttt{public Material markedMaterial} - The initial material to use for marking object annotations.
+\item \texttt{public bool uiOpen} - This variables tells whether or not the annotation form is open (i.e active and visible to the user).
+\item \texttt{public GestureHand leftHand, rightHand} - References to the left and right hand's \texttt{GestureHand} instances.
+\item \texttt{private int annotationCounter} - A count of active point annotation in the scene. This variable is used to assign annotations IDs upon their creation.
+\item \texttt{private bool annotationPlacedDuringGesture} - Whether or not a point annotation or an object annotation was placed during the current active gestures. 
+\item \texttt{private AnnotationFormController orchestrator} - A reference to a singleton \texttt{AnnotationFormController}. This controller is described more in the next section.
+\end{itemize}
+
+
+
+% The raycasts should be fired from the player model towards where the player model is facing.
+% The player should thus be able to aim, e.g.~by utilizing a crosshair in the middle of the players screen, by looking at a spot and use the single-point gesture to fire off 
+% the raycast. At the point the raycast collides with a part of the model a point annotation should be created. If the user use the single-point gesture again, while
+% still aiming at the same spot (where an annotation now is), the annotation form should open up to supply input to the annotation. 
 
 \subsection{The Annotation Form Controller}
