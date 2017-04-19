@@ -1,0 +1,58 @@
+% Carsten: 
+% This chapter should come much earlier.
+% Perhaps not everything, but at least DNV GL should be introduced and their motivations should be stated before even starting with the state-of-the-art reviews. 
+% That means that section 5.1 of chapter 5 should be an own chapter between chapters 1 and 2. It would provide the fundamental reasons for making your thesis.
+% In that new chapter, you should describe the approval workflow as it is today: papers is sent back and forth, models are made and updated on both sides, 
+% annotations are disconnected from designs. And the vision: a share digital design where designer and reviewer can interact, perhaps even meet in a cooperative mode, 
+% but without loosing the accountability that comes from today’s paper trail. This story of DNV GL’s vision is important - you must come back to it at the start of chapter 6.
+% 
+% It should also preferably be longer: more about what DNV GL is, what classification comprises, focus onto ships in this thesis. Where in the long line of 
+% classification-related tasks does your thesis fit?
+% The rest of 5 is in the right place. However, the current chapter 4 should really come after you have stated your requirement into this chapter.
+
+
+\section{The core design} 
+The core functionality in the application should be to navigate the 3D model and "annotate" it (i.e creating and placing remarks tied to a the model), 
+primarily by using the advantages of virtual reality and gesture recognition. 
+The users should in later iteration also be able to create "sessions" that enable several users to be virtually present 
+in the same instance of the 3D model, and to interact with it using gestures. During these sessions a user should then be able to create annotations, 
+which can be interacted with (e.g.~edited or deleted) and are tied to the 3D model and the session. 
+Beyond this there is a lot of other functionality which should be in place for a complete product, but which will not be a priority 
+for this thesis as the virtual reality and gesture recognition aspects are the focus. 
+
+In the final product the application should support a lot more functionality, some of which is described in the next sections.
+
+%To enable the application to a be a VR collaboration tool
+
+\subsection{Application use cases}
+\import{}{2-application_functionality.tex}
+
+\section{The gestures}
+\label{sec:gesture_design}
+\import{../3-design/}{3-gesture-scheme.tex}
+
+% \section{Functionality limitations}
+% \subsection{Handling textual input with gestures}
+% \subsection{User gesture calibration}
+% \subsection{Saving annotation to a database}
+% \subsection{Exposing annotation to web servers}
+% \subsection{Annotation time-lines}
+
+% \section{Challenges with VR and GRT} 
+% Problems with using VR + e.g Leap over mouse + keyboard + display. E.g:
+
+% \subsection{The "writing issue"}
+% Virtual keyboards are bad. 
+% Regular keyboards are impractical. 
+% See "ideer til masteroppgaven.txt"
+% 
+% \subsection{Challenges in "designing" gesture schemes}
+% People have different preferences. Have intuitive gestures. Have gestures that is not too
+% fatiguing. Have gesture with high precision and recall (F-score) (high TP and TN. Low FP, FN).
+% Have a system that doesnt mistake one gesture for another.
+% 
+% \subsubsection{Fixes?}
+% User-gesture calibration. 
+% 
+% \section{Related work}
+

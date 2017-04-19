@@ -1,0 +1,7 @@
+The \texttt{LeapMotionController} game object contains objects related to the Leap Motion device and gesture recognition and consist primarily of the hand models, necessary 
+scrips and detectors. In the game object \texttt{HandModels} there is one object-representation of the left hand, called \texttt{Pepper\_LeftHand}, and one for the 
+right hand, called \texttt{Pepper\_RightHand}. These objects have their own hand models (as there needs to be different models for the left and right hand) and their 
+own detector objects (as a detector can/should only observe one hand). Each "hand" thus have its own list of detectors called \texttt{Detectors}. 
+These are the definition and implementation of the gesture scheme that were discussed in~\vref{sec:gesture_design}. In addition to detectors, each
+hand also have its own instance of the \texttt{GestureHand} class, which is an important component to keep track of hand states and resources, and
+it exposes utility function to other classes. 
