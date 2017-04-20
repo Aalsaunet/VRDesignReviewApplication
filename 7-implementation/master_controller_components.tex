@@ -243,23 +243,23 @@ These scenarios and which one of them is triggered can be summarized with the fo
 \begin{table}
 \label{table:raycast_scenarios}
 \begin{lstlisting}
-if single-point gesture is active OR left-click-mouse is active)
+if singlePointGesture OR leftMouseClick is active
+    
     objectWhichWasHit = createRayCastBeam();
-    if (objectWhichWasHit is a point annotation)
+    if objectWhichWasHit is a point annotation
         editTheHitPointAnnotation();
-
     else 
         // Place a point annotation on the object, 
         // even if its on top of an object annotation
         CreatePointAnnotation();  
 
-else if double-point gesture is active OR right-click-mouse is active
+else if doublePointGesture OR right-click-mouse is active   
     
     objectWhichWasHit = createRayCastBeam();
-    if (objectWhichWasHit is an object annotation)
+    if (objectWhichWasHit is an object annotation
         editTheHitObjectAnnotation();
 
-    else if (objectWhichWasHit is NOT a point annotation)
+    else if (objectWhichWasHit is NOT a point annotation
         // Object annotation of a point annotation is not allowed.
         CreateObjectAnnotation(); 
 
@@ -285,6 +285,82 @@ The \texttt{RayCastController} contains the following instance variables:
 \item \texttt{private bool annotationPlacedDuringGesture} - Whether or not a point annotation or an object annotation was placed during the current active gestures. 
 \item \texttt{private AnnotationFormController orchestrator} - A reference to a singleton \texttt{AnnotationFormController}. This controller is described more in the next section.
 \end{itemize}
+
+The update function checks for button clicks ("Fire1" and "Fire2") and gestures ("SINGLE\_POINT" and "DOUBLE\_POINT"), each with its own additional conditions.
+If a button is clicked the value of \texttt{uiOpen} needs to be false. This is because we don't want to fire a raycast when the user interface (i.e the annotation form) is 
+open (i.e when \texttt{uiOpen = true}). Gestures work a little differently as the detectors are disabled when the annotation form is open, and we thus don't have to check 
+for the value of \texttt{uiOpen}.
+Instead, the gesture checks whether the value of \texttt{annotationPlacedDuringGesture} is false before proceeding. This is to prevent an issue where the user performs a 
+single- or double point gesture and the annotation is both created and opened for editing instantaniously (which is again the desing). An annotation could be placed by 
+using one of the point-gestures, and on the next frame, were the same gesture is presumably still present, a new raycast would have been fired off, htting the annotation placed 
+one frame ago and opening the annotation form to edit it. As \texttt{annotationPlacedDuringGesture} is set to true when an annotation is placed, and the gesture (detector) 
+becomes inactive, it circumvents this issue.
+
+All the actions mentioned above calls the function \texttt{CreateRaycastBeam(bool isObjectAnnotation)}, which creates the raycast and applies the logic outlines by the 
+pseudo code in table~\vref{table:raycast_scenarios}. 
+"Fire1" and "SINGLE\_POINT" calls this with the argument \texttt{false} and "Fire2" and "DOUBLE\_POINT" calls it with \texttt{true}.
+
+\begin{table}
+\label{table:movement_gesture_code}
+\lstset{style=csharp}
+\begin{lstlisting}
+private void CreateRaycastBeam(bool isObjectAnnotation)
+{
+    // Create a vector at the center of our camera's viewport
+    Vector3 rayOrigin = mainCamera.ViewportToWorldPoint(new Vector3(0.5f, 0.5f, 0.0f));
+
+    // RaycastHit stores information about what our raycast has hit
+    RaycastHit hit;
+
+    // Check if our raycast has hit anything
+    if (Physics.Raycast(rayOrigin, mainCamera.transform.forward, out hit, raycastRange))
+    {
+        string tag = hit.collider.gameObject.tag;    
+        if (tag.Equals("PointAnnotation") || tag.Equals("ObjectAnnotation")) {
+            if (tag.Equals("PointAnnotation") && !isObjectAnnotation)
+                EditAnnotation(hit, isObjectAnnotation);
+            else if (tag.Equals("ObjectAnnotation") && isObjectAnnotation)
+                EditAnnotation(hit, isObjectAnnotation);
+            else if (!isObjectAnnotation)
+                CreatePointAnnotation(hit);
+        }
+
+        else if (isObjectAnnotation)
+            CreateObjectAnnotation(hit);
+        else // Else create a new annotation
+            CreatePointAnnotation(hit);
+        annotationPlacedDuringGesture = true;
+    }
+} 
+
+private void CreatePointAnnotation(RaycastHit hit)
+{
+    Vector3 hitPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
+    Quaternion rotation = Quaternion.identity;
+
+    //Create an annotation object at hit's coordinates. 
+    GameObject newAnnotation = (GameObject) Instantiate(annotationPrefab, hitPosition, rotation);
+    newAnnotation.tag = "SphereAnnotation";
+    newAnnotation.name = "SphereAnnotation_" + annotationCounter++;
+    AnnotationInformation info = newAnnotation.GetComponent<AnnotationInformation>();
+    info.initializeMaterials();
+    info.text = "Please enter your notes";
+    info.annotationSphere = newAnnotation;
+}
+
+private void CreateObjectAnnotation(RaycastHit hit)
+{
+    GameObject targetObject = hit.collider.gameObject;
+    targetObject.tag = "ObjectAnnotation";
+    AnnotationInformation info = targetObject.AddComponent<AnnotationInformation>();
+    info.initializeMaterials();
+    info.changeMaterial(markedMaterial);
+}
+
+\end{lstlisting}
+\caption[How the \texttt{CreateRaycastBeam} function of the \texttt{RaycastController} works.]{How the \texttt{CreateRaycastBeam} function of the \texttt{RaycastController} works.
+Note that annotation editing is handled by the \texttt{AnnotationFormController}, which is reviewed in the next section}. 
+\end{table}
 
 
 
