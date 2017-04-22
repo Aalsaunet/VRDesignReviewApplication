@@ -256,7 +256,7 @@ if singlePointGesture OR leftMouseClick is active
 else if doublePointGesture OR right-click-mouse is active   
     
     objectWhichWasHit = createRayCastBeam();
-    if (objectWhichWasHit is an object annotation
+    if objectWhichWasHit is an object annotation
         editTheHitObjectAnnotation();
 
     else if (objectWhichWasHit is NOT a point annotation
@@ -301,7 +301,7 @@ pseudo code in table~\vref{table:raycast_scenarios}.
 "Fire1" and "SINGLE\_POINT" calls this with the argument \texttt{false} and "Fire2" and "DOUBLE\_POINT" calls it with \texttt{true}.
 
 \begin{table}
-\label{table:movement_gesture_code}
+\label{table:create_raycast}
 \lstset{style=csharp}
 \begin{lstlisting}
 private void CreateRaycastBeam(bool isObjectAnnotation)
@@ -313,7 +313,7 @@ private void CreateRaycastBeam(bool isObjectAnnotation)
     RaycastHit hit;
 
     // Check if our raycast has hit anything
-    if (Physics.Raycast(rayOrigin, mainCamera.transform.forward, out hit, raycastRange))
+    if (Physics.Raycast(rayOrigin, transform.forward, out hit, raycastRange))
     {
         string tag = hit.collider.gameObject.tag;    
         if (tag.Equals("PointAnnotation") || tag.Equals("ObjectAnnotation")) {
@@ -324,7 +324,6 @@ private void CreateRaycastBeam(bool isObjectAnnotation)
             else if (!isObjectAnnotation)
                 CreatePointAnnotation(hit);
         }
-
         else if (isObjectAnnotation)
             CreateObjectAnnotation(hit);
         else // Else create a new annotation
@@ -332,14 +331,19 @@ private void CreateRaycastBeam(bool isObjectAnnotation)
         annotationPlacedDuringGesture = true;
     }
 } 
+\end{lstlisting}
+\caption[How the \texttt{CreateRaycastBeam} function of the \texttt{RaycastController} works.]{How the \texttt{CreateRaycastBeam} function of the \texttt{RaycastController} works.} 
+\end{table}
 
+
+\begin{table}
+\label{table:create_annotations}
+\lstset{style=csharp}
+\begin{lstlisting}
 private void CreatePointAnnotation(RaycastHit hit)
 {
-    Vector3 hitPosition = new Vector3(hit.point.x, hit.point.y, hit.point.z);
-    Quaternion rotation = Quaternion.identity;
-
     //Create an annotation object at hit's coordinates. 
-    GameObject newAnnotation = (GameObject) Instantiate(annotationPrefab, hitPosition, rotation);
+    GameObject newAnnotation = (GameObject) Instantiate(annotationPrefab, hit.point, Quaternion.identity);
     newAnnotation.tag = "SphereAnnotation";
     newAnnotation.name = "SphereAnnotation_" + annotationCounter++;
     AnnotationInformation info = newAnnotation.GetComponent<AnnotationInformation>();
@@ -356,12 +360,16 @@ private void CreateObjectAnnotation(RaycastHit hit)
     info.initializeMaterials();
     info.changeMaterial(markedMaterial);
 }
-
 \end{lstlisting}
-\caption[How the \texttt{CreateRaycastBeam} function of the \texttt{RaycastController} works.]{How the \texttt{CreateRaycastBeam} function of the \texttt{RaycastController} works.
-Note that annotation editing is handled by the \texttt{AnnotationFormController}, which is reviewed in the next section}. 
+\caption[How the \texttt{CreatePointAnnotation} and \texttt{CreateObjectAnnotation} functions in the \texttt{RaycastController} works.]
+{How the \texttt{CreatePointAnnotation} and \texttt{CreateObjectAnnotation} functions in the \texttt{RaycastController} works.
+Note that annotation editing is handled by the \texttt{AnnotationFormController}, which is reviewed in the next section.}
 \end{table}
 
+The code in table~\vref{table:create_annotations} also shows how point- and object annotation are created (editing of these is handled by the \texttt{AnnotationFormController}, 
+which is reviewed in the next section). In the function \texttt{CreatePointAnnotation} and \texttt{CreateObjectAnnotation} the game object which was hit, and the point where the
+hit occured (i.e where the raycast collided with the object), is accessable through the \texttt{RaycastHit} object, and creating annotations then simply becomes a 
+matter of either instantiating a prefab or attaching an annotation, in to "tagging" them as annotation. 
 
 
 % The raycasts should be fired from the player model towards where the player model is facing.
@@ -370,3 +378,44 @@ Note that annotation editing is handled by the \texttt{AnnotationFormController}
 % still aiming at the same spot (where an annotation now is), the annotation form should open up to supply input to the annotation. 
 
 \subsection{The Annotation Form Controller}
+The \texttt{AnnotationFormController} performs various task when entering or exiting the annotation form, in addition to hosting many of its button listeners.
+The \texttt{AnnotationFormController} contains the following instance variables:
+
+\begin{itemize}
+    \item \texttt{public GameObject hoverkey} - A reference to the hoverkey (the virtual keyboard) game object.
+    \item \texttt{public Camera annotationCamera} - A reference to the annotation camera.
+    \item \texttt{public GameObject annotationCanvas} - A reference to the canvas the annotation form is drawn on.
+    \item \texttt{public CanvasCollider annotationCollider} - A reference to the collider-script that is used for the world-space canvas. 
+    \item \texttt{public CrosshairController crosshair} - A reference to the crosshair/cursor. This is disabled when the annotation form is active.
+    \item \texttt{public Material[] glowColors} - An array for the different annotation priority material.  0 = error, 1 = warning, 2 = info.
+    \item \texttt{public Material[] nonGlowColors} - A similar array, with a non-glowing variant of the materials in case glow is disabled. Follows the same order as the previous array.
+    \item \texttt{private RayCastController raycastHandler} - A reference to the raycast controller singleton which were covered in the previous section.
+    \item \texttt{private AnnotationInformation annotationInstance} - A reference to the current annotation being edited.
+\end{itemize}
+
+The annotation form controller functions are invoked by the raycast controller when the user wishes to edit an annotation. 
+The raycast controller then sequentially calls \texttt{EnterAnnotationForm}, \texttt{AttachActionButtonListeners} and 
+\texttt{AttachPriorityButtonListeners} in the \texttt{AnnotationFormController} class. The \texttt{EnterAnnotationForm} function
+does the neccessary setup, while the latter two attach button listeners to the buttons. When the user clicks either the 
+"Submit", "Cancel" or "Delete" buttons the \texttt{ExitAnnotationForm} function is called, which essentially does the inverse
+of what \texttt{EnterAnnotationForm} does. 
+
+The following setup is done by \texttt{EnterAnnotationForm} and \texttt{ExitAnnotationForm}:
+\begin{enumerate}
+    \item Disable the annotation camera. This makes annotation invisible to the user.
+    \item Disable colliding object. This disabled (i.e temporary removes) all objects that would otherwise obstruct the world-space canvas.
+    \item Activate the world-space canvas so its visible to the user (the annotation form is now active).
+    \item Activate the hoverkey (the virtual keyboard) so its visible to the user.
+    \item Retrieve the annotation instance that was hit by the raycast beam.  
+    \item Set the \texttt{uiOpen} boolean variable in the raycast controller to \texttt{true}.
+    \item Lock movement. This will disable the \texttt{RotationController} and \texttt{MovementController} classes so the user cant move or rotate when
+            the annotation form is open.
+    \item Enable the mouse cursor, which is disabled when the annotation form isnt open. This is to allow the user to use the mouse to click on buttons.
+    \item Disable the crosshair so its no longer visible.
+    \item Disable the detectors for the left and right hand so no gestures are being recognized while the annotation form is open (using the hand to click
+            buttons still work though).
+    \item Input the text that is already stored in the annotation to the annotation form text field. If the annotation is newly created this text value is blank.
+\end{enumerate}
+
+As previously mentioned \texttt{ExitAnnotationForm} undoes most of these action when the user exits the annotation form. 
+
