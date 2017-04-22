@@ -51,41 +51,61 @@ This is a thorough and continuous evaluation process that has several phases~\ci
 		  to verify that the ship continues to meet the relevant rules and requirements for its class.
 \end{itemize}
 
-The first phase, i.e the technical review of the design plans, is of special interest to this thesis. 
-As this phase is primarily based on design documents and drawing, and usually is conducted before any construction has started, it might stand to benefit greatly from
-digitalization. The use of customized high quality software in this phase can potentially improve the entire work flow and enable useful features such as e.g.~ keeping a 
-history of decision, changes and discussions, in addition to organize the information in an intuitive manner. 
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/ship_design_sketch.png}
+	\caption[A typical paper based design sketch]{A typical paper based design sketch~\cite{MarinoConsult}}
+	\label{fig:ship_design_sketch}
+\end{figure} 
 
+The first phase, i.e the technical review of the design plans, is of special interest to this thesis as it is one that stands to gain a lot from 
+new ways of utilizing computer technology. The use of customized high quality software in this phase can potentially improve the entire work flow and enable useful 
+features such as e.g.~ keeping a history of decision, changes and discussions, in addition to organize the information in an intuitive manner. 
+As we will see in the next sections, this phase already commonly makes use of high fidelity 3D models, but often in a much more narrow fashion than 
+what could be possible. 
 
 \section{DNV GL's Digital Vision}
-DNV GL is the result of a merger between two leading classification societies, Det Norske Veritas (Norwegian) and Germanischer Lloyd (Germany),
+DNV GL is the result of a merger, taking place in 2013, between two leading classification societies, Det Norske Veritas (Norwegian) and Germanischer Lloyd (Germany),
 and is the world's largest classification society with about 15,000 employees and 350 offices operating in more than 100 countries. 
 They provide services for more than 13 000 vessels and mobile offshore units, which represents a global market share of 21\%~\citep{TO:DNVGL}
 It is the world's largest technical consultancy to onshore and offshore wind, wave, tidal, and solar industries, as well as the global oil \& gas industry 
 -- 65\% of the world’s offshore pipelines are designed and installed to DNV GL technical standards~\citep{MTN:DNVGL}. 
 
-As a classification society, DNV GL operates in all the phases outlines above and as mentioned in chapter~\vref{chapter:introduction} they are 
+As a classification society, DNV GL operates in all the phases outlines above and, as mentioned in chapter~\vref{chapter:introduction}, they are 
 currently investigating the idea of a virtual reality application for technical design reviews. 
 Currently their technical design review process can be summarized by the following steps: 
 
 \begin{enumerate}
 	\item The designer sends the model to DNV GL for evaluation.
-	\item One or several "approval engineer" from DNV GL inspects the model noting down aspects that doesn't meet DNV GL requirements.
+	\item One or several "approval engineer" from DNV GL inspects the model noting down (usually on a document) aspects that doesn't meet DNV GL requirements.
 	\item The designer receives the remarks and has to make the necessary changes to the model to continue to process towards getting the classification.
 	\item This process is repeated until the design is approved.
 \end{enumerate}
 
 This process usually results in a lot of papers being sent back and forth, and because of a lack of application support the process can, according to one DNV GL employee,
 feel very disconnected and "ad hoc". 
-DNV GL is thus looking into the possibilities of digitalizing this process, and making it more interactive and efficient by 
+
+Although digital 3D models usually are utilized in this phase, the work flow is reportedly still mostly based on design document and drawings.  
+It is said that the model is usually just a reference, and is static (i.e receives no changes) throughout the process. After the model is "completed", and DNV GL starts
+its design review process, most (if not all) comments, annotations and discussions are handled separate from the model (e.g.~through emails, phone calls)
+and is highly paper-based. This might in part because of the existing computer-aided design (CAD) software solution and in part because of the established practices.
+
+DNV GL is thus looking into the possibilities of digitalizing this process more, and making it more interactive and efficient by 
 conduct virtual design review meetings in the 3D models. Here the designer and reviewer could interact, 
 survey the model together, and annotate it instead of model-printouts (on paper). This should also be possible 
-without loosing the accountability that comes from today’s paper trail.
+without loosing the accountability that comes from today’s paper trail. It is thus not necessarily the 3D models themselves that 
+need to evolve, but rather the application that interfaces with them and what functionality they allow for.  
 
 As the sense of scale is important in a 3D model review, virtual reality technology is deemed promising as it gives a unique sense of scale
 and a depth, which is hard to match by regular "2D screens". 
 DNV GL is also interested in alternate interaction methods, as mouse and keyboard can have some limitation when working in a 3D environment~\citep{Rautaray2015}. 
 Gesture Recognition Technology has been of special interest as this can potentially offer unique approaches to working with 3D models.
+
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/ship_cad.jpg}
+	\caption[A ship model created using conventional CAD software.]{A ship model created using conventional Computer-aided Design (CAD) software.~\cite{IMO}}
+	\label{fig:ship_cad}
+\end{figure} 
+
 
 \section{Initial Design Ideas}
 The core functionality of such an application should be to navigate the 3D model and "annotate" it (i.e creating and placing remarks tied to a the model), 
