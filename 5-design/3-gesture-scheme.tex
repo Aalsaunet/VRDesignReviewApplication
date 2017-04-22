@@ -1,6 +1,6 @@
 
-As mention in the user stories for the application, all of the application's functionality should be accessible by using gestures. The user should thus
-be able to do every task only by using gestures (except the "look around story", which only be done by rotating the HMD). To support this a gesture scheme of seven (or eight depending
+As mention in the use cases for the application, all of the application's functionality should be accessible by using gestures. The user should thus
+be able to do every task only by using gestures (except the "look around case", which only be done by rotating the HMD). To support this a gesture scheme of seven (or eight depending
 on perspective) individual gestures were created. The gestures can all be considered static gesture, meaning that they don't require movement for the gesture to be detected, 
 except for the movement required to form the gesture. 
 Even though the gestures can be considered static in this aspect, the user is still often required to move his or her hand while holding the gesture to get the desired effect. 
@@ -16,7 +16,7 @@ another), and to work with the cameras (assuming a vision-based system) position
 
  
 \subsection{The pinch gesture}
-The pinch gesture will cover the "rotate user story", specified in the previous section, and thus enable the user to rotate the camera by the Y and Z axis. 
+The pinch gesture will cover the "rotate user case", specified in the previous section, and thus enable the user to rotate the camera by the Y and Z axis. 
 The pinch gesture is accomplished by squeezing the tip of the thumb and index fingers together while, preferably, keeping the rest of the fingers erect and the palm facing 
 somewhere between the table top and the displays (see~\vref{fig:gestures1} for an illustration). Once this gesture is done by the user, 
 the system should indicate that the gesture was recognized as a pinch gesture.
@@ -37,7 +37,7 @@ In addition this scheme also prevents the user from having to move his or her ha
 \end{figure} 
 
 \subsection{The palm-down gesture}
-The palm-down gesture, alternatively called the Y-gesture, fulfills the up-and-down functionality specified in the "move-user story", and enables the user to 
+The palm-down gesture, alternatively called the Y-gesture, fulfills the up-and-down functionality specified in the "move-user case", and enables the user to 
 move the player model along the y-axis, relative to its orientation. The palm-down gesture is accomplished simply by having all fingers extended, with all of them pointing in
 the direction of the display with the palm facing downwards towards the table top (see~\vref{fig:gestures1} for an illustration). This gesture, along with the rest of the 
 "movement gestures", uses the same origin-offset scheme as the pinch gesture, but the offset is in this gesture only measured on the y-axis, so moving the hand to the 
@@ -45,13 +45,13 @@ right, as mention in the pinch gesture section, will cause no movement when the 
 Instead the user can move his or her hands up and down on the y-axis, so the distance to the table top varies.  
 
 \subsection{The palm-side gesture}
-The palm-side gesture, alternatively called the X-gesture, fulfills the left-and-right functionality specified in the "move-user story", and enables the user to 
+The palm-side gesture, alternatively called the X-gesture, fulfills the left-and-right functionality specified in the "move-user case", and enables the user to 
 move the player model along the x-axis, relative to its orientation. The palm-side gesture is accomplished simply by having all fingers extended, with all of them pointing in
 the direction of the display with the palm perpendicular (i.e~at a 90° or 270° angle) to the table top (see~\vref{fig:gestures2} for an illustration). 
 As one of the movement gesture, this gesture also uses the origin-offset scheme, but only with the x-axis monitored.
 
 \subsection{The fist gesture}
-The fist gesture, alternatively called the Z-gesture, fulfills the forward-and-backwards functionality specified in the "move-user story", and enables the user to 
+The fist gesture, alternatively called the Z-gesture, fulfills the forward-and-backwards functionality specified in the "move-user case", and enables the user to 
 move the player model along the z-axis, relative to its orientation. The fist gesture gesture is accomplished by forming a fist (i.e with no fingers extended)
 and is used by extending and retracting the fist. 
 

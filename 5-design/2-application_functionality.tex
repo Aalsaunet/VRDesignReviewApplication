@@ -1,32 +1,39 @@
-This section gives an overview of the use cases which is intended for the finished application, some of which will be implemented in this thesis. 
-This section separates the user stories into two subsection "The Launcher" and "The Inspector", where "The Inspector stories" was all implemented, while
-"The Launcher stories" where skipped because they aren't relevant for the thesis, and to give more time to prioritize "The Inspector stories".
+% This section gives an overview of the use cases which are intended for the finished application, most of which will be implemented in this thesis. 
+% This section separates the user stories into two subsection "The Launcher" and "The Surveyor", where "The Surveyor stories" was all implemented, while
+% "The Launcher stories" where skipped because of time concerns, and to give more time to prioritize "The Surveyor stories".
 
-\subsubsection{The Launcher}
-\textit{Note that the Launcher was not implemented as part of the thesis.}
-The Launcher should show up when the application is launched and in many ways function as a "server browser".
-Here the user can decide between hosting a session on a 3D model he or she has access to, or join an existing session from a list/browser.
-When the user wishes to initiate or join a session with a particular 3D model to be inspected, he/she should be able to:
-
-\paragraph{When hosting}a session, the user should be able to:
-\begin{itemize}
-	\item Specify a 3D model from a standard file format to host the session on.
-	\item Give the session a name
-	\item Define a password, which will be required to enter the session. 
-	\item Choose between different visibility settings for the session (e.g~whether it should show up in the session list)
-\end{itemize}
-
-\paragraph{When joining}a session, the user  should be able to:
-\begin{itemize}
-	\item Choose a session from the session list and click the join-button to enter.
-	\item Enter the name of a session in the search text field to search for a session by name.
-			This should also enable to find sessions that are otherwise "hidden".
-\end{itemize}	
+% \subsubsection{The Launcher}
+% \textit{Note that the Launcher was not implemented as part of the thesis.}
+% The Launcher should show up when the application is launched and in many ways function as a "server browser".
+% Here the user can decide between hosting a session on a 3D model he or she has access to, or join an existing session from a list/browser.
+% When the user wishes to initiate or join a session with a particular 3D model to be inspected, he/she should be able to:
+% 
+% \paragraph{When hosting}a session, the user should be able to:
+% \begin{itemize}
+% 	\item Specify a 3D model from a standard file format to host the session on.
+% 	\item Give the session a name
+% 	\item Define a password, which will be required to enter the session. 
+% 	\item Choose between different visibility settings for the session (e.g~whether it should show up in the session list)
+% \end{itemize}
+% 
+% \paragraph{When joining}a session, the user  should be able to:
+% \begin{itemize}
+% 	\item Choose a session from the session list and click the join-button to enter.
+% 	\item Enter the name of a session in the search text field to search for a session by name.
+% 			This should also enable to find sessions that are otherwise "hidden".
+% \end{itemize}	
 
 % Mockup for the launcher?
 
-\subsubsection{The Inspector}
-Once a user has either created or joined a session and is loaded into the model, he or she should be able to do the following:
+This section gives an overview of the application functionality, which will be implemented in this thesis.
+Initially the design also contained specification for a "Launcher", i.e a program that gave the boot arguments to the program itself.
+In this Launcher program a user could either "host" a design review session by selecting one or multiple 3D models(s) and invite other users, or
+"join" a session by either accepting an invite or browse available sessions. Because of time concerns, and to give more time to prioritize the 
+more thesis-relevant use cases, this functionality was cut and the application instead boots up to a specific tanker model. 
+
+Once the user is loaded into this model, he or she should ble able to do the following:
+% \subsubsection{The Surveyor}
+%Once a user has either created or joined a session and is loaded into the model, he or she should be able to do the following:
 
 \paragraph{Choose between Virtual Reality Mode and Desktop Mode.} Virtual reality mode is meant to be used with a virtual reality headset
 and sets up the correct settings (e.g the field of view). Desktop mode is meant to be used without a virtual reality headset and instead used
@@ -91,40 +98,3 @@ The menu should allow the the user to:
 		  This is to enable the user to use his or her hands without it having effect on the application. 
 	\item Toggle between having X, Y, and Z axis movement as three separate gestures (forward/backward, left/right, up/down) or one (forward/backwards/left/right/up/down). 
 \end{itemize}
-
-
-Actions done during the 3D model session (such as annotating an object) should continuously be stored in a database. 
-If a user wants to re-enter the session at a later time, this database is read, and the actions done in previous sessions are loaded into the model.
-By utilizing a database 
-in this way the model files themselves can also remain unedited throughout a session, as opposed to saving annotations into the model files itself, 
-which could be more inefficient and create model versioning issues. 
-Another upside with utilizing a database is that it enables exposure of the actions done in the sessions to other platforms, such as web applications. 
-This can enable annotation and comments done on the 3D model to become "issues" or "remarks" in more traditional collaboration tools such as Atlassian's Jira or Confluence, 
-although this will not be a focus point for the thesis.  
-
-% To ensure that the desired application is as intuitive and functional as possible the upcoming master's thesis will also look into several ways of interacting with the 
-% 3D model while using virtual reality lenses. Special emphasis will be put on using gestures for certain tasks (such as marking and annotating objects) and evaluating the
-% performance through user testing. Using gestures in combination with mouse and keyboard, 
-% game controller and joysticks will also be evaluated to ensure a satisfactory user experience.     
-
-%support a model versioning system to keep track of which model version(s) annotations are tied to
-
-% \begin{itemize}
-% 	\item Move around on the horizontal plane by using the arrow keys, the WASD keys or by specific gestures (e.g.~a "dragging motion").
-% 	\item Move in the vertical plane increasing or decreasing altitude (i.e "flying").
-% 	\item Zoom in and out by virtually changing the avatar's own size.
-% 	\item Annotate the surface he/she is looking at. This should furthermore enable:
-% 	\begin{itemize}
-% 		\item Choosing between a placeholder-, predefined- or custom defined text and/or an icon.
-% 		\item Choosing between several annotation states,  e.g.~"unresolved", "work in progress", "Ready for approval" and "approved".
-% 		\item Automatic saving of the annotation and its coordinates to a log used for easy retrieval of the annotation entries. 
-% 		\item A threaded follow up discussion of the annotation (i.e adding comments).
-% 	\end{itemize}
-% 	\item Annotate regions or areas of the 3D model (e.g.~annotate an entire room). These "area annotations" should subsequently be modifiable to change the size. 
-% 	\item Link annotations to the DNV GL rules and requirements.
-% 	\item Draw on the desired surface to make suggestions or highlight, e.g.~drawing arrows.
-% 	\item Choose between enabling or disabling collision and gravity. By default the user should be able to traverse freely without collision, but to enable it can be practical in certain circumstances.
-% 	%\item Make the target surface transparent and without collision, thereby enabling the user to %move through it.
-% 	\item Obtain the real-world distance between two specified points.
-% 	\item Bookmark the avatar's current location and orientation to easily be able to go back to bookmarked locations. 
-% \end{itemize}

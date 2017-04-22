@@ -1,16 +1,9 @@
-\section{The core design} 
-% Flyttet:
-% The core functionality in the application should be to navigate the 3D model and "annotate" it (i.e creating and placing remarks tied to a the model), 
-% primarily by using the advantages of virtual reality and gesture recognition. 
-% The users should in later iteration also be able to create "sessions" that enable several users to be virtually present 
-% in the same instance of the 3D model, and to interact with it using gestures. During these sessions a user should then be able to create annotations, 
-% which can be interacted with (e.g.~edited or deleted) and are tied to the 3D model and the session. 
-% Beyond this there is a lot of other functionality which should be in place for a complete product, but which will not be a priority 
-% for this thesis as the virtual reality and gesture recognition aspects are the focus. 
-% 
-% In the final product the application should support a lot more functionality, some of which is described in the next sections.
-
-%To enable the application to a be a VR collaboration tool
+\section{The core functionality} 
+In section~\vref{sec:initial_design} we discussed the fundamental design ideas for a virtual reality design review application. 
+To ensure that such an application could change the work flow of DNV GL's design reviews, multiple design aspects should be met and a satisfactory infrastructure would need to be
+set up. As this thesis' scope is limited to virtual reality and gesture recognition technology's role in such an application, several of the components necessary for
+a satisfactory product will not be implemented to focus more one these aspects. The resulting thesis implementation will thus be more a prototype or proof-of-concept of 
+how virtual reality and gesture recognition technology can be used to interact and work with 3D models. 
 
 \subsection{Application use cases}
 \import{}{2-application_functionality.tex}
@@ -19,9 +12,29 @@
 \label{sec:gesture_design}
 \import{../3-design/}{3-gesture-scheme.tex}
 
-\section{Why Leap Motion?}
+\section{Technology Choices}
+There are several technology choices to make with regards to the implementation of the design review application.
+These span from programming framework, language, and what gesture recognition and virtual reality vendors to use, 
+and these decisions also must address capability between the different technologies.
 
-\section{Why Unity?}
+% A major decision is what programming framework to use. In the implementation the Unity game engine will be utilized.
+\subsection{The Game Engine}
+A game engine is a software framework, usually designed for development of video games. 
+The core functionality of a game engine typically includes a rendering engine, a physics engine (at least providing collision detection), sound, scripting, 
+animation, networking, streaming, memory management, and threading~\citep{Gregory2014}. As game engines are created to enable development of complex 
+3D environments and contain many of the facilities necessary for the application use cases outlined above, they provide a good foundation for the implementation.
+Even though several game developers develops their own proprietary game engines, which are kept strictly private to the company, there are several commercially available ones 
+as well. The biggest of these is the Unity and the Unreal engines, both with broad support from a number of third party vendors. This is a great benefit for the implementation 
+as support "straight out of the box" for our choice of virtual reality and gesture recognition technology will ease the development process.
+
+Of these two Unity were chosen as it was requested from DNV GL, as they have more experience with it from other projects.
+The Unity engine and its central concepts will be discussed in chapter~\vref{chapter:technical}.
+
+
+\subsection{Why Leap Motion?}
+
+
+\subsection{Oculus Rift and HTC Vive}
 
 
 % \section{Functionality limitations}
