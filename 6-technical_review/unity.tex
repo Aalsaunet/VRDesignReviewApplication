@@ -1,13 +1,29 @@
-
 \subsection{Scene}
+A Scene is the top level "container" of objects in the application and is equivalent to a level in a game. 
+An application can thus be divided into several scenes, e.g~one scene might be a main menu, while another might be a tutorial stage.
+In the design review application there is currently only one scene, which is on the tanker model.
 
 \subsection{Game Objects}
+A GameObject is perhaps the most important concept in the Unity editor and is essentially a generic container.
+Everything in the scene is, or belongs to, a GameObject. What defines a GameObject's function is its \textit{components}, 
+which essentially are properties of the GameObject. In Unity there are several built ones, e.g~camera components,
+light components etc. 
+The most important GameObject component is perhaps the \texttt{Transform} component, which is a mandatory component (i.e every GameObject has one) and 
+defines a GameObject's position, rotation and scale in the scene. Scripts, i.e custom code, is also commonly used as a component of 
+a GameObject.
+
+A GameObject can be assigned a \textit{Tag}, which serves as useful GameObject categories. This can be especially useful in a script logic setting when, e.g.~
+a collision between two objects occur and one wants to find out what kind of objects were involves (e.g.~ maybe a "Player" GameObject collides with a "Coin" GameObject, which
+is to be collected when this occurs).   
 
 \subsection{Prefabs}
+In Unity a Prefab is a type of GameObject template or blueprint, an is useful when the same assets is used multiple times (e.g.~multiple copies are present in the scene). 
+Just as a class can instantiate objects, multiple objects can be instantiated from one prefab.
+Any edits made to a prefab asset are thus immediately reflected in all instances produced from it, but any edits or overrides to the instances will be treated individually.
 
 
-\subsection{}
+%\subsection{}
 
-\subsection{}
+%\subsection{}
 
-\subsection{}
+%\subsection{}

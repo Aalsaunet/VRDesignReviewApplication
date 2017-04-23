@@ -1,5 +1,23 @@
-\section{Leap Motion - A Vision-based Gesture Recognition Device}
-\import{../6-technical_review/}{leap_motion.tex}
+This chapter will give a brief introduction to central concepts of the software frameworks outlined in the previous design chapter.
+The sections covering the Unity game engine and the Leap Motion Controller are both based on their documentation pages, found at 
+https://docs.unity3d.com and https://developer.leapmotion.com.
+Note that although these introductions are brief, more detailed information is mentioned as necessary in the implementation chapter.
 
 \section{Unity - The Cross-platform Game Engine}
+Unity is a cross-platform game engine developed by Unity Technologies, and is a popular engine both in a personal- and enterprise settings.
+Unity Personal is a free version for individuals and enterprises making less than 100 000\$ a year off content created in Unity, and is the 
+edition used in for the implementation phase.
+Unity Personal is full-featured and comes with all the necessary subsystems typically required in a game engine, like rendering, physics and scripting.
+Unity makes use of either C\# or UnityScript (a dialect of JavaScript) as scripting language, where the former is the preferred by the community and 
+exclusively used in the implementation. As its primary software framework Unity used \textit{Mono}, an open source development platform based on the .NET
+framework. The main different between the .NET framework and the Mono framework is that mono aims to be platform independent, whereas .NET is Windows only.
+The major components of the Mono framework is a C\# compiler, a runtime environment, the .NET class library and a Mono class library.
+
+In Unity, all script which will be using the framework must be derived from the base class \texttt{MonoBehavior}. 
+This class contains a lot of key functions in the Unity framework, such as \texttt{Start()} and \texttt{Update()}. 
+The following are important concept in Unity:
+
 \import{../6-technical_review/}{unity.tex}
+
+\section{Leap Motion - A Vision-based Gesture Recognition Device}
+\import{../6-technical_review/}{leap_motion.tex}

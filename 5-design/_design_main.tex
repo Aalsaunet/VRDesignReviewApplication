@@ -30,11 +30,19 @@ as support "straight out of the box" for our choice of virtual reality and gestu
 Of these two Unity were chosen as it was requested from DNV GL, as they have more experience with it from other projects.
 The Unity engine and its central concepts will be discussed in chapter~\vref{chapter:technical}.
 
-
 \subsection{Why Leap Motion?}
-
+When deciding on what vision-based gesture recognition system the Leap Motion Controller was chosen.
+This is primarily because of vision-based gesture recognition systems that focus on hand gesture, this seemed like the most mature. 
+The Leap Motion Controller also has a convenient API, with support for several high-level languages, and integration with Unity is well supported both
+through software libraries and documentation. The Leap Motion Controller and its API will be reviewed in chapter~\vref{chapter:technical}.
 
 \subsection{Oculus Rift and HTC Vive}
+As mentioned in earlier sections, two of the most popular virtual reality HMDs are the Oculus Rift and the HTC Vive. 
+These two HMDs both have good support for usage with Unity, but have separate SDKs (Software Development Kits) and runtime environments.
+Even though this is the case the implementation will support both of these HMDs. There are a couple of reasons for this:
+Unity 5 support both HMDs natively (i.e "out-of-the-box"), so adding the basic VR functionality is trivial and 
+implementing support for both enable a comparison of their performance in the application. 
+
 
 
 % \section{Functionality limitations}
