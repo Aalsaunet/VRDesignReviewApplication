@@ -1,6 +1,6 @@
 To evaluate the application's ability to meet user requirements, two rounds of user testing seasons were conducted at the DNV GL headquarters in Høvik, Norway.
 The first of these season were held the 24th March 2017 and involved one test person, while the second round were held at the 30th March 2017 and involved two persons. 
-The users were brought in individually and asked to take a seated position at an ordinary work stations with a mouse, keyboard and display, 
+The participants were brought in individually and asked to take a seated position at an ordinary work stations with a mouse, keyboard and display, 
 in addition to a leap motion controller positioned at the desk between the keyboard and the user. A HTC Vive head mount was also present for use during the experimentation phase. 
 
 The computer used for the testing had the following specifications (hardware and software):
@@ -14,7 +14,7 @@ The computer used for the testing had the following specifications (hardware and
     \item Steam VR runtime (for use with the HTC Vive head mount)
 \end{itemize}
 
-After the user was seated the test phases were conducted in the following order (including an estimated of alloted time):
+After the participant was seated the test phases were conducted in the following order (including an estimated of alloted time):
 
 \begin{enumerate}
     \item  5 minutes of introduction. The users were informed about the purpose of the application, some of its long term goals and its limitations.
@@ -25,11 +25,11 @@ After the user was seated the test phases were conducted in the following order 
 \end{enumerate}
 
 With the exception of the experimentation phase, all the steps above were conducted without the use of a VR head mount. In the experimentation phase
-the users were asked to divide their time equally between using the application in "desktop mode" (i.e using an regular display without a VR head mount) and
+the participants were asked to divide their time equally between using the application in "desktop mode" (i.e using an regular display without a VR head mount) and
 "VR mode" (i.e using a VR head mount). 
 
-\section{The instructions}
-The users were asked to perform the following tasks:
+\section{The Instructions}
+The participants were asked to perform the following tasks:
 
 \begin{enumerate}
     \item The pinch gesture is performed by pushing the thumb and index finger together, while keeping the palm directed against the table surface. 
@@ -76,7 +76,7 @@ The users were asked to perform the following tasks:
           % and with the same rotation as when this session started.
 \end{enumerate}
 
-\section{The questions}
+\section{The Questions}
 At the end of the individual test session the users were asked the following questions:
 
 \begin{enumerate}
@@ -92,11 +92,70 @@ At the end of the individual test session the users were asked the following que
             \item The double point gesture?
       \end{enumerate}
       \item How easy to use was the menu?
-      \item How difficult was it to place the cursor/crosshair where you wanted?
       \item How difficult or impractical was it to use the annotation form?
+      \item How difficult was it to place the cursor/crosshair where you wanted?     
       \item How was using the application with a virtual reality head mount different from using it in "desktop mode"? 
             Which one did you prefer?
+      \item Did or do you feel any symptoms of motion or virtual reality sickness after using the application in virtual reality mode?
 \end{enumerate}
+
+\section{Responses}
+On question no. 1 two of the participants responded that they preferred having distinct gestures for movement along the x-, y- and z-axis, because 
+it gives more precision and it's easier to avoid accidental movement, while the remaining participant preferred the combined gesture scheme as 
+s/he found it more intuitive to use. Combined gestures were also favored by this participant because s/he felt that it was easier to perform the 
+required tasks with only one hand, and s/he could thus switch between using the left and the right hand to combat fatigue (e.g.~"gorilla arm syndrome").  
+
+When asking the participants about their impressions about the different gestures the answers were more unanimous in some aspect
+as all participants preferred the fist gesture the least and the pinch gesture the most. As we will see in the next section there might be an inverse relationship between the two.
+All the participants also reported that they didn't use the palm-down (y-axis movement) and palm-side (x-axis movement) that much and instead preferred to rotate to the 
+direction they wanted to move and use the fist gesture (z-axis movement) to go there. All the participants also preferred the single-point gesture over the double-point gesture as 
+the latter often was mistaken for the former. The participants also found the initial 25 degree on and off angle of the single- and double point detectors 
+(see section~\vref{sec:singlepoint_detector}) to be to "generous", resulting in several annotation being placed by mistake. 
+As a result of this the participants also were allowed to try with a stricter 15 degree on/off-angle, which all preferred (and thus is the application default).
+
+The participants all seemed pretty satisfied with the menu, as they felt it was straight-forward to use. One participant felt that is was a little "too slow", by which
+s/he referred to how the user of the menu is required to hold a button for about 1-2 second before a click is registered (to avoid accidental clicks).
+Another participant also felt that is was to hard to read the menu text (i.e the labels), as he it was to small and pixelated. Both of these issues 
+can quickly be adjusted in the implementation, by e.g~increasing the font size and applying anti-aliasing to the text, but this wasn't done during the testing.
+With regard to using the annotation form the participants had similar remarks as to the menu. 
+
+When asking the participant about the differences between using the application with or without a virtual reality HMD, and what they prefer, they unanimously responded
+that they preferred to use the application in virtual reality mode. One of the reasons for this was that it was simply easier to position the crosshair/cursor at the 
+desired location (i.e to aim) with the assistance of head movements. Although the participants felt that aiming with the crosshair/cursor was easiest in VR mode, they still 
+didn't find it troublesome to do so in desktop mode. Another reason the participants preferred using the application with a VR HMD was because of the 
+better depth vision they felt it provided. This was, according to one participant, especially beneficial with regards to using the menu and annotation form, as it 
+was easier to click the buttons (i.e easier to see the relation between the hand models and the buttons). The added depth information was, according to another participant, 
+also especially useful to understand the model better. 
+
+The participants were also asked if they felt any symptoms of motion or virtual reality sickness after using the application. 
+One participant responded that s/he felt a little dizzy after using the application and that it felt like this was especially caused by unintentional movement 
+(e.g.~When intentionally performing a movement gesture). The other two participant felt no kind of symptoms or fatigue after using the application.
+
+\section{Observations}
+As mentioned in the previous section, the fist gesture was the least preferred gesture.
+This appeared to be because of two primary reason: Detector conflict and fatigue.
+When the participants attempted to do a fist gesture the gesture recognition system would often mistake it for a pinch gesture 
+as the distance between the tip of the thumb and index finger is small when forming a fist. As the Leap Motion base pinch detector only defines a pinch
+as this distance, additional detectors needed to be added to the pinch gesture to avoid this detector conflict. Because of this, there are two composite pinch
+detectors per hand in the implementation, one "slack" version only using the base pinch detector and one "strict" version using a combination of the base
+pinch detector and the base finger extended detector. The strict version requires a pinch gesture to be performed while having at least two fingers extended at the same time. 
+This makes it more distinguishable from the fist gesture, but also make it a bit harder to use (i.e more false negatives).
+
+% Collision 
+
+%As the test were run in the Unity editor, some tweaking could be done during the testing after request from the users.
+%, as it was often mistaken for a pinch gesture (this will be discussed more below) . 
+
+\section{Lessons Learned}
+
+Although the sample size of these test was too small to draw definitive conclusions, they do point towards some hypothesizes and theories. 
+Generally it feels like users of a gesture recognition system preferred false negatives over false positives, i.e they would rather have it occasionally
+happen that a gesture they attempt aren't recognized than that the system detects a gesture which isn't being performed.
+
+
+
+
+% \subsection{User proposals}
 
 % Write about how the participants responded.
 
