@@ -134,12 +134,26 @@ One participant responded that s/he felt a little dizzy after using the applicat
 \section{Observations}
 As mentioned in the previous section, the fist gesture was the least preferred gesture.
 This appeared to be because of two primary reason: Detector conflict and fatigue.
-When the participants attempted to do a fist gesture the gesture recognition system would often mistake it for a pinch gesture 
-as the distance between the tip of the thumb and index finger is small when forming a fist. As the Leap Motion base pinch detector only defines a pinch
-as this distance, additional detectors needed to be added to the pinch gesture to avoid this detector conflict. Because of this, there are two composite pinch
+When the participants attempted to do a fist gesture the gesture recognition system would often mistake it for a pinch gesture,
+possibly because the distance between the tip of the thumb and index finger is relatively small when forming a fist. As the Leap Motion base pinch detector only defines a pinch
+as a small enough thump--tip-to-index-tip distance, additional detectors was added to the pinch gesture to avoid this detector conflict. 
+Because of this, there are two composite pinch
 detectors per hand in the implementation, one "slack" version only using the base pinch detector and one "strict" version using a combination of the base
 pinch detector and the base finger extended detector. The strict version requires a pinch gesture to be performed while having at least two fingers extended at the same time. 
 This makes it more distinguishable from the fist gesture, but also make it a bit harder to use (i.e more false negatives).
+% Another reason why the fist gesture is the least preferred among the participants might also be because of ergonomic comfort. % Muligens noe annet enn "ergonomic comfort"?
+% While in a seated position, many of the other gestures can be used with the upper part of the arm (i.e above the elbow) relatively stationary, but when
+% using the fist gesture the user is often required to extend 
+
+
+During the test session several of the participant also had interesting suggestions for the application.
+One participant said he appreciated not having collision on the \texttt{MasterController} in the application, thus being able to move through objects, 
+but that he would prefer if the user "bumped into objects" before going through them. S/he thus felt that some sort of collision, while still having the ability to move
+through objects, would be helpful when positioning. 
+Another user, upon discussing the fist-pinch detector conflict, suggested to use a new gesture to rotate the camera. 
+More specifically, the participant suggested a fist gesture with the thumb extended to rotate and the regular fist gesture for Z-axis movement (thus using a gesture
+scheme without the pinch gesture).
+
 
 % Collision 
 

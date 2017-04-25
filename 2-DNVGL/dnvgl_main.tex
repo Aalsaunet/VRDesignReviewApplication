@@ -18,7 +18,7 @@ publishes its own classification rules and technical requirements in relation to
 The organization should have capacity to apply, maintain and update these rules and requirements with own resources on a regular basis, and should 
 be impartial, meaning that it should not be controller by ship-owners, shipbuilders or be otherwise commercially engaged in the manufacture, 
 equipping, repair or operation of ships.
-In addition the classification society should verify compliance with these rules and requirements during construction and periodically during a classed
+In addition, the classification society should verify compliance with these rules and requirements during construction and periodically during a classed
 ship's service life. 
 
 % Kanskje droppe dette avsnittet?
@@ -28,14 +28,14 @@ the establishment of the insurance market Lloyd's of London, Lloyd's Register an
 This also led to a committee being formed in London in 1760 being the first recorded classification society committee~\citep{Hormann2006}. 
 At this time, various aspect of a ship, such as its hull and equipment, were assigned "grades" for their condition, ranging between G, M and B (good, middling or bad), 
 or simply 1, 2 and 3. As the classification profession evolved, these different classifications were mostly replaced by a more discrete classification system, meaning
-a ship either meets the relevant class society's rules or it does not. 
+that a ship either meets the relevant class society's rules or it does not. 
 
-This classification serves as a certification process where the candidate 
+Classification serves as a certification process where the candidate 
 has to fulfill a number of requirements in order to "pass" the classification process. 
 \citet{Hormann2006} describes the objective of ship classification as verifying "the structural strength and integrity of essential parts of the ship’s hull 
 and its appendages, and the reliability and function of the propulsion and steering systems, power generation and those other features and auxiliary systems 
 which have been built into the ship in order to maintain essential services on board. Classification Societies aim to achieve this objective through the development 
-and application of their own Rules and by verifying compliance with international and/or national statutory regulations on behalf of flag Administrations"
+and application of their own rules and by verifying compliance with international and/or national statutory regulations on behalf of flag Administrations"
 This is a thorough and continuous evaluation process that has several phases~\citep{Hormann2006}. These phases include:
 
 \begin{itemize}
@@ -65,8 +65,8 @@ what could be possible.
 
 \section{DNV GL's Digital Vision}
 DNV GL is the result of a merger, taking place in 2013, between two leading classification societies, Det Norske Veritas (Norwegian) and Germanischer Lloyd (Germany),
-and is the world's largest classification society with about 15,000 employees and 350 offices operating in more than 100 countries. 
-They provide services for more than 13 000 vessels and mobile offshore units, which represents a global market share of 21\%~\citep{TO:DNVGL}
+and it is the world's largest classification society with about 15,000 employees and 350 offices operating in more than 100 countries. 
+DNV GL provides services for more than 13 000 vessels and mobile offshore units, which represents a global market share of 21\%~\citep{TO:DNVGL}.
 It is the world's largest technical consultancy to onshore and offshore wind, wave, tidal, and solar industries, as well as the global oil \& gas industry 
 -- 65\% of the world’s offshore pipelines are designed and installed to DNV GL technical standards~\citep{MTN:DNVGL}. 
 
@@ -76,9 +76,9 @@ Currently their technical design review process can be summarized by the followi
 
 \begin{enumerate}
 	\item The designer sends the model to DNV GL for evaluation.
-	\item One or several "approval engineer" from DNV GL inspects the model noting down (usually on a document) aspects that doesn't meet DNV GL requirements.
+	\item One or several \textit{Approval Engineeers} from DNV GL inspect the model and notes down (usually on a document) aspects that don't meet DNV GL requirements.
 	\item The designer receives the remarks and has to make the necessary changes to the model to continue to process towards getting the classification.
-	\item This process is repeated until the design is approved.
+	\item The process is repeated until the design is approved.
 \end{enumerate}
 
 This process usually results in a lot of papers being sent back and forth, and because of a lack of application support the process can, according to one DNV GL employee,
@@ -86,18 +86,19 @@ feel very disconnected and "ad hoc".
 
 Although digital 3D models usually are utilized in this phase, the work flow is reportedly still mostly based on design document and drawings.  
 It is said that the model is usually just a reference, and is static (i.e receives no changes) throughout the process. After the model is "completed", and DNV GL starts
-its design review process, most (if not all) comments, annotations and discussions are handled separate from the model (e.g.~through emails, phone calls)
-and is highly paper-based. This might in part because of the existing computer-aided design (CAD) software solution and in part because of the established practices.
+its design review process, most comments, annotations and discussions are handled separate from the model, e.g on paper, while almost all communication
+is performed by either emails and phone calls.
+This might in part be because of limitations in the existing computer-aided design (CAD) software solutions, and in part because of companies' established practices.
 
-DNV GL is thus looking into the possibilities of digitalizing this process more, and making it more interactive and efficient by 
-conduct virtual design review meetings in the 3D models. Here the designer and reviewer could interact, 
-survey the model together, and annotate it instead of model-printouts (on paper). This should also be possible 
+DNV GL is thus intrigued by the prospects of digitalizing this process more, and make it more interactive and efficient by 
+e.g~utilizing an application that allows for \textit{virtual} design review meetings in the 3D models. In these virtual design review meetings, 
+the designer and reviewer could interact, survey the model together, and annotate it instead of model-printouts (on paper). This should also be possible 
 without loosing the accountability that comes from today’s paper trail. It is thus not necessarily the 3D models themselves that 
 need to evolve, but rather the application that interfaces with them and what functionality they allow for.  
 
 As the sense of scale is important in a 3D model review, virtual reality technology is deemed promising as it gives a unique sense of scale
 and a depth, which is hard to match by regular "2D screens". 
-DNV GL is also interested in alternate interaction methods, as mouse and keyboard can have some limitation when working in a 3D environment~\citep{Rautaray2015}. 
+DNV GL is also interested in alternate interaction methods, as mouse and keyboard can have some limitation when working in 3D environments~\citep{Rautaray2015}. 
 Gesture Recognition Technology has been of special interest as this can potentially offer unique approaches to working with 3D models.
 
 \begin{figure}%[h!] %[H]
@@ -110,31 +111,41 @@ Gesture Recognition Technology has been of special interest as this can potentia
 
 \section{Initial Design Ideas}
 \label{sec:initial_design}
-The core functionality of such an application should be to navigate the 3D model from a first-person view and "annotate" it (i.e creating and placing remarks tied to a the model), 
-primarily by using the advantages of virtual reality and gesture recognition technology. 
-The users should also be able to create "sessions" that enable several users to be virtually present 
-in the same instance of the 3D model, and to interact with it using gestures. During these sessions a user should then be able to create annotations, 
+The core functionality of a virtual reality design review application, such as the one outlined above, should be to navigate the 3D model from a first-person view 
+and "annotate" it (i.e creating and placing remarks tied to a the model), primarily by using the advantages of virtual reality and gesture recognition technology.
+The users should also be able to create "sessions" that enable several users to be virtually present in the same instance of a 3D model (as opposed to different copies of it),
+and to interact with it using gestures. During these sessions a user should then be able to create annotations, 
 which can be interacted with (e.g.~edited or deleted) and are tied to the 3D model and the session. 
 
-Actions done during the 3D model session (such as annotating an object) should continuously be stored in a database. 
+Actions done during the 3D model session (such as annotating an object) should continuously be stored in a database or a distributed file system. 
 If a user wants to re-enter the session at a later time, this database is read, and the actions done in previous sessions are loaded into the model.
-By utilizing a database 
-in this way the model files themselves can also remain unedited throughout a session, as opposed to saving annotations into the model files itself, 
-which could be more inefficient and create model versioning issues. 
-Another upside with utilizing a database is that it enables exposure of the actions done in the sessions to other platforms, such as web applications. 
-This can enable annotation and comments done on the 3D model to become "issues" or "remarks" in more traditional collaboration tools such as Atlassian's Jira or Confluence.
+By utilizing a database to store annotations in this way, the original model file (or files) could also remain unchanged throughout sessions, thereby avoiding conflicting 
+or outdated versions of the model once it is submitted for a design review. This is opposed to the idea of saving the annotations as part of the model file(s), thus creating
+a new "version" of the model for each "save".
+The application could treat the storage of annotations as a revision control/version control system (VCS) would: The model itself could be the 
+base (like a "first commit") and each time an annotation were added, edited and remove a "commit"" would happen were the "diff" (i.e the difference between the previous commit 
+and this commit) would be stored. This would also allow for an annotation log, similar to a commit log in a VCSs. 
+If a session with a previous history were opened the application could thus load in all annotations by sequentially iterating through
+this annotation history (the "annotation commit log") and applying the diffs.
 
-% Write more on initial design ideas?
+Another upside with utilizing a database is that it enables exposure of the actions done in the sessions to other platforms, such as web applications. 
+This can enable annotation and comments done in a virtual design review session to become "issues" or "remarks" in more traditional collaboration tools such as 
+Atlassian's Jira or Confluence.
+This might in its own way be a key approach to designing a virtual reality application that requires some sort of textual input. As a virtual reality headset might make
+it harder to utilize a keyboard, the user will then be able to first create annotations while using a virtual reality headset, and 
+later input the text for those annotations through a web application tool. This would also allow the interested parties to access the annotations without necessarily having
+to enter the model again. 
+
 To approach these design ideas this thesis will first review the fields of virtual reality technology and gesture recognition technology, before revisiting the design in light
 of these reviews. The design is concretized and scoped in chapter~\vref{chapter:design}, where we select the focus and core functionality and write these as 
 "use cases" (i.e informal, natural language descriptions of features, commonly used in software projects). Here we will also go more into the design issues that has to be
 addressed before the implementation starts, and review our technology choices.  
 
-
-
-
-% INCLUDE USE CASES HERE?
-
-
-% A major part of DNV GL's work is evaluation and quality assurance of a client's product (e.g.~a ship) , 
-% where a DNV GL "Approval Engineer" conducts a design review of the client's model of the proposed product. 
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/jira_board.png}
+	\caption[Annotation available in web applications.]
+			{Annotation and comments created in a virtual design review session can become "issues" or "tasks" in more conventional web application collaboration tools, such as 
+			Atlassian's Jira. Both the web application and the design review application would be utilizing the same database, thus making changes performed in one of them also
+			present in the other. Picture from \citet{Atlassian}.}
+	\label{fig:jira_board}
+\end{figure} 

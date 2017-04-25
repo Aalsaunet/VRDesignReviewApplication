@@ -24,10 +24,10 @@ by turning his or her head.
 \end{figure}
 
 
-\section{The virtual reality ecosystem}
+\section{The Virtual Reality Ecosystem}
 As described in the previous section, a virtual reality head-mounted device (HMD) is in simple terms a device that is fastened to the user's head and, when fastened, 
 covers the user's entire field of vision. 
-Each eye has its own display, and both of these are positioned about 2-3 centimeters from the eyes. In addition to this several head motion
+Each eye has its own display, and both of these are positioned about 2-3 centimeters from the eyes. In addition to this, several head motion
 tracking sensors are built into the headset to detect any movement~\citep{POLYGON2016}. This usually includes a gyroscope, which is responsible for measuring the orientation of the
 HMD, and some times an accelerometer to measure the proper acceleration of the HMD \citep{THEVERGE2016}. In addition, or instead of this, the first consumer versions of 
 virtual reality headset also usually utilizes some other sensors or cameras outside the HMD. As an example the Oculus Rift CV1 utilizes constellation sensors~\citep{VRFOCUS2015}, 
@@ -47,12 +47,12 @@ utilize similar sensor technology as the head mounted devices.
 	\label{fig:vive_and_rift_marked}
 \end{figure} 
 
-\section{Virtual reality performance demands}
+\section{Virtual Reality Performance Demands}
 Virtual reality places some strict demands on performance and software design to avoid discomfort for the user. This is in many ways connected to how virtual reality "tricks" 
 the user's brain into thinking the virtual experiences are actually real, thus giving it its "reality feel". Failing to meet these demands can quickly result in significant 
 discomfort for the user, often called \textbf{\textit{virtual reality sickness}}, a kind of motion sickness~\citep{ARSTECHNICA2013}. Some of these demands are described below:
 
-\subsection{Latency requirements}
+\subsection{Latency Requirements}
 Virtual reality headsets have a much stricter requirements for latency, i.e the time required for an input to have a visible effect, 
 than with use of regular displays~\citep{ROADTOVR2013}. If this demand isn't met the system might feel "sluggish", and user's actions and 
 visual feedback might feel disjoint, which often lead to virtual reality sickness. According to one of the engineers behind the HTC Vive, the ideal
@@ -64,7 +64,7 @@ that the displays don't "redraw" an identical frame on a buffer update the frame
 rate (e.g 90 frames per second for the Oculus Rift CV1 or HTC Vive). Refresh rate and frame rate are thus highly codependent, where performance is only as good as the weaker
 of the two, and the target computer should thus have a GPU strong enough to meet a frame rate equal or above to the HMD's refresh rate. 
 
-\subsubsection{Asynchronous reprojection}
+\subsubsection{Asynchronous Reprojection}
 To reduce the perceived latency, or to compensate for a frame rate that is too low, several virtual reality HMDs make use of \textit{asynchronous reprojection}
 (equivalent to what Oculus VR refer to as "asynchronous time warp")~\citep{GD2016}. This is a technique in which the virtual reality system generates intermediate frames 
 in situations where the software (e.g a game) can't maintained the required frame rate (which is typically 90 fps with 90 Hz). In simple terms asynchronous reprojection 
@@ -72,7 +72,7 @@ produces "in-between frames", which is a manipulated version of an older rendere
 before the frame is presented on the displays~\citep{GD2016}. By doing this, software that runs at e.g 45 FPS (frames per seconds) natively can be transformed into 90 FPS by 
 applying asynchronous reprojection to each rendered frame. Every other frame is thus actually a manipulated version of the former frame. 
 
-\subsection{Display resolution and quality}
+\subsection{Display Resolution and Quality}
 Virtual reality headsets also have strict demands in respect to display resolution and quality. As the eyes of the user is closer
 to the displays than with a regular monitor, and the displays have to "wrap around" the user's whole field of view, flaws and shortcomings in the display technology 
 become more apparent. 
@@ -89,7 +89,7 @@ It was like you were sitting too close to an old TV, or staring at the display t
 	\label{fig:the_screen_door_effect}
 \end{figure} 
 
-\section{Virtual reality sickness}
+\section{Virtual Reality Sickness}
 % Carsten: This is a very interesting survey of the state of knowledge in motion sickness. 
 % Still, it should be motivated as well as concluded with some sentences that tell why this is an issue for your design, 
 % and how the knowledge influences your design decisions. This discussion should be related to thesis goals that are already mentioned in section 1.3
@@ -98,6 +98,10 @@ As mentioned in the previous sections, virtual reality sickness, a condition sim
 can be a consequence of the usage of virtual reality headsets, and is considered a major barrier to 
 using virtual reality. Like simulator sickness, virtual reality sickness causes symptoms that are similar to those of motion sickness, and can include symptoms like 
 headache, stomach awareness, nausea, vomiting, pallor, sweating, fatigue, drowsiness and disorientation~\citep{Kolasinski1995}. 
+To ensure an optimal virtual reality experience when using the design review application, the design and implementation should address these issues.
+The following subsection will thus review what's known about virtual reality sickness and what can be done from a design and 
+implementation standpoint.
+
 
 Contrary to "regular" motion sickness, where the user visually perceived to be still while in actual motion, 
 virtual reality sickness turns this around: The user visually perceive to be in motion which he or she is still. 
@@ -110,7 +114,7 @@ they should still be understood by the VR designer~\citep{Stanney2003}.
 The following two subsections will review factors that contribute to virtual reality sickness, and make a distinction by
 what are mostly determined by individual differences and whats mostly determined by the application design. 
 
-\subsection{Individual differences in susceptibility}
+\subsection{Individual Differences in Susceptibility}
 Research has identified some individual differences that correlate with the individual's susceptibility for experiencing virtual reality sickness. 
 One observation is that the susceptibility for virtual reality sickness correlates heavily with motion sickness susceptibility, and 
 factors that influence motion sickness susceptibility also usually influence virtual reality sickness susceptibility~\citep{Stanney2003}.
@@ -136,11 +140,11 @@ Tibetans and Northeast Indians having greater susceptibility than Caucasian race
 Symptoms of virtual reality sickness are more prevalent in people who are fatigued, sleep deprived, are nauseated or have an upper respiratory illness, 
 ear trouble or influenza~\citep{Kolasinski1995}.
 
-\subsubsection{Postural stability}
+\subsubsection{Postural Stability}
 Users with a postural instability has been found to be more susceptible to visually-induced motion sickness, such as virtual reality sickness, and to experience
 stronger symptoms of nausea and disorientation~\citep{Kolasinski1995}. 
 
-\subsubsection{Experience with the application}
+\subsubsection{Experience with the Application}
 More exposure to virtual environments can train the brain to be less sensitive to their effects~\citep{Stanney2003}. Users tend to become less likely to experience
 virtual reality sickness as they become more familiar with the virtual reality application. This adaption may occur with only a few seconds of exposure to the application~\citep{Kennedy1985}.\\
 
@@ -155,13 +159,13 @@ As mentioned earlier sensory conflict during a virtual reality session might occ
 not to the vestibular organs (inner ear organs that responds to acceleration). The speed of movement does not seem to contribute to virtual reality sickness in the same scale
 as the vestibular organs do not respond to constant velocity. % Needs some references
 
-\subsubsection{Camera control}
+\subsubsection{Camera Control}
 Some theories indicates that the ability to anticipate and control the motion the user experiences plays a significant role in staving off motion- 
 and virtual reality sickness~\citep{Rolnick1991}. Unexpected movement of the camera should thus be avoided in the virtual reality application. 
 If the camera control is taken away from the user it is considered good practice to cue the impending camera movement to help the user to anticipate and prepare for 
 the visual motion~\citep{Lin2004}.
 
-\subsubsection{Field of view}
+\subsubsection{Field of View}
 The term "field of view" (FOV) can refer both to \textit{display FOV} and \textit{camera FOV}, which are similar, 
 but still distinct concepts that can both have an effect on the user's proneness to virtual reality sickness. 
 
@@ -176,11 +180,11 @@ If the camera FOV is setup wrong, movement of the user head can lead to unnatura
 25° rotation of the camera in the virtual environment). In addition to begin highly discomforting, this can lead to a temporary impairment in the vestibulo-ocular reflex, 
 which is a reflex to stabilize images on the retinas during head movement~\citep{Stanney2002}.
 
-\subsubsection{Focus distance}
+\subsubsection{Focus Distance}
 To avoid discomfort and fatigue it is important to place content the user will be focusing on for extended amounts of time in an optimal range.
 As an example Oculus VR recommends such content to be placed a distance in the range of 0.75 to 3.5 Unity units/meters away from the camera \citep{OCULUS2016}. 
 
-\subsubsection{Latency and lag}
+\subsubsection{Latency and Lag}
 As mentioned earlier in this chapter, latency and lag can have a major impact VR sickness and the usability of the virtual reality application as a whole.
 Although designers and developers have no control over many aspects of a system's performance, it's important to make sure the target virtual reality application
 doesn't drop frames or lag on a minimum technical specifications system~\citep{OCULUS2016}. While some dropped frames or occasional jitter can be a minor annoyance
@@ -189,7 +193,7 @@ in conventional applications or video games, it can have a much more discomforti
 Some research indicates that a fixed, and thus predictable, latency creates about the same degree of VR sickness whether it's as short as 48 milliseconds or as long 
 as 300 milliseconds, and that big and predictable latency or lag are more comfortable for VR users than smaller, but more unpredictable, latency or lag~\citep{Draper2001}. 
 
-\subsubsection{Mouse and keyboard usage}
+\subsubsection{Mouse and Keyboard Usage}
 While a user is wearing a virtual reality headset, interaction with external input devices such as a keyboard, might be inconvenient or difficult. 
 Put simply, this is because the user can't see his or her hands and thus can't get the visual hand positional feedback they could get without the virtual reality HMD. 
 Because of this, many virtual reality applications makes use of a gamepad controller instead. %reference needed
