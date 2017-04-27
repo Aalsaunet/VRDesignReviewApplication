@@ -49,7 +49,7 @@ utilize similar sensor technology as the head mounted devices.
 \subsection{Generating Virtual Reality Images}
 There are a number of steps a virtual reality system has to perform from the moment a user performs an action to the moment that action is reflected visually on the displays.
 The first step of this is head tracking. The HMD sensors and the tracking software have to determine the exact position and orientation of the HMD in the 
-real world. Next, the application has to render the scene in stereo, i.e for both the cameras (as mention is section~\vref{sec:vr_basics}), 
+real world. Next, the application has to render the scene in stereo, i.e for both the cameras (as mentioned in section~\vref{sec:vr_basics}), 
 as it would look from that point of view. As pixel density usually is low for HMDs with a wide field of view (more on that later), this step should usually 
 also include anti-aliasing to avoid jagged edges and pixelation, and to ensure "smoother" images. When the application has rendered the frames/images (one per eye)
 the frames need to be transfered to the HMD's displays by the graphics hardware. This is usually referred to as a scan-out and involves reading sequentially through the 
@@ -71,6 +71,7 @@ Before this we will discuss what generally makes virtual reality applications mo
 
 
 \subsection{Latency Requirements}
+\label{sec:latency_requirements}
 Virtual reality headsets have a much stricter requirements for latency, i.e the time required for an input to have a visible effect, 
 than with use of regular displays~\citep{ROADTOVR2013}. If this demand isn't met the system might often feel "sluggish" and the user will usually be more susceptible to
 virtual reality sickness. %Latency plays a big role in the time required from a sensor registers a movement to that movement being reflected visually to the user.
@@ -122,7 +123,8 @@ still considered better than the negative effects (such as latency) a low frame 
 Virtual reality headsets also have strict demands in respect to display resolution and quality. As the eyes of the user is closer
 to the displays than with a regular monitor, and the displays have to "wrap around" the user's whole field of view, flaws and shortcomings in the display technology 
 become more apparent. 
-One such example is the \textit{screen-door effect (SDE)}, which is when the lines separating the display pixel or subpixels are visible in the displayed image~\citep{TC2016}. 
+One such example is the \textit{screen-door effect (SDE)} (see figure~\vref{fig:the_screen_door_effect}), 
+which is when the lines separating the display pixel or subpixels are visible in the displayed image~\citep{TC2016}. 
 To illustrate this issue \citet{TC2016} had the following remark about the Oculus Rift DK1 (released in 2013 with a resolution of 640×800 per eye):
 "Its low resolution screen (combined with magnification lenses that helped wrap the image around your view) made even the most beautifully rendered 3D environment look dated. 
 It was like you were sitting too close to an old TV, or staring at the display through a screen door (aptly, this shortcoming quickly came to be known as “the screen door effect”)"
@@ -153,60 +155,77 @@ the same performance benefit as they would when applied to non-VR applications.
 
 Because of the latest virtual reality headset's high resolution and wide field of view (usually about 110 degrees), 
 more of the virtual environment is shown to the user in a frame than is usual in non-VR applications~\citep{Ohannessian2016}. 
-This greatly affects several \textit{culling} techniques, such as \textit{frustum culling} and \textit{occlusion culling}), 
+This greatly affects several \textit{culling} techniques, such as 
+\textit{frustum culling}\footnote{Frustum culling is concerned with only rendering objects that is within the field of view (the frustum pyramid) of the user.} and 
+\textit{occlusion culling}\footnote{Occlusion culling consists of filtering out the objects that are entirely hidden behind other opaque objects~\citep{PerezFernandez2015}.}, 
 which are commonly used 3D rendering techniques for removing objects that don't contribute to the final image from the rendering pipeline~\citep{Johnson2013}.
-Simply put, the rendering engine tries to only render what's actually visible to the user, while other objects are ignored by the rendering engine to diminish the workload. 
-Frustum culling is concerned with only rendering objects that is within the field of view (the frustum pyramid) of user, while 
-occlusion culling consists of filtering out the objects that are entirely hidden behind other opaque objects~\citep{PerezFernandez2015}. 
-As, on average, more objects are visible to a user wearing a HMD than a user using a regular display more object have to be rendered, which implies a more work for the rendering
+Simply put, the rendering engine tries to only render what's actually visible to the user, while other objects are ignored to diminish the workload. 
+As, on average, more objects are visible to a user wearing a HMD than a user using a regular display more object have to be rendered, which implies more work for the rendering
 engine~\citep{Ohannessian2016}. 
 
 Another commonly employed technique in game development is using flat 2D images for certain parts of the virtual environment instead of 3D objects~\citep{Ohannessian2016}.
-Simple examples of this are e.g.~present in game "Super Mario 64", released for the Nintendo 64 in 1996, and one of the first commercially successful video games to utilize 3D.
+Examples of this are e.g.~present in game "Super Mario 64", released for the Nintendo 64 in 1996, and one of the first commercially successful video games to utilize 3D.
 In this game one can often spot objects, such as balls, trees and fences, that tries to appear as 3D objects, but in reality are 2D images that are rotated to always face the camera. 
 Similar techniques, although usually more subtly applied, are still commonly used today, but not for virtual reality applications.
 This is simply because the "2D deception" becomes much more obvious with the depth perception the stereo cameras enable~\citep{Ohannessian2016}. 
 
 
-\section{Virtual Reality Sickness}
+\section{Virtual Reality- and Simulator Sickness}
 \label{sec:vr_sickness}
 % Carsten: This is a very interesting survey of the state of knowledge in motion sickness. 
 % Still, it should be motivated as well as concluded with some sentences that tell why this is an issue for your design, 
 % and how the knowledge influences your design decisions. This discussion should be related to thesis goals that are already mentioned in section 1.3
 
-Virtual reality sickness, a condition similar to \textit{simulator sickness}, 
-can be a consequence of using virtual reality technology, and is considered a major barrier to 
-using virtual reality. Like simulator sickness, virtual reality sickness causes symptoms that are similar to those of motion sickness, and can include symptoms like 
-headache, stomach awareness, nausea, vomiting, pallor, sweating, fatigue, drowsiness and disorientation~\citep{Kolasinski1995}. 
-To ensure an optimal virtual reality experience when using the design review application, the design and implementation should address these issues.
-The following subsection will thus review what's known about virtual reality sickness and what can be done from a design and 
-implementation standpoint.
+Virtual reality sickness, also referred to as \textit{cybersickness}, can occur with exposure to virtual environment when using virtual reality technology, 
+and causes symptoms that are similar to those of motion sickness~\citep{Jr2000}. This condition also has many similarities with \textit{simulator sickness}, which
+typically is experienced by pilots undergoing training in flight simulators, but as explained by~\citet{Stanney1997} these two conditions are different.
+Simulator sickness, not using virtual reality, tends to be characterized by \textit{oculomotor disturbances}, whereas virtual reality sickness, using virtual reality,
+tends to be characterized by disorientation~\citep{Stanney1997}. 
+Symptoms that can occur due to virtual reality sickness include headache, eye strain, nausea, sweating, disorientation (e.g~through Vertigo
+\footnote{A state where the user's surroundings appear to swirl dizzily~\citep{Jr2000}}) and temporary loss of muscle coordinates (e.g~through Ataxia
+\footnote{A lack of voluntary muscle coordination})~\citep{Jr2000}.
 
-Contrary to "regular" motion sickness, where the user visually perceived to be still while in actual motion, 
-virtual reality sickness turns this around: The user visually perceive to be in motion which he or she is still. 
-Virtual reality sickness can thus in many ways be considered as "a reverse motion sickness". Both these condition can thus be caused by
-sensory conflict, i.e that there exist a discrepancy between the information given by the senses ("the human sensors").
-The susceptibility for this condition vary widely among users. Some user might experience it shortly after putting on the headset, 
+Contrary to motion sickness, where the user visually perceived to be still while in actual motion, 
+virtual reality sickness often turns this around: The user visually perceive to be in motion while he or she in reality is stationary. 
+Virtual reality sickness can thus in many ways be considered as "a reverse motion sickness". There are several theories on why virtual reality sickness 
+occurs, with three of the more popular being the \textit{sensory conflict theory}, \textit{the poison theory} and the \textit{postural instability theory}~\citep{Jr2000}.
+
+The sensory conflict theory is the oldest and most supported of the three, and thus the one we will focus on, 
+and claims that virtual reality sickness is caused by the conflict or discrepancies between the senses that provide information about the body's orientation, motion and acceleration. 
+In a virtual reality setting this typically means that the visual sense perceive the body being in movement, while the \textit{vestibular sense}
+\footnote{a sensory system that partially provides the sense of balance and spatial orientation.} perceive that the body is stationary, thus causing a sensory conflict~\citep{Jr2000}.
+
+% Muligens ha et avsnitt on the poison theory og postural instability theory?
+
+The susceptibility for virtual reality sickness vary widely among users. Some users might experience it shortly after putting on the headset, 
 while others may never experience it~\citep{Stanney2003}.
-The causes for virtual reality sickness can vary and while some are less under the VR application designer's control than others, 
+The causes for virtual reality sickness can vary, and while some are less under the VR application designer's control than others, 
 they should still be understood by the VR designer~\citep{Stanney2003}. 
+To ensure an optimal virtual reality experience when using the design review application, outlined in section~\vref{sec:initial_design}, 
+the design and implementation should address these potential consequences. 
+The following subsections will thus review what's known about virtual reality sickness and what can be done from a design and implementation standpoint.
 The following two subsections will review factors that contribute to virtual reality sickness, and make a distinction by
-what are mostly determined by individual differences and whats mostly determined by the application design. 
+what are mostly determined by individual differences and whats mostly determined by the virtual reality hardware and application design. 
 
 \subsection{Individual Differences in Susceptibility}
 Research has identified some individual differences that correlate with the individual's susceptibility for experiencing virtual reality sickness. 
 One observation is that the susceptibility for virtual reality sickness correlates heavily with motion sickness susceptibility, and 
 factors that influence motion sickness susceptibility also usually influence virtual reality sickness susceptibility~\citep{Stanney2003}.
-Below are some theories of the major contributing factors that are based on individual differences, and which are difficult to account for during the design of a virtual reality application.
+Below are some theories of the major contributing factors that are based on individual differences, 
+and which are difficult to account for during the design of a virtual reality application. 
+Note that some of these finding were originally for simulator sickness, but have proven to hold for virtual reality sickness as well.
 
 \subsubsection{Age}
-Research suggest that users between the ages of 2 and 12 are the most susceptible to virtual reality sickness~\citep{Kolasinski1995}. The susceptibility then decreases
-rapidly until an age of about 21, before it start decreasing more slowly until and age of 50, where the susceptibility increases again~\citep{Brooks2010}.
+Research suggest that users between the ages of 2 and 12 are the most susceptible to virtual reality sickness, with a rapid decrease in susceptibility 
+until an age of about 21~\citep{Kolasinski1995}. With regards to older users (e.g~ 50 years of age) the research findings seems to differ for virtual reality sickness
+and simulator sickness. \citet{Brooks2010} reported that older participants had a greater likelihood of simulator sickness than younger participants, while
+\citet{Jr2000} writes about how virtual reality sickness is almost nonexistent in participants of 50 years of age. 
 
 \subsubsection{Gender}
-Women have proven more susceptible to virtual reality sickness than men~\citep{Kennedy1985}. The most common theories to explain this difference point out the genders' differences
+Women have proven more susceptible to simulator- and virtual reality sickness than men~\citep{Kennedy1985}. 
+The most common theories to explain this difference point out the genders' differences
 in hormonal composition, field of view (some research suggest that women has a wider field of view than men) and differences in depth cue recognition~\citep{Biomed2012}. 
-Women are most susceptible to virtual reality sickness during ovulation~\citep{Clemes2005}.
+Women are also most susceptible to virtual reality sickness during ovulation~\citep{Clemes2005}.
 
 \subsubsection{Ethnicity}
 Some ethnicities seem to be more susceptible to virtual reality sickness than others, suggesting a genetic component. 
@@ -226,11 +245,19 @@ stronger symptoms of nausea and disorientation~\citep{Kolasinski1995}.
 More exposure to virtual environments can train the brain to be less sensitive to their effects~\citep{Stanney2003}. Users tend to become less likely to experience
 virtual reality sickness as they become more familiar with the virtual reality application. This adaption may occur with only a few seconds of exposure to the application~\citep{Kennedy1985}.\\
 
-
 In addition to this, people with a low threshold for detecting flicker and low mental rotation ability are more susceptible to virtual reality sickness~\cite{Kolasinski1995}.
 
-\subsection{Virtual reality design factors}
-This section identifies some of the most common contributers to virtual reality sickness that can be lessened or mitigated completely by the VR application design.
+\subsection{Virtual Reality Hardware and Design Factors}
+This section identifies some of the most common contributers to virtual reality sickness, which can be diminished or mitigated completely by either the virtual reality hardware
+or the virtual reality application design and implementation. 
+
+\subsubsection{Flicker}
+Flicker is a contributing factor to virtual reality sickness, in addition to also being distracting for the user and a cause of eye fatigue~\citep{Jr2000}.
+There are two specially interesting observation done about flickering in research: First, the degree of perceived flicker is subjective as 
+individuals have different \textit{flicker fusion frequency thresholds}, i.e points at which flicker becomes visually perceivable~\citep{Pausch1992}.
+Second, the likelihood that flickers are perceived increases as the field of view increases, as the peripheral visual system is more sensitive to flicker than 
+the fovea vision system (i.e the sharp vision around the area the user focuses). This is again an important argument for the importance of a high enough
+refresh rate in virtual reality displays (discussed in section~\vref{sec:latency_requirements}). 
 
 \subsubsection{Acceleration}
 As mentioned earlier sensory conflict during a virtual reality session might occur. This is especially noticeable during acceleration that is conveyed visually, but 
@@ -238,12 +265,14 @@ not to the vestibular organs (inner ear organs that responds to acceleration). T
 as the vestibular organs do not respond to constant velocity. % Needs some references
 
 \subsubsection{Camera Control}
+\label{sec:camera_control}
 Some theories indicates that the ability to anticipate and control the motion the user experiences plays a significant role in staving off motion- 
 and virtual reality sickness~\citep{Rolnick1991}. Unexpected movement of the camera should thus be avoided in the virtual reality application. 
 If the camera control is taken away from the user it is considered good practice to cue the impending camera movement to help the user to anticipate and prepare for 
 the visual motion~\citep{Lin2004}.
 
 \subsubsection{Field of View}
+\label{sec:fov}
 The term "field of view" (FOV) can refer both to \textit{display FOV} and \textit{camera FOV}, which are similar, 
 but still distinct concepts that can both have an effect on the user's proneness to virtual reality sickness. 
 
@@ -258,12 +287,8 @@ If the camera FOV is setup wrong, movement of the user head can lead to unnatura
 25° rotation of the camera in the virtual environment). In addition to begin highly discomforting, this can lead to a temporary impairment in the vestibulo-ocular reflex, 
 which is a reflex to stabilize images on the retinas during head movement~\citep{Stanney2002}.
 
-\subsubsection{Focus Distance}
-To avoid discomfort and fatigue it is important to place content the user will be focusing on for extended amounts of time in an optimal range.
-As an example Oculus VR recommends such content to be placed a distance in the range of 0.75 to 3.5 Unity units/meters away from the camera \citep{OCULUS2016}. 
-
 \subsubsection{Latency and Lag}
-As mentioned earlier in this chapter, latency and lag can have a major impact VR sickness and the usability of the virtual reality application as a whole.
+As mentioned earlier in this chapter, latency and lag can have a major impact on virtual reality sickness and the usability of the virtual reality application as a whole.
 Although designers and developers have no control over many aspects of a system's performance, it's important to make sure the target virtual reality application
 doesn't drop frames or lag on a minimum technical specifications system~\citep{OCULUS2016}. While some dropped frames or occasional jitter can be a minor annoyance
 in conventional applications or video games, it can have a much more discomforting effect on the user of a virtual reality application. 
@@ -271,19 +296,57 @@ in conventional applications or video games, it can have a much more discomforti
 Some research indicates that a fixed, and thus predictable, latency creates about the same degree of VR sickness whether it's as short as 48 milliseconds or as long 
 as 300 milliseconds, and that big and predictable latency or lag are more comfortable for VR users than smaller, but more unpredictable, latency or lag~\citep{Draper2001}. 
 
-\subsubsection{Mouse and Keyboard Usage}
-While a user is wearing a virtual reality headset, interaction with external input devices such as a keyboard, might be inconvenient or difficult. 
-Put simply, this is because the user can't see his or her hands and thus can't get the visual hand positional feedback they could get without the virtual reality HMD. 
-Because of this, many virtual reality applications makes use of a gamepad controller instead. %reference needed
+\subsubsection{Focus Distance}
+\label{sec:focus_distance}
+Although not directly related to virtual reality sickness, it is still important to avoid discomfort and fatigue for the user by placing content s/he will be focusing on 
+for extended amounts of time in an optimal range.
+As an example Oculus VR recommends such content to be placed a distance in the range of 0.75 to 3.5 Unity units/meters away from the camera \citep{OCULUS2016}. 
+
+% \subsubsection{Mouse and Keyboard Usage}
+% While a user is wearing a virtual reality headset, interaction with external input devices such as a keyboard, might be inconvenient or difficult. 
+% Put simply, this is because the user can't see his or her hands and thus can't get the visual hand positional feedback they could get without the virtual reality HMD. 
+% Because of this, many virtual reality applications makes use of a gamepad controller instead. %reference needed
+
 
 %\subsubsection{Distortion Correction}
-
-%\subsubsection{Flicker}
-
 %\subsubsection{Independent Visual Backgrounds}
-
 %\section{Ways to combat virtual reality Sickness}
 
 \section{Considerations for the Design Review Application}
-Throughout this chapter we have reviewed various aspects related to virtual reality. 
+Throughout this chapter we have reviewed various aspects related to virtual reality, its performance demands and some potential contributers to virtual reality sickness. 
+For the design- and implementation phase of our design review application, there are some aspect to be more concerned with than others. As will be discussed in chapter~\ref{chapter:design}, 
+\ref{chapter:technical} and \ref{chapter:implementation}, some of these potential issues, like incorrect field of view settings, are usually taken care of by the 
+virtual reality headset's runtime environment, libraries or by other frameworks, and thus usually work correctly "out of the box". 
+Other potential issues - like latency, lag and flicker - are usually avoided simply by utilizing sufficiently powerful hardware, with perhaps the HMD, CPU and GPU 
+being the most important. An exception from this is with extremely performance demanding applications, in which case software optimization should be considered.
+Of topics that can be addressed at design- and implementation time acceleration, camera control and focus distance are included.  
 
+As the initial design ideas of the design review application revolves around the user virtually moving around a 3D model, while in actuality being stationary at his or her
+desk, some degree of sensory conflict is inevitable. There are however measures we can take to lessen the impact of such a sensation and combat virtual reality sickness.
+With regard to acceleration we can ensure that the acceleration always feels gradual instead of going from 0 m/s (meter per second) to e.g.~20 m/s in just a couple of frames 
+(of which there should be about 90 per second). This gradual and slower increase in speed should not trigger the vestibular organs to the same extent as higher acceleration.
+As gestures are more continuous in nature than buttons, which usually are discrete (either a button is pressed or not), they might be a natural fit for such a gradual acceleration. 
+If acceleration is still too much of an issue, one can also limit the user peripheral vision and field of view by "framing" the frames
+and thus not have any movement appearing in the user's outer peripheral vision (see section~\vref{sec:fov} for a quick discussion of this phenomenon).
+For the user this might seem like looking like unmagnified binoculars with the edges of his or her peripheral vision being obscured.  
+
+To combat virtual reality sickness we can also ensure that the user always has direct control of the camera. 
+This is perhaps easier to ensure in our application, were there are few reasons to take the camera control away from the user, 
+compared to e.g a game (which usually are much more event-driven). It does however become relevant and non-intuitive in certain scenarios.  
+One such scenario, which is discussed in chapter~\ref{chapter:design} and \ref{chapter:implementation}, is the annotation form, which is an input schema the user can fill in
+when editing an annotation. 
+
+In a non-VR application this could typically be handled by showing the form as an overlay, temporary covering the model, while disabling any camera movement as long as the
+form was open. Although this might also seem like an intuitive thing to do in a virtual reality application, it does take camera control away from the user, which - as described in
+section~\vref{sec:camera_control} - should be avoided. Because of this,
+the user should still be able to control the camera while the annotation form is open by, and thus be able to "look away" from the form. 
+
+There is also another consideration to take with regards to the annotation form, which is the focus distance (covered in section~\vref{sec:focus_distance}). 
+Should the annotation form be an overlay (i.e be drawn directly on the screen space), as would be intuitive in a non-VR application, 
+it would be too low a focus distance. This would be analogous to holding a sheet of paper directly in front
+of the user eyes and asking them to read it. The annotation form should thus be at a comfortable focus distance from the user, i.e 0.75 to 3.5 Unity units/meters away 
+from the camera, and thus present in the world space instead of screen space, which is reviewed more in section~\vref{sec:world_space_canvas}. 
+
+There are thus several potential issues to be mindful of when developing a virtual reality application. Just as this chapter 
+has covered the landscape of virtual reality, the next chapter will cover the landscape of gesture recognition technology, a technology which can extend the possibilities
+of virtual reality and for our virtual reality design review application.
