@@ -1,9 +1,11 @@
-This chapter will review what the virtual reality is, how it is enabled through the use of virtual reality headsets and 
-outline how virtual reality images are generated. After this, we will discuss some of the performance demands of virtual reality headset 
+This chapter will review what virtual reality is, how it is enabled through the use of virtual reality headsets and 
+outline how virtual reality images are generated. After this, we will discuss some of the performance demands of virtual reality headsets 
 and important considerations when designing and implementing virtual reality applications. 
 We will also review the conditions \textit{simulator sickness} and \textit{virtual reality sickness}, which can be consequences of not adhering 
 to the outlined considerations, and review ways to prevent this. More specifically we will discuss which factors that can be addressed in a virtual reality application's design and 
 implementation phases, and which factors that are mostly due to individual differences and thus more outside the developers control. 
+The lessons learned in this chapter will help guide the design and implementation consideration of the virtual reality design review application, which 
+are discussed in chapter~\ref{chapter:design} and chapter~\ref{chapter:implementation}.
 
 
 \section{The Basics of a Virtual Reality System}
@@ -45,7 +47,7 @@ utilize similar sensor technology as the head mounted devices.
 % Table med specs?
 
 \subsection{Generating Virtual Reality Images}
-There are a number of steps a virtual reality system has to perform from the moment a user moves to that movement being reflected visually on the displays.
+There are a number of steps a virtual reality system has to perform from the moment a user performs an action to the moment that action is reflected visually on the displays.
 The first step of this is head tracking. The HMD sensors and the tracking software have to determine the exact position and orientation of the HMD in the 
 real world. Next, the application has to render the scene in stereo, i.e for both the cameras (as mention is section~\vref{sec:vr_basics}), 
 as it would look from that point of view. As pixel density usually is low for HMDs with a wide field of view (more on that later), this step should usually 
@@ -63,15 +65,15 @@ As a consequence of this, the user's brain tend to perceive VR-applications diff
 One example of such an anomaly includes displacements of objects when the user's head rotates (i.e the objects are in the wrong position 
 relative to the user's head)~\citep{Abrash2012}. 
 Failing to meet the performance demands outlined below can quickly result in significant discomfort for the user and give symptoms like 
-headache, nausea or disorientation. Many of these symptoms also make up the conditions \textit{simulator sickness} and \textit{virtual reality sickness},
+headache, nausea or disorientation. Many of these symptoms are also common in the closely related conditions \textit{simulator sickness} and \textit{virtual reality sickness},
 which will be reviewed in section~\vref{sec:vr_sickness}.  
-Before this we will discuss what generally makes virtual reality application more demanding the non-VR applications.
+Before this we will discuss what generally makes virtual reality applications more demanding in terms of execution, design and implementation than non-VR applications.
 
 
 \subsection{Latency Requirements}
 Virtual reality headsets have a much stricter requirements for latency, i.e the time required for an input to have a visible effect, 
-than with use of regular displays~\citep{ROADTOVR2013}. If this demand isn't met the system might quickly feel "sluggish" and the user will usually be more susceptible to
-virtual reality sickness. Latency plays a big role in the time required from a sensor registers a movement to that movement being reflected visually to the user.
+than with use of regular displays~\citep{ROADTOVR2013}. If this demand isn't met the system might often feel "sluggish" and the user will usually be more susceptible to
+virtual reality sickness. %Latency plays a big role in the time required from a sensor registers a movement to that movement being reflected visually to the user.
 If e.g.~too much time elapses between the time the user starts to turn his or her head, and the time 
 the image is redrawn to account for the new head orientation, the visual image will feel disjoint for the user's action~\citep{Abrash2012}.
 
@@ -82,13 +84,14 @@ According to~\citet{Abrash2012} more than 20 milliseconds (ms) of latency is too
 and a latency of 15 ms should be the absolute maximum.
 
 One important component of latency is the \textit{refresh rates} of the displays, i.e 
-how often the display hardware updates its buffers and thus "draws" a new image on the displays. As an example both the Oculus Rift CV1 and the HTC Vive
-has a refresh rate of 90 Hz (i.e the display updates 90 times per second), as opposed to the 60 Hz which is more common in commodity displays.
+how often the display hardware updates its buffers and thus "draws" a new image on the displays. Both the Oculus Rift CV1 and the HTC Vive
+has a refresh rate of 90 Hz (i.e the display updates 90 times per second) for this reason, as opposed to the 60 Hz which is more common in commodity displays.
 In addition to refresh rate, the \textit{frame rate}, i.e how often the graphics processing unit (GPU) renders new frames/images, is also important. To ensure 
 that the displays don't "redraw" an identical frame on a buffer update the frame rate should thus ideally be the same or higher than the refresh 
 rate (e.g 90 frames per second for the Oculus Rift CV1 or HTC Vive). Frame rate also determines the rendering latency, i.e the time is takes before 
-an updated image, reflecting the user's latest actions, is produced. With 60 frames per second the rendering latency is about 16.7 ms~\citep{Abrash2012}. 
-Refresh rate and frame rate are thus highly codependent, where performance is only as good as the weaker of the two. 
+an updated image, reflecting the user's latest actions, is produced. With 60 frames per second the rendering latency is on avaerage about 16.7 ms, while at 90 fps it is 
+11 ms on average, and thus under the 15 ms maximum threshold (not accounting for other phases). %~\citep{Abrash2012}. 
+Refresh rate and frame rate are thus highly codependent, where latency is only as low as the weaker of the two allow. 
 The target computer should thus have a CPU and GPU strong enough to meet a frame rate equal or above to the HMD's refresh rate. 
 
 \subsubsection{Asynchronous Reprojection}
@@ -97,20 +100,37 @@ To reduce the perceived latency, or to compensate for a frame rate that is too l
 in situations where the software (e.g a game) can't maintained the required frame rate (which is typically 90 fps with 90 Hz). In simple terms asynchronous reprojection 
 produces "in-between frames", which is a manipulated version of an older rendered frame. This is done my morphing the frame according to the most recent head tracking data just 
 before the frame is presented on the displays~\citep{GD2016}. By doing this, software that runs at e.g 45 FPS (frames per seconds) natively can be transformed into 90 FPS by 
-applying asynchronous reprojection to each rendered frame. Every other frame is thus actually a manipulated version of the former frame. 
+applying asynchronous reprojection to each rendered frame. Every other frame is thus actually a manipulated version of the former frame. It should be noted that frames produced by
+asynchronous reprojection should only be regarded as "pseudo-frames" that compensation for lacking system performance in a rather performance-cost efficient manner, thereby
+giving lower-end system (such as Sony's Playstation 4) access to VR. Also note that these pseudo-frames, produced by asynchronous reprojection, are still 
+more susceptible to unfortunate side effects, such as \textit{positional judder}, than application rendered frames (the "real frames"). Positional judder is
+one of the most obvious visual artifacts using this approach and can make objects near the user seem "blurry" or unfocused (see figure~\vref{fig:positional_judder})
+~\citep{Antonov2015}. Asynchronous reprojection should thus only be regarded as a technique to compensate for a lacking frame rate, as its side effects are 
+still considered better than the negative effects (such as latency) a low frame rate has for the virtual reality experience~\citep{OCULUS2016}. 
+
+\begin{figure}%[h!] %[H]
+	\label{fig:positional_judder}
+	\includegraphics[width=\linewidth]{pictures/positional_judder.jpg}
+	\caption[Positional judder can make objects near the user seem "blurry" or unfocused]
+	{Positional judder can make objects near the user seem "blurry" or unfocused. In the image the objects near the user are more blurry than 
+	than those that are farther away. This is because these object "move" more, relative to the user, from frame to frame as the user's head moves. 
+	Picture from~\citet{Antonov2015}}
+\end{figure} 
+
 
 \subsection{Display Resolution and Pixel Density}
 Virtual reality headsets also have strict demands in respect to display resolution and quality. As the eyes of the user is closer
 to the displays than with a regular monitor, and the displays have to "wrap around" the user's whole field of view, flaws and shortcomings in the display technology 
 become more apparent. 
-One such example is \textit{the screen-door effect (SDE)}, which is when the lines separating the display pixel or subpixels are visible in the displayed image~\citep{TC2016}. 
+One such example is the \textit{screen-door effect (SDE)}, which is when the lines separating the display pixel or subpixels are visible in the displayed image~\citep{TC2016}. 
 To illustrate this issue \citet{TC2016} had the following remark about the Oculus Rift DK1 (released in 2013 with a resolution of 640×800 per eye):
 "Its low resolution screen (combined with magnification lenses that helped wrap the image around your view) made even the most beautifully rendered 3D environment look dated. 
 It was like you were sitting too close to an old TV, or staring at the display through a screen door (aptly, this shortcoming quickly came to be known as “the screen door effect”)"
 With the release of commercial and more high-end virtual reality headset, the screen-door effect have become less apparent.
-On the time of writing, two of the most sold virtual reality headsets, the Oculus Rift CV1 and the HTC Vive, both have a resolution of 1200 × 1080 per eye (combined 
+On the time of writing, two of the most sold virtual reality headsets, the Oculus Rift CV1 and the HTC Vive, both have a resolution of 1200 × 1080 per eye (a combined 
 resolution of 2160 × 1200) with a pixel density of about 2450 ppi (pixel per inch), which is about ten times denser than the DK1's 215 ppi. 
-With the improved pixel density, combined with the use of Fresnel lenses to create optical diffusion, the screen-door effect is severely minimized~\citep{Davies2016}. 
+With the improved pixel density, combined with the use of Fresnel lenses to create optical diffusion (i.e spreading out light to make it "softer"), 
+the screen-door effect is severely minimized in the latest high-end virtual reality headsets~\citep{Davies2016}. 
 
 \begin{figure}%[h!] %[H]
 	\includegraphics[width=\linewidth]{pictures/the_screen_door_effect.jpg}
@@ -118,9 +138,9 @@ With the improved pixel density, combined with the use of Fresnel lenses to crea
 	\label{fig:the_screen_door_effect}
 \end{figure} 
 
-Just as having low latency, and thus a high amount of frames rendered per second, demand much from the computer, so does the high resolution.
-As each lens has a resolution similar to a commodity desktop computer (1200 x 1080), the application must effectively render twice as many frames
-as it would when only using a regular display with the same frame- and refresh rate. With the 90 Hz refresh rate of the Rift and Vive, this effectively means
+Just as having low latency, and thus a high amount of frames rendered per second, demands much from the computer, so does the high resolution.
+As each lens has a resolution similar to a commodity computer display (1200 x 1080), the application must effectively render twice as many frames
+as it would when only using such a display with the same frame- and refresh rate. With the 90 Hz refresh rate of the Rift and Vive, this effectively means
 that 180 frames with a 1200 x 1080 resolution should ideally be produced per second.  
 
 \subsection{Rendering Techniques}
@@ -133,18 +153,19 @@ the same performance benefit as they would when applied to non-VR applications.
 
 Because of the latest virtual reality headset's high resolution and wide field of view (usually about 110 degrees), 
 more of the virtual environment is shown to the user in a frame than is usual in non-VR applications~\citep{Ohannessian2016}. 
-This greatly affects several \textit{culling}, which in 3D rendering is the process of removing objects that don't contribute to the 
-image from the rendering pipeline~\citep{Johnson2013}.
-Simply put, the rendering engine tries to only render what's actually visible to the user, while other objects are ignored by the rendering engine. 
+This greatly affects several \textit{culling} techniques, such as \textit{frustum culling} and \textit{occlusion culling}), 
+which are commonly used 3D rendering techniques for removing objects that don't contribute to the final image from the rendering pipeline~\citep{Johnson2013}.
+Simply put, the rendering engine tries to only render what's actually visible to the user, while other objects are ignored by the rendering engine to diminish the workload. 
+Frustum culling is concerned with only rendering objects that is within the field of view (the frustum pyramid) of user, while 
+occlusion culling consists of filtering out the objects that are entirely hidden behind other opaque objects~\citep{PerezFernandez2015}. 
 As, on average, more objects are visible to a user wearing a HMD than a user using a regular display more object have to be rendered, which implies a more work for the rendering
 engine~\citep{Ohannessian2016}. 
 
 Another commonly employed technique in game development is using flat 2D images for certain parts of the virtual environment instead of 3D objects~\citep{Ohannessian2016}.
-A simple example of this is present in game "Super Mario 64", released for the Nintendo 64 in 1996, and one of the first commercially successful video games to utilize 3D.
-In this game one can often spot objects that tries to appear as 3D objects, but in reality are 2D images that are rotated to always face the camera. 
+Simple examples of this are e.g.~present in game "Super Mario 64", released for the Nintendo 64 in 1996, and one of the first commercially successful video games to utilize 3D.
+In this game one can often spot objects, such as balls, trees and fences, that tries to appear as 3D objects, but in reality are 2D images that are rotated to always face the camera. 
 Similar techniques, although usually more subtly applied, are still commonly used today, but not for virtual reality applications.
 This is simply because the "2D deception" becomes much more obvious with the depth perception the stereo cameras enable~\citep{Ohannessian2016}. 
-
 
 
 \section{Virtual Reality Sickness}
@@ -263,4 +284,6 @@ Because of this, many virtual reality applications makes use of a gamepad contro
 
 %\section{Ways to combat virtual reality Sickness}
 
+\section{Considerations for the Design Review Application}
+Throughout this chapter we have reviewed various aspects related to virtual reality. 
 

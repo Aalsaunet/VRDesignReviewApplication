@@ -124,7 +124,8 @@ or outdated versions of the model once it is submitted for a design review. This
 a new "version" of the model for each "save".
 The application could treat the storage of annotations as a revision control/version control system (VCS) would: The model itself could be the 
 base (like a "first commit") and each time an annotation were added, edited and remove a "commit"" would happen were the "diff" (i.e the difference between the previous commit 
-and this commit) would be stored. This would also allow for an annotation log, similar to a commit log in a VCSs. 
+and this commit) would be stored. This would also allow for an annotation log, similar to a commit log in a VCSs, where "HEAD" (i.e the latest commit) would be the sum of the 
+first commit and all following commits. 
 If a session with a previous history were opened the application could thus load in all annotations by sequentially iterating through
 this annotation history (the "annotation commit log") and applying the diffs.
 
