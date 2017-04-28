@@ -229,9 +229,16 @@ Women are also most susceptible to virtual reality sickness during ovulation~\ci
 
 \subsubsection{Ethnicity}
 Some ethnicities seem to be more susceptible to virtual reality sickness than others, suggesting a genetic component. 
-Several studies indicate that asians tends to be more susceptible to visually-induced motion sickness,
-with the Chinese being more susceptible that European-Americans and African-Americans on measures to motion sickness induced by a circular vection drum, and with
-Tibetans and Northeast Indians having greater susceptibility than Caucasian races~\citep{Barrett2004}.
+Several studies indicate that asian people on average tend to be more susceptible to visually-induced motion sickness than people from other regions.
+One study reported on Chinese people being more susceptible that European-Americans and African-Americans on measures to motion sickness induced by a 
+circular vection\footnote{Vection is the phenomenon that a stationary user can feel like s/he is moving when a large part of his or her visual field moves.} 
+drum\footnote{Circular vection drum is a large vertically-oriented rotating drum surrounding the user to induce vection.}, 
+while another study claims that Tibetans and Northeast Indians have a greater susceptibility to induced motion sickness than Caucasian races~\citep{Barrett2004}.
+
+% Some ethnicities seem to be more susceptible to virtual reality sickness than others, suggesting a genetic component. 
+% Several studies indicate that asian people tends to be more susceptible to visually-induced motion sickness,
+% with the Chinese being more susceptible that European-Americans and African-Americans on measures to motion sickness induced by a circular vection drum, and with
+% Tibetans and Northeast Indians having greater susceptibility than Caucasian races~\citep{Barrett2004}.
 
 \subsubsection{Health}
 Symptoms of virtual reality sickness are more prevalent in people who are fatigued, sleep deprived, are nauseated or have an upper respiratory illness, 
@@ -243,7 +250,8 @@ stronger symptoms of nausea and disorientation~\citep{Kolasinski1995}.
 
 \subsubsection{Experience with the Application}
 More exposure to virtual environments can train the brain to be less sensitive to their effects~\citep{Stanney2003}. Users tend to become less likely to experience
-virtual reality sickness as they become more familiar with the virtual reality application. This adaption may occur with only a few seconds of exposure to the application~\citep{Kennedy1985}.\\
+virtual reality sickness as they become more familiar with the virtual reality application. 
+This adaption may occur with only a few seconds of exposure to the application~\citep{Kennedy1985}.\\
 
 In addition to this, people with a low threshold for detecting flicker and low mental rotation ability are more susceptible to virtual reality sickness~\cite{Kolasinski1995}.
 
@@ -256,7 +264,7 @@ Flicker is a contributing factor to virtual reality sickness, in addition to als
 There are two specially interesting observation done about flickering in research: First, the degree of perceived flicker is subjective as 
 individuals have different \textit{flicker fusion frequency thresholds}, i.e points at which flicker becomes visually perceivable~\citep{Pausch1992}.
 Second, the likelihood that flickers are perceived increases as the field of view increases, as the peripheral visual system is more sensitive to flicker than 
-the fovea vision system (i.e the sharp vision around the area the user focuses). This is again an important argument for the importance of a high enough
+the fovea vision system\footnote{The sharp vision around the area the user focuses.}. This is again an important argument for the importance of a high enough
 refresh rate in virtual reality displays (discussed in section~\vref{sec:latency_requirements}). 
 
 \subsubsection{Acceleration}
@@ -283,9 +291,9 @@ Reducing display FOV can reduce the changes of VR sickness \citep{Draper2001}, b
 than with a higher display FOV.
 
 Camera FOV refers the area of the virtual environment that the graphics engine draws to the display.
-If the camera FOV is setup wrong, movement of the user head can lead to unnatural movement in the virtual environment (e.g a 15° rotation of the head can lead to a 
-25° rotation of the camera in the virtual environment). In addition to begin highly discomforting, this can lead to a temporary impairment in the vestibulo-ocular reflex, 
-which is a reflex to stabilize images on the retinas during head movement~\citep{Stanney2002}.
+If the camera FOV is setup wrong, movement of the user head can lead to unnatural movement in the virtual environment (e.g a 15 degree rotation of the head can lead to a 
+25 degree rotation of the camera in the virtual environment). In addition to being highly discomforting, this can lead to a temporary impairment in the vestibulo-ocular reflex, 
+which is a reflex to stabilize images on the retinas during head movement (enabling people to e.g~read while moving their heads)~\citep{Stanney2002}.
 
 \subsubsection{Latency and Lag}
 As mentioned earlier in this chapter, latency and lag can have a major impact on virtual reality sickness and the usability of the virtual reality application as a whole.
@@ -312,7 +320,7 @@ As an example Oculus VR recommends such content to be placed a distance in the r
 %\subsubsection{Independent Visual Backgrounds}
 %\section{Ways to combat virtual reality Sickness}
 
-\section{Considerations for the Design Review Application}
+\section{Design Considerations}
 Throughout this chapter we have reviewed various aspects related to virtual reality, its performance demands and some potential contributers to virtual reality sickness. 
 For the design- and implementation phase of our design review application, there are some aspect to be more concerned with than others. As will be discussed in chapter~\ref{chapter:design}, 
 \ref{chapter:technical} and \ref{chapter:implementation}, some of these potential issues, like incorrect field of view settings, are usually taken care of by the 
