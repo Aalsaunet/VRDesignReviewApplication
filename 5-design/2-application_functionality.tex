@@ -29,7 +29,7 @@ This section gives an overview of the application functionality, which will be i
 Initially the design also contained specification for a "Launcher", i.e a program that gave the boot arguments to the program itself.
 In this Launcher program a user could either "host" a design review session by selecting one or multiple 3D models(s) and invite other users, or
 "join" a session by either accepting an invite or browse available sessions. Because of time concerns, and to give more time to prioritize the 
-more thesis-relevant use cases, this functionality was cut and the application instead boots up to a specific tanker model. 
+more thesis-relevant use cases, this functionality was cut and the application instead boots up with one predefined tanker model. 
 
 Once the user is loaded into this model, he or she should ble able to do the following:
 % \subsubsection{The Surveyor}
@@ -37,7 +37,7 @@ Once the user is loaded into this model, he or she should ble able to do the fol
 
 \paragraph{Choose between Virtual Reality Mode and Desktop Mode.} Virtual reality mode is meant to be used with a virtual reality headset
 and sets up the correct settings (e.g the field of view). Desktop mode is meant to be used without a virtual reality headset and instead used
-a regular display. This modes sets up the best setting for regular display usage, and if a virtual reality headset is attached the input from it will be ignored 
+a regular display. This mode sets up the best setting for regular display usage, and if a virtual reality headset is attached the input from it will be ignored 
 (e.g.~To avoid its orientation affecting the camera in the application).
 
 \paragraph{Look around.} By looking around the camera should rotate to the desired direction, but the player model should keep its orientation 
@@ -47,7 +47,7 @@ head while wearing a virtual reality HMD and having the application run in VR mo
 \paragraph{Rotate (i.e change orientation).} When rotating the camera and the player model should rotate in the desired direction (e.g.~"forward" is where the player model is
 facing after the rotation).
 Rotation should allow pitching and yawing (rotation along the Y and Z axis), but not rolling (rotation along the X axis) as this might cause the user discomfort, especially when
-using a virtual reality headset, and has little to no practical implication. See~\vref{the_six_degrees_of_freedom} for an illustration of this. 
+using a virtual reality headset, and has little to no practical implication. See~\vref{fig:the_six_degrees_of_freedom} for an illustration of this. 
 Rotation should be possible either by using a gesture or by moving the mouse.
 
 \paragraph{Move (i.e change position).} The user should be able to move freely along the X, Y and Z axis, thus moving both in the horizontal and vertical plane. 

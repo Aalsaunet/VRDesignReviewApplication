@@ -8,21 +8,21 @@ of special interest as virtual reality in many ways change several human-compute
 technologies that enable gesture recognition, and use this comparison as a foundation for the design and implementation of the design review application.  
 
 \section{Gestures}
-According to research, non-verbal communication makes up about two-thirds of all communication between humans, with gestures being one of the most common 
-categories of non-verbal communication, often conveying the most specific linguistic content~\citep{Hogan2003}.
+According to~\citet{Hogan2003}, non-verbal communication makes up about two-thirds of all communication between humans, with gestures being one of the most common 
+categories of non-verbal communication, often conveying the most specific linguistic content.
 A gesture can be defined as a physical movement of the hands, arms, face and body with the intent to convey information or meaning~\citep{Mitra2007}, 
-and can often be classified into several categories, some of which are mention in section~\vref{sec:gesture_classes}. Even though 
+and can often be classified into several categories. Even though 
 a gesture can involve several body parts hand gestures are of special interest to this thesis, as they are often the most used in non-verbal communication
 and the most convenient to utilize in our design review application. 
+Because of this, the term "gestures" are often used synonymous with "hand gestures" for the remainder of this chapter.
+
 Gesture as an interaction and communication method not only between humans, but also between human and computer is an interesting topic, 
 and especially so when it comes to virtual reality as it sets some constraints with regard to more conventional interaction methods, like using 
 a mouse and keyboard. \citet{Rautaray2015} also points out that there are situations in which
 these devices are impractical for human-computer interaction (HCI), and that this is particularly the case for interaction with 3D objects.
 As mentioned earlier, gestures can be divides into several categories, with two of the primary ones being \textit{static gestures} and \textit{dynamic gestures}.
 
-\subsection{Static and Dynamic Gestures}
-\label{sec:gesture_classes}
-In the gesture recognition field it is common to define a gesture as either a static or dynamic. Static gestures can in simple terms be defined as gestures
+Static gestures can in simple terms be defined as gestures
 without any movement. The hand and its fingers and joints simply maintain a certain position or orientation and it is recognized as a gesture. One example 
 of this gesture category is the "V sign" (or the "peace sign"), where the index and middle fingers are raised and parted while the other fingers are clenched.
 
@@ -39,16 +39,30 @@ See~\vref{fig:static_and_dynamic} for an hierarchical overview.
 \end{figure} 
 
 
-What gesture types are being used has implication for the gesture recognition methods as well. 
+What gesture types are being used has implication for the gesture recognition methods as well, as dynamic gestures have a temporal aspect that 
+static gestures don't~\citep{Rautaray2015}. This means that when recognizing dynamic gesture one must handle the time aspect of the gesture (i.e from the gesture starts
+to the gesture ends), and thus keep track of the frame-to-frame transitions of the hand. This is the reason Hidden Markov Models (HMMs) are commonly used for
+dynamic recognition algorithms, as they specifically are designed to handle state transitions. Static gestures recognition schemes don't need this complexity as 
+whether or not a gesture is performed can be determined from individual frames. Thus a more general classifier or template-based algorithm can be applied for a 
+static gesture recognition system~\citep{Rautaray2015}.
 
 \section{Gesture Recognition Devices}
 \label{sec:gr_devices}
 \import{}{gr_devices.tex}
 
 
-\section{The Vision-based Recognition Pipeline}
+\section{The Gesture Recognition Pipeline}
 \label{sec:gr_principles}
 \import{}{gr_principles.tex}
+
+
+\section{Design Considerations}
+With regard to the topics discussed in this chapter, the design review application will primarily be aimed toward usage with vision-based gesture recognition
+systems. There are three primary vision-based technologies in use today: Stereoscopic Vision, Structured Light Pattern and Time of Flight~\citep{Ko2012}.
+Of these Stereoscopic Vision devices are perhaps the most promising ones as they has proved more reliable in variable light condition than their counterparts, and they 
+also usually have a lower material cost (they are cheaper, which also makes them more attractive for the consumer market)~\citep{Ko2012}. 
+The Leap Motion Controller, which will be reviewed in chapter~\ref{chapter:technical}, is one such device. 
+ 
 
 
 

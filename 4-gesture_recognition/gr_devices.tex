@@ -1,6 +1,7 @@
-To be able to convey semantically meaningful commands through the use of gestures one relies on a gesture recognition system, 
-which is responsible for capturing and interpreting gestures from the user and carry out the desired action. 
-There are several categories of these complex recognition systems, which usually have roots in sensor technology, 
+%To be able to convey semantically meaningful commands through the use of gestures one relies on gesture recognition systems, 
+%which is responsible for capturing and interpreting gestures from the user and carry out the desired action. 
+To be able to apply the various hand gesture recognition algorithms one must first be able to monitor the user hands through some sort of hardware. 
+There are several categories of these recognition systems, which usually have roots in sensor technology, 
 image processing and computer vision~\citep{Vafadar2014}.
 
 The first attempts at a commercial hand gesture recognition system were typically glove-based control interfaces, often called \textit{data gloves},
@@ -19,79 +20,103 @@ and thus the systems could run optimally on the commodity 1980s and 1990s comput
 \end{figure} 
 
 Today, both contact-based and vision-based devices are utilized for gesture recognition purposes. 
+He following subsection will the discuss the main properties of the two and review the differences.
 
 \subsection{Contact-based Devices} 
 Contact-based devices are usually wearable objects, such as gloves or armbands, 
-which register the user's kinetic movement through sensors and attempt to mirror it in the virtual world. 
-Some notable products making use of this technology include the Nintendo Wii remote controller and the Myo armband (see figure~\vref{fig:myo}). 
+which register the user's kinetic movement through sensors. %and attempt to mirror it in the virtual world. 
+A variety of sensor technologies have been applied to capture the physical data of a users hand (such as finger bending and hand orientation and position).
+Traditionally a combination of \textit{inertial navigation systems}\footnote{A navigation tool, often used on ships and aircrafts, that calculates position, orientation and velocity.} 
+and \textit{flex sensors}\footnote{A "bend sensor" that measure the amount of deflection.} have been utilized in contact-based gesture recognition devices~\citep{Sturman1994}. 
+Inertial navigation systems contain motion and rotation sensors, such as accelerometers and gyroscopes, and is used to monitor the hand position and orientation by
+calculating the position, orientation and velocity (in terms of direction and speed) via \textit{dead reckoning}, and thus without the need for external references~\citep{Berg1970}.
+Flex sensors are often positioned at important finger joint to determine the amount the finger is bent by. 
+
+There are also other types of sensors being used in various contact-based products. 
+One example of this is the Myo armband by Thalmic Labs (see figure~\vref{fig:myo}), which - in addition to containing gyroscopes, accelerometers and magnetometers - also utilizes 
+a set of electromyographic (EMG)
+\footnote{Electromyography (EMG) is an electrodiagnostic medicine technique for evaluating and recording the electrical activity produced by skeletal muscles~\citep{Kamen2004}}
+sensors that sense electrical activity in the forearm muscles~\citep{Myo2015} 
+By monitoring this electrical activity, i.e the electric potential of the muscles, the Myo armband can thus determine the state of each muscle (e.g~whether it is contracted or not).
+
 
 \begin{figure}%[h!] %[H]
 	\includegraphics[width=\linewidth]{pictures/myo_armband.jpg}
-	\caption[The Myo armband]{The Myo armband is a gesture recognition device worn on the forearm and manufactured by Thalmic Labs. 
-	The Myo enables the user to control technology wirelessly using various hand motions. 
-	It uses a set of electromyographic (EMG) sensors that sense electrical activity in the forearm muscles, combined with a gyroscope, 
-	accelerometer and magnetometer to recognize gestures~\citep{Myo2015}.}
+	\caption[The Myo armband]{The Myo armband is a contact-based gesture recognition device worn on the forearm. Picture from~\citet{Myo2015}.}
 	\label{fig:myo}
 \end{figure}
 
 \subsection{Vision-based Devices} 
-Vision-based Devices usually make use of either depth-aware cameras or stereo cameras to approximate a 3D representation of what's output by the cameras, 
-which in many ways are similar to how the human eyes work. 
-Products making use of this technology include the Microsoft's Kinect and the Leap Motion controller (see figure~\vref{fig:leapmotion}). 
+Vision-based devices usually make use of either depth-aware cameras or stereo cameras to approximate a contour/silhouette or 
+3D representation of what's output by the cameras. A vision-based hand gesture recognition system thus takes "pictures"\footnote{Usually about 60 images/frames per second} of the 
+user's hands, and often applies various image processing techniques (e.g image normalization) before using a computer vision algorithm to detect if any known gesture is 
+being performed. As mention previously, these techniques require more processing than those of contact-based devices, but usually allows its user to use the system
+without using any form of gloves or armbands~\citep{Rautaray2015}. 
+
+Even though vision-based gesture recognition technologies are more complex, demanding, and prone to 
+errors in the form of inaccurate readings, they still have some important advantages over contact-based devices, as will be covered in the next section.
 
 \begin{figure}%[h!] %[H]
 	\includegraphics[width=\linewidth]{pictures/leapmotion2.png}
-	\caption[The Leap Motion Controller]{The Leap Motion Controller is a small USB peripheral device which is designed to be placed on a physical desktop, 
-	facing upward. Using two monochromatic IR cameras and three infrared LEDs, the device observes a roughly hemispherical area, to a distance of about 1 meter, 
-	and generates almost 200 frames per second of reflected data~\citep{LeapMotion2016}.}
+	\caption[The Leap Motion Controller]{The Leap Motion Controller is a vision-based gesture recognition devices that can be placed on a table top to observe the users hands.}
 	\label{fig:leapmotion}
 \end{figure} 
 
-\subsection{Technology Comparision}
+% The Leap Motion Controller is a small USB peripheral device which is designed to be placed on a physical desktop, 
+% facing upward. Using two monochromatic IR cameras and three infrared LEDs, the device observes a roughly hemispherical area, to a distance of about 1 meter, 
+% and generates almost 200 frames per second of reflected data~\citep{LeapMotion2016}.
+
+\subsection{Technology Comparison}
 Both approaches have their advantages and disadvantages (see~\citet{Rautaray2015} for a deeper discussion of these). 
-Contact-based devices generally have a higher accuracy of recognition and a lower complexity of implementation than vision-based ones. 
-Vision-based devices are on the other hand seen as more user friendly as they require no physical contact with the user. 
+As contact-based devices avoid several of the challenges of vision-based devices, such as illumination and occlusion, they generally have a higher accuracy of recognition.
+In addition to this, and as explained earlier, contact-based devices usually also relies less on processing resources as the sensor data can be applied more directly than the
+frames captured by a vision-based system. Contact-based systems are also known to give more tactile feedback\footnote{A (simulated) sense of touch to indicate that the user e.g~
+has pushed a button} then vision based systems.
+
+Vision-based devices are on the other hand seen as more user friendly, as they usually don't require the user to wear anything, and can thus also be used more easily
+in combination with other input methods (such as mouse and keyboard). This is perhaps especially relevant when it comes to using gesture recognition technology in
+sterile environments (such as in surgery), as no contact with the device is required. 
 
 The main disadvantage of contact-based devices is the potential health hazards, which may be caused by some of its components~\citep{Schultz2003}. 
 Research has suggested that mechanical sensor materials may raise symptoms of allergy and magnetic component may raise the risk of cancer~\citep{Nishikawa2003}. 
 Even though vision-based devices have the initial challenge of complex configuration and implementations, 
-they are still considered more user friendly and hence more suited for usage in long run. Because of the reasons outlined above this thesis will primarily 
-be oriented towards vision-based gesture recognition technologies. 
+they are still considered more user friendly and hence more suited for usage in long run. Because of the reasons outlined above this thesis will, from here on out, be
+primarily oriented towards vision-based gesture recognition technologies. 
 
-\section{The Primary Vision-based Technologies}
-Today, there are three primary vision-based technologies that can acquire 3D images: Stereoscopic vision, structured light pattern and time of flight (TOF)~\citep{Ko2012}.
-These all make use of one or several cameras and lights to capture and recognize certain movements or poses from the user, 
-and transform it to a certain action on the computer (e.g.~a recognized finger tap might be the equivalent to left mouse button click). 
-
-\subsection{Stereoscopic Vision}
-is the most common 3D acquisition method and uses two cameras to obtain a left and right stereo image. 
-These images are slightly offset on the same axis as the human eyes. As the computer compares the two images, 
-it develops a disparity image that relates the displacement of objects in the images.
-
-\subsection{Structured Light}
-measure or scan 3D objects through illumination. Light patterns are created using either a projection of lasers or LED light 
-interference or a series of projected images. 
-By replacing one of the sensors of a stereoscopic vision system with a light source, structured-light-based technology basically exploits the same triangulation as a 
-stereoscopic system does to acquire the 3D coordinates of the object. 
-Single 2D camera systems with an IR- or RGB-based sensor can be used to measure the displacement of any single stripe of visible or IR light, 
-and then the coordinates can be obtained through software analysis.
-
-\subsection{Time of Flight}
-is a relatively new technique among depth information systems
-and is a type of light detection and ranging (LIDAR) system that transmits a light pulse from an emitter to an object. 
-A receiver determines the distance of the measured object by calculating the travel time of the light pulse from the emitter to the object and back to the receiver 
-in a pixel format.
-
-\begin{figure}%[h!] %[H]
-	\includegraphics[width=\linewidth]{pictures/Vision-based_comparisons.png}
-	\caption{Comparison of Vision-based sensor technologies~\citep{Ko2012}.}
-	\label{fig:VBComparisions}
-\end{figure} 
-
-\subsection{Comparing the Technologies} 
-Stereoscopic vision is perhaps the most promising one for the consumer market as it has the lowest material cost~\citep{Ko2012}, 
-and has proved more reliable in variable light conditions than its counterparts. 
-One of the latest consumer-oriented devices of this kind is the Leap Motion Controller, 
-which distinguishes itself for having a higher localization precision than other depth vision-based devices~\citep{Weichert2013}, 
-and also for capturing depth data related to palm direction, fingertips positions, palm center position, and other relevant points~\citep{Wei2016}. 
-The Leap Motion Controller will be reviewed more in-depth in the next chapter. 
+% \section{The Primary Vision-based Technologies}
+% Today, there are three primary vision-based technologies that can acquire 3D images: Stereoscopic vision, structured light pattern and time of flight (TOF)~\citep{Ko2012}.
+% These all make use of one or several cameras and lights to capture and recognize certain movements or poses from the user, 
+% and transform it to a certain action on the computer (e.g.~a recognized finger tap might be the equivalent to left mouse button click). 
+% 
+% \subsection{Stereoscopic Vision}
+% Stereoscopic Vision is the most common 3D acquisition method and uses two cameras to obtain a left and right stereo image. 
+% These images are slightly offset on the same axis as the human eyes. As the computer compares the two images, 
+% it develops a disparity image that relates the displacement of objects in the images.
+% 
+% \subsection{Structured Light}
+% Structured Light measure or scan 3D objects through illumination. Light patterns are created using either a projection of lasers or LED light 
+% interference or a series of projected images. 
+% By replacing one of the sensors of a stereoscopic vision system with a light source, structured-light-based technology basically exploits the same triangulation as a 
+% stereoscopic system does to acquire the 3D coordinates of the object. 
+% Single 2D camera systems with an IR- or RGB-based sensor can be used to measure the displacement of any single stripe of visible or IR light, 
+% and then the coordinates can be obtained through software analysis.
+% 
+% \subsection{Time of Flight}
+% Time of Flight is a relatively new technique among depth information systems
+% and is a type of light detection and ranging (LIDAR) system that transmits a light pulse from an emitter to an object. 
+% A receiver determines the distance of the measured object by calculating the travel time of the light pulse from the emitter to the object and back to the receiver 
+% in a pixel format.
+% 
+% \begin{figure}%[h!] %[H]
+% 	\includegraphics[width=\linewidth]{pictures/Vision-based_comparisons.png}
+% 	\caption{Comparison of Vision-based sensor technologies~\citep{Ko2012}.}
+% 	\label{fig:VBComparisions}
+% \end{figure} 
+% 
+% \subsection{Comparing the Technologies} 
+% Stereoscopic vision is perhaps the most promising one for the consumer market as it has the lowest material cost~\citep{Ko2012}, 
+% and has proved more reliable in variable light conditions than its counterparts. 
+% One of the latest consumer-oriented devices of this kind is the Leap Motion Controller, 
+% which distinguishes itself for having a higher localization precision than other depth vision-based devices~\citep{Weichert2013}, 
+% and also for capturing depth data related to palm direction, fingertips positions, palm center position, and other relevant points~\citep{Wei2016}. 
+% The Leap Motion Controller will be reviewed more in-depth in chapter~\ref{technical}. 

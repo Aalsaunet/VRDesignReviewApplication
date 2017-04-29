@@ -1,6 +1,8 @@
-Often this process is seen as a sum of three fundamental phases: Detection, tracking and recognition~\citep{Rautaray2015}.
-This section will describe what makes up a gesture recognition system, with special emphasis on hand gesture recognition, and
-summarize some common challenges with vision-based gesture recognition methods.
+
+A gesture recognition system can in many ways be regarded as a pipeline with three fundamental phases: Detection, tracking and recognition~\citep{Rautaray2015}.
+
+% This section will describe what makes up a gesture recognition system, with special emphasis on hand gesture recognition, and
+% summarize some common challenges with vision-based gesture recognition methods.
 
 \subsection{Detection}
 The first step in a typical gesture recognition system is to detect the relevant parts of the captured image and segment them from the rest. 
@@ -12,13 +14,15 @@ A gesture recognition system interested in detecting e.g.~hand gestures should t
 Many different detection methods have been proposed by research, each using different visual features to detect relevant segments. 
 Example of such visual features include skin color, shape, motion and anatomical models of the hands~\citep{Cote2006}.
 
-\paragraph{Color} detection is a method of detecting the relevant segment (e.g.~hands) by its color. 
+\subsubsection{Color Detection} 
+Color detection is a method of detecting the relevant segment (e.g.~hands) by its color. 
 When employing this method one important decision is what color space to use, though color spaces efficiently separating the chromaticity from
 the luminance components of color are typically the preferred ones. These are favored as they have some degree of robustness to illumination variability, which
 is a weakness of this detection method. In addition to this skin color detection also have performance problems when the background contains objects that have a 
 color distribution similar to human skin, although this can be combated by \textit{background subtraction}, and with variability in human skin tones~\citep{Rautaray2015}.
 
-\paragraph{Shape} detection is a method of detecting the relevant segment by its shape, and usually tries to extract the contours of objects to judge
+\subsubsection{Shape Detection} 
+Shape detection is a method of detecting the relevant segment by its shape, and usually tries to extract the contours of objects to judge
 whether those objects are relevant or not. An advantage with this method over color detection is that it's not directly dependent on skin color or
 illumination, although these are still a factor~\citep{Rautaray2015}. However, a major disadvantage with this methods relates to occlusion and viewpoint
 problems, which might cause a hand to not be recognized as one because of the camera angle and/or the hands orientation and configuration. One way to prevent this
@@ -26,7 +30,8 @@ might be to use several cameras with different viewpoints.
 Shadows can also cause a problem as shadows of a hand often will be detected as hands themselves. Because of these disadvantages it is more
 common to use this method in combination with other ones rather than on its own.
 
-\paragraph{Motion} detection is a method of detecting the relevant segment though motion, and assumes that all moving object are relevant.
+\subsubsection{Motion Detection} 
+Motion detection is a method of detecting the relevant segment though motion, and assumes that all moving object are relevant.
 When used as a gesture recognition scheme it requires a very controlled setup as it assumes that the only motion in the image is caused by hand movement. 
 This method is also more common to use in combination with other methods.
 
