@@ -14,34 +14,66 @@ how virtual reality and gesture recognition technology can be used to interact a
 
 \section{Technology Choices}
 There are several technology choices to make with regards to the implementation of the design review application.
-These span from programming framework, language, and what gesture recognition and virtual reality vendors to use, 
-and these decisions also must address capability between the different technologies.
+These choices include programming framework or platform, what language to use, and what brand of gesture recognition technology and
+virtual reality technology to use. Its also important to make sure that these choices are as compatible with each other as possible.
 
 % A major decision is what programming framework to use. In the implementation the Unity game engine will be utilized.
-\subsection{The Game Engine}
+\subsection{Software Framework}
+Selecting a suitable software framework can save a lot of time during implementation, and simplify a lot of the implementation details. 
+If the framework is popular, several other relevant frameworks, SDKs and libraries might also have integration or explicit support for it, 
+meaning one can be fairly confident that the two are compatible and working well together. 
+As the design review application will primarily be dealing with rendering, calculations and manipulation of 3D objects, using a game engine - which is specifically tailored for Handling
+these topics - is an interesting option.
 A game engine is a software framework, usually designed for development of video games. 
 The core functionality of a game engine typically includes a rendering engine, a physics engine (at least providing collision detection), sound, scripting, 
 animation, networking, streaming, memory management, and threading~\citep{Gregory2014}. As game engines are created to enable development of complex 
 3D environments and contain many of the facilities necessary for the application use cases outlined above, they provide a good foundation for the implementation.
 Even though several game developers develops their own proprietary game engines, which are kept strictly private to the company, there are several commercially available ones 
-as well. The biggest of these is the Unity and the Unreal engines, both with broad support from a number of third party vendors. This is a great benefit for the implementation 
+as well. The biggest of these today is arguably the Unity and the Unreal engines, both with broad support from a number of third party vendors. 
+This is a great benefit for the implementation 
 as support "straight out of the box" for our choice of virtual reality and gesture recognition technology will ease the development process.
 
-Of these two Unity were chosen as it was requested from DNV GL, as they have more experience with it from other projects.
+Of these two popular game engines the Unity engine was selected as the software platform. This was both a request from DNV GL, 
+as they have experience with it from other projects, and also enabled the reuse of an asset bundle - containing a tanker model - from one of their other projects.
 The Unity engine and its central concepts will be discussed in chapter~\vref{chapter:technical}.
 
-\subsection{Why Leap Motion?}
-When deciding on what vision-based gesture recognition system the Leap Motion Controller was chosen.
-This is primarily because of vision-based gesture recognition systems that focus on hand gesture, this seemed like the most mature. 
-The Leap Motion Controller also has a convenient API, with support for several high-level languages, and integration with Unity is well supported both
-through software libraries and documentation. The Leap Motion Controller and its API will be reviewed in chapter~\vref{chapter:technical}.
+\subsection{Virtual Reality Device}
+The virtual reality design review application should be targeted toward usage with modern head-mounted VR devices.
+As DNV GL possesses a HTC Vive, and this HMD will be used in test sessions with potential end-users after implementation, 
+the application should work optimally with it. However, as this device is only available at their facilities, and not during development, support 
+should also be added for Oculus Rift DK2\footnote{The Development Kit 2, a predecessor or DK1, releases in 2014} as it is available via Simula Research Laboratory.
+As these two HMDs have separate SDKs and runtime environment, support for them have to be added individually. 
+Luckily, Unity 5 supports both HMDs natively (i.e "out-of-the-box") by enabling the project specific setting "Virtual Reality Supported", 
+so adding the basic VR functionality - such as camera rotation on head turn - is trivial. 
+Implementing support for both these virtual reality headsets also enable a comparison of their performance in the application, to, at least, indicate whether 
+one HMD perform better than the other. 
 
-\subsection{Oculus Rift and HTC Vive}
-As mentioned in earlier sections, two of the most popular virtual reality HMDs are the Oculus Rift and the HTC Vive. 
-These two HMDs both have good support for usage with Unity, but have separate SDKs (Software Development Kits) and runtime environments.
-Even though this is the case the implementation will support both of these HMDs. There are a couple of reasons for this:
-Unity 5 support both HMDs natively (i.e "out-of-the-box"), so adding the basic VR functionality is trivial and 
-implementing support for both enable a comparison of their performance in the application. 
+\subsection{Gesture Recognition Device}
+When deciding on what vision-based gesture recognition system the Leap Motion Controller, from the company Leap Motion Inc., was chosen.
+The primary reasons behind this choice were as follows: 
+\begin{itemize}
+    \item It is a vision-based gesture recognition device that focuses on only hand gestures in an desktop or virtual reality situation.
+    \item It utilizes stereoscopic vision, which - as discussed in section~\vref{sec:gesture_design_considerations} - is arguably the most promising vision-based technology.
+    \item It is both relatively small (the size of a matchbox) and cheap (about 70 euro at the time of writing). 
+    \item It has a well-documented API\footnote{Application Programming Interface: A defined set of high-level functions or abstractions other software can utilize.}, which 
+          supports multiple programming languages. This API is reviewed in chapter~\vref{chapter:technical}.
+\end{itemize}
+
+The Leap Motion controller also have software components tailored for use with the Unity Engine, which also made it a convenient choice. 
+These components ensured that the Leap Motion usage is the design review application was following Leap Motion's own best practices. 
+
+\section{Final Thoughts on the Design}
+With these software frameworks we get several pre-made software components, which enables us to focus more on the application specific during the implementation.
+The high fidelity tanker model, provided by DNV GL, gives us a default model we can prototype all functionality on, before generalizing the application to accept other models as
+well. This generalization should be done before the application is used in any professional capacity, but it is outside the scope of this thesis. 
+In addition to the model, the SDK and runtime libraries of the virtual reality vendors can be added to the project, and (presumably) work without any custom code. 
+The design review application should enable the user to easy switching between these two virtual reality headsets and a desktop mode, for use without a virtual reality headset.
+The Leap Motion Controller SDK and runtime library (called Orion) also provides some standard assets we can use in the implementation. 
+The most useful of these assets include hand models, API-scripts (to retrieve information from the device) and detectors, which is used to recognize gestures. 
+These Leap Motion components are covered more thoroughly in chapter~\ref{chapter:technical}.
+
+
+
 
 
 
