@@ -1,27 +1,41 @@
 \subsection{Scene}
-A Scene is the top level "container" of objects in the application and is equivalent to a level in a game. 
-An application can thus be divided into several scenes, e.g~one scene might be a main menu, while another might be a tutorial stage.
+In Unity, a scene is a self-contained 3D space that hosts all objects that logically belongs together in that space, and can thus be regarded 
+as a top level container of objects. Every Unity project need at least one scene as objects have to be members of at least one scene.
+In a game a scene could typically represent a level (or "a map"), and the game could
+thus consist of multiple levels that were loaded or unloaded when transitioning from one level to another. 
 In the design review application there is currently only one scene, which is on the tanker model.
 
-\subsection{Game Objects}
+\subsection{GameObjects}
 A GameObject is perhaps the most important concept in the Unity editor and is essentially a generic container.
-Everything in the scene is, or belongs to, a GameObject. What defines a GameObject's function is its \textit{components}, 
-which essentially are properties of the GameObject. In Unity there are several built ones, e.g~camera components,
-light components etc. 
-The most important GameObject component is perhaps the \texttt{Transform} component, which is a mandatory component (i.e every GameObject has one) and 
-defines a GameObject's position, rotation and scale in the scene. Scripts, i.e custom code, is also commonly used as a component of 
-a GameObject.
+Everything in the scene is, or belongs to, a GameObject. What defines a GameObject's function or purpose is its \textit{components}, 
+which essentially are properties of the GameObject. 
+In Unity there are a multitude of built-in components to cover the most common scenarios. 
+Examples of this include different camera components, light components, meshes, colliders, rigid bodies and a lot more.
+One of the most important components is arguably the \textit{Transform} component, which is a mandatory component (i.e every GameObject has one) and 
+defines a GameObject's position, rotation and scale in the scene. Scripts, i.e custom code in C\# or UnityScipt, are also commonly used as components of 
+GameObjects.
 
-A GameObject can be assigned a \textit{Tag}, which serves as useful GameObject categories. This can be especially useful in a script logic setting when, e.g.~
-a collision between two objects occur and one wants to find out what kind of objects were involves (e.g.~ maybe a "Player" GameObject collides with a "Coin" GameObject, which
-is to be collected when this occurs).   
+A GameObject can be assigned a \textit{Tag}, which serves as a useful GameObject category. This can be especially useful in a script logic setting when one 
+want to make a conditional or branching decision at runtime based on the involved object(s).
+One such common circumstance is when a collision between two objects occur and one wants to find out what kind of objects were involved 
+(e.g.~ maybe a \texttt{Player} GameObject collides with a \texttt{Coin} GameObject, which is to be collected when this occurs).   
 
 \subsection{Prefabs}
-In Unity a Prefab is a type of GameObject template or blueprint, an is useful when the same assets is used multiple times (e.g.~multiple copies are present in the scene). 
+In Unity a prefab is a type of GameObject template or blueprint, and is useful when one wants to reuse a GameObject multiple times (e.g.~have multiple copies present in the scene). 
 Just as a class can instantiate objects, multiple objects can be instantiated from one prefab.
 Any edits made to a prefab asset are thus immediately reflected in all instances produced from it, but any edits or overrides to the instances will be treated individually.
 
+\subsection{MonoBehavior}
+Once a script is used as a component of a GameObject in Unity, it should inherit from the MonoBehavior base class, which contains a lot of key functions in the Unity framework.
+Several of these functions are called by Unity's messaging system in set intervals, e.g.~on every rendered frame, so when a script inherits from MonoBehavior and overrides such a
+function the overridden function will instead be called on these set intervals. The two most used of these functions are probably \texttt{Start()} and \texttt{Update()}.
+\texttt{Start()} is only called once by Unity and is called on the first frame the GameObject the script is attached to is active. As such it can often 
+serve as a setup function or constructor that can initialize or retrieve relevant data. \texttt{Update()} is a function that is called on every rendered frame, 
+of which there are typically at least 30 a second. In the design review application it is perhaps the most used MonoBehavior function, as it is 
+a convenient place to place conditional checks (such as whether a certain gesture is active or not).
 
+In addition to these two key functions the MonoBehavior class also contains a lot of event-based function, typically named on the format "On<Action>" (e.g~\texttt{OnEnable()}, 
+\texttt{OnDestroy()} and \texttt{OnTriggerEnter()}). These are also useful and used several places in the design review application.
 %\subsection{}
 
 %\subsection{}

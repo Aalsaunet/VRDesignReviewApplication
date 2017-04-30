@@ -1,22 +1,20 @@
-
-% Carsten: Add a connection to chapter 3 in this intro.
-
-The latest technological breakthrough in gesture-sensing devices has come in the form of a Leap Motion Controller (Leap Motion, San Francisco, CA, United States). 
-The controller, approximately the size of a box of matches, allows for the precise and fluid tracking of multiple hands, fingers, and small objects in free space with 
-sub-millimeter accuracy~\citep{Guna2014}. This chapter is based on the Leap Motion Controller documentation for the Orion software (i.e version 3.2 of the Leap motion software), 
+The Leap Motion Controller, created by Leap Motion Inc, is a vision-based gesture recognition system, first released in 2013 with several new versions released in the following
+years. As mention in section~\vref{sec:design_leapmotion} the Leap Motion Controller is an attractive choice because of it accessibility and affordability and was thus 
+selected as the gesture recognition system of choice for the design review application. 
+This chapter is based on the Leap Motion Controller documentation (see \citet{LeapMotion2016}) for the Orion software (i.e version 3.2 of the Leap motion software), 
 and aims to highlight the important conceptual foundation for using the Leap Motion Controller in this thesis' design review application.
+
+% The controller, approximately the size of a box of matches, allows for the precise and fluid tracking of multiple hands, fingers, and small objects in free space with 
+% sub-millimeter accuracy~\citep{Guna2014}.
 
 \section{Physical properties}
 The Leap Motion Controller (see fig.~\vref{fig:leapmotion} and~\vref{fig:leapmotion2}) contains two stereoscopic cameras, with a field of view of about 150 degrees, 
-in addition to three infrared LEDs. These infrared lights periodically emit light pulses with a wavelength of 850 nanometer, and thus outside the visible light spectrum. 
-During the light pulses, 
-which light up about eight cubic feet in front of the controller, grayscale stereo images are captured by the cameras and sent to the 
-Leap Motion tracking software~\citep{LeapMotion2016}. 
-This image capturing has an effective range from approximately 25 to 600 millimeters above the device.
-In the software, the images are analyzed to reconstruct a 3D representation of what the device sees, 
-compensating for static background objects and ambient environmental lighting. 
-The Leap Motion software combines this sensor data with an internal model of the human hand to help cope with challenging tracking conditions.
-
+in addition to three infrared LEDs. 
+These lights periodically emit infrared light pulses at a wavelength of 850 nanometers, thus outside the visible light spectrum, which light up about the 
+area in front of the controller. During these pulses grayscale stereo images are also captured, with an effective range from approximately 25 to 600 millimeters above the device.
+After this the images are sent to the tracking software, where the images are analyzed to construct 3D representations of the captured 2D images (by comparing offsets), and
+compensate for static background objects and ambient environmental lighting. 
+The data derived from the pictures are also combined with an internal model of the human hand to help cope with challenging tracking conditions.
 
 \begin{figure}%[h!] %[H]
 	\includegraphics[width=\linewidth]{pictures/LMC_measures.png}
@@ -27,28 +25,36 @@ The Leap Motion software combines this sensor data with an internal model of the
 \section{The Leap API}
 The controller itself can be accessed and programmed through high level Application Programming Interfaces (APIs), with support for a variety of programming languages, 
 including C++, C\#, Objective-C, Java, JavaScript and Python. Although the API is programmed almost exclusively in C, access through a variety of other languages 
-is achieved by virtue of various "wrapper libraries", which exposes and translates functions from their respective languages into the corresponding C function[cite].
-In addition to this, the Leap Motion SDK also features integration with commercial game engines such as Unity and the Unreal Engine~\citep{Guna2014}. 
+is achieved by virtue of various "wrapper libraries", which exposes and translates functions from their respective languages into the corresponding C function.
+In addition to this, the Leap Motion SDK also features integration with commercial game engines such as Unity and the Unreal Engine. 
 This section will cover important concepts in the Leap API, which are thoroughly used in the thesis implementation.
 
 \subsection{Integration with the Unity editor}
-To use Leap Motion in a Unity project one simply import the Leap Motion Asset Package, which included plugin files, as well as hand prefabs, scripts and demo scenes, 
-into the project and includes certain components to the scene (the most important being the LeapHandController and HandModels prefabs). LeapHandController is responsible
-for representing the Leap Motion device in the Unity scene, while the HandModels prefabs are model of the virtual hands that are to mimic what the user's hands are doing.  
+To use Leap Motion in a Unity project one can simply import the Leap Motion Core Asset Package, which includes the neccessary scripts and components to utilize Leap Motion in the 
+project. In addition to this Leap Motion also offers different modules, which contain several useful assets. 
+Several of the assets provided by Leap Motion can often be included directly in the scene, such as LeapHandController from the core module and hand model prefabs 
+from the hands module.
+The LeapHandController is arguably the most important prefab in the Leap Motion Asset Packages and is responsible for representing the Leap Motion device 
+in the scene, which is important with regard to where the hand models, when active, are position relative to the camera. 
+LeapHandController is also important as it has the LeapServiceProvider script, which contain several key function, as a component.
+
+The hand model prefabs are also useful assets, as - when used correctly- they can be present in the scene and mimic what the user's hands are doing.
+This helps the user get visual feedback on what the controller is capturing and should also make it easier for the user to 
+hold his or her hands in an optimal position for the Leap Motion Controller to capture.
 
 
-\subsection{The hand abstractions}
-The Leap Motion API offers many convenient abstractions for relevant properties when detecting and tracking hands.
-Hands are the main entity tracked by the Leap Motion controller, and it maintains an inner model of the human hand and validates the data from 
-its sensors against this model. This allows the controller to track finger positions even when some fingers are not visible from the Leap Motion Controllers point of view.
+\subsection{The Hand Abstractions}
+% The Leap Motion API offers many convenient abstractions for relevant properties when detecting and tracking hands.
+% Hands are the main entity tracked by the Leap Motion controller, and it maintains an inner model of the human hand and validates the data from 
+% its sensors against this model. This allows the controller to track finger positions even when some fingers are not visible from the Leap Motion Controllers point of view.
 
 The Hand class represents a physical hand detected by the Leap, and is perhaps one of the most central abstractions in the Leap Motion API. 
 A Hand object provides access to lists of its pointables as well as attributes describing the hand position, orientation, and movement.
-Each hand-object have object-representations for its fingers, palm etc, each with its own data.
+Each hand-object also have object-representations for its fingers, palm etc, each with its own data.
 One common way to access the hands are through the Frame object, which is an object-oriented representation of the last captured frame of the device.
-Each frame will contain a list called "hands", which will contain a hand-object per detected and tracked hand.
+Each frame will contain a list called \texttt{hands}, which will contain a hand-object per detected and tracked hand.
 These hands have their own characteristics, which are handily available to the developer. 
-Some examples (from~\citet{LeapMotion2016}) of what variables the hand objects contain include:
+Some examples of what variables the hand objects contain include:
 
 \begin{itemize}
 \item isRight, isLeft — Whether the hand is a left or a right hand.
@@ -60,10 +66,10 @@ Some examples (from~\citet{LeapMotion2016}) of what variables the hand objects c
 \item Motion factors — Provide relative scale, rotation, and translation factors for movement between two frames.
 \end{itemize}
 
-Below is an example derived from the MovementController.cs class in the Design Review implementation (in C\#). 
-This examples highlights how hand-object can be acquired from the frame-object, how we can e.g.~make sure its a left-hand
-before proceeding, and how we can calculate a new player model position based on the hand position offset from the gesture origin.
-Note that this code is incomplete and only meant as a somewhat compact example:
+Figure~\vref{table:annotation_visibility_code} shows an example derived from the MovementController.cs class in the design review implementation. 
+This example highlights how hand-object can be acquired from the frame-object, how we can e.g.~make sure its a left-hand
+before proceeding, and how we can calculate a new position based on the hand position offset from the gesture origin.
+Note that this code is incomplete and only meant as a somewhat compact example.
 
 \begin{table}
 \label{table:annotation_visibility_code}
@@ -106,10 +112,10 @@ void Update()
 \caption[Accessing the Leap Motion Frame objects]{Accessing the Leap Motion Frame objects}
 \end{table}
 
-\subsection{The coordinate system}
+\subsection{The Coordinate System}
 The Leap Motion API enables acquisition of the recognized object's position through Cartesian and spherical coordinate systems, 
-which are used to describe positions in the controller's sensory space~\citep{Guna2014}. The hand positions above the Leap Motion device are given as three dimensional
-vectors on the form \{x, y, z\}, with origin being in the center of the Leap Motion surface (see~\vref{fig:leapmotion3})~\citep{LeapMotion2016}.  
+which are used to describe positions in the controller's sensory space. The hand positions above the Leap Motion device are given as three dimensional
+vectors on the form \{x, y, z\}, with origin being in the center of the Leap Motion surface (see~\vref{fig:leapmotion3}).  
 Positional information, like the position of a hand, or the position of the tip of a finger, can be access in various ways. One way is to access the hands through the
 Frame-object, and then find the relevant hand, palm, finger or finger-joint.
 
@@ -117,7 +123,7 @@ The Leap Motion API uses a right-handed coordinate convention, meaning that when
 towards the right, the y-axis grows more positive upwards and the z-axis grows more positive towards the user (see~\vref{fig:leapmotion3}). 
 As frameworks like that of Unity uses a left-handed convention for its coordinate system, i.e that the z-axis grows more positive away from the 
 user instead of towards, the Leap Motion API also does an appropriate convention to adhere to its software environment. 
-The Leap Motion API also adhere to differences in units, as e.g Unity uses a default unit of meters, while the Leap Motion uses millimeters~\citep{LeapMotion2016}.
+The Leap Motion API also adhere to differences in units, as e.g Unity uses a default unit of meters, while the Leap Motion uses millimeters.
 
 \begin{figure}%[h!] %[H]
 	\includegraphics[width=\linewidth]{pictures/Leap_Axes.png}
@@ -125,13 +131,13 @@ The Leap Motion API also adhere to differences in units, as e.g Unity uses a def
 	\label{fig:leapmotion3}
 \end{figure} 
 
-\subsection{The detection utilities}
-To provide a common and high level interface to recognize gestures the Leap Motion API offers several detection utilities called \textbf{\textit{detectors}}.
+\subsection{The Detection Utilities}
+To provide a common and high level interface to recognize gestures the Leap Motion API offers several detection utilities called \textit{detectors}.
 Detectors are scripts in the core asset package that serve as basic building blocks for hand action detections, and can e.g.~detect whether a certain finger is extended or not
-or which way the palm is facing~\citep{LeapMotion2016}. New detectors can also be created by the developer by extending
+or which way the palm is facing. New detectors can also be created by the developer by extending
 the Detector base class and implement logic that calls "Active" when the detector turns on and "Deactivate" when it turns off.
 
-Several of these detector can be chained together using a \textbf{\textit{Logic Gate}} to create more complex expressions. 
+Several of these detector can be chained together using a \textit{Logic Gate} to create more complex expressions. 
 The Detector Logic Gate is itself a detector that logically combines two or more other detectors, using operations like AND, OR, NAND (not AND) and NOR (not OR), 
 to determine its own state.
 If one thus were to make a thumb's up-gesture, one could use a logic gate with an AND-configuration together with a detector for detecting whether or not the
