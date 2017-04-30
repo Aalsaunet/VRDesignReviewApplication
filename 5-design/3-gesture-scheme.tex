@@ -1,6 +1,6 @@
 
 As mention in the use cases for the application, all of the application's functionality should be accessible by using gestures. The user should thus
-be able to do every task only by using gestures (except the "look around case", which only be done by rotating the HMD). To support this a gesture scheme of seven (or eight depending
+be able to do every task only by using gestures (except looking around, which can only be done by rotating the HMD). To support this a gesture scheme of seven (or eight depending
 on perspective) individual gestures were created. The gestures can all be considered static gestures, meaning that they don't require movement for the gesture to be detected, 
 except for the movement required to form the gesture. 
 Even though the gestures can be considered static in this aspect, the user is still often required to move his or her hand while holding the gesture to get the desired effect. 
@@ -11,12 +11,12 @@ switching materials) or by having some user interface showing it.
 The gestures are individually described below on a functional level and will be covered in more technical detail during the our review of the implementation in chapter~\ref{chapter:implementation}. 
 Both the left- and right hand should be able to execute all these gestures independently, so scenarios where both hands do the same gestures, or different gestures, should
 work. The only exception from this is the menu gesture, where one hand is assigned to be "the menu hand" (the left hand by default) and one is assigned to be "the selector hand"
-(right by default). The gestures are design to be as distinguishable from each other as possible (i.e so the gesture recognition system doesn't mistake one gesture for
-another), and to work with the cameras (assuming a vision-based system) positioned in several different positions (i.e also distinguishable from different angles).
+(right by default). The gestures are designed to be as distinguishable from each other as possible to decrease the possibility of one gesture being mistaken for another
+by the gesture recognition system. The gestures should also be distinguishable from different angles, and thus support different camera positions (assuming a vision-based system).
 
- 
+
 \subsection{The pinch gesture}
-The pinch gesture will enable the rotate use case, specified in the previous section, and thus enable the user to rotate the camera by the Y and Z axis. 
+The pinch gesture will enable the user to rotate - and thus change orientation- by the Y and Z axis, as specified in "rotate-use case". 
 The pinch gesture is accomplished by squeezing the tip of the thumb and index fingers together while, preferably, keeping the rest of the fingers erect and the palm facing 
 somewhere between the table top and the displays (see~\vref{fig:gestures1} for an illustration). Once this gesture is done by the user, 
 the system should indicate that the gesture was recognized as a pinch gesture.
@@ -54,7 +54,7 @@ As one of the movement gesture, this gesture also uses the origin-offset scheme,
 
 \subsection{The fist gesture}
 The fist gesture, alternatively called the Z-gesture, fulfills the forward-and-backwards functionality specified in the move use case, and enables the user to 
-move along the z-axis, relative to its orientation. The fist gesture gesture is accomplished by forming a fist (i.e with no fingers extended)
+move along the z-axis, relative to its orientation. The fist gesture is accomplished by forming a fist (i.e with no fingers extended)
 and is used by extending and retracting the fist. 
 
 \begin{figure}%[h!] %[H]
@@ -72,7 +72,7 @@ When this option is enabled the other movement gestures, i.e the palm-down-, the
 When this is the case, the "use combined gesture" option should be replace by a "distinguish movement gestures" option in the menu, 
 which disabled this combined gesture and re-enabled the default movement gestures. 
 
-The combined movement gesture should be performed in the same manner as the palm-down gesture, described in section~\vref{sec:palm_down_design}, 
+The combined movement gesture should be performed in the same manner as the palm-down gesture, described in section~\ref{sec:palm_down_design}, 
 and can thus be considered an overload\footnote{A concept where the same identifier (a gesture in this case) can perform different actions based on a current state or context (i.e whether the combined gesture scheme is active or not.)}.
 %i.e by having all fingers extended, with all of them pointing in the direction of the display with the palm facing downwards towards the table top.
 However, instead of now only being responsible for navigation along the y-axis, i.e up and down, this same gesture is now responsible for movement along the x-, y- and z-axis, so
