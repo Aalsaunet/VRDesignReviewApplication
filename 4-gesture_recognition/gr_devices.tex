@@ -20,7 +20,7 @@ and thus the systems could run optimally on the commodity 1980s and 1990s comput
 \end{figure} 
 
 Today, both contact-based and vision-based devices are utilized for gesture recognition purposes. 
-He following subsection will the discuss the main properties of the two and review the differences.
+The following subsections will the discuss the main properties of the two and review their differences.
 
 \subsection{Contact-based Devices} 
 Contact-based devices are usually wearable objects, such as gloves or armbands, 
@@ -50,24 +50,60 @@ By monitoring this electrical activity, i.e the electric potential of the muscle
 Vision-based devices usually make use of either depth-aware cameras or stereo cameras to approximate a contour/silhouette or 
 3D representation of what's output by the cameras. A vision-based hand gesture recognition system thus takes "pictures"\footnote{Usually about 60 images/frames per second} of the 
 user's hands, and often applies various image processing techniques (e.g image normalization) before using a computer vision algorithm to detect if any known gesture is 
-being performed. As mention previously, these techniques require more processing than those of contact-based devices, but usually allows its user to use the system
-without using any form of gloves or armbands~\citep{Rautaray2015}. 
-
-Even though vision-based gesture recognition technologies are more complex, demanding, and prone to 
-errors in the form of inaccurate readings, they still have some important advantages over contact-based devices, as will be covered in the next section.
+being performed. Today, there are three primary vision-based technologies: \textit{Stereoscopic vision}, \textit{structured light} and 
+\textit{time of flight}~\citep{Ko2012} (see figure~\vref{fig:VBComparisions} for a comparison). 
+These technologies all use different techniques to construct 3D representations of the captured 2D images, as the 
+depth information is crucial in a vision-based gesture recognition system~\citep{Ko2012}.
 
 \begin{figure}%[h!] %[H]
-	\includegraphics[width=\linewidth]{pictures/leapmotion2.png}
-	\caption[The Leap Motion Controller]{The Leap Motion Controller is a vision-based gesture recognition devices that can be placed on a table top to observe the users hands.}
-	\label{fig:leapmotion}
+	\includegraphics[width=\linewidth]{pictures/Vision-based_comparisons.png}
+	\caption{Comparison of Vision-based sensor technologies~\citep{Ko2012}.}
+	\label{fig:VBComparisions}
 \end{figure} 
+
+Stereoscopic vision is arguably the most common of these vision-based methods and is a method that in many ways seem inspired by how the human body processes depth information.
+This technique uses two cameras - often referred to as a stereo camera - to obtain a left and right image (just as human eyes), which are sent to
+the tracking software. After such a stereo image (see figure~\vref{fig:stereo_image}) is captured the left- and right part are compared in software and a disparity image that relates the 
+displacement of objects in the images is created. This disparity image can in many ways be regarded as a sum of the offsets between the left and right images,
+due to their cameras' different point of views of the tracked object. 
+
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/stereo_image.jpg}
+	\caption[Stereo image captured by a stereoscopic vision device]{Stereo image captured by a stereoscopic vision device. These images are compared by looking at differences
+	(offsets) in the object's position and create a disparity image which is used to obtain depth information.}
+	\label{fig:stereo_image}
+\end{figure} 
+
+Structured light achieves a 3D representation of the tracked object in a different manner. This technique instead gain its depth information by projecting a pattern 
+of structured light, such as a grid or horizontal bars (somewhat similar a barcode reader), and look at the way this pattern deforms when hitting a surface~\citep{Ko2012}.
+By looking at how the pattern behaves, e.g~ that it curves around something, the system can thus conclude that e.g.~an object is present on the surface or what shape it has 
+(see figure~\vref{fig:structured_light} for an example of this). 
+A structured light system thus only need one camera, as opposed to the stereoscopic vision method. 
+
+Time of Flight is technique that acquires the depth information by measuring distances to the captured object by illumination, and 
+can thus be considered a LIDAR system\footnote{Light Detection And Ranging: The technique of emitting light to a surface and measure the time it takes to return to its source.}. 
+The system transmits light pulses from an emitter and a receiver determines the distance to different points of the measured object 
+by calculating the travel time of the light pulse from the emitter to the object and back to the receiver in a pixel format.
+
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/structured_light.jpg}
+	\caption[Vision-based recognition by structured light.]{Vision-based gesture recognition can be achieved by a structured light approach.
+		With structured light the depth information is obtained by projecting a pattern of structured light, 
+		and look at the way this pattern deforms when hitting a surface (such as the doll's face in the picture). Picture from~\citet{Ramamoorthi2007}}
+	\label{fig:structured_light}
+\end{figure} 
+
+As mention previously, these techniques require more processing than those of contact-based devices, but usually allows its user to use the system
+without using any form of gloves or armbands~\citep{Rautaray2015}. 
+Even though vision-based gesture recognition technologies are more complex, computationally demanding, and prone to 
+errors in the form of inaccurate readings, they still have some important advantages over contact-based devices, as will be covered in the next section.
 
 % The Leap Motion Controller is a small USB peripheral device which is designed to be placed on a physical desktop, 
 % facing upward. Using two monochromatic IR cameras and three infrared LEDs, the device observes a roughly hemispherical area, to a distance of about 1 meter, 
 % and generates almost 200 frames per second of reflected data~\citep{LeapMotion2016}.
 
 \subsection{Technology Comparison}
-Both approaches have their advantages and disadvantages (see~\citet{Rautaray2015} for a deeper discussion of these). 
+Both contact-based and vision-based technologies have their advantages and disadvantages (see~\citet{Rautaray2015} for a deeper discussion of these). 
 As contact-based devices avoid several of the challenges of vision-based devices, such as illumination and occlusion, they generally have a higher accuracy of recognition.
 In addition to this, and as explained earlier, contact-based devices usually also relies less on processing resources as the sensor data can be applied more directly than the
 frames captured by a vision-based system. Contact-based systems are also known to give more tactile feedback\footnote{A (simulated) sense of touch to indicate that the user e.g~
@@ -80,8 +116,16 @@ sterile environments (such as in surgery), as no contact with the device is requ
 The main disadvantage of contact-based devices is the potential health hazards, which may be caused by some of its components~\citep{Schultz2003}. 
 Research has suggested that mechanical sensor materials may raise symptoms of allergy and magnetic component may raise the risk of cancer~\citep{Nishikawa2003}. 
 Even though vision-based devices have the initial challenge of complex configuration and implementations, 
-they are still considered more user friendly and hence more suited for usage in long run. Because of the reasons outlined above this thesis will, from here on out, be
-primarily oriented towards vision-based gesture recognition technologies. 
+they are still considered more user friendly and hence more suited for usage in long run. 
+Because of these reasons the design review application should thus ideally utilize a vision-based gesture recognition technology. 
+
+Of the three vision-based technologies outlined above, stereoscopic vision is arguably the most promising one~\citep{Ko2012}.
+One of the reasons for this is that devices utilizing this technology have proved more reliable in variable light condition than their counterparts, 
+as both structured light- and time of flight technologies relies heavily on light to obtain depth information, while stereoscopic vision does so by looking at image offsets.
+Stereoscopic vision devices also usually have a better range, i.e they can capture objects farther away from the cameras, and 
+a lower material cost (they are cheaper, which also makes them more attractive for the consumer market)~\citep{Ko2012}.
+Because of this the stereoscopic vision technology is deemed the most appropriate vision-based technology to use with the design review application.
+In the next sections we will review central concepts when utilizing a vision-based gesture recognition system.
 
 % \section{The Primary Vision-based Technologies}
 % Today, there are three primary vision-based technologies that can acquire 3D images: Stereoscopic vision, structured light pattern and time of flight (TOF)~\citep{Ko2012}.
@@ -107,11 +151,7 @@ primarily oriented towards vision-based gesture recognition technologies.
 % A receiver determines the distance of the measured object by calculating the travel time of the light pulse from the emitter to the object and back to the receiver 
 % in a pixel format.
 % 
-% \begin{figure}%[h!] %[H]
-% 	\includegraphics[width=\linewidth]{pictures/Vision-based_comparisons.png}
-% 	\caption{Comparison of Vision-based sensor technologies~\citep{Ko2012}.}
-% 	\label{fig:VBComparisions}
-% \end{figure} 
+
 % 
 % \subsection{Comparing the Technologies} 
 % Stereoscopic vision is perhaps the most promising one for the consumer market as it has the lowest material cost~\citep{Ko2012}, 

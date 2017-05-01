@@ -6,6 +6,11 @@ and aims to highlight the important conceptual foundation for using the Leap Mot
 
 % The controller, approximately the size of a box of matches, allows for the precise and fluid tracking of multiple hands, fingers, and small objects in free space with 
 % sub-millimeter accuracy~\citep{Guna2014}.
+\begin{figure}%[h!] %[H]
+	\includegraphics[width=\linewidth]{pictures/leapmotion2.png}
+	\caption[The Leap Motion Controller]{The Leap Motion Controller is a vision-based gesture recognition devices that can be placed on a table top to observe the users hands.}
+	\label{fig:leapmotion}
+\end{figure} 
 
 \section{Physical properties}
 The Leap Motion Controller (see fig.~\vref{fig:leapmotion} and~\vref{fig:leapmotion2}) contains two stereoscopic cameras, with a field of view of about 150 degrees, 
@@ -30,12 +35,12 @@ In addition to this, the Leap Motion SDK also features integration with commerci
 This section will cover important concepts in the Leap API, which are thoroughly used in the thesis implementation.
 
 \subsection{Integration with the Unity editor}
-To use Leap Motion in a Unity project one can simply import the Leap Motion Core Asset Package, which includes the neccessary scripts and components to utilize Leap Motion in the 
+To use Leap Motion in a Unity project one can simply import the Leap Motion Core Asset Package, which includes the necessary scripts and components to utilize Leap Motion in the 
 project. In addition to this Leap Motion also offers different modules, which contain several useful assets. 
-Several of the assets provided by Leap Motion can often be included directly in the scene, such as LeapHandController from the core module and hand model prefabs 
+Several of the assets provided by Leap Motion can often be included directly in the scene, such as LeapHandController from the core module and the hand model prefabs 
 from the hands module.
 The LeapHandController is arguably the most important prefab in the Leap Motion Asset Packages and is responsible for representing the Leap Motion device 
-in the scene, which is important with regard to where the hand models, when active, are position relative to the camera. 
+in the scene, which is important with regard to where the hand models, when active, are positioned relative to the camera. 
 LeapHandController is also important as it has the LeapServiceProvider script, which contain several key function, as a component.
 
 The hand model prefabs are also useful assets, as - when used correctly- they can be present in the scene and mimic what the user's hands are doing.
@@ -48,26 +53,43 @@ hold his or her hands in an optimal position for the Leap Motion Controller to c
 % Hands are the main entity tracked by the Leap Motion controller, and it maintains an inner model of the human hand and validates the data from 
 % its sensors against this model. This allows the controller to track finger positions even when some fingers are not visible from the Leap Motion Controllers point of view.
 
-The Hand class represents a physical hand detected by the Leap, and is perhaps one of the most central abstractions in the Leap Motion API. 
+The Hand class represents a physical hand detected by the Leap Motion Controller, and is perhaps one of the most central abstractions in the Leap Motion API. 
 A Hand object provides access to lists of its pointables as well as attributes describing the hand position, orientation, and movement.
 Each hand-object also have object-representations for its fingers, palm etc, each with its own data.
-One common way to access the hands are through the Frame object, which is an object-oriented representation of the last captured frame of the device.
-Each frame will contain a list called \texttt{hands}, which will contain a hand-object per detected and tracked hand.
-These hands have their own characteristics, which are handily available to the developer. 
-Some examples of what variables the hand objects contain include:
+One common way to access the hands are through the \textit{frame object}, which is an object-oriented representation of the last captured frame of the device.
+Each of these frame objects contain a list called \texttt{hands}, which contains a hand-object per detected and tracked hand in that frame.
+These hand objects have their own instance variables, which provide useful information about the properties of the hand (e.g~its position and velocity relative to the Leap Motion
+Controller). Some examples of what variables the hand objects contain can be seen in table~\vref{tab:hand_variables}
 
-\begin{itemize}
-\item isRight, isLeft — Whether the hand is a left or a right hand.
-\item Palm Position — The center of the palm measured in millimeters from the Leap Motion origin.
-\item Palm Velocity — The speed and movement direction of the palm in millimeters per second.
-\item Palm Normal — A vector perpendicular to the plane formed by the palm of the hand. The vector points downward out of the palm.
-\item Direction — A vector pointing from the center of the palm toward the fingers.
-\item grabStrength, pinchStrength — Describe the posture of the hand.
-\item Motion factors — Provide relative scale, rotation, and translation factors for movement between two frames.
-\end{itemize}
+% \begin{itemize}
+% \item isRight, isLeft — Whether the hand is a left or a right hand.
+% \item Palm Position — The center of the palm measured in millimeters from the Leap Motion origin.
+% \item Palm Velocity — The speed and movement direction of the palm in millimeters per second.
+% \item Palm Normal — A vector perpendicular to the plane formed by the palm of the hand. The vector points downward out of the palm.
+% \item Direction — A vector pointing from the center of the palm toward the fingers.
+% \item grabStrength, pinchStrength — Describe the posture of the hand.
+% \item Motion factors — Provide relative scale, rotation, and translation factors for movement between two frames.
+% \end{itemize}
+
+\begin{table}[]
+\centering
+\label{tab:hand_variables}
+\begin{tabular}{p{2.5cm}| p{8cm}}
+	\textbf{Variable name} &  \textbf{Description} \\ \hline
+	isRight, isLeft & Whether the hand is a left or a right hand. \\ \hline
+	palmPosition    & The center of the palm measured in millimeters from the Leap Motion origin. \\ \hline
+	palmVelocity    & The speed and movement direction of the palm in millimeters per second.  \\ \hline
+	palmNormal      & A vector perpendicular to the plane formed by the palm of the hand. The vector points downward out of the palm.  \\ \hline
+	direction       & A vector pointing from the center of the palm toward the fingers.  \\ \hline
+	grabStrength    & Describe the posture of the hand.  \\ \hline
+	pinchStrength   & Describe the posture of the hand.  \\ \hline
+	motionFactors   & Provide relative scale, rotation, and translation factors for movement between two frames. 
+\end{tabular}
+\caption{Some of the instance variables of the Leap API Hand class.}
+\end{table}
 
 Figure~\vref{table:annotation_visibility_code} shows an example derived from the MovementController.cs class in the design review implementation. 
-This example highlights how hand-object can be acquired from the frame-object, how we can e.g.~make sure its a left-hand
+This example highlights how hand objects can be acquired from the frame object, how we can e.g.~make sure its a left-hand
 before proceeding, and how we can calculate a new position based on the hand position offset from the gesture origin.
 Note that this code is incomplete and only meant as a somewhat compact example.
 
@@ -121,9 +143,9 @@ Frame-object, and then find the relevant hand, palm, finger or finger-joint.
 
 The Leap Motion API uses a right-handed coordinate convention, meaning that when the user is positioned in front of the Leap Motion Controller the x-axis grows more positive 
 towards the right, the y-axis grows more positive upwards and the z-axis grows more positive towards the user (see~\vref{fig:leapmotion3}). 
-As frameworks like that of Unity uses a left-handed convention for its coordinate system, i.e that the z-axis grows more positive away from the 
+As some frameworks, like the Unity engine, use a left-handed convention for their coordinate system, i.e that the z-axis grows more positive away from the 
 user instead of towards, the Leap Motion API also does an appropriate convention to adhere to its software environment. 
-The Leap Motion API also adhere to differences in units, as e.g Unity uses a default unit of meters, while the Leap Motion uses millimeters.
+The Leap Motion API also adhere to differences in units, as e.g Unity uses a default unit of meters, while the Leap Motion uses millimeters as default.
 
 \begin{figure}%[h!] %[H]
 	\includegraphics[width=\linewidth]{pictures/Leap_Axes.png}
@@ -134,20 +156,24 @@ The Leap Motion API also adhere to differences in units, as e.g Unity uses a def
 \subsection{The Detection Utilities}
 To provide a common and high level interface to recognize gestures the Leap Motion API offers several detection utilities called \textit{detectors}.
 Detectors are scripts in the core asset package that serve as basic building blocks for hand action detections, and can e.g.~detect whether a certain finger is extended or not
-or which way the palm is facing. New detectors can also be created by the developer by extending
-the Detector base class and implement logic that calls "Active" when the detector turns on and "Deactivate" when it turns off.
+or which way the palm is facing. New detectors can also be created by extending
+the \texttt{Detector} base class and implement logic that calls \texttt{Active()} when the detector turns on - i.e when a certain condition is met (e.g~a gesture is performed) - 
+and \texttt{Deactivate()} when it turns off (i.e~ when the condition is no longer met).
 
 Several of these detector can be chained together using a \textit{Logic Gate} to create more complex expressions. 
-The Detector Logic Gate is itself a detector that logically combines two or more other detectors, using operations like AND, OR, NAND (not AND) and NOR (not OR), 
+The \texttt{DetectorLogicGate} is itself a detector that logically combines two or more other detectors, using operations like AND, OR, NAND (not AND) and NOR (not OR), 
 to determine its own state.
 If one thus were to make a thumb's up-gesture, one could use a logic gate with an AND-configuration together with a detector for detecting whether or not the
-thumb is extended and a detector for determining whether or not the thump if facing upward~\citep{LeapMotion2016}. 
+thumb is extended and a detector for determining whether or not the thump if facing upward. 
 
-The detectors also have some public variables, which can be adjusted for preference. These include "Period", which determines how often the detector checks the hand state,
-"Hand Model", which refers to which hand model is being observed and several "On and off values", which sets the thresholds for when the detector should be on (i.e the
-detector recognizes the property it's looking for) or off. The latter is can especially be the subject of repeated adjustment, as it is deemed crucial to find a good
+The detectors also have some public variables that can be adjusted to find the optimal "gesture sensitivity". These include \textit{Period}, which determines how often 
+the detector checks the hand state,
+\textit{HandModel}, which refers to which hand model is being observed by the detector and several on-or-off values, 
+which sets the thresholds for when the detector should be active (i.e the detector recognizes the property it's looking for) or off. 
+These on and off values can especially be the subject of repeated adjustment, as it is deemed crucial to find a good
 compromise between the two values (more on this in the implementation chapter). The detectors also has some public functions, with two of the most important ones being
-"OnActivate" and "OnDeactivate". OnActivate is called by its detector when the detector turns on (activates), while OnDeactivate is called when it turns off (deactivates). 
+\texttt{OnActivate()} and \texttt{OnDeactivate()}. \texttt{OnActivate()} is called by its detector when the detector turns on (activates), 
+while \texttt{OnDeactivate()} is called when it turns off (deactivates). 
 
 This outlines the primary means of creating gestures and connecting them to actions using the Leap Motion API. One can create gesture expressions, like the thumb's up-gesture
 described above, using a Logic Gate with AND. This Logic Gate will only be active (on), while all of the detectors it references ("is hooked up to") are active, so in our example

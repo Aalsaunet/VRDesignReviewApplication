@@ -12,12 +12,12 @@ According to~\citet{Hogan2003}, non-verbal communication makes up about two-thir
 categories of non-verbal communication, often conveying the most specific linguistic content.
 A gesture can be defined as a physical movement of the hands, arms, face and body with the intent to convey information or meaning~\citep{Mitra2007}, 
 and can often be classified into several categories. Even though 
-a gesture can involve several body parts hand gestures are of special interest to this thesis, as they are often the most used in non-verbal communication
+a gesture can involve several parts of the body, hand gestures are of special interest to this thesis, as they are often the most used in non-verbal communication
 and the most convenient to utilize in our design review application. 
-Because of this, the term "gestures" are often used synonymous with "hand gestures" for the remainder of this chapter.
+Because of this, the term "gestures" are often used synonymously with "hand gestures" for the remainder of this chapter.
 
-Gesture as an interaction and communication method not only between humans, but also between human and computer is an interesting topic, 
-and especially so when it comes to virtual reality as it sets some constraints with regard to more conventional interaction methods, like using 
+Gesture as an interaction and communication method not only between humans, but also between human and computer, is can be an interesting topic. 
+This is perhaps especially the case when it comes to virtual reality as it sets some constraints with regard to more conventional interaction methods, like using 
 a mouse and keyboard. \citet{Rautaray2015} also points out that there are situations in which
 these devices are impractical for human-computer interaction (HCI), and that this is particularly the case for interaction with 3D objects.
 As mentioned earlier, gestures can be divides into several categories, with two of the primary ones being \textit{static gestures} and \textit{dynamic gestures}.
@@ -56,15 +56,20 @@ static gesture recognition system~\citep{Rautaray2015}.
 \import{}{gr_principles.tex}
 
 
-\section{Design Considerations}
+\section{Summary and Design Considerations}
 \label{sec:gesture_design_considerations}
 With regard to the topics discussed in this chapter, the design review application will primarily be aimed toward usage with vision-based gesture recognition
-systems. There are three primary vision-based technologies in use today: Stereoscopic Vision, Structured Light Pattern and Time of Flight~\citep{Ko2012}.
-Of these Stereoscopic Vision devices are perhaps the most promising ones as they has proved more reliable in variable light condition than their counterparts, and they 
-also usually have a lower material cost (they are cheaper, which also makes them more attractive for the consumer market)~\citep{Ko2012}. 
-The Leap Motion Controller, which will be reviewed in chapter~\ref{chapter:technical}, is one such device. 
- 
+systems, in favor of contact-based system, as they are deemed more user friendly and doesn't have the same health risk associated with them.
+There are three primary vision-based technologies in use today: Stereoscopic vision, structured light and time of flight, where stereoscopic vision is 
+viewed as the most promising one by research (e.g.~by~\citet{Ko2012}). This is primary because it is deemed more robust to variable light conditions, have 
+a better range and a lower material cost. These factors also make stereoscopic vision devices more ideal for usage in regular office spaces than its competing technologies, 
+which in relevant in terms of the design review application. 
 
+In the next chapter the design of the design review application will be review, where one such stereoscopic vision device - The Leap Motion Controller - is identified as the target
+gesture recognition system. The Leap Motion Controller, which will be reviewed further in depth in chapter~\ref{chapter:technical}, has a convenient and high
+level API, which takes care of a lot of the challenges associated with detection, tracking and recognition (as discussed in section~\vref{sec:gr_principles}). 
+This also makes it an ideal candidate for usage in software project as one can interface with at a higher level and use several of its abstractions, 
+such as its \textit{detectors} (also reviewed in chapter~\ref{chapter:technical}), to rapidly prototype gesture recognizing applications. 
 
 
 % Carsten: Conclude the chapter with insights gained for the thesis, and consequences for your work on the thesis, such as choices made and work you have to do. 
