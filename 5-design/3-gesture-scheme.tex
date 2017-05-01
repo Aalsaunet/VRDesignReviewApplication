@@ -15,7 +15,7 @@ work. The only exception from this is the menu gesture, where one hand is assign
 by the gesture recognition system. The gestures should also be distinguishable from different angles, and thus support different camera positions (assuming a vision-based system).
 
 
-\subsection{The pinch gesture}
+\subsection{The Pinch Gesture}
 The pinch gesture will enable the user to rotate - and thus change orientation- by the Y and Z axis, as specified in "rotate-use case". 
 The pinch gesture is accomplished by squeezing the tip of the thumb and index fingers together while, preferably, keeping the rest of the fingers erect and the palm facing 
 somewhere between the table top and the displays (see~\vref{fig:gestures1} for an illustration). Once this gesture is done by the user, 
@@ -36,7 +36,7 @@ In addition this scheme also prevents the user from having to move his or her ha
 	\label{fig:gestures1}
 \end{figure} 
 
-\subsection{The palm-down gesture}
+\subsection{The Palm-down Gesture}
 \label{sec:palm_down_design}
 The palm-down gesture, alternatively called the Y-gesture, fulfills the up-and-down functionality specified in the move use case, and enables the user to 
 move along the y-axis, relative to its orientation. The palm-down gesture is accomplished simply by having all fingers extended, with all of them pointing in
@@ -46,13 +46,13 @@ so moving the hand to the
 right, as mention in the pinch gesture section, will cause no movement when the palm-down gesture is the active gesture. 
 Instead the user can move his or her hands up and down on the y-axis, so the distance to the table top increases or decreases.  
 
-\subsection{The palm-side gesture}
+\subsection{The Palm-side Gesture}
 The palm-side gesture, alternatively called the X-gesture, fulfills the left-and-right functionality specified in the move use case, and enables the user to 
 move along the x-axis, relative to its orientation. The palm-side gesture is accomplished simply by having all fingers extended, with all of them pointing in
 the direction of the display with the palm perpendicular (i.e~at a 90° or 270° angle) to the table top (see~\vref{fig:gestures2} for an illustration). 
 As one of the movement gesture, this gesture also uses the origin-offset scheme, but only with the x-axis monitored.
 
-\subsection{The fist gesture}
+\subsection{The Fist Gesture}
 The fist gesture, alternatively called the Z-gesture, fulfills the forward-and-backwards functionality specified in the move use case, and enables the user to 
 move along the z-axis, relative to its orientation. The fist gesture is accomplished by forming a fist (i.e with no fingers extended)
 and is used by extending and retracting the fist. 
@@ -65,7 +65,7 @@ and is used by extending and retracting the fist.
 	\label{fig:gestures2}
 \end{figure} 
 
-\subsection{The combined-movement gesture}
+\subsection{The Combined-movement Gesture}
 \label{sec:combined-movement}
 The combined-movement gesture, alternatively called the XYZ-gesture, is a special gesture that's only enabled if the "use combined gesture" option is selected in the menu.
 When this option is enabled the other movement gestures, i.e the palm-down-, the palm-side- and the fist gesture, should be disabled and instead replaced by a combined version. 
@@ -81,7 +81,7 @@ The idea behind reusing a gesture is because it limits the number of unique gest
 that the gesture recognition system often confuses them. The palm-down gesture is selected because is arguably is one of the more ergonomic and comfortable gestures to perform. 
 Also note that when the palm-down gesture is used in combined-gesture mode the origin-offset scheme is still used, but now all the three dimensions are monitored. 
 
-\subsection{The single-point gesture}
+\subsection{The Single-point Gesture}
 The single-point gesture is used to annotate a point or edit a point annotation, and is used by having the index finger extended and "pointing" at the display while the 
 rest of the fingers are non-extended (the thumb can be either extended or not extended). 
 When the user does the single-point gesture, a raycast (a kind of invisible beam) should be fired from the user towards where the user is facing.
@@ -89,7 +89,7 @@ The player should thus be able to aim, e.g.~by utilizing a crosshair in the midd
 the raycast. At the point the raycast collides with a part of the model a point annotation should be created. If the user use the single-point gesture again, while
 still aiming at the same spot (where an annotation now should be present), the annotation form should open up to allow the user to input annotation information. 
 
-\subsection{The double-point gesture}
+\subsection{The Double-point Gesture}
 The double-point gesture is used to annotate an object by highlighting it, or to edit a object annotation. The double-point gesture is invoked by pointing the index- and
 middle finger at the screen with a slight angle between them, while the rest of the fingers are non-extended (the thumb can be either extended or not extended).
 Apart from this the double-point gesture function very similar to the point gesture, with some few exception. Object annotations are edited by using the 
@@ -103,7 +103,7 @@ double-point gesture at them again, as opposed to using the single-point gesture
 	\label{fig:gestures3}
 \end{figure} 
 
-\subsection{The menu gesture}
+\subsection{The Menu Gesture}
 The menu gesture gives the user access to a menu especially design to use with gestures. The menu is invoked by extending all fingers on 
 "the menu hand" (the left hand by default) and turn it so the palm faces the user. When this gesture is recognized by the system a menu should 
 appear in the shape of a fan with its root in the palm of the user. The user can then use the index finger on the other hand, "the selector hand" (right hand by default),
@@ -111,9 +111,3 @@ and click on one of the buttons by holder the tip of the index finger within the
 If the tip of the index finger is close enough to the button, the button will start to "fill up", indicating that it is in the process of being pressed.
 Once the button is "filled up" the selection is registered and the action the button represents is carried out. Not that this mechanism is in place
 to prevent miss-clicks from the user.
-
-% Carsten:
-% Write a conclusion for this chapter.
-% I recommend that this contains a requirement for understanding the rendering engine and the user interaction in more detail.
-% You could then write a single chapter that comprises as 2 subsections, 
-% first (a) new text introducing Unity, because that is dearly missed, (b) the old chapter 4 text about the Leap motion. 

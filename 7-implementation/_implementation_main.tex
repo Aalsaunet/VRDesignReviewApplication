@@ -13,19 +13,38 @@
 % 
 % The ship model itself should receive a bit of attention in chapter 7.
 
-\section{External Assets}
-\label{sec:external_assets}
-\import{}{external_assets.tex}
+% \section{External Assets}
+% \label{sec:external_assets}
+% \import{}{external_assets.tex}
 
 % \section{The architecture}
-\begin{figure}%[h!] %[H]
-	\includegraphics{pictures/unity_hierarchy.png} % Create a better hierarchical view?
-	\caption[The Unity project hierarchy of the Design Review Application]{The Unity project hierarchy of the Design Review Application}
-	\label{fig:unity_hierarchy}
-\end{figure} 
+% \begin{figure}%[h!] %[H]
+% 	\includegraphics{pictures/unity_hierarchy.png} % Create a better hierarchical view?
+% 	\caption[The Unity project hierarchy of the Design Review Application]{The Unity project hierarchy of the Design Review Application}
+% 	\label{fig:unity_hierarchy}
+% \end{figure} 
 
+This chapter will document the implementation of the design review application, which was conducted according to the design - discussed in chapter~\ref{chapter:design} - 
+and utilizes many of the components reviewed in the technical review (chapter~\ref{chapter:technical}). The application is envisioned to be used by DNV GL Approval Engineers 
+(discussed in chapter~\ref{chapter:dnvgl}), which are responsible for reviewing design proposals in the form of complex 3D models and communicate their finding - whether it 
+be general information or reporting errors - to the designer. The designer then have to fix any shortcomings reported by the Approval Engineer before again submitting 
+his or her 3D model for approval. With the design review application, the Approval Engineer and designer could achieve this, and more, directly in the application.
+In this thesis implementation annotations can be stored in the model, edited, deleted and their appearance can be manipulated. The user is also able to navigate the 
+3D model using only gesture, only keyboard and mouse, or a combination of the two.
+
+The design review application is designed to primarily be used at a regular workspace, containing a computer and - optionally - a Leap Motion and a virtual reality headset.
+The user should thus be able to use the application without any virtual reality or gesture recognition peripherals, only with one of them (i.e a VR HMD or a Leap Motion Controller) 
+or with both of them. When using the application the user will thus always have keyboard and mouse available as an input method, 
+and can thus use these in combination with the Leap Motion Controller. If the application is started with a virtual reality HMD connected the application will also be displayed
+both on the HMD's lenses and on the desktop display, although certain settings - such as the field of view - is affected by the presence or absence of a VR HMD. 
+
+This chapter will primarily document how the implementation is organized as a Unity project, what the major components are, and how it performs its most important functions
+(such as recognizing gestures and creating annotations). When the implementation was completed, and thus had fulfilled the functional demands from the design, 
+the application was tested and evaluated by DNV GL employees to gain feedback for continued development. This evaluation, and the participants responses are 
+covered in chapter~\ref{chapter:evaluation}.
+
+\section{The Project Organization}
 The Unity project has four top-level game objects: \texttt{EventSystem}, \texttt{TankModel}, \texttt{GestureMenu} and \texttt{MasterController}. 
-%as visible in~\vref{fig:unity_hierarchy}. 
 
 The \texttt{EventSystem} game object is responsible for processing and handling events and input actions in the scene. 
 In this implementation a standard unity event system is used (generated when creating a new systems), with some modifications done for virtual reality.

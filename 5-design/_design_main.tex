@@ -41,8 +41,16 @@ This is a great benefit for the implementation phase as support for our choice o
 will ease the development process.
 
 Of these two popular game engines the Unity engine was selected as the software platform. This was both a request from DNV GL, 
-as they have experience with it from other projects, and also enabled the reuse of an asset bundle - containing a tanker model - from one of their other projects.
+as they have experience with it from other projects, and also enabled the reuse of an asset bundle - containing a tanker model (see figure~\vref{fig:tank_outside}) 
+- from one of their other projects.
 The Unity engine and its central concepts will be discussed in chapter~\vref{chapter:technical}.
+
+\begin{figure}%[h!] %[H]
+	\frame{\includegraphics[width=0.5\linewidth]{pictures/screenshots/tank_back.png}}
+	\frame{\includegraphics[width=0.5\linewidth]{pictures/screenshots/tank_half_profile.png}}
+	\caption[The oil tanker model provided by DNV GL.]{The oil tanker model provided by DNV GL. This was used as a default model in the design review application.}
+	\label{fig:tank_outside}
+\end{figure} 
 
 \subsection{Virtual Reality Device}
 The virtual reality design review application should be targeted toward usage with modern head-mounted VR devices.
@@ -64,7 +72,7 @@ The primary reasons behind this choice were as follows:
           on the whole body (such as Microsoft's Kinect~\citep{Zhang2012}).
     \item It has been relatively well received by several evaluations and has been reported to have a higher accuracy than similar systems in the same price range
             (see evaluations by~\citet{Weichert2013} and~\citet{Guna2014}).
-    \item It utilizes stereoscopic vision, which - as discussed in section~\vref{sec:gesture_design_considerations} - is arguably the most promising vision-based technology.
+    \item It utilizes stereoscopic vision, which - as discussed in section~\vref{sec:vision_based_comparison} - is arguably the most promising vision-based technology.
     \item It is both relatively small (the size of a matchbox) and cheap (about 70 euro at the time of writing), which makes it optimal for usage in regular work spaces. 
     \item It has a well-documented API\footnote{Application Programming Interface: A defined set of high-level functions or abstractions other software can utilize.}, which 
           supports multiple programming languages. This API is reviewed in chapter~\ref{chapter:technical}.
@@ -73,7 +81,7 @@ The primary reasons behind this choice were as follows:
 The Leap Motion controller also have software components tailored for use with the Unity Engine, which also made it a convenient choice. 
 These components ensure that the usage of the Leap Motion Controller in the design review application is conducted after Leap Motion's best practices. 
 
-\section{Final Thoughts on the Design}
+\section{Summary and Final Thoughts}
 With these software frameworks we get several pre-made software components, which enables us to focus more on the application specifics during the implementation phase.
 The high fidelity tanker model, provided by DNV GL, gives us a default model we can prototype all functionality on, before generalizing the application to accept other models as
 well. This generalization should be done before the application is used in any professional capacity, but it is outside the scope of this thesis. 
@@ -88,6 +96,11 @@ The technical review will expand upon the framework and devices choices we did i
 This should again lay the ground work for understanding the implementation, which is documented in chapter~\ref{chapter:implementation}.
 
 
+% Carsten:
+% Write a conclusion for this chapter.
+% I recommend that this contains a requirement for understanding the rendering engine and the user interaction in more detail.
+% You could then write a single chapter that comprises as 2 subsections, 
+% first (a) new text introducing Unity, because that is dearly missed, (b) the old chapter 4 text about the Leap motion. 
 
 % \section{Functionality limitations}
 % \subsection{Handling textual input with gestures}
