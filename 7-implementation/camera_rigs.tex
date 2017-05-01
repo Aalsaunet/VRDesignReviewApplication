@@ -1,5 +1,5 @@
-The \texttt{CameraRigs} game object is a direct child of the \texttt{MasterController} and holds three different game object, 
-which each represents its own camera-setup: \texttt{DesktopCameraRig}, which is meant to be used
+The \texttt{CameraRigs} game object is a direct child of the \texttt{MasterController} and holds three different game objects, 
+each representing its own camera-setup: \texttt{DesktopCameraRig}, which is meant to be used
 without virtual reality, \texttt{OculusCameraRig}, meant to be used with Oculus Rift HMDs, and \texttt{ViveCameraRigs}, meant to be used with the HTC Vive. 
 While the desktop rig uses one main camera, the virtual reality rigs (i.e the Oculus and Vive rigs) utilizes two main cameras (one per eye).
 These are slightly offset, by about the same length as the real-world distance between two eyes, and rendered separately.
@@ -13,7 +13,7 @@ This is done by:
 	\item Have the annotation-camera only render objects on the annotation-layer.
 	\item "Combine" the output of the two cameras by drawing the output from the annotation camera on top of the output from the main camera. 
 		  The main camera thus renders first and the annotation camera second. This is accomplished by giving the main camera \texttt{depth = 0} and the
-		  annotation camera \texttt{depth = 1}. 
+		  annotation camera \texttt{depth = 1} in the Unity Inspector. 
 \end{enumerate}
 
 By rendering these two categories of layers independently we get some flexibility and options with regards to how to present the annotations.
