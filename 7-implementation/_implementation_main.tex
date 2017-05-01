@@ -47,22 +47,25 @@ covered in chapter~\ref{chapter:evaluation}.
 The Unity project has four top-level game objects: \texttt{EventSystem}, \texttt{TankModel}, \texttt{GestureMenu} and \texttt{MasterController}. 
 
 The \texttt{EventSystem} game object is responsible for processing and handling events and input actions in the scene. 
-In this implementation a standard unity event system is used (generated when creating a new systems), with some modifications done for virtual reality.
-Most of these modification are accomplished by the \texttt{OVRInputModule} script, which inspired by an Oculus VR sample project. 
+In this implementation a standard unity event system is used (generated when creating a new project), with some modifications done for virtual reality.
+Most of these modification are accomplished by the attached \texttt{OVRInputModule} script, which is a script inspired by a similar one in an Oculus VR sample project. 
 Apart from this no other changes was done to \texttt{EventSystem} as it worked optimally "right out of the box".
 
 The \texttt{TankModel} game object contains several child objects that together make up the oiltank-model, which this application is based on.
 Originally the design included the functionality to load different models into the application and starts sessions, but 
-this was fell out of scope to both prioritize the gesture recognition and virtual reality aspect, and because of a low availability of similar models.
-The tank model has not received any changes during implementation and has been used as it was supplied. 
+this fell out of scope to both prioritize the gesture recognition and virtual reality aspects, and because of a low availability of similar models.
+The tanker model has not received any changes during implementation and has been used as it was supplied. 
 
 The \texttt{GestureMenu} and \texttt{MasterController} together contain most of the key components of the application and will, with their relevant child objects,
 be the main focus for the rest of this chapter. \texttt{GestureMenu} represents the gesture menu, which by default is available by directing the left hand palm in the 
-direction of the camera. The \texttt{MasterController} game object represents the player model and contains many of the most important game objects, in addition to
-holding many key scripts. The \texttt{MasterController}'s transform, with its position, rotation and scale, represents the user's position and orientation, 
+direction of the camera. The \texttt{MasterController} game object represents the \textit{player model} - i.e the user's virtual presence in the model - 
+and has many important game objects as children, in addition to holding many key scripts. 
+The \texttt{MasterController}'s transform, with its position, rotation and scale, represents the user's position and orientation, 
 and every child object of \texttt{MasterController} will have a position, rotation and scale that is relative to its own. This ensures
-that e.g.~the camera will always "follow" the user. Several of the important game objects that are covered in later sections are children of 
+that e.g.~the camera and hand models will always "follow" the user. Several of the important game objects that are covered in later sections are children of 
 the master controller for this reason. First, however, we will cover the important components of \texttt{MasterController}.
+Note that several times during this documentation we will discuss "the cameras" - in plural - as the implementation always utilizes two or more cameras simultaneously, 
+even through they appear as one to the user. This will be expanded upon in section~\vref{sec:camera_rigs}.
 
 \begin{figure}%[h!] %[H]
 	\includegraphics{pictures/unity_inspector.png} % Get better resolution?
@@ -109,3 +112,4 @@ the master controller for this reason. First, however, we will cover the importa
 \import{}{annotations.tex}
 
 
+\section{Summary}

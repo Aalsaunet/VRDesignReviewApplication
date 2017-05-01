@@ -1,44 +1,72 @@
 The master controller represents a collection of controllers, which all have the role of handling input from the user and translate it into
 the correct action. These controllers typically interact with the \texttt{GestureHand} class to check if a certain hand state-criterion
 is met, utilize its utility functions and check for changes every frame. The \texttt{GestureHand} will be covered more in depth in section~\vref{sec:gesturehand_class}, 
-but can in short be described as a class which is instantiated once per hand and keeps track of what potential gesture the hands are performing, the origin coordinates
+but can in short be described as a class which is instantiated once per hand and keeps track of what potential gestures the hands are performing, the origin coordinates
 for the potential gestures and other useful hand-specific information. 
 
-Another important component in the controllers, with the \texttt{AnnotationFormController} as an exception, is how they all relies on the Update-function, 
-which is called in a set order by the Unity runtime environment on every frame. During the update call these controllers checks for input relevant for its 
-purposes. The following four sections will cover the controllers that the master controller contains.
+Another important aspect of the controllers, with \texttt{Annotation\-Form\-Controller} as an exception, is how they all utilizes the \texttt{Update()} function, 
+which is called in a set order by the Unity runtime environment on every rendered frame. 
+During the update call these controllers check for conditions relevant for their purposes (such as a specific gesture being executed), 
+and invoke the relevant function(s) if this is the case. 
+The following four sections will cover the controllers that the master controller contains.
 
 \subsection{The Rotation Controller}
-The \texttt{RotationController} is a script component of the \texttt{MasterController} and its primary function to handle user input related to rotation.
+The \texttt{RotationController} is a script component of the \texttt{MasterController} and its primary function is to handle user input related to rotation.
 \texttt{RotationController} contains a number of instance variables, which will be described below. Some of these variables have a public access modifier, as
 this allows their values to be seen and edited from the Unity Inspector view (see figure~\vref{fig:unity_inspector} for an example). Variables that does not
-have this requirement, and is which should not be accessed from other parts of the application, are given a private access modifier.
+have this requirement, and which should not be accessed from other parts of the application, are given a private access modifier.
 
-\begin{itemize}
-    \item \texttt{public GestureHand leftHand, rightHand} - Stores the \texttt{GestureHand} instances that represents the left and right hand.
-    \item \texttt{public float sensitivity} - A float-point multiplier that determines the sensitivity of the rotational actions. 
-                                              All statements that rotates the camera is multiplied by this variable's value, which by default is 100.0.
-    \item \texttt{public float clampAngle} - An absolute value in degrees for the maximum rotation allowed along in y-axis. 
+% \begin{itemize}
+%     \item \texttt{public GestureHand leftHand, rightHand} - Stores the \texttt{GestureHand} instances that represents the left and right hand.
+%     \item \texttt{public float sensitivity} - A float-point multiplier that determines the sensitivity of the rotational actions. 
+%                                               All statements that rotates the camera is multiplied by this variable's value, which by default is 100.0.
+%     \item \texttt{public float clampAngle} - An absolute value in degrees for the maximum rotation allowed along in y-axis. 
+%                                             Its default is 90.0 (degrees), meaning that the user can rotate from looking straight ahead (0.0 degrees on the y-axis) to 
+%                                             straight up (90.0 degrees on the y-axis) and straight down (-90.0 degrees on the y-axis). Note that this rotational 
+%                                             limitation along the y-axis is in place to prevent the user from rotating the cameras (and the enire \texttt{MasterController}) 
+%                                             "upside-down". %Include an illustration?                                         
+%     \item \texttt{private float rotX, rotY} - The floatpoint variables rotX and rotY are intermediate values that stores the rotation of the \texttt{MasterController} (and thus the
+%                                               cameras) and is used to calculate the new rotation quaternion\footnote{A number system that extends the complex numbers. 
+%                                               Commonly used in calculations involving three-dimensional rotations~\citep{Kunze2004}.} 
+%                                               that is applied to the \texttt{MasterController}'s transform 
+%                                               every frame. Note that \texttt{RotationController} only allows rotation
+%                                               along the x-axis (left-and-right) and y-axis (up-and-down), and not along the z-axis (a "barrel roll" rotation). 
+%     \item \texttt{private InteractionBox iBox} - The \texttt{InteractionBox} class is a Leap Motion abstraction for the area (i.e the "box") above/in front of 
+%                                                 the Leap Motion device that is interactable (i.e where the device can detect and track the hands), 
+%                                                 and is used for normalizing purposes. 
+%                                                 This variable holds a reference to the latest \texttt{InteractionBox} object, which is updated on every Leap Motion-frame by
+%                                                 retrieving it from the Leap Motion \texttt{Frame} object (see table~\vref{table:annotation_visibility_code} for an example).  
+% \end{itemize}
+
+\paragraph{\texttt{public GestureHand leftHand, rightHand}}stores the \texttt{GestureHand} instances that represents the left and right hand.
+
+\paragraph{\texttt{public float sensitivity}}is a float-point multiplier that determines the sensitivity of the rotational actions. 
+                                             All statements that rotates the cameras are multiplied by this variable's value, which by default is 100.0.
+
+\paragraph{\texttt{public float clampAngle}}is an absolute value in degrees for the maximum rotation allowed along in y-axis. 
                                             Its default is 90.0 (degrees), meaning that the user can rotate from looking straight ahead (0.0 degrees on the y-axis) to 
                                             straight up (90.0 degrees on the y-axis) and straight down (-90.0 degrees on the y-axis). Note that this rotational 
                                             limitation along the y-axis is in place to prevent the user from rotating the cameras (and the enire \texttt{MasterController}) 
                                             "upside-down". %Include an illustration?                                         
-    \item \texttt{private float rotX, rotY} - The floatpoint variables rotX and rotY are intermediate values that stores the rotation of the \texttt{MasterController} (and thus the
-                                              cameras) and is used to calculate the new rotation quaternion that is applied to the \texttt{MasterController}'s transform 
+
+\paragraph{\texttt{private float rotX, rotY}}are intermediate floatpoint values that store the rotation of the \texttt{MasterController} (and thus the
+                                              cameras) and are used to calculate the new rotation quaternion\footnote{A number system that extends the complex numbers. 
+                                              Commonly used in calculations involving three-dimensional rotations~\citep{Kunze2004}.} 
+                                              that is applied to the \texttt{MasterController}'s transform 
                                               every frame. Note that \texttt{RotationController} only allows rotation
                                               along the x-axis (left-and-right) and y-axis (up-and-down), and not along the z-axis (a "barrel roll" rotation). 
-    \item \texttt{private InteractionBox iBox} - The \texttt{InteractionBox} class is a Leap Motion abstraction for the area (i.e the "box") above/in front of 
+
+\paragraph{\texttt{private InteractionBox iBox}}is a variable that holds a reference to the latest \texttt{InteractionBox} object, which is updated on every Leap Motion-frame by
+                                                retrieving it from the Leap Motion \texttt{Frame} object (see table~\vref{table:annotation_visibility_code} for an example). 
+                                                The \texttt{InteractionBox} class is a Leap Motion abstraction for the area (i.e the "box") above/in front of 
                                                 the Leap Motion device that is interactable (i.e where the device can detect and track the hands), 
                                                 and is used for normalizing purposes. 
-                                                This variable holds a reference to the latest InteractionBox-object, which is updated on every Leap Motion-frame by
-                                                retrieving it from the Leap Motion \texttt{Frame} object (see table~\vref{table:annotation_visibility_code} for an example).  
-\end{itemize}
-
+\\\\
+\noindent
 During its update function \texttt{RotationController} both checks for mouse movements and whether the pinch gesture is performed by either hand.
-
-Mouse movements are retrieved by calling the unity-function \texttt{Input.GetAxis(string axisName)} once per axis (i.e twice to get the x- and y axis). 
+Mouse movements are retrieved by calling the Unity function \texttt{Input.\-GetAxis(\-string axisName)} once per axis (i.e twice to get the x- and y axis). 
 The return value of this function is in the range -1 and 1 for each axis, which signifies in what direction the mouse is moving and at what speed. 
-If \texttt{Input.GetAxis("Mouse X")} e.g.~returns "-0.01" the mouse is moving very slowly to the left, while "1.0" would mean that is moves as fast as possible to the right. 
+If \texttt{Input.\-GetAxis(\-"Mouse X")} e.g.~returns "-0.01" the mouse is moving very slowly to the left, while "1.0" would mean that is moves as fast as possible to the right. 
 If calling GetAxis with the x-axis and the y-axis both yield 0, then the mouse is not moving and no rotation is performed.
 
 \begin{table}
@@ -61,20 +89,16 @@ void Update() { // Update is called every frame
 private void trackMouse() {
     float mouseX = Input.GetAxis("Mouse X");  // Get x-axis mouse movement
     float mouseY = -Input.GetAxis("Mouse Y");// Get y-axis mouse movement
-
-    rotY += mouseX * sensitivity * Time.deltaTime; // Transform mouse movements
-    rotX += mouseY * sensitivity * Time.deltaTime; // to rotations  
+    // Transform mouse movements to rotations
+    rotY += mouseX * sensitivity * Time.deltaTime; 
+    rotX += mouseY * sensitivity * Time.deltaTime;   
 }                                                                                
 \end{lstlisting}
 \caption[How mouse movement is captured and transformed to rotations]{How mouse movement is captured and transformed to rotations.} 
 \end{table}
 
-% // Create new position quaternion and update the MasterController's position
-%     Quaternion newRot = Quaternion.Euler(rotX, rotY, 0.0f);                          
-%     transform.rotation = newRot;  
-
-Before applying the captured mouse movements to the rotation it is multiplied by the sensitivity variable outlined above, and by \texttt{Time.deltaTime}.
-\texttt{Time.deltaTime} is another function in the Unity framework and returns the time in seconds it took to complete the last frame.
+Before applying the captured mouse movements to the rotation it is multiplied by the sensitivity variable outlined above, and by \texttt{Time.\-deltaTime}.
+\texttt{Time.\-deltaTime} is another function in the Unity framework and returns the time in seconds it took to complete the last frame.
 By applying this to the equation we make the calculation frame rate independent and essentially expresses that we want to rotate X amount per second, instead of
 X amount per frame.
 
@@ -147,7 +171,8 @@ private void TrackPinch(Hand hand, Leap.Vector originCoordinates)
 \subsection{The Movement Controller}
 The \texttt{MovementController} is another script component of the \texttt{MasterController}, and relates to the movement of the user. 
 This controller has many similarities with the \texttt{RotationController}, covered in the previous section, as it has very similar
-code for hand detection in the update method. If one of the hands have a different state than NONE, the \texttt{TrackHandMovement} function
+code for hand detection in the update method. If one of the hands have a different state than NONE\footnote{One of several hand states defined by the \texttt{GestureHand} class, 
+which is reviewed in section~\vref{sec:gesturehand_class}}, the \texttt{TrackHandMovement} function
 (see table~\vref{table:movement_gesture_code}) is called. In this function the hand position is obtained and a number of conditions are checked for:
 
 \begin{enumerate}
@@ -158,8 +183,11 @@ code for hand detection in the update method. If one of the hands have a differe
 \end{enumerate}
 
 If any of these criteria are met the appropriate action is taken. 
-For the last criterion this would mean going forward by X, where X is positive or negative float point number, 
-and is the result of (current coordinates - origin coordinates). Also note that although only one of these cases can trigger for each hand, the user can 
+For the last criterion this would mean going forward by X, where X is positive or negative float point number 
+and the result of $C_x - C_0$, where $C_x$ is the coordinates of the current hand position and $C_0$ is the coordinates of the origin hand position 
+(i.e the position the current gesture was first registered). 
+This calculation is done other places as well and is often referred to at a \textit{origin-offset scheme}.
+Also note that although only one of these cases can trigger for each hand, the user can 
 perform different gestures simultaneously using both hands, and thus potentially meet more of these criteria at the same time.
 
 \begin{table}
@@ -196,78 +224,110 @@ private void TrackHandMovement(Hand hand, GestureHand gestureHand)
 \caption[How movement gestures are detected and handling in \texttt{MovementController}]{How movement gestures are detected and handling in \texttt{MovementController}} 
 \end{table}
 
-As \texttt{MovementController} also support keyboard usage some keys are also tracked, primarily by using the two different unity built-in functions \texttt{Input.GetAxis} 
-and \texttt{Input.GetButton}. The former of these is used for movement along the x- and z-axis (left/right and forward/backward) and returns a continuous number in the 
-range <-1, 1>, while the latter is used for the rest of the actions and returns a discrete number. 
+As \texttt{Movement\-Controller} also support keyboard usage some keys are also tracked, primarily by using the two different unity built-in functions \texttt{Input.\-GetAxis(..)} 
+and \texttt{Input.\-GetButton(..)}. The former of these is used for movement along the x- and z-axis (left/right and forward/backward) and returns a continuous number in the 
+range $<-1, 1>$, while the latter is used for the rest of the actions and returns a discrete number. 
 \texttt{Input.GetAxis} is used in a similar fashion as mouse movement was captured, but instead using the arguments "Vertical" for the x-axis and "Horizontal" for the z-axis. 
 The movement calculations are similar to those found in \texttt{TrackHandMovement} (see table~\vref{table:movement_gesture_code}), only substituting or removing the
 hand position calculations (e.g.~\texttt{normalizedPoint.x - gestureHand.GetGestureOriginPosition().x}). 
 
-What key each movement corresponds to is configured in the Unity Input Manager, which is a build specific configuration that allows the user to customize the 
-controls at runtime. This also gives an abstraction layer for the developer, where a virtual "input name", e.g.~"down", is specified instead of which physical key that needs to be 
-used (e.g.~\texttt{KeyCode.DownArrow}). If the latter approach is preferred, Unity also offers the function \texttt{Input.GetKey(Keycode)}. 
-With this function the developer must specify a "physical" and "actual" key instead of a virtual one. 
-This means that the code \texttt{Input.GetKey(Keycode.Q)} always listen for the Q-button on the keyboard and never any other. 
-Because of the flexibility of using the Input Manager this implementation uses \texttt{Input.GetAxis} and \texttt{Input.GetButton} for all keyboard input.
+What key each movement corresponds to is configured in the Unity \textit{Input Manager}, which is a build specific configuration that allows the user to customize the 
+controls at runtime. This also gives an abstraction layer for the developer, where a \textit{virtual input name}, e.g.~"down", is specified instead of which physical key that needs to be 
+used (e.g.~\texttt{KeyCode.\-DownArrow}). If the latter approach is preferred, Unity also offers the function \texttt{Input.\-GetKey(\-Keycode)}. 
+With this function the developer must specify a "physical and actual" key instead of a virtual one. 
+This means that the code \texttt{Input.\-GetKey(\-Keycode.Q)} always listen for the Q-button on the keyboard and never any other. 
+Because of the flexibility the Input Manager offers in this regard this implementation uses \texttt{Input.\-GetAxis(..)} and \texttt{Input.\-GetButton(..)}, 
+which both support virtual input names, for all keyboard input.
 
-In this implementation the default keys for actions handled by the \texttt{MovementController} class are as follows:
+In the design review application the default keys for actions handled by the \texttt{Movement\-Controller} class are as follows:
 "Left" or "A" for left (-horizontal), "right" or "D" for right (+horizontal), "up" or "W" for going forward (+vertical), 
 "down" or "S" for going backward (-vertical), "Q" for going up (+altitude), "E" for going down (-altitude), "Left Shift" for increasing movement speed and
 "Left Ctrl" for decreasing movement speed. The movement speed is a multiplier that is applied to every movement (i.e the ones mention in this section),
 and it is increased or decreased in increments of 0.5.  
 
-\begin{figure}
-\label{fig:unity_build_startup}
-\includegraphics[width=\linewidth]{pictures/unity_build_startup.png}
-\caption[The Unity Input Manager enable startup configuration]{The Unity Input Manager enables the user to specify which input keys to use for certain actions
-when starting up the application}
-\end{figure}
-
+%  
+% \begin{figure}
+% \label{fig:unity_build_startup}
+% \includegraphics[width=\linewidth]{pictures/unity_build_startup.png}
+% \caption[The Unity Input Manager enable startup configuration]{The Unity Input Manager enables the user to specify which input keys to use for certain actions
+% when starting up the application}
+% \end{figure}
 
 \subsection{The Raycast Controller}
-The \texttt{RaycastController} is another script component of the \texttt{MasterController}, and is responsible for detecting certain input from the user, create raycast-beams 
-and handle when a raycast hits an object. When activated a raycast beam should be fired from the position of the \texttt{MasterController} and towards where the 
-\texttt{MasterController} is oriented ("toward were the camera is located"). To enable the user to aim the raycast properly a crosshair or cursor (depending on the 
-active camera rig) is present in the middle of the users field of view, just like in a first-person shooter game. 
+The \texttt{Raycast\-Controller} is another script component of the \texttt{Master\-Controller}, and is responsible for detecting certain input from the user, create raycast-beams 
+and handle when a raycast hits an object. When activated a raycast beam should be fired from the position of the \texttt{Master\-Controller} and towards where the 
+\texttt{Master\-Controller} is oriented (and towards were the camera is facing). To enable the user to aim the raycast properly a crosshair or cursor (depending on the 
+active camera rig\footnote{Different camera settings for desktop and VR usage (Oculus Rift and HTC Vive). Reviewed in section~\vref{sec:camera_rigs}}) 
+is present in the middle of the users field of view, just like in a first-person shooter game. 
 If a raycast is created and collides with a part of the model (i.e an object with a collider that is within range), one of the following cases occur:
 
 \begin{enumerate}
     \item A point annotation is created at the collision point (where the raycast hit the object).
     \item The object the raycast hit gets an annotation attached to it and have its material changed to indicate that it is annotated.
-    \item The annotation form because active and edits the target point annotation.
-    \item The annotation form because active and edits the target object annotation.
+    \item The annotation form becomes active, enabling the user to edit the target point annotation.
+    \item The annotation form because active, enabling the user to edit the target object annotation.
 \end{enumerate}
  
-These scenarios and which one of them is triggered can be summarized with the following pseudo code:
+These scenarios, and which one of them is triggered when, is summarized in the pseudo code in table~\vref{table:raycast_scenarios}.
 
-\begin{table}
+% \begin{table}
+% \label{table:raycast_scenarios}
+% \lstset{style=csharp}
+% \begin{lstlisting}
+% if singlePointGesture OR leftMouseClick is active
+%     
+%     objectWhichWasHit = createRayCastBeam();
+%     if objectWhichWasHit is a point annotation
+%         editTheHitPointAnnotation();
+%     else 
+%         // Place a point annotation on the object, 
+%         // even if its on top of an object annotation
+%         CreatePointAnnotation();  
+% 
+% else if doublePointGesture OR right-click-mouse is active   
+%     
+%     objectWhichWasHit = createRayCastBeam();
+%     if objectWhichWasHit is an object annotation
+%         editTheHitObjectAnnotation();
+% 
+%     else if (objectWhichWasHit is NOT a point annotation)
+%         // Object annotation of a point annotation is not allowed.
+%         CreateObjectAnnotation(); 
+% 
+% else 
+%     Go check for other stuff!                                                                 
+% \end{lstlisting}
+% \caption[Pseudo code for the raycast scenarios]{Pseudo code for the raycast scenarios} 
+% \end{table}
+
+\begin{algorithm}[H]
 \label{table:raycast_scenarios}
-\begin{lstlisting}
-if singlePointGesture OR leftMouseClick is active
-    
-    objectWhichWasHit = createRayCastBeam();
-    if objectWhichWasHit is a point annotation
-        editTheHitPointAnnotation();
-    else 
-        // Place a point annotation on the object, 
-        // even if its on top of an object annotation
-        CreatePointAnnotation();  
+\uIf{SPG is active OR LMC is active}{
+    objectHit = createRayCastBeam()\;
+    \uIf{objectHit is a pointAnnotation}{
+        EditTheHitPointAnnotation()\;
+    }
+    \Else{
+        CreatePointAnnotation()\;
+    }
+}
 
-else if doublePointGesture OR right-click-mouse is active   
-    
-    objectWhichWasHit = createRayCastBeam();
-    if objectWhichWasHit is an object annotation
-        editTheHitObjectAnnotation();
+\uElseIf{DPG is active OR RMC is active}{
+    objectHit = createRayCastBeam()\;
+    \uIf{objectHit is a objectAnnotation}{
+        EditTheHitObjectAnnotation()\;
+    }
+    \uElseIf{objectWhichWasHit is NOT a pointAnnotation}{
+        CreatePointAnnotation()\;
+    }
+}
 
-    else if (objectWhichWasHit is NOT a point annotation
-        // Object annotation of a point annotation is not allowed.
-        CreateObjectAnnotation(); 
-
-else 
-    Go check for other stuff!                                                                 
-\end{lstlisting}
-\caption[Pseudo code for the raycast scenarios]{Pseudo code for the raycast scenarios} 
-\end{table}
+\Else{
+    Go check for other stuff!
+}
+\caption[Pseudo code for the raycast scenarios]{Pseudo code for the raycast scenarios. 
+SPG = singlePointGesture, DPG = doublePointGesture, LMC = leftMouseClick and RMC = rightMouseClick}
+\end{algorithm}
 
 Note that a raycast beam can be created by a single-point gesture or "Fire1" (a input name in the Input Manager that defaults to the left mouse button), or 
 by a double-point gesture or "Fire2" (right mouse button by default). The logic for these to scenarios are handled independently as seen in the pseudo code in 
@@ -277,16 +337,18 @@ The \texttt{RayCastController} contains the following instance variables:
 \begin{itemize}
 \item \texttt{public float raycastRange} - The raycasts maximum range, meaning the user has to be within N distance from an object for the raycast to hit it. Default is 50.0f.                             
 \item \texttt{public Camera mainCamera} - A reference to the main camera of the active camera rig.                                       
-\item \texttt{public GameObject annotationPrefab} - A reference to the point annotation prefab. This serves as a blue print for new point annotations.
+\item \texttt{public GameObject annotationPrefab} - A reference to the point annotation prefab. This serves as a template for new point annotations.
 \item \texttt{public Material markedMaterial} - The initial material to use for marking object annotations.
 \item \texttt{public bool uiOpen} - This variables tells whether or not the annotation form is open (i.e active and visible to the user).
 \item \texttt{public GestureHand leftHand, rightHand} - References to the left and right hand's \texttt{GestureHand} instances.
 \item \texttt{private int annotationCounter} - A count of active point annotation in the scene. This variable is used to assign annotations IDs upon their creation.
 \item \texttt{private bool annotationPlacedDuringGesture} - Whether or not a point annotation or an object annotation was placed during the current active gestures. 
-\item \texttt{private AnnotationFormController orchestrator} - A reference to a singleton \texttt{AnnotationFormController}. This controller is described more in the next section.
+\item \texttt{private AnnotationFormController orchestrator} - A reference to a singleton \texttt{AnnotationFormController} object. 
+        This controller is described more in the next section.
 \end{itemize}
 
-The update function checks for button clicks ("Fire1" and "Fire2") and gestures ("SINGLE\_POINT" and "DOUBLE\_POINT"), each with its own additional conditions.
+The update function checks for button clicks (\texttt{Fire1} and \texttt{Fire2}) and gestures (\texttt{SINGLE\_POINT} and \texttt{DOUBLE\_POINT}), 
+each with its own additional conditions.
 If a button is clicked the value of \texttt{uiOpen} needs to be false. This is because we don't want to fire a raycast when the user interface (i.e the annotation form) is 
 open (i.e when \texttt{uiOpen = true}). Gestures work a little differently as the detectors are disabled when the annotation form is open, and we thus don't have to check 
 for the value of \texttt{uiOpen}.
