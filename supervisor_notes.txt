@@ -15,12 +15,3 @@ Generelt, liker jeg også å avslutte hvert kapittel med et kort “Summary” s
 - bruke hva som mangler til å peke på neste kapittel.
 —> merk at du har noen slike seksjoner som heter noe annet (Final thoughts on the Design, Lessons Learned), 
 men se om du jan få inn mer av dette, og til å inkludere alle punktene jeg beskriver (da blir det også konsistent igjennom oppgaven)
-
-Kap. 8:
-two rounds of user testing seasons were —> two rounds of user testing SESSIONS were  ??
-
-Du MÅ få en konklusjon klar. Vanligvis har vi en struktur a la:
-- summary (hvor du også gjentar oppgavestillignen fra 1.3) og viser hvordan du har løst denne.
-- main contributions (kan slåes sammen med “summary) - dette er en ren gjentagelse fra det avsnittet jeg foreslår for kapittel 1
-- future work
-(merk at nåværende kapittel sier “ESSAY”)

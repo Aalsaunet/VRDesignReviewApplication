@@ -7,7 +7,7 @@ this we discuss ideas for future work.
 \section{Summary}
 In this thesis, we have reviewed how the current state-of-the-art virtual reality- and vision-based gesture recognition technologies can be utilized 
 in the design review process of the major international classification society DNV GL. We did so by first reviewing the roles and responsibilities of classification societies 
-in general, before discussed DNV GL's current workflow in chapter~\ref{chapter:dnvgl}. In this chapter we also mentioned some initial design ideas for how a full-featured 
+in general, before discussing DNV GL's current workflow in chapter~\ref{chapter:dnvgl}. In this chapter we also mentioned some initial design ideas for how a full-featured 
 design review application might look, and what functionality it could offer to improve DNV GL's design review workflow. This includes
 conducting virtual design review meetings, were the designer and reviewer could meet in the 3D model, interact, survey- and annotate it together.
 These annotations could be stored in a database - a system keeping track of their history, information and states - and be accessed from multiple platforms - like 
@@ -18,7 +18,7 @@ and gesture recognition technology - allowing the users to work with the 3D mode
 In chapter~\ref{chapter:vr}, we reviewed the basics of virtual reality technology and the various challenges of developing a virtual reality system. 
 Specifically, we covered the big performance demands virtual reality places on a system, as having a low latency is crucial to avoid user discomfort (such
 as virtual reality sickness). To achieve a low enough latency it is important to have both a high enough frame rate - i.e the number of frames rendered by the system per second - 
-and a high refresh rate - i.e the number of times the display hardware updates its buffers per second. The latency doesn't get better than the weakest of these two allow, so it is 
+and a high refresh rate - i.e the number of times the display hardware updates its buffers per second. The latency does not get better than the weakest of these two allow, so it is 
 important that both the frame- and refresh rate are high enough. Asynchronous reprojection is a performance-cheap method to combat a low frame rate by inserting "pseudo-frames" in 
 the frame buffer, created by the manipulation of previously rendered frames. 
 Even though asynchronous reprojection might give a high perceived frame rate, a high frame rate without the use of asynchronous reprojection is still 
@@ -34,7 +34,7 @@ and contact-based. We compared the two and concluded that the design review appl
 advantages over contact-based, such as having lower health risk associated with them and a higher user friendliness. We also discussed the three primary vision-based 
 technologies - stereoscopic vision, structured light and time of flight - and concluded that we would target a stereoscopic vision system, as these are 
 arguably the most promising for use in an office environment. After this we discussed the three stages of gesture recognition - detection, tracking and recognition - 
-and several approaches to each of these phases. In the chapters conclusion we conclude to use the Leap Motion Controller as our gesture recognition system, 
+and several approaches to each of these phases. In the chapter's conclusion we conclude to use the Leap Motion Controller as our gesture recognition system, 
 as it is both a stereoscopic vision system - and thus also vision-based - and also because it has a well documented high-level API and an attractive size and price.
 
 In chapter~\ref{chapter:design}, we defined the design of the design review application. This was in part done by use cases specifying what functionality should 
@@ -50,7 +50,7 @@ Emphasis were put on commonly used components in Unity, such as GameObjects, and
 In chapter~\ref{chapter:implementation}, we documented our implementation by reviewing several important game objects and scripts in our Unity project. 
 This was done by first reviewing the project organization and explaining the different ideas behind the top-level objects. 
 After this we reviewed the different controller - i.e the \texttt{Rotation\-Controller}, \texttt{Movement\-Controller}, \texttt{Raycast\-Controller} and 
-\texttt{Annotation\-Form\-Controller} - that made up the \texttt{MasterController}, which essential is the virtual representation of the user. 
+\texttt{Annotation\-Form\-Controller} - that made up the \texttt{MasterController}, which essentially is the virtual representation of the user. 
 After this we discussed the ideas behind the different camera rigs - i.e that the VR-scenarios and desktop-scenarios (i.e without using any VR HMD) - should
 be treated differently. This was followed by a discussion of the \texttt{World\-Space\-Canvas}, the canvas that exists in the 3D space - as opposed to only 
 on 2D screen space - and hosts the annotation form. After this we discussed the \texttt{GestureHand} class, representing a hand and keeping track of its states, 
@@ -59,26 +59,27 @@ and how the two types of annotation - i.e point annotations and object annotatio
 
 In chapter~\ref{chapter:evaluation}, we discussed how the application was tested by three DNV GL employees, what they were asked to to, what questions they 
 were asked and how they responded. We also made several observations during these user tests, which lead to some interesting ideas and hypotheses. 
-One of these observations were how the participants seem to prefer that the gesture recognition system to failed to recognize some attempts at using a gesture,
-in exchange for decrease the number of times the system perceived a gesture that the participant didn't actually attempt. 
+One of these observations were how the participants seem to prefer that the gesture recognition system failed to recognize some attempts at using a gesture,
+in exchange for decreasing the number of times the system perceived a gesture that the participant did not actually attempt. 
 Other findings include how the user seem to prefer using gesture recognition with virtual reality - rather than without -, how the relative difficulty of performing 
-a gesture is subjective and how the participants used some movement gesture much more often than others.
+a gesture is subjective and how the participants used some movement gesture much more often than other movement gestures.
 
 \section{Future Work}
-As mentioned in our review of the application evaluation in chapter~\ref{chapter:evaluation} - and in the previous section - there were several interesting findings, 
+As mentioned in our review of the application evaluation in chapter~\ref{chapter:evaluation} - and in the previous section - there were several interesting findings, % !!!
 which could be explored in future research. 
 
-One interesting topic of study could be how a gesture scheme (i.e the set of possible gestures) should be optimally design to maximize its precision 
+One interesting topic of study could be how a gesture scheme (i.e the set of possible gestures) should be optimally designed to maximize its precision 
 and accuracy, thus also maximizing the amount of true positives and true negatives, while minimizing the amount of false positives and false negatives. 
 The evaluation chapter briefly mentioned the gesture sensitivity preferences, as well as differences in individual gesture preferences, which both
 would be relevant observations for such a study.
 
-Another import challenge in the field of virtual reality is to uncover more factors that correlate with susceptibility to virtual reality sickness, 
+Another important challenge in the field of virtual reality is to uncover more factors that correlate with susceptibility to virtual reality sickness, 
 both with regard to individual differences and from an application design standpoint. As covered in section~\vref{sec:vr_sickness}, several factors are either hypothesized or 
-proved to correlate with proneness to virtual reality sickness, but more research would certainly be beneficial, especially when considering conflicting findings (such as 
+proved to correlate with proneness to virtual reality sickness, but more research would certainly be beneficial, especially when considering conflicting findings, such as 
 how age - especially when around 50 years of age - affect the susceptibility to virtual reality sickness.  
 
 This is just a few examples of many potential research topics within virtual reality technology, gesture recognition technology and how these can be used together.
+% Noe som runder av mer! 
 
 
 % One of these observations were how the participants seem to prefer false negatives over false positives in the gesture recognition system -
