@@ -7,7 +7,7 @@ this we discuss ideas for future work.
 \section{Summary}
 In this thesis, we have reviewed how the current state-of-the-art virtual reality- and vision-based gesture recognition technologies can be utilized 
 in the design review process of the major international classification society DNV GL. We did so by first reviewing the roles and responsibilities of classification societies 
-in general, before discussed DNV GL's current workflow in chapter~\vref{chapter:dnvgl}. In this chapter we also mentioned some initial design ideas for how a full-featured 
+in general, before discussed DNV GL's current workflow in chapter~\ref{chapter:dnvgl}. In this chapter we also mentioned some initial design ideas for how a full-featured 
 design review application might look, and what functionality it could offer to improve DNV GL's design review workflow. This includes
 conducting virtual design review meetings, were the designer and reviewer could meet in the 3D model, interact, survey- and annotate it together.
 These annotations could be stored in a database - a system keeping track of their history, information and states - and be accessed from multiple platforms - like 
@@ -15,68 +15,106 @@ an issue tracker or a digital scrum board. The interaction, surveying, and exper
 giving the unique sense of scale and a depth that is invaluable for a design - 
 and gesture recognition technology - allowing the users to work with the 3D model in new and innovative ways. 
 
-In chapter~\vref{chapter:vr} we reviewed the basics of virtual reality technology and the various challenges of developing a virtual reality system. 
-Specifically, we covered the big performance demands a virtual reality system places on a computer, as having a low latency is crucial to avoid user discomfort (such
-as virtual reality sickness). To achieve a low enough latency it is required to have a high enough frame rate - i.e the number of frames rendered by the system per second - 
-coupled with a high refresh rate - i.e the number of times the display hardware updates its buffers per second. Latency does get better than the weakest of these two, so it is 
-important that both the frame- and refresh rate are high enough. Asynchronous reprojection is a method to combat a low frame rate by also inserting "pseudo-frames", 
-created by manipulating previously rendered frames, which might give a higher perceived frame rate. A high frame rate without using asynchronous reprojection is still 
-recommended. A sufficiently high display resolution and pixel density are also important perform in virtual reality system, both to avoid the screen-door effect as well
-as positional judder. Virtual reality also impacts how VR-application should be design and implemented. Failing to meet these demands can increase the 
+In chapter~\ref{chapter:vr}, we reviewed the basics of virtual reality technology and the various challenges of developing a virtual reality system. 
+Specifically, we covered the big performance demands virtual reality places on a system, as having a low latency is crucial to avoid user discomfort (such
+as virtual reality sickness). To achieve a low enough latency it is important to have both a high enough frame rate - i.e the number of frames rendered by the system per second - 
+and a high refresh rate - i.e the number of times the display hardware updates its buffers per second. The latency doesn't get better than the weakest of these two allow, so it is 
+important that both the frame- and refresh rate are high enough. Asynchronous reprojection is a performance-cheap method to combat a low frame rate by inserting "pseudo-frames" in 
+the frame buffer, created by the manipulation of previously rendered frames. 
+Even though asynchronous reprojection might give a high perceived frame rate, a high frame rate without the use of asynchronous reprojection is still 
+recommended. A sufficiently high display resolution and pixel density are also important factors in the performance of a virtual reality system. 
+Failing to deliver a high enough display resolution and pixel density can - among other things - lead to negative effects such as the screen-door effect, 
+as well as positional judder and other visual artifacts. 
+Virtual reality also impacts how VR-application should be design and implemented. Failing to meet these demands can increase the 
 risk of virtual reality sickness, a condition similar to motion sickness. There are several factors that impact a virtual reality-user's susceptibility for virtual 
 reality sickness, which can be dividing into those caused by individual differences and those caused by the application or virtual reality system. 
 
-In chapter~\vref{chapter:grt} we reviewed the basics of gesture recognition technology and discussed the two primary categories of gesture recognition devices: Vision-based
+In chapter~\ref{chapter:grt}, we reviewed the basics of gesture recognition technology and discussed the two primary categories of gesture recognition devices: Vision-based
 and contact-based. We compared the two and concluded that the design review application would target a vision-based gesture recognition system, as these have several important
 advantages over contact-based, such as having lower health risk associated with them and a higher user friendliness. We also discussed the three primary vision-based 
 technologies - stereoscopic vision, structured light and time of flight - and concluded that we would target a stereoscopic vision system, as these are 
 arguably the most promising for use in an office environment. After this we discussed the three stages of gesture recognition - detection, tracking and recognition - 
-and several approaches to each of these phases. In the chapters conclussion we conclude to use the Leap Motion Controller as our gesture recognition system, 
+and several approaches to each of these phases. In the chapters conclusion we conclude to use the Leap Motion Controller as our gesture recognition system, 
 as it is both a stereoscopic vision system - and thus also vision-based - and also because it has a well documented high-level API and an attractive size and price.
 
-% In chapter~\vref{chapter:grt} 
+In chapter~\ref{chapter:design}, we defined the design of the design review application. This was in part done by use cases specifying what functionality should 
+be included, such as be able to move in all three dimensions and be able to annotate objects, and in part done by defining the gesture scheme. The gesture scheme
+described what gestures a user of the application should be able to perform and how they should be performed. The design also addressed various technology 
+choices for the application. The Unity game engine was selected as a software framework as it has good compatibility with the other technology we are using and 
+because it allowed us to use a pre-made asset from DNV GL - the tanker model. With regard to virtual reality HMD we concluded that both Oculus Rift and the 
+HTC Vive should be supported, as both were available to us during the development.
 
+In chapter~\ref{chapter:technical} we reviewed some of the documentation of Unity and Leap Motion to discuss their central concepts. 
+Emphasis were put on commonly used components in Unity, such as GameObjects, and the Leap Motion API.
 
+In chapter~\ref{chapter:implementation}, we documented our implementation by reviewing several important game objects and scripts in our Unity project. 
+This was done by first reviewing the project organization and explaining the different ideas behind the top-level objects. 
+After this we reviewed the different controller - i.e the \texttt{Rotation\-Controller}, \texttt{Movement\-Controller}, \texttt{Raycast\-Controller} and 
+\texttt{Annotation\-Form\-Controller} - that made up the \texttt{MasterController}, which essential is the virtual representation of the user. 
+After this we discussed the ideas behind the different camera rigs - i.e that the VR-scenarios and desktop-scenarios (i.e without using any VR HMD) - should
+be treated differently. This was followed by a discussion of the \texttt{World\-Space\-Canvas}, the canvas that exists in the 3D space - as opposed to only 
+on 2D screen space - and hosts the annotation form. After this we discussed the \texttt{GestureHand} class, representing a hand and keeping track of its states, 
+and the various composite detectors - enabling us to recognize the gestures the user is performing. We then discussed the menu, created by using the Hover UI Kit,
+and how the two types of annotation - i.e point annotations and object annotations - are implemented. 
 
-
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%
-This thesis reviews how the current state-of-the-art virtual reality- and vision-based gesture recognition technologies can be utilized in a professional capacity, 
-and more specifically, to the design reviews of complex 3D models. 
-Instead of printing the model to paper, drawing on the paper, scanning it and sending it by email - as isn't an uncommon workflow today, 
-the designer and reviewer could have a virtual design review meeting, were they could meet in the 3D model, interact, survey- and annotate it together. 
-They could manipulate the model, and change how the annotations appear in the models.
-These annotations could be stored in a database - a system keeping track of their history, information and states - and be accessed from multiple platforms - like 
-an issue tracker or a digital scrum board. The interaction, surveying, and experience as a whole, could be enhanced by virtual reality technology -
-giving the unique sense of scale and a depth that is invaluable for a design - 
-and gesture recognition technology - allowing the users to work with the 3D model in new and innovative ways. 
-
-This is the vision of DNV GL, who regularly conducts such design reviews. % Hmm, ta bort
-To address this, and evaluate this vision's feasibility, this thesis implements such a design review application, and 
-reviews its requirements and design, documents its implementation details and evaluates its performance by conducting user test sessions.
-In the prototype application, developed as part of this thesis, the user is able to navigate 3D models, annotate them - by either creating 
-annotation orbs, which are physical object in the model, or by attaching an annotation directly to an object - and perform various other actions. 
-This can be done in a conventional manner, i.e by mouse, keyboard and a display, by only using gestures (hand movements) and a virtual reality headset, or 
-a combination of the two.
-
-To ensure that the application is developed using state-of-the-art technology, and that it addresses the challenges such technology presents, 
-the field of virtual reality is reviewed and discussed. In addition to this, the gesture recognition field is also reviewed, as this alternate 
-input method can have the potential to increase the usability of 3D-based applications - such as the design review application -, especially when coupled with virtual reality.
-Several software frameworks and devices that enable this technology are also discussed in this thesis, as we wanted to quickly prototype the 
-application using these state-of-the-art tools.
-We chose to use readily available virtual reality tools, such as the virtual reality headsets Oculus Rift CV1 and HTC Vive, coupled with
-the Leap Motion Controller, a stereoscopic vision-based gesture recognition device. The software was developed using the Unity 
-framework - a popular game engine - because of its capability and as it allowed us to interface with other projects in DNV GL
-
+In chapter~\ref{chapter:evaluation}, we discussed how the application was tested by three DNV GL employees, what they were asked to to, what questions they 
+were asked and how they responded. We also made several observations during these user tests, which lead to some interesting ideas and hypotheses. 
+One of these observations were how the participants seem to prefer that the gesture recognition system to failed to recognize some attempts at using a gesture,
+in exchange for decrease the number of times the system perceived a gesture that the participant didn't actually attempt. 
+Other findings include how the user seem to prefer using gesture recognition with virtual reality - rather than without -, how the relative difficulty of performing 
+a gesture is subjective and how the participants used some movement gesture much more often than others.
 
 \section{Future Work}
+As mentioned in our review of the application evaluation in chapter~\ref{chapter:evaluation} - and in the previous section - there were several interesting findings, 
+which could be explored in future research. 
+
+One interesting topic of study could be how a gesture scheme (i.e the set of possible gestures) should be optimally design to maximize its precision 
+and accuracy, thus also maximizing the amount of true positives and true negatives, while minimizing the amount of false positives and false negatives. 
+The evaluation chapter briefly mentioned the gesture sensitivity preferences, as well as differences in individual gesture preferences, which both
+would be relevant observations for such a study.
+
+Another import challenge in the field of virtual reality is to uncover more factors that correlate with susceptibility to virtual reality sickness, 
+both with regard to individual differences and from an application design standpoint. As covered in section~\vref{sec:vr_sickness}, several factors are either hypothesized or 
+proved to correlate with proneness to virtual reality sickness, but more research would certainly be beneficial, especially when considering conflicting findings (such as 
+how age - especially when around 50 years of age - affect the susceptibility to virtual reality sickness.  
+
+This is just a few examples of many potential research topics within virtual reality technology, gesture recognition technology and how these can be used together.
+
+
+% One of these observations were how the participants seem to prefer false negatives over false positives in the gesture recognition system -
+% meaning they preferred the system to occasionally miss some gestures attempted by them, than respond to a perceived gesture which the participant didn't actually attempt.
 
 
 
 
-
+% %%%%%%%%%%%%%%%%%%%%%%%
+% This thesis reviews how the current state-of-the-art virtual reality- and vision-based gesture recognition technologies can be utilized in a professional capacity, 
+% and more specifically, to the design reviews of complex 3D models. 
+% Instead of printing the model to paper, drawing on the paper, scanning it and sending it by email - as isn't an uncommon workflow today, 
+% the designer and reviewer could have a virtual design review meeting, were they could meet in the 3D model, interact, survey- and annotate it together. 
+% They could manipulate the model, and change how the annotations appear in the models.
+% These annotations could be stored in a database - a system keeping track of their history, information and states - and be accessed from multiple platforms - like 
+% an issue tracker or a digital scrum board. The interaction, surveying, and experience as a whole, could be enhanced by virtual reality technology -
+% giving the unique sense of scale and a depth that is invaluable for a design - 
+% and gesture recognition technology - allowing the users to work with the 3D model in new and innovative ways. 
+% 
+% This is the vision of DNV GL, who regularly conducts such design reviews. % Hmm, ta bort
+% To address this, and evaluate this vision's feasibility, this thesis implements such a design review application, and 
+% reviews its requirements and design, documents its implementation details and evaluates its performance by conducting user test sessions.
+% In the prototype application, developed as part of this thesis, the user is able to navigate 3D models, annotate them - by either creating 
+% annotation orbs, which are physical object in the model, or by attaching an annotation directly to an object - and perform various other actions. 
+% This can be done in a conventional manner, i.e by mouse, keyboard and a display, by only using gestures (hand movements) and a virtual reality headset, or 
+% a combination of the two.
+% 
+% To ensure that the application is developed using state-of-the-art technology, and that it addresses the challenges such technology presents, 
+% the field of virtual reality is reviewed and discussed. In addition to this, the gesture recognition field is also reviewed, as this alternate 
+% input method can have the potential to increase the usability of 3D-based applications - such as the design review application -, especially when coupled with virtual reality.
+% Several software frameworks and devices that enable this technology are also discussed in this thesis, as we wanted to quickly prototype the 
+% application using these state-of-the-art tools.
+% We chose to use readily available virtual reality tools, such as the virtual reality headsets Oculus Rift CV1 and HTC Vive, coupled with
+% the Leap Motion Controller, a stereoscopic vision-based gesture recognition device. The software was developed using the Unity 
+% framework - a popular game engine - because of its capability and as it allowed us to interface with other projects in DNV GL
+% 
 
 
 % This essay has given a brief summary of the virtual reality design review application that is going to be implemented for DNV GL 

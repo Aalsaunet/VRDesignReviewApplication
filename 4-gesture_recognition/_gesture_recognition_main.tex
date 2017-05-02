@@ -2,8 +2,8 @@
 % start of this chapter, and it must be founded on section 1.3, or perhaps be a
 % consequence of knowledge found in chapter 2, which leads to the assumption that gestures are a desirable approach to interaction. 
 % If it is a consequence, than the motivation for looking deeper into gestures should be included in the conclusion of chapter 2.
-This chapter will review what gesture recognition is, what technology that enables it, and how it can potentially give new possibilities when working
-with three-dimension environments, like our design review application will. Furthermore, using gesture recognition technology with virtual reality is 
+This chapter will review what gesture recognition is, what technology enables it, and how it can potentially give new possibilities when working
+with three-dimensional environments, like our design review application will enable. Furthermore, using gesture recognition technology with virtual reality is 
 of special interest as virtual reality in many ways change several human-computer interaction patterns. This chapter will also compare several competing 
 technologies that enable gesture recognition, and use this comparison as a foundation for the design and implementation of the design review application.  
 
@@ -16,9 +16,9 @@ a gesture can involve several parts of the body, hand gestures are of special in
 and the most convenient to utilize in our design review application. 
 Because of this, the term "gestures" are often used synonymously with "hand gestures" for the remainder of this chapter.
 
-Gesture as an interaction and communication method not only between humans, but also between human and computer, is can be an interesting topic. 
+Gestures as an interaction and communication method not only between humans, but also between human and computer, can be an interesting topic. 
 This is perhaps especially the case when it comes to virtual reality as it sets some constraints with regard to more conventional interaction methods, like using 
-a mouse and keyboard. \citet{Rautaray2015} also points out that there are situations in which
+a mouse and keyboard. \citet{Rautaray2015} also point out that there are situations in which
 these devices are impractical for human-computer interaction (HCI), and that this is particularly the case for interaction with 3D objects.
 As mentioned earlier, gestures can be divides into several categories, with two of the primary ones being \textit{static gestures} and \textit{dynamic gestures}.
 
@@ -26,10 +26,10 @@ Static gestures can in simple terms be defined as gestures
 without any movement. The hand and its fingers and joints simply maintain a certain position or orientation and it is recognized as a gesture. One example 
 of this gesture category is the "V sign" (or the "peace sign"), where the index and middle fingers are raised and parted while the other fingers are clenched.
 
-Dynamic gestures, on the other hand, are gesture that involves or requires movement for the gesture to have semantic meaning. One example of this
+Dynamic gestures, on the other hand, are gestures that involve or require movement for the gesture to have semantic meaning. One example of this
 might be to wave goodbye to someone or to twist a straight hand back and forth to indicate uncertainty. One can classify dynamic gestures into several 
-subclasses, such as conscious gestures, which are done intentionally for communication purposes, or unconscious gestures, which are carried out unconsciously.
-See~\vref{fig:static_and_dynamic} for an hierarchical overview.
+subclasses (See figure~\vref{fig:static_and_dynamic}), such as conscious gestures, which are done intentionally for communication purposes, 
+or unconscious gestures, which are carried out unconsciously.
 %As the gestures included in this thesis' implementation can be considered static (they use movement, but does not require it)
 
 \begin{figure}%[h!] %[H]
@@ -40,7 +40,7 @@ See~\vref{fig:static_and_dynamic} for an hierarchical overview.
 
 
 What gesture types are being used has implication for the gesture recognition methods as well, as dynamic gestures have a temporal aspect that 
-static gestures don't~\citep{Rautaray2015}. This means that when recognizing dynamic gesture one must handle the time aspect of the gesture (i.e from the gesture starts
+static gestures don't~\citep{Rautaray2015}. This means that when recognizing dynamic gestures one must handle the time aspect of the gesture (i.e from the gesture starts
 to the gesture ends), and thus keep track of the frame-to-frame transitions of the hand. This is the reason Hidden Markov Models (HMMs) are commonly used for
 dynamic recognition algorithms, as they specifically are designed to handle state transitions. Static gestures recognition schemes don't need this complexity as 
 whether or not a gesture is performed can be determined from individual frames. Thus a more general classifier or template-based algorithm can be applied for a 
@@ -59,13 +59,13 @@ static gesture recognition system~\citep{Rautaray2015}.
 \section{Summary and Design Considerations}
 \label{sec:gesture_design_considerations}
 With regard to the topics discussed in this chapter, the design review application will primarily be aimed toward usage with vision-based gesture recognition
-systems, in favor of contact-based system, as they are deemed more user friendly and doesn't have the same health risk associated with them.
+systems, in favor of contact-based system, as they are deemed more user friendly and doesn't have the same health risks associated with them.
 There are three primary vision-based technologies in use today: Stereoscopic vision, structured light and time of flight, where stereoscopic vision is 
-viewed as the most promising one by research (e.g.~by~\citet{Ko2012}). This is primary because it is deemed more robust to variable light conditions, have 
+viewed as the most promising one by research (e.g.~by~\citet{Ko2012}). This is primary because it is deemed more robust to variable light conditions, has 
 a better range and a lower material cost. These factors also make stereoscopic vision devices more ideal for usage in regular office spaces than its competing technologies, 
-which in relevant in terms of the design review application. 
+which is relevant in terms of the design review application. 
 
-In the next chapter the design of the design review application will be review, where one such stereoscopic vision device - The Leap Motion Controller - is identified as the target
+In the next chapter the design of the design review application will be reviewed, where one such stereoscopic vision device - The Leap Motion Controller - is identified as the target
 gesture recognition system. The Leap Motion Controller, which will be reviewed further in depth in chapter~\ref{chapter:technical}, has a convenient and high
 level API, which takes care of a lot of the challenges associated with detection, tracking and recognition (as discussed in section~\vref{sec:gr_principles}). 
 This also makes it an ideal candidate for usage in software project as one can interface with at a higher level and use several of its abstractions, 

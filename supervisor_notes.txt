@@ -13,7 +13,8 @@ Generelt, liker jeg også å avslutte hvert kapittel med et kort “Summary” s
 - liste opp de viktigste funnene/konklusjonene du kan trekke 
 - fortelle kort hva som fortsatt mangler (som gir motivasjon for det du skal gjøre i din oppgave) 
 - bruke hva som mangler til å peke på neste kapittel.
-—> merk at du har noen slike seksjoner som heter noe annet (Final thoughts on the Design, Lessons Learned), men se om du jan få inn mer av dette, og til å inkludere alle punktene jeg beskriver (da blir det også konsistent igjennom oppgaven)
+—> merk at du har noen slike seksjoner som heter noe annet (Final thoughts on the Design, Lessons Learned), 
+men se om du jan få inn mer av dette, og til å inkludere alle punktene jeg beskriver (da blir det også konsistent igjennom oppgaven)
 
 Kap. 8:
 two rounds of user testing seasons were —> two rounds of user testing SESSIONS were  ??
