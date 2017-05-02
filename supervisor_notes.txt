@@ -1,27 +1,12 @@
 Fra Carsten:
 
 
-I noen tilfeller har du bare et underkapittel, f.eks 4.1.1 under 4.1 og 5.1.1 under 5.1. Dette er ikke god stil. 
-Kanskje kan du droppe overskriften, eller hvis du vil beholde den bruk \subsubsection*{...} slik at det forblir uten nummer.
-
 Kan du gjøre figurene 7.1 , 7.6-7.12 , 7.15 litt lysere? Jeg leser på skjermen og synes det er mørkt. Mer slitsomt på en utskrift.
 
-Du har en del ord som strekker inn i den høyre margen. Dette er vanlig med CamelCase ord. Du kan gi Latex lov å brekke de ved å skrive Camel\-Case.
-
-Kapittel 8 snakker fortsatt om "This essay". Går ut fra at dette kommer senere ;-)
 
 
 Fra Pål:
 
-Sect. 1.3
-the user evaluation session will be discussed —> evaluation session er uklar. hva er dette?
-
-Jeg syntes du skulle ha en “MAIN CONTRIBUTIONS” etter 1.4 hvor du oppsummerer alle resultatene dine, dvs systemet du har bygget, 
-eksperimenter og resultater og de viktigste konklusjonene. Mat sensor med teskje og fortell rett ut alt du bidrar med i denne oppgaven.
-
-Du trenger helst en “Research Methods” section for 1.5. outline. Se for eksempel seksjon 1.4 i 
-http://home.ifi.uio.no/paalh/students/MichaelRiegler-phd.pdf
-og skriv en kortere versjon av teksten her for de punktene som passer.
 
 Generelt, liker jeg også å avslutte hvert kapittel med et kort “Summary” som skal lettere binde sammen oppgaven og lage en rød tråd igjennom hele ved å inneholde:
 - et kort sammendrag av hva du har beskrevet her.

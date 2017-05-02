@@ -1,9 +1,10 @@
-To evaluate the application's ability to meet user requirements, two rounds of user testing seasons were conducted at the DNV GL headquarters in Høvik, Norway.
-The first of these session involved one test person, while the second session involved two. 
-The participants were brought in individually and asked to take a seated position at an ordinary work stations with a mouse, keyboard and display, 
-in addition to a leap motion controller positioned at the desk between the keyboard and the user. A HTC Vive head mount was also present for use during the experimentation phase. 
 
+To evaluate the application's ability to meet user requirements, two rounds of user testing sessions were conducted at the DNV GL headquarters in Høvik, Norway.
+The first of these session involved one test person, while the second session involved two. 
+The participants were brought in individually and asked to take a seated position at an ordinary work station (i.e an office space) with a mouse, keyboard and display, 
+in addition to a Leap Motion Controller positioned at the desk between the keyboard and the user. A HTC Vive head mount was also present for use during the experimentation phase. 
 The computer used for the testing had the following specifications (hardware and software):
+
 \begin{itemize}
     \item An Intel i7 as processor.
     \item 8 GB of RAM.
@@ -11,10 +12,16 @@ The computer used for the testing had the following specifications (hardware and
     \item A Windows 10 64-bit operating system (build 14393).
     \item Unity 5.5.2
     \item Leap Motion Control Panel version 3.2.0+45899
-    \item Steam VR runtime (for use with the HTC Vive head mount)
+    \item Steam VR runtime (for use with the HTC Vive HMD)
 \end{itemize}
 
-After the participant was seated the test phases were conducted in the following order (including an estimated of alloted time):
+\begin{figure}%[h!] %[H]
+	\includegraphics{pictures/test_setup.jpg}
+	\caption[The user test setup]{The user test setup}
+	\label{fig:test_setup}
+\end{figure} 
+
+After the participant was seated the test phases were conducted in the following order (including an estimate of alloted time):
 
 \begin{enumerate}
     \item  5 minutes of introduction. The users were informed about the purpose of the application, some of its long term goals and its limitations.
@@ -24,9 +31,11 @@ After the participant was seated the test phases were conducted in the following
     \item 10 minutes of questions. The users were interviewed with a series of questions related to the application and their experience using it.   
 \end{enumerate}
 
-With the exception of the experimentation phase, all the steps above were conducted without the use of a VR head mount. In the experimentation phase
-the participants were asked to divide their time equally between using the application in "desktop mode" (i.e using an regular display without a VR head mount) and
-"VR mode" (i.e using a VR head mount). 
+With the exception of the experimentation phase, all the steps above were conducted without the use of a virtual reality headset. 
+This was done to more easily explain and show different gestures - which is easier when not wearing a HMD - and to allow the user to 
+get familiar with the gesture scheme before using the virtual reality headset (to e.g.~~reduce the amount of unintended movements).
+In the experimentation phase, the participants were asked to divide their time equally between using the application in \textit{desktop mode} 
+- a collection of settings intended for usage with a regular display - and \textit{Virtual reality mode} - settings intended for usage with a virtual reality HMD. 
 
 \section{The Instructions}
 The participants were asked to perform the following tasks:
@@ -35,14 +44,14 @@ The participants were asked to perform the following tasks:
     \item The pinch gesture is performed by pushing the thumb and index finger together, while keeping the palm directed against the table surface. 
           Move the hand which holding the pinch gesture to rotate the camera along the X and Y axis.
     
-    \item The X gesture is performed by holding your hand straight with all fingers extended, pointing towards the screen and the palm facing downward towards the table surface. 
+    \item The Palm-down gesture (alternatively, the Y gesture) is performed by holding your hand straight with all fingers extended, pointing towards the screen and the palm facing downward towards the table surface. 
           Lift and lower your hand to change move the camera along the Y axis. 
     
-    \item The Y gesture is performed by holding your hand straight with all fingers extended, pointing towards the screen and the palm facing to the side, 
+    \item The Palm-side gesture (alternatively, the X gesture) is performed by holding your hand straight with all fingers extended, pointing towards the screen and the palm facing to the side, 
           perpendicular to the table surface. 
           Move it from side to side to move the camera along the X axis.
     
-    \item The Z gesture is performed by holding your hand curled up into a fist with no finger extended, pointing towards the screen and the palm facing downward towards the table surface. 
+    \item The fist gesture (alternatively, the Z gesture) is performed by holding your hand curled up into a fist with no finger extended, pointing towards the screen and the palm facing downward towards the table surface. 
           Move your fist closer or further from the screen to move the camera along the Z axis. 
     
     \item Maneuver from your current position around one of the pipes present in the 3D model and back to your original position, using one or both hands. 
@@ -77,7 +86,7 @@ The participants were asked to perform the following tasks:
 \end{enumerate}
 
 \section{The Questions}
-At the end of the individual test session the users were asked the following questions:
+At the end of the individual test sessions the users were asked the following questions:
 
 \begin{enumerate}
       \item Did you prefer to have distinct gestures for movement along the X, Y or Z axis or did you prefer having it combined in a single gesture?
@@ -91,21 +100,21 @@ At the end of the individual test session the users were asked the following que
             \item The point gesture?
             \item The double point gesture?
       \end{enumerate}
-      \item How easy to use was the menu?
+      \item How easy was the menu to use?
       \item How difficult or impractical was it to use the annotation form?
       \item How difficult was it to place the cursor/crosshair where you wanted?     
       \item How was using the application with a virtual reality head mount different from using it in "desktop mode"? 
             Which one did you prefer?
-      \item Did or do you feel any symptoms of motion or virtual reality sickness after using the application in virtual reality mode?
+      \item Do or did you feel any symptoms of motion or virtual reality sickness after using the application in virtual reality mode?
 \end{enumerate}
 
 \section{Responses}
-On question no. 1 two of the participants responded that they preferred having distinct gestures for movement along the x-, y- and z-axis, because 
+On the first question two of the participants responded that they preferred having distinct gestures for movement along the x-, y- and z-axis, because 
 it gives more precision and it's easier to avoid accidental movement, while the remaining participant preferred the combined gesture scheme as 
 s/he found it more intuitive to use. Combined gestures were also favored by this participant because s/he felt that it was easier to perform the 
-required tasks with only one hand, and s/he could thus switch between using the left and the right hand to combat fatigue (e.g.~"gorilla arm syndrome").  
+required tasks with only one hand, and s/he could thus switch between using the left and the right hand to combat fatigue (e.g.~like the "gorilla arm syndrome").  
 
-When asking the participants about their impressions about the different gestures the answers were more unanimous in some aspect
+When asking the participants about their impressions of the different gestures the answers were more unanimous in some aspects
 as all participants preferred the fist gesture the least and the pinch gesture the most. As we will see in the next section there might be an inverse relationship between the two.
 All the participants also reported that they didn't use the palm-down (y-axis movement) and palm-side (x-axis movement) that much and instead preferred to rotate to the 
 direction they wanted to move and use the fist gesture (z-axis movement) to go there. All the participants also preferred the single-point gesture over the double-point gesture as 
@@ -140,10 +149,17 @@ as a small enough thump--tip-to-index-tip distance, additional detectors was add
 Because of this, there are two composite pinch
 detectors per hand in the implementation, one "slack" version only using the base pinch detector and one "strict" version using a combination of the base
 pinch detector and the base finger extended detector. The strict version requires a pinch gesture to be performed while having at least two fingers extended at the same time. 
-This makes it more distinguishable from the fist gesture, but also make it a bit harder to use (i.e more false negatives).
+This made it more distinguishable from the fist gesture, but also made it a bit harder to use/trigger (i.e more false negatives).
 % Another reason why the fist gesture is the least preferred among the participants might also be because of ergonomic comfort. % Muligens noe annet enn "ergonomic comfort"?
 % While in a seated position, many of the other gestures can be used with the upper part of the arm (i.e above the elbow) relatively stationary, but when
 % using the fist gesture the user is often required to extend 
+
+Another interesting observation is related to virtual reality sickness. As previously mentioned, one participant felt affected by virtual reality sickness, while 
+the other two participants felt no sign of it. Even when engaged in quick, sudden and unintended movement, and when not being in control of the camera themselves, these 
+two participants remained unaffected by any virtual reality-, simulator or motion sickness symptoms, thus indicating a lower susceptibility for virtual reality sickness 
+than the first participant. Interestingly, these two participants were also younger, about 30 and 45 years of age, whereas the first participant was 
+about 60 years of age. Although the sample size is too small to draw any form of conclusion from this it can still be considered interesting observation.
+Whether the participant was seating or standing while wearing the HMD seemed to have to effect on the proneness to, or effect of, virtual reality sickness.
 
 
 During the test session several of the participant also had interesting suggestions for the application.
@@ -160,13 +176,36 @@ scheme without the pinch gesture).
 %As the test were run in the Unity editor, some tweaking could be done during the testing after request from the users.
 %, as it was often mistaken for a pinch gesture (this will be discussed more below) . 
 
-\section{Lessons Learned}
+\section{Summary and Findings}
+Although the sample size of these test was too small to draw definitive conclusions, there were still some interesting observations.
+These observations point towards some possible hypothesizes, which could be the subject of further research.
 
-Although the sample size of these test was too small to draw definitive conclusions, they do point towards some hypothesizes and theories. 
-Generally it feels like users of a gesture recognition system preferred false negatives over false positives, i.e they would rather have it occasionally
-happen that a gesture they attempt aren't recognized than that the system detects a gesture which isn't being performed.
+\subsubsection{Gesture Sensitivity Preferences}
+Generally it felt like the participants of the test sessions preferred false negatives over false positives in the gesture recognition system -
+meaning they prefer the system to occasionally miss some gestures attempted by the user, than respond to a perceived gesture which the user didn't actually attempt.
+To investigate this the user were allowed to try "stricter" settings during the evaluations, such as a lower detector on- and off angle and additional requirements for the 
+pinch gesture. All of the participants responded that they preferred this.
 
+\subsubsection{Increased Depth Perception Matters for Gesture Interaction}
+All three participants responded that they had a much stronger sense of where the hand models - representing their own virtual hands - were in relation to objects in the model,
+while wearing a virtual reality headset. This was especially the case when interacting with buttons, such as found in the menu and on the annotation form, as the tip of the finger
+must be within a maximum distance on the x-, y- and z-axis in order for the button to respond. Judging the z-axis distance, i.e the depth, was reported to be harder 
+when not wearing a virtual reality headset.  
 
+\subsubsection{Individual Gesture Preferences}
+There were distinct differences between how the users naturally held their hands when performing gestures, and also differences in how easy or hard a particular gesture 
+was to perform for a user. One example of this was how the palm-down gesture was perceived to be easy to use for some participants, while other participants 
+often - unconsciously - held their hand at an angle which resulted in the gesture not being recognized.
+This indicates that a gesture recognition application should ideally have some customizability with regards to the gesture scheme, allowing e.g~the user to adjust
+which gestures map to which actions and what sensitivity a gesture should have (e.g.~in terms of a maximum allowed on- and off angle).
+
+\subsubsection{User Prefer Natural Movement Patterns}
+The participants used the fist gesture (the Z gesture) and the pinch gesture almost exclusively for movement, while the palm-down and palm-side gestures were little used. 
+This might have a connection to how people naturally move, as moving forward, while turning to the desired direction, is a usual movement pattern, while "strafing", e.g 
+moving directly left and right, and going vertically up and down, are arguably not. \\\\
+
+%\noindent
+%The responses from the participants gave valuable insights into how 
 
 
 % \subsection{User proposals}

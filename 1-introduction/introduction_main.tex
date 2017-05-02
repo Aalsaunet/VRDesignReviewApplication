@@ -45,20 +45,38 @@ which have long been considered an interaction technique that can potentially de
 creative and intuitive methods for interacting with computers~\citep{Rautaray2015}. 
 To enable the use of gestures as a viable input method to a computer, responsive and reliable gesture recognition techniques are needed.  
 
-\section{Problem definition}
-This thesis will review how the current state-of-the-art virtual reality- and vision-based gesture recognition technologies can be utilized in a professional capacity, and more
-specificaly to the design reviews of complex 3D models. 
-Instead of printing the model to paper, drawing on the paper, scanning it and sending it by email - as isn't an uncommon work flow today, 
-the designer and design review could have a virtual design review meeting, were the designer and reviewer could meet on the 3D model, interact, survey- and annotate it together. 
-This could be enhanced by virtual reality technology, giving a unique sense of scale and a depth - which is hard to match by regular "2D screens" - and 
-gesture recognition technology, allowing the user to work with the 3D model in new and innovative ways. 
+\section{Problem Definition}
+This thesis reviews how the current state-of-the-art virtual reality- and vision-based gesture recognition technologies can be utilized in a professional capacity, 
+and more specifically, to the design reviews of complex 3D models. 
+Instead of printing the model to paper, drawing on the paper, scanning it and sending it by email - as isn't an uncommon workflow today, 
+the designer and reviewer could have a virtual design review meeting, were they could meet in the 3D model, interact, survey- and annotate it together. 
+They could manipulate the model, and change how the annotations appear in the models.
+These annotations could be stored in a database - a system keeping track of their history, information and states - and be accessed from multiple platforms - like 
+an issue tracker or a digital scrum board. The interaction, surveying, and experience as a whole, could be enhanced by virtual reality technology -
+giving the unique sense of scale and a depth that is invaluable for a design - 
+and gesture recognition technology - allowing the users to work with the 3D model in new and innovative ways. 
 
-This is the vision of DNV GL, a major international classification company working with this design review process. 
+This is the vision of DNV GL, who regularly conducts such design reviews. % Hmm, ta bort
+To address this, and evaluate this vision's feasibility, this thesis implements such a design review application, and 
+reviews its requirements and design, documents its implementation details and evaluates its performance by conducting user test sessions.
+In the prototype application, developed as part of this thesis, the user is able to navigate 3D models, annotate them - by either creating 
+annotation orbs, which are physical object in the model, or by attaching an annotation directly to an object - and perform various other actions. 
+This can be done in a conventional manner, i.e by mouse, keyboard and a display, by only using gestures (hand movements) and a virtual reality headset, or 
+a combination of the two.
+
+To ensure that the application is developed using state-of-the-art technology, and that it addresses the challenges such technology presents, 
+the field of virtual reality is reviewed and discussed. In addition to this, the gesture recognition field is also reviewed, as this alternate 
+input method can have the potential to increase the usability of 3D-based applications - such as the design review application -, especially when coupled with virtual reality.
+Several software frameworks and devices that enable this technology are also discussed in this thesis, as we wanted to quickly prototype the 
+application using these state-of-the-art tools.
+We chose to use readily available virtual reality tools, such as the virtual reality headsets Oculus Rift CV1 and HTC Vive, coupled with
+the Leap Motion Controller, a stereoscopic vision-based gesture recognition device. The software was developed using the Unity 
+framework - a popular game engine - because of its capability and as it allowed us to interface with other projects in DNV GL
 
 
-This vision was pursued by implementing an application that enabled the user to navigate the model and create annotation - 
-i.e comments or remarks to an aspect of the model - that were position in the model and either represented as "annotation orbs" or as an object highlighting.
-The design review application is also a prototype developed for the major international classification company DNV GL to evaluate how the use of virtual reality and gesture
+% This vision was pursued by implementing an application that enabled the user to navigate the model and create annotation - 
+% i.e comments or remarks to an aspect of the model - that were position in the model and either represented as "annotation orbs" or as an object highlighting.
+% The design review application is also a prototype developed for the major international classification company DNV GL to evaluate how the use of virtual reality and gesture
 % recognition technology might benefit their design review process. As such, the application requirements have been created in cooperation with DNV GL and represents
 % common 3D object manipulating and navigation tasks
 
@@ -77,11 +95,54 @@ The design review application is also a prototype developed for the major intern
 
 % Write more about the concrete thesis ideas and why all the chapters are relevant. 
 
-\section{Limitations}
+\section{Scope and Limitations}
 The initial list of application features had to be shortened significantly to focus more on the most relevant parts for this thesis. As such the design review application
-is more a prototype or proof-of-concept than a finished product. Section 5.2.1 outlines the application features and will explain more of what's included in the application and what isn't. 
+is more a prototype or proof-of-concept than a finished product. 
+Section~\vref{sec:application_functionality} outlines the application features and will explain more of what's included in the application and what isn't. 
+
+\section{Research Methods}
+The ACM Task Force report \textit{Computing As a Discipline}, by~\citet{Denning1989}, identifies a structure of how research in computing should be approached.
+This report defines computer science as an intersection between several processes, with the primary being applied mathematics, science and engineering~\citep{Denning1989}.
+These central processes are basically reflected in the paradigms of \textit{theory}, \textit{abstraction} and \textit{design}.
+
+The first paradigm, \textit{theory}, is defined by (i) characterizing the objects of study (definition), (ii) hypothesizing possible relationships among them (theorem), (iii) 
+determining whether the relationships are true (proof) (iv) and interpreting the results.
+
+The second paradigm, \textit{abstraction}, is defined by (i) forming a hypothesis, (ii) constructing a model and making a prediction, (iii) designing an experiment and collecting data, 
+and (iv) analysing the results. 
+
+The third paradigm, \textit{design}, is defined by (i) stating requirements, (ii) stating specifications, (iii) designing and implementing the system and (iv) test the system.
+
+% which can briefly be summarized as:
+% \begin{itemize}
+%     \item (i) characterize objects of study (definition), hypothesize possible relationships among them (theorem), determines whether the relationships are true (proof)
+%             and interpret the results.
+%     \item (ii) form a hypothesis, construct a model and make a prediction, design an experiment and collect data, and analyse results 
+% \end{itemize}
+
+In this thesis the \textit{design paradigm} is followed, as the main focus of this thesis is to design and implementation an application using the technology of interest,
+and test it by user evaluations. The initial requirements are discussed section~\vref{sec:initial_design}, before being scoped in section~\vref{sec:application_functionality}. 
+The specifications and design are discussed in chapter~\vref{chapter:design}, while the implementation is reviewed and documented in chapter~\vref{chapter:implementation}. 
+The testing and evaluation of the system is covered in chapter~\vref{chapter:evaluation}
 
 \section{Main Contributions}
+The summarized main contributions of this thesis are:
+\begin{enumerate}
+    \item A discussion of classification societies, and more specifically DNV GL, and how the use of virtual reality and gesture recognition technology could
+            benefit them in their design review process.
+    \item A review of the state-of-the-art virtual reality technology, with special focus on the head-mounted devices Oculus Rift CV1 and HTC Vive, 
+            in addition to its challenges and techniques for addressing this.
+    \item A survey on what's known about virtual reality- and simulator sickness, what their main causes are, and which of these causes are primarily due to (i) 
+            individual differences in susceptibility or (ii) the application design or performance.
+    \item A review of the state-of-the-art gesture recognition technology, its history and what the main techniques are. After a general overview 
+            we will focus more on vision-based gesture recognition technology, and more specifically stereoscopic vision technology, 
+            as it is arguably the most promising gesture recognition technology. 
+    \item Design and implementation of a prototype application utilizing virtual reality- and gesture recognition technology to perform the basic functionality
+          required of a design review application (e.g~navigating and annotating).
+    \item Evaluating several aspect of the design review implementation through user testing, a discussions of what design aspects worked better than other
+            in such an application and how mature the virtual reality- and gesture recognition technologies are.
+    \item A conclusion which sums up important finding, formulates new hypothesis and recommends subject for further study.
+\end{enumerate}
 
 
 \section{Outline}
